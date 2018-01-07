@@ -57,7 +57,7 @@ ul, ol, li {
   height: 4px;
   background-color: var(--orange);
 }
-#lnav h1 a {
+#lnav h1 #home {
   font-size: 33px;
   margin: auto 1vw;
   font-weight: bold;
@@ -182,8 +182,8 @@ footer p {
 /* ----------------------------------------mobile----------------------------------------*/
 @media only screen and (max-width:  600px) {
   #lnav h1 img {
-    width: 3.3rem;
-    height: 3.3rem;
+    width: 3rem;
+    height: 3rem;
     vertical-align:middle;
     margin-left: 1vw;
   }
@@ -212,8 +212,8 @@ footer p {
     display: none;
   }
   #lnav h1 img {
-    width: 3.3rem;
-    height: 3.3rem;
+    width: 3rem;
+    height: 3rem;
     vertical-align:middle;
     margin-left: 5vw;
   }
@@ -222,7 +222,7 @@ footer p {
     position: fixed;
     right: 0;
     line-height: 60px;
-    padding-right: 6vw;
+    padding-right: 5vw;
   }
 
   #rnav li {
@@ -273,8 +273,8 @@ footer p {
     display: none;
   }
   #lnav h1 img {
-    width: 3.3rem;
-    height: 3.3rem;
+    width: 3rem;
+    height: 3rem;
     vertical-align:middle;
     margin-left: 11vw;
   }
