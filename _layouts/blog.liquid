@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include "head.liquid" %}
+  </head>
+  <body>
+    <header>
+      {% include "header.liquid" %}
+    </header>
+    <main>
+      <section class="docs">
+        <div class="inner">
+          <aside>
+            <p>2018</p>
+            <ul>
+              <li><a {%if route == "Blog-example"%}class="active"{%endif%} href="/blog/Blog-example.html">Blog Example</a></li>
+            </ul>
+          </aside>
+          <main>
+          {{ content }}
+          </main>
+        </div>
+      </section>
+    </main>
+    <footer>
+      {% include "footer.liquid" %}
+    </footer>
+  </body>
+</html>

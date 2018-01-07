@@ -70,7 +70,7 @@ ul, ol, li {
 }
 
 /* ----------------------------------------section----------------------------------------*/
-section.docs aside ul li a {
+section.docs aside ul li a, section.blog aside ul li a {
   display: inline-block;
   margin-bottom: 0.25rem;
   text-decoration: none;
@@ -80,7 +80,11 @@ section.docs aside ul li a {
 section.docs aside ul li a.active,
 section.docs aside ul li a:hover,
 section.docs aside ul li a:active,
-section.docs aside ul li a:focus {
+section.docs aside ul li a:focus,
+section.blog aside ul li a.active,
+section.blog aside ul li a:hover,
+section.blog aside ul li a:active,
+section.blog aside ul li a:focus {
   font-weight: bold;
   background: var(--orange);
   color: var(--white);
@@ -227,19 +231,21 @@ footer p {
     padding-top: 5rem;
     width: 88%;
   }
-  section.docs .inner {
+  section.docs .inner, section.blog .inner {
     display: flex;
   }
-
-  section.docs aside {
+  section.docs aside, section.blog aside {
     flex: 0 1 30%;
   }
-  section.docs aside p {
+  
+  section.docs aside p, section.blog aside p {
     font-size: 1.3rem;
   }
-  section.docs main {
+   
+  section.docs main, section.blog main {
     flex: 0 1 70%;
   }
+  
   .columns {
     display: flex;
   }
@@ -285,17 +291,16 @@ footer p {
     width: 77%;
   }
 
-  section.docs .inner {
+  section.docs .inner, section.blog .inner {
     display: flex;
   }
-
-  section.docs aside {
+  section.docs aside, section.blog aside {
     flex: 0 1 30%;
   }
-  section.docs aside p {
+  section.docs aside p, section.blog aside p {
     font-size: 1.3rem;
   }
-  section.docs main {
+  section.docs main, section.blog main {
     flex: 0 1 70%;
   }
 
