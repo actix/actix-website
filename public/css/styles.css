@@ -69,7 +69,7 @@ ul, ol, li {
   margin: auto 2vw;
 }
 
-/* ----------------------------------------main----------------------------------------*/
+/* ----------------------------------------section----------------------------------------*/
 section.docs aside ul li a {
   display: inline-block;
   margin-bottom: 0.25rem;
@@ -190,7 +190,7 @@ footer p {
     border-bottom: 1px solid #d8d8d8;
     padding: 0.5rem 1rem;
   }
-  main {
+  section {
     margin: 0 auto ;
     padding-top: 1rem;
     width: 94%;
@@ -222,7 +222,7 @@ footer p {
     font-weight: bold;
     padding-left: 2vw;
   }
-  main {
+  section {
     margin: 0 auto;
     padding-top: 5rem;
     width: 88%;
@@ -279,7 +279,7 @@ footer p {
     font-weight: bold;
     padding-left: 2vw;
   }
-  main {
+  section {
     margin: 0 auto;
     padding-top: 5.5rem;
     width: 77%;
