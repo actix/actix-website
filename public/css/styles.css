@@ -22,7 +22,6 @@
 }
 
 body {
-  border-top: 4px solid var(--orange);
   font-family: var(--font-stack);
   line-height: 1.4rem;
 }
@@ -50,7 +49,14 @@ ul, ol, li {
   border-bottom: 1px solid #dfdcdc;  
   box-shadow: 0 3px 3px rgba(200, 216, 206, 0.12), 0 3px 3px rgba(97, 107, 100, 0.24);
 }
-
+#line {
+  position: fixed;
+  zoom:1;
+  display: flex;
+  width: 100%;
+  height: 4px;
+  background-color: var(--orange);
+}
 #lnav h1 a {
   font-size: 33px;
   margin: auto 2vw;
@@ -169,26 +175,24 @@ footer p {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ----------------------------------------mobile----------------------------------------*/
 @media only screen and (max-width:  600px) {
   #rnav {
-    display: none;
+    padding-top: 4rem;
+    height: 0;
+    display: block;
+    overflow: hidden;
   }
-  section {
-    margin: 5rem auto 2rem ;
+  #rnav li a {
+    color: var(--orange);
+    display:block;
+    font-weight: bold;
+    border-bottom: 1px solid #d8d8d8;
+    padding: 0.5rem 1rem;
+  }
+  main {
+    margin: 0 auto ;
+    padding-top: 1rem;
     width: 94%;
   }
 }
@@ -220,14 +224,9 @@ footer p {
   }
   main {
     margin: 0 auto;
+    padding-top: 5rem;
     width: 88%;
   }
-  section {
-    margin-top: 3rem;
-    padding: 2rem 0;
-    position: relative;
-  }
-
   section.docs .inner {
     display: flex;
   }
@@ -235,7 +234,9 @@ footer p {
   section.docs aside {
     flex: 0 1 30%;
   }
-  
+  section.docs aside p {
+    font-size: 1.3rem;
+  }
   section.docs main {
     flex: 0 1 70%;
   }
@@ -280,12 +281,8 @@ footer p {
   }
   main {
     margin: 0 auto;
+    padding-top: 5.5rem;
     width: 77%;
-  }
-  section {
-    margin-top: 4rem;
-    padding: 2rem 0;
-    position: relative;
   }
 
   section.docs .inner {
@@ -297,7 +294,6 @@ footer p {
   }
   section.docs aside p {
     font-size: 1.3rem;
-    font-weight: bold;
   }
   section.docs main {
     flex: 0 1 70%;
