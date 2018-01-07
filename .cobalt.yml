@@ -1,0 +1,6 @@
+name: Actix-web framework
+source: "."
+dest: "build"
+ignore:
+  - .git/*
+  - build/*

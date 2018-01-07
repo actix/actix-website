@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include "head.liquid" %}
+  </head>
+  <body>
+    <header>
+      {% include "header.liquid" %}
+    </header>
+    <main>
+      <section class="docs">
+        <div class="inner">
+          <aside>
+            <p>Basics</p>
+            <ul>
+              <li><a {%if route == "Basics-example"%}class="active"{%endif%} href="/docs/Basics-example.html">Basics Example</a></li>
+            </ul>
+            <p>Reference</p>
+            <ul>
+              <li><a {%if route == "Reference-example"%}class="active"{%endif%} href="/docs/Reference-example.html">Reference Example</a></li>
+            </ul>
+            <p>Advance</p>
+            <ul>
+              <li><a {%if route == "Advance-example"%}class="active"{%endif%} href="/docs/Advance-example.html">Advance Example</a></li>
+            </ul>
+            <p>Misc</p>
+            <ul>
+              <li><a {%if route == "Misc-example"%}class="active"{%endif%} href="/docs/Misc-example.html">Misc Example</a></li>
+            </ul>
+          </aside>
+          <main>
+          {{ content }}
+          </main>
+        </div>
+      </section>
+    </main>
+    <footer>
+      {% include "footer.liquid" %}
+    </footer>
+  </body>
+</html>
