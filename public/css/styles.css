@@ -157,18 +157,20 @@ footer p {
 }
 
 #Features {
-  margin-top: 2rem;
-  padding: 2rem 2rem 0 2rem;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
   background-color:  var(--grey);
 }
 #Features #feature {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
-
+#Features article {
+  padding-top: 1rem;
+}
 #Features article h3 {
   font-size: 1.3rem;
   color: var(--black);
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 
