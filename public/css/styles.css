@@ -1,19 +1,9 @@
 :root {
-  --orange: #F1592A;
-  --dark-orange: #A12700;
-  --light-orange: #FF9C7C;
-
-  --dark-grey: #58585A;
-  --med-grey: #818285;
-  --light-grey: #D1D2D4;
-  --med-dark-grey: #6D6E71;
-
+  --grey:  #f5f5f5;
   --black: #000;
   --white: #fff;
-
+  --new: rgb(82, 29, 79);
   --font-stack: helvetica, arial, sans-serif;
-
-  --breakpoint: 55rem;
 }
 
 *, *:before, *:after {
@@ -27,11 +17,10 @@ body {
 }
 
 a {
-  color: var(--orange);
-  /* color: inherit; */
+  color: var(--black);
   text-decoration: none;
 }
-a:hover { color:#067a1f;text-decoration:underline; }
+a:hover { color: var(--new) ;text-decoration:none; }
 
 ul, ol, li {
   list-style: none;
@@ -55,7 +44,7 @@ ul, ol, li {
   display: flex;
   width: 100%;
   height: 4px;
-  background-color: var(--orange);
+  background-color: var(--black);
 }
 #lnav h1 #home {
   font-size: 33px;
@@ -70,9 +59,12 @@ ul, ol, li {
 }
 
 /* ----------------------------------------section----------------------------------------*/
+section {
+  min-height: 100vh;
+}
 section.docs aside ul li a, section.blog aside ul li a {
   display: inline-block;
-  margin-bottom: 0.25rem;
+  margin-left: 0.8rem;
   text-decoration: none;
   transition: all 0.15s ease-in-out;
 }
@@ -85,11 +77,13 @@ section.blog aside ul li a.active,
 section.blog aside ul li a:hover,
 section.blog aside ul li a:active,
 section.blog aside ul li a:focus {
-  font-weight: bold;
-  background: var(--orange);
-  color: var(--white);
+  color: var(--new);
+  border-left: 3px solid var(--new);
   padding: 0.25rem 0.5rem;
-  border-radius: 3px;
+}
+section.docs aside p, section.blog aside p {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 pre {
@@ -98,7 +92,7 @@ pre {
   margin: 0 0 10px;
   font-size: 13px;
   line-height: 1.42857143;
-  color: var(--dark-grey);
+  color: var(--new);
   word-break: break-all;
   word-wrap: break-word;
   background-color: #f5f5f5;
@@ -112,7 +106,7 @@ code {
   background-color: #f5f5f5;
   border-radius: 4px;
   border: 1px solid #ccc;
-  color: var(--dark-grey);
+  color: var(--new);
   text-shadow: none;
 }
 
@@ -129,8 +123,8 @@ pre code {
 /* ----------------------------------------footer----------------------------------------*/
 footer {
   text-align: center;
-  background-color: #f9f9f9;
   justify-content: center;
+  border-top: 2px solid var(--new);
 }
 
 footer p {
@@ -141,41 +135,40 @@ footer p {
 
 /* ----------------------------------------home page----------------------------------------*/
 #top {
-  background-color: rgb(243, 225, 123);
   padding: 2rem;
   text-align: center;
   line-height: 3rem;
+  background-color:  var(--grey);
 }
 #top h1 {
-  font-size: 3rem;
-  color: #b71fdd;
+  font-size: 2.2rem;
+  color: var(--new);
 }
 #top p {
-  font-size: 1.5rem;
-  color: rgb(240, 105, 60);
+  font-size: 1.1rem;
+  color: var(--new);
 }
 #top button {
   margin-right: 15px;
   font-size: 18px;
   padding: 8px 30px;
-  background-color: rgb(21, 233, 109);
+  background-color: rgb(190, 241, 211);
   border: none;
 }
 
 #Features {
   margin-top: 2rem;
-  padding: 0 1rem;
+  padding: 2rem 2rem 0 2rem;
+  background-color:  var(--grey);
 }
 #Features #feature {
-  margin-bottom: 2rem;
-}
-#Features article h3 {
-  font-size: 1.5rem;
-  color: #b71fdd;
+  padding-bottom: 2rem;
 }
 
-#Features article p {
-  padding: 1rem 0;
+#Features article h3 {
+  font-size: 1.3rem;
+  color: var(--black);
+  padding-bottom: 1rem;
 }
 
 
@@ -194,7 +187,7 @@ footer p {
     overflow: hidden;
   }
   #rnav li a {
-    color: var(--orange);
+    color: var(--black);
     display:block;
     font-weight: bold;
     border-bottom: 1px solid #d8d8d8;
@@ -204,6 +197,12 @@ footer p {
     margin: 0 auto ;
     padding-top: 1rem;
     width: 94%;
+  }
+  #hr {
+    width: 100%;
+    height: 0.25rem;
+    margin: 0.6rem 0;
+    background-color: var(--black);
   }
 }
 /* ----------------------------------------table----------------------------------------*/
@@ -236,7 +235,7 @@ footer p {
   section {
     margin: 0 auto;
     padding-top: 5rem;
-    width: 88%;
+    width: 85%;
   }
   section.docs .inner, section.blog .inner {
     display: flex;
@@ -244,15 +243,13 @@ footer p {
   section.docs aside, section.blog aside {
     flex: 0 1 30%;
   }
-  
-  section.docs aside p, section.blog aside p {
-    font-size: 1.3rem;
-  }
    
   section.docs main, section.blog main {
     flex: 0 1 70%;
   }
-  
+  #hr {
+    display: none;
+  }
   .columns {
     display: flex;
   }
@@ -296,7 +293,7 @@ footer p {
   section {
     margin: 0 auto;
     padding-top: 5.5rem;
-    width: 77%;
+    width: 75%;
   }
 
   section.docs .inner, section.blog .inner {
@@ -305,13 +302,12 @@ footer p {
   section.docs aside, section.blog aside {
     flex: 0 1 30%;
   }
-  section.docs aside p, section.blog aside p {
-    font-size: 1.3rem;
-  }
   section.docs main, section.blog main {
     flex: 0 1 70%;
   }
-
+  #hr {
+    display: none;
+  }
   .columns {
     display: flex;
   }
