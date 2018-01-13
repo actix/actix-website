@@ -1,6 +1,6 @@
-extends: docs.liquid
-title: "Docs::Basics Example"
-route: Basics-example
+title:   Docs::Basics Example
+layout: docs.liquid
+permalink: /docs/Basics/Basics-example.html
 ---
 
 ## Basics Example

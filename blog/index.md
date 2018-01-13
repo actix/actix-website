@@ -1,6 +1,6 @@
-extends: blog.liquid
-title: "Blog"
-route: ""
+title:  Blog
+layout: blog.liquid
+permalink: /blog/index.html
 ---
 
 ## Documentation

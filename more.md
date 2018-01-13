@@ -1,5 +1,6 @@
-extends: default.liquid
-path: /:filename/
+title:   More
+layout: default.liquid
+permalink: /more.html
 ---
 <section >
 <div >

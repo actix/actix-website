@@ -1,5 +1,6 @@
-extends: default.liquid
-path: /:filename/
+title:   Tutorials
+layout: default.liquid
+permalink: /tutorials.html
 ---
 <section >
 <div >

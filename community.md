@@ -1,5 +1,6 @@
-extends: default.liquid
-path: /:filename/
+title:   Community
+layout: default.liquid
+permalink: /community.html
 ---
 <section >
 <div >

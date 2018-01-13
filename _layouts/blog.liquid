@@ -13,12 +13,12 @@
           <aside>
             <p>2018</p>
             <ul>
-              <li><a {%if route == "Blog-example"%}class="active"{%endif%} href="/blog/Blog-example.html">Blog Example</a></li>
+              <li><a {%if page.permalink == "Blog-example"%}class="active"{%endif%} href="/blog/Blog-example.html">Blog Example</a></li>
             </ul>
           </aside>
           <hr id="hr">
           <main>
-          {{ content }}
+          {{ page.content }}
           </main>
         </div>
       </section>

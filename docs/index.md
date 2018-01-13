@@ -1,6 +1,6 @@
-extends: docs.liquid
-title: "Docs"
-route: ""
+title:  Docs
+layout: docs.liquid
+permalink: /docs/index.html
 ---
 
 ## Documentation
