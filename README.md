@@ -10,5 +10,5 @@ $ git clone https://github.com/actix/actix-website.git
 $ cd actix-website
 // modify index.liquid or tutorials/community/more markdown file.
 // also add or  modify  markdown files in docs/blog DIR.
-$ cobalt serve   // it will get 'build' DIR, so only need put files in this 'build' DIR to [actix.github.io](https://github.com/actix/actix.github.io)
+$ cobalt serve   // it will get '_site' DIR, so only need put files in this '_site' DIR to [actix.github.io](https://github.com/actix/actix.github.io)
 ```
