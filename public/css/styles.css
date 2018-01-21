@@ -1,8 +1,8 @@
 :root {
   --grey:  #f5f5f5;
   --text-color: #413e3e;
-  --black: #000;
-  --white: #fff;
+  --black: #000000;
+  --white: #ffffff;
   --new: rgb(82, 29, 79);
   --font-stack: helvetica, arial, sans-serif;
 }
@@ -36,25 +36,29 @@ ul, ol, li {
   line-height: 60px;
   zoom:1;
   display: flex;
-  background-color: var(--black);
+  background-color: var(--white);
   justify-content: space-between;
-  /* border-bottom: 1px solid #dfdcdc;  
-  box-shadow: 0 3px 3px rgba(200, 216, 206, 0.12), 0 3px 3px rgba(97, 107, 100, 0.24); */
+  border-bottom: 1px solid #dfdcdc;  
+  box-shadow: 0 3px 3px rgba(200, 216, 206, 0.12), 0 3px 3px rgba(97, 107, 100, 0.24);
+}
+#line {
+  position: fixed;
+  zoom:1;
+  display: flex;
+  width: 100%;
+  height: 4px;
+  background-color: var(--black);
 }
 #lnav h1 #home {
   font-size: 33px;
   margin: auto 1vw;
   font-weight: bold;
-  color: var(--grey);
 }
 #lnav label {
   float: right;
   font-size: 26px;
   font-weight: bold;
   margin: auto 2vw;
-}
-#lnav label a {
-  color: var(--grey);
 }
 #lnav h1 img {
   width: 2.8rem;
@@ -64,7 +68,7 @@ ul, ol, li {
 }
 
 /* ----------------------------------------section----------------------------------------*/
-section, #index {
+section {
   min-height: 100vh;
 }
 section.docs aside ul li a, section.blog aside ul li a {
@@ -143,25 +147,21 @@ footer p {
 
 /* ----------------------------------------home page----------------------------------------*/
 #top {
-    margin: 0 auto;
-    padding: 7.5rem 2rem 5rem 2rem;
+    padding: 2rem;
     text-align: center;
     line-height: 3rem;
-    background-color: var(--black);
+    border: 2px solid var(--grey);
 }
 #top h1 {
     font-size: 2.2rem;
-    color: var(--white);
 }
 #top p {
    font-size: 1.1rem;
-   color: var(--grey);
 }
 #top button {
     margin-right: 18px;
     font-size: 18px;
     padding: 8px 22px;
-    background-color: var(--grey);
     border: none;
 }
 
@@ -192,15 +192,13 @@ footer p {
     height: 0;
     display: block;
     overflow: hidden;
-    background-color: var(--black);
     
   }
   #rnav li a {
     display:block;
     font-weight: bold;
-    border-bottom: 1px solid var(--grey);
+    border-bottom: 1px solid #d8d8d8;
     padding: 0.5rem 1rem;
-    color: var(--white);
   }
   #top {
     margin: 0 auto;
@@ -211,11 +209,6 @@ footer p {
     padding-top: 1rem;
     width: 94%;
   }
-  #index {
-    margin: 0 auto;
-    width: 94%;
-  }
-  width: 85%;
   #hr {
     width: 100%;
     height: 0.25rem;
@@ -246,17 +239,13 @@ footer p {
     font-size: 20px;
     font-weight: bold;
     padding-left: 2vw;
-    color: var(--grey);
   }
   section {
     margin: 0 auto;
     padding-top: 5rem;
     width: 85%;
   }
-  #index {
-    margin: 0 auto;
-    width: 85%;
-  }
+
   section.docs .inner, section.blog .inner {
     display: flex;
   }
@@ -306,15 +295,10 @@ footer p {
     font-size: 20px;
     font-weight: bold;
     padding-left: 2vw;
-    color: var(--grey);
   }
   section {
     margin: 0 auto;
     padding-top: 5.5rem;
-    width: 75%;
-  }
-  #index {
-    margin: 0 auto;
     width: 75%;
   }
   section.docs .inner, section.blog .inner {
