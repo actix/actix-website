@@ -36,23 +36,16 @@ ul, ol, li {
   line-height: 60px;
   zoom:1;
   display: flex;
-  background-color: white;
-  justify-content: space-between;
-  border-bottom: 1px solid #dfdcdc;  
-  box-shadow: 0 3px 3px rgba(200, 216, 206, 0.12), 0 3px 3px rgba(97, 107, 100, 0.24);
-}
-#line {
-  position: fixed;
-  zoom:1;
-  display: flex;
-  width: 100%;
-  height: 4px;
   background-color: var(--black);
+  justify-content: space-between;
+  /* border-bottom: 1px solid #dfdcdc;  
+  box-shadow: 0 3px 3px rgba(200, 216, 206, 0.12), 0 3px 3px rgba(97, 107, 100, 0.24); */
 }
 #lnav h1 #home {
   font-size: 33px;
   margin: auto 1vw;
   font-weight: bold;
+  color: var(--grey);
 }
 #lnav label {
   float: right;
@@ -60,9 +53,18 @@ ul, ol, li {
   font-weight: bold;
   margin: auto 2vw;
 }
+#lnav label a {
+  color: var(--grey);
+}
+#lnav h1 img {
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-top: -0.25rem;
+  vertical-align:middle;
+}
 
 /* ----------------------------------------section----------------------------------------*/
-section {
+section, #index {
   min-height: 100vh;
 }
 section.docs aside ul li a, section.blog aside ul li a {
@@ -141,29 +143,32 @@ footer p {
 
 /* ----------------------------------------home page----------------------------------------*/
 #top {
-  padding: 2rem;
-  text-align: center;
-  line-height: 3rem;
-  background-color:  var(--grey);
+    margin: 0 auto;
+    padding: 7.5rem 2rem 5rem 2rem;
+    text-align: center;
+    line-height: 3rem;
+    background-color: var(--black);
 }
 #top h1 {
-  font-size: 2.2rem;
+    font-size: 2.2rem;
+    color: var(--white);
 }
 #top p {
-  font-size: 1.1rem;
+   font-size: 1.1rem;
+   color: var(--grey);
 }
 #top button {
-  margin-right: 15px;
-  font-size: 18px;
-  padding: 8px 30px;
-  background-color: rgb(190, 241, 211);
-  border: none;
+    margin-right: 18px;
+    font-size: 18px;
+    padding: 8px 22px;
+    background-color: var(--grey);
+    border: none;
 }
 
 #Features {
   margin: 2rem auto;
   padding: 1rem 2rem;
-  background-color:  var(--grey);
+  border: 2px solid var(--grey);
 }
 #Features #feature {
   padding-bottom: 1rem;
@@ -180,28 +185,36 @@ footer p {
 /* ----------------------------------------mobile----------------------------------------*/
 @media only screen and (max-width:  600px) {
   #lnav h1 img {
-    width: 3rem;
-    height: 3rem;
-    vertical-align:middle;
     margin-left: 1vw;
   }
   #rnav {
-    padding-top: 4rem;
+    padding-top: 3.6rem;
     height: 0;
     display: block;
     overflow: hidden;
+    background-color: var(--black);
+    
   }
   #rnav li a {
     display:block;
     font-weight: bold;
-    border-bottom: 1px solid #d8d8d8;
+    border-bottom: 1px solid var(--grey);
     padding: 0.5rem 1rem;
+    color: var(--white);
   }
+  #top {
+    margin: 0 auto;
+    padding: 3.5rem 2rem 5rem 2rem;
+}
   section {
     margin: 0 auto ;
-    padding-top: 1rem;
     width: 94%;
   }
+  #index {
+    margin: 0 auto;
+    width: 94%;
+  }
+  width: 85%;
   #hr {
     width: 100%;
     height: 0.25rem;
@@ -215,9 +228,6 @@ footer p {
     display: none;
   }
   #lnav h1 img {
-    width: 3rem;
-    height: 3rem;
-    vertical-align:middle;
     margin-left: 5vw;
   }
 
@@ -235,10 +245,15 @@ footer p {
     font-size: 20px;
     font-weight: bold;
     padding-left: 2vw;
+    color: var(--grey);
   }
   section {
     margin: 0 auto;
     padding-top: 5rem;
+    width: 85%;
+  }
+  #index {
+    margin: 0 auto;
     width: 85%;
   }
   section.docs .inner, section.blog .inner {
@@ -274,9 +289,6 @@ footer p {
     display: none;
   }
   #lnav h1 img {
-    width: 3rem;
-    height: 3rem;
-    vertical-align:middle;
     margin-left: 11vw;
   }
   #rnav {
@@ -293,13 +305,17 @@ footer p {
     font-size: 20px;
     font-weight: bold;
     padding-left: 2vw;
+    color: var(--grey);
   }
   section {
     margin: 0 auto;
     padding-top: 5.5rem;
     width: 75%;
   }
-
+  #index {
+    margin: 0 auto;
+    width: 75%;
+  }
   section.docs .inner, section.blog .inner {
     display: flex;
   }
