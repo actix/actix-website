@@ -208,6 +208,7 @@ footer p {
 }
   section {
     margin: 0 auto ;
+    padding-top: 1rem;
     width: 94%;
   }
   #index {
