@@ -317,12 +317,12 @@ footer p {
     display: flex;
   }
 
-  .columns.three > article {
-    flex: 0 1 33%;
+  .columns.four > article {
+    flex: 0 1 25%;
     margin-right: 1.5%;
   }
 
-  .columns.three > article:last-child {
+  .columns.four > article:last-child {
     margin-right: 0;
   }
 }
