@@ -1,14 +1,27 @@
-# actix-theme
-The Actix website template made with [Cobalt](https://cobalt-org.github.io/)
+# Actix Website
 
+The work in progress website for the actix project based on tokio's website.
 
-# Contribute.
-So you want make actix-website more beautiful.
-```bash
-$ cobalt -V    // Cobalt 0.11.1
-$ git clone https://github.com/actix/actix-website.git
-$ cd actix-website
-// modify index.liquid or tutorials/community/more markdown file.
-// also add or  modify  markdown files in docs/blog DIR.
-$ cobalt serve   // it will get '_site' DIR, so only need put files in this '_site' DIR to [actix.github.io](https://github.com/actix/actix.github.io)
+## Getting Started
+
+Building the website depends on [Hugo](http://gohugo.io). So, first make sure
+that you have it installed. If on OS X and using Homebrew, run the following:
+
+```sh
+brew update && brew install hugo
 ```
+
+Then, get the website running locally:
+
+```sh
+git clone https://github.com/mitsuhiko/actix-website
+cd website
+hugo server
+```
+
+Then visit [http://localhost:1313](http://localhost:1313).
+
+# License
+
+Pretty murky.  Right now a massive clone of the tokio website.  Will get this
+figured out as we go along.

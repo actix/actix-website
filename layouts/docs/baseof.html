@@ -1,0 +1,100 @@
+{{ partial "header" . }}
+{{ $currentURL := .URL }}
+
+<div class="actix-pageheader">
+  <div class="container">
+    <h1 class="display-4">{{ .Title }}</h1>
+    {{ if .Description }}
+    <p class="lead">{{ .Description }}</p>
+    {{ end }}
+  </div>
+</div>
+
+<div class="container actix-docs">
+  <div class="row">
+    <div class="col-md-3">
+
+      <nav class="leftnav">
+        <div class="" id="">
+          <h5>Introduction</h5>
+          <div>
+            <ul class="nav">
+              {{ range .Site.Menus.docs_intro }}
+              <li{{ if eq $currentURL .URL }} class="active"{{ end }}>
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+
+          <h5>Basics</h5>
+          <div>
+            <ul class="nav">
+              {{ range .Site.Menus.docs_basics }}
+              <li{{ if eq $currentURL .URL }} class="active"{{ end }}>
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+
+          <h5>Advanced</h5>
+          <div>
+            <ul class="nav">
+              {{ range .Site.Menus.docs_advanced }}
+              <li{{ if eq $currentURL .URL }} class="active"{{ end }}>
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+
+          <h5>Protocols</h5>
+          <div>
+            <ul class="nav">
+              {{ range .Site.Menus.docs_proto }}
+              <li{{ if eq $currentURL .URL }} class="active"{{ end }}>
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+
+          <h5>Patterns</h5>
+          <div>
+            <ul class="nav">
+              {{ range .Site.Menus.docs_patterns }}
+              <li{{ if eq $currentURL .URL }} class="active"{{ end }}>
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+
+          <h5>API Documentation</h5>
+          <div>
+            <ul class="nav">
+              <li><a href="https://docs.rs/actix">actix <span class="fa fa-external-link"></span></a></li>
+              <li><a href="https://docs.rs/actix-web">actix-web <span class="fa fa-external-link"></span></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+    <div class="col-md-9">
+      <div class="actix-content">
+        {{ block "main" . }}{{ end }}
+        <div class="github-edit">
+            <a class="fa fa-github" href="https://github.com/actix/actix-website/tree/master/content/{{ .File.Path }}"> Edit on GitHub</a>
+        </div>
+        <!-- Yes, we have to use *Prev* to get the next content, because the
+        weights are sorted inversely to how they are actually displayed... -->
+        {{ with .PrevInSection }}<div class="actix-next"><b>Next up</b>: <a href = {{ .URL }}>{{ end }}
+        {{ with .PrevInSection }} {{ .Title }}</a></div>{{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ partial "footer" . }}

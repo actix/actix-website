@@ -1,15 +1,17 @@
 language: rust
 sudo: false
-dist: trusty
 
-# build website
+install:
+  - curl -L https://github.com/gohugoio/hugo/releases/download/v0.40.3/hugo_0.40.3_Linux-64bit.tar.gz |
+      tar xzvf -
+
 script:
-  - export PATH=$PATH:~/.cargo/bin
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "linux" && "$TRAVIS_PULL_REQUEST" = "false" && "$TRAVIS_BRANCH" == "master" ]]; then
-      curl -sL https://github.com/cobalt-org/cobalt.rs/releases/download/v0.12.1/cobalt-v0.12.1-x86_64-unknown-linux-gnu.tar.gz | tar xvz -C $HOME/.cargo/bin &&
-      cobalt build && cp CNAME ./_site/ &&
-      git clone https://github.com/davisp/ghp-import.git &&
-      ./ghp-import/ghp_import.py -n -p -f -m "Documentation upload" -b master -r https://"$GH_TOKEN"@github.com/actix/actix.github.io.git _site &&
-      echo "Uploaded documentation"
-    fi
+  - ./hugo_0.40.3_Linux-64bit/hugo_0.18.1_linux_amd64
+
+deploy:
+  provider: script
+  script: bash .deploy.sh
+  skip_cleanup: true
+  on:
+    branch: master
+    condition: $TRAVIS_PULL_REQUEST = "false"

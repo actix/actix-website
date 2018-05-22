@@ -1,4 +1,2 @@
-.DS_Store
-
-build/
-_site/
+public
+tmp
