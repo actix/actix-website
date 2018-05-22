@@ -1,11 +1,10 @@
 sudo: false
 
 install:
-  - curl -L https://github.com/gohugoio/hugo/releases/download/v0.40.3/hugo_0.40.3_Linux-64bit.tar.gz |
-      tar xzvf -
+  - curl -L https://github.com/gohugoio/hugo/releases/download/v0.40.3/hugo_0.40.3_Linux-64bit.tar.gz | tar xzvf -
 
 script:
-  - ./hugo_0.40.3_Linux-64bit/hugo
+  - ./hugo
 
 deploy:
   provider: script
