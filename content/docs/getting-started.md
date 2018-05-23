@@ -32,14 +32,7 @@ and returns a type that can be converted into `HttpResponse`:
 
 Filename: `src/main.rs`
 
-```rust
-extern crate actix_web;
-use actix_web::{HttpRequest, App, server};
-
-fn index(_req: HttpRequest) -> &'static str {
-    "Hello world!"
-}
-```
+{{< include-example example="getting-started" section="setup" >}}
 
 Next, create an `Application` instance and register the request handler with
 the application's `resource` on a particular *HTTP method* and *path* and
@@ -48,16 +41,7 @@ for incoming connections. The server accepts a function that should return an
 `HttpHandler` instance.  For simplicity `server::new` could be used, this
 function is shortcut for `HttpServer::new`:
 
-```rust
-fn main() {
-    server::new(|| {
-        App::new()
-            .resource("/", |r| r.f(index))
-    })
-       .bind("127.0.0.1:8088").unwrap()
-       .run();
-}
-```
+{{< include-example example="getting-started" section="main" >}}
 
 That's it! Now, compile and run the program with `cargo run`.
 Head over to ``http://localhost:8088/`` to see the results.
