@@ -23,21 +23,7 @@ The prefix should consist of value path segments.
 > any request with the paths `/app`, `/app/`, or `/app/test` would match;
 > however, the path `/application` would not match.
 
-```rust
-# extern crate actix_web;
-# use actix_web::{App, Responder, HttpRequest, http::Method};
-
-fn index(req: HttpRequest) -> impl Responder {
-    "Hello world!"
-}
-
-fn main() {
-    let app = App::new()
-        .prefix("/app")
-        .resource("/index.html", |r| r.method(Method::GET).f(index))
-        .finish();
-}
-```
+{{< include-example example="application" section="setup" >}}
 
 In this example, an application with the `/app` prefix and a `index.html` resource
 are created. This resource is available through the `/app/index.html` url.

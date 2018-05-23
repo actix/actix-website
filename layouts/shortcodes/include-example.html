@@ -1,0 +1,7 @@
+{{$example := .Get "example"}}
+{{$file := .Get "file" | default "main.rs"}}
+{{$section := .Get "section"}}
+{{$source := readFile (printf "examples/%s/src/%s" $example $file)}}
+{{$source := index (findRE (printf "(?ms)// <%s>$(.*?)// </%s>" $section $section) $source) 0 }}
+{{$source := trim (replaceRE "// <[^>]+>" "" $source) "\n" }}
+{{- highlight $source "rust" "" -}}
