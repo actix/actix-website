@@ -136,6 +136,64 @@ fn test() {
 );
 ```
 
+
+# Stream response tests
+
+If you need to test stream it would be enough to convert a [*ClientResponse*](../../actix-web/actix_web/client/struct.ClientResponse.html) to future and execute it.
+For example of testing [*Server Sent Events*](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).
+
+```rust
+extern crate bytes;
+extern crate futures;
+extern crate actix_web;
+
+use bytes::Bytes;
+use futures::stream::poll_fn;
+use futures::{Async, Poll, Stream};
+
+use actix_web::{HttpRequest, HttpResponse, Error};
+use actix_web::http::{ContentEncoding, StatusCode};
+use actix_web::test::TestServer;
+
+
+fn sse(_req: HttpRequest) -> HttpResponse {
+    let mut counter = 5usize;
+    // yields `data: N` where N in [5; 1]
+    let server_events = poll_fn(move || -> Poll<Option<Bytes>, Error> {
+        if counter == 0 {
+            return Ok(Async::NotReady);
+        }
+        let payload = format!("data: {}\n\n", counter);
+        counter -= 1;
+        Ok(Async::Ready(Some(Bytes::from(payload))))
+    });
+
+    HttpResponse::build(StatusCode::OK)
+        .content_encoding(ContentEncoding::Identity)
+        .content_type("text/event-stream")
+        .streaming(server_events)
+}
+
+
+fn main() {
+    // start new test server
+    let mut srv = TestServer::new(|app| app.handler(sse));
+
+    // request stream
+    let request = srv.get().finish().unwrap();
+    let response = srv.execute(request.send()).unwrap();
+    assert!(response.status().is_success());
+
+    // convert ClientResponse to future, start read body and wait first chunk
+    let (bytes, response) = srv.execute(response.into_future()).unwrap();
+    assert_eq!(bytes.unwrap(), Bytes::from("data: 5\n\n"));
+
+    // next chunk
+    let (bytes, _) = srv.execute(response.into_future()).unwrap();
+    assert_eq!(bytes.unwrap(), Bytes::from("data: 4\n\n"));
+}
+```
+
 # WebSocket server tests
 
 It is possible to register a *handler* with `TestApp::handler()`, which
