@@ -10,7 +10,7 @@ matrix:
       script: ./hugo
     - env:
       - TASK=check
-      lang: rust
+      language: rust
       script: cd examples; cargo check
 
 deploy:
