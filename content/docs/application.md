@@ -24,14 +24,19 @@ The prefix should consist of value path segments.
 > however, the path `/application` would not match.
 
 ```rust
-fn index(req: HttpRequest) -> &'static str {
+# extern crate actix_web;
+# use actix_web::{App, Responder, HttpRequest, http::Method};
+
+fn index(req: HttpRequest) -> impl Responder {
     "Hello world!"
 }
 
-let app = App::new()
-    .prefix("/app")
-    .resource("/index.html", |r| r.method(Method::GET).f(index))
-    .finish()
+fn main() {
+    let app = App::new()
+        .prefix("/app")
+        .resource("/index.html", |r| r.method(Method::GET).f(index))
+        .finish();
+}
 ```
 
 In this example, an application with the `/app` prefix and a `index.html` resource
@@ -43,6 +48,7 @@ are created. This resource is available through the `/app/index.html` url.
 Multiple applications can be served with one server:
 
 ```rust
+# extern crate actix_web;
 use actix_web::{server, App, HttpResponse};
 
 fn main() {
@@ -76,6 +82,7 @@ Let's write a simple application that uses shared state. We are going to store r
 in the state:
 
 ```rust
+# extern crate actix_web;
 use std::cell::Cell;
 use actix_web::{App, HttpRequest, http};
 
@@ -113,12 +120,15 @@ Combining multiple applications with different state is possible as well.
 This limitation can easily be overcome with the [App::boxed](https://docs.rs/actix-web/*/actix_web/struct.App.html#method.boxed) method, which converts an App into a boxed trait object.
 
 ```rust
+# use std::thread;
+# extern crate actix_web;
 use actix_web::{server, App, HttpResponse};
 
 struct State1;
 struct State2;
 
 fn main() {
+# thread::spawn(|| {
     server::new(|| {
         vec![
             App::with_state(State1)
@@ -133,5 +143,6 @@ fn main() {
     })
         .bind("127.0.0.1:8080").unwrap()
         .run()
+# });
 }
 ```
