@@ -1,2 +1,6 @@
 public
 tmp
+_site
+Cargo.lock
+build/
+target/

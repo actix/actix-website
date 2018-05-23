@@ -1,0 +1,45 @@
+[package]
+name = "actix-website"
+version = "0.6.0"
+authors = ["Actix Project and Contributors"]
+readme = "README.md"
+keywords = ["http", "web", "framework", "async", "futures"]
+homepage = "https://github.com/actix/actix-website/"
+repository = "https://github.com/actix/actix-website.git"
+documentation = "https://docs.rs/actix-website/"
+categories = ["network-programming", "asynchronous",
+              "web-programming::http-server",
+              "web-programming::http-client",
+              "web-programming::websocket"]
+license = "MIT/Apache-2.0"
+exclude = [".gitignore", ".travis.yml", ".cargo/config", "appveyor.yml"]
+build = "build.rs"
+
+[lib]
+src="src/lib.rs"
+crate-type = ["dylib"]
+
+[dependencies]
+actix = "^0.5.6"
+actix-web = "^0.6"
+
+flate2 = "1.0"
+serde = "1.0"
+serde_json = "1.0"
+serde_urlencoded = "0.5"
+
+# io
+bytes = "0.4"
+futures = "0.1"
+tokio-io = "0.1"
+tokio-core = "0.1"
+http = "0.1"
+
+[dev-dependencies]
+env_logger = "0.5"
+skeptic = "0.13"
+serde_derive = "1.0"
+
+[build-dependencies]
+skeptic = "0.13"
+futures = "0.1"
