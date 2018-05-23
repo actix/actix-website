@@ -3,8 +3,15 @@ sudo: false
 install:
   - curl -L https://github.com/gohugoio/hugo/releases/download/v0.40.3/hugo_0.40.3_Linux-64bit.tar.gz | tar xzvf -
 
-script:
-  - ./hugo
+matrix:
+  include:
+    - env:
+      - TASK=build
+      script: ./hugo
+    - env:
+      - TASK=check
+      lang: rust
+      script: cd examples; cargo check
 
 deploy:
   provider: script
@@ -12,4 +19,4 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-    condition: $TRAVIS_PULL_REQUEST = "false"
+    condition: $TRAVIS_PULL_REQUEST = "false" && $TASK = "build"
