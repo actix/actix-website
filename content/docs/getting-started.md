@@ -34,9 +34,9 @@ Filename: `src/main.rs`
 
 ```rust
 extern crate actix_web;
-use actix_web::{HttpRequest, Responder, App, server};
+use actix_web::{HttpRequest, App, server};
 
-fn index(req: _HttpRequest) -> Responder {
+fn index(_req: HttpRequest) -> &'static str {
     "Hello world!"
 }
 ```
