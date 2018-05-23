@@ -329,7 +329,7 @@ A scoped layout of these paths would appear as follows
 					.with(delete_task)})})})
 ```
 
-A *scoped" path can contain variable path segments as resources. Consistent with 
+A *scoped* path can contain variable path segments as resources. Consistent with 
 unscoped paths, a scoped prefix without a trailing slash has one automatically 
 appended to it: `/app` converts to `/app/`.
 
