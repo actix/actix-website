@@ -59,10 +59,9 @@ fn main() {
       </div>
     </div>
   </div>
-  <div class="row actix-showcase">
-    <div class="col-md-8">
-      <input type="radio" name="feature" id="responders" checked>
-      <div class="feature">
+  <div class="actix-showcase">
+    <div class="col-md-9">
+      <div class="actix-feature" id="responders">
         <h2>Flexible Responders</h2>
         <p>
           Handler functions in actix can return a wide range of objects that
@@ -82,8 +81,7 @@ fn current_temperature(_req: HttpRequest) -> impl Responder {
     Json(Measurement { temperature: 42.3 })
 }` "rust" "" }}
       </div>
-      <input type="radio" name="feature" id="extractors">
-      <div class="feature">
+      <div class="actix-feature" id="extractors">
         <h2>Powerful Extractors</h2>
         <p>
           Actix comes with a powerful extractor system that extracts data
@@ -104,8 +102,7 @@ fn capture_event(evt: Json<Event>) -> impl Responder {
     format!("got event {}", id)
 }` "rust" "" }}
       </div>
-      <input type="radio" name="feature" id="forms">
-      <div class="feature">
+      <div class="actix-feature" id="forms">
         <h2>Easy Form Handling</h2>
         <p>
           Handling multipart/urlencoded form data is easy.  Just define
@@ -123,10 +120,12 @@ fn register(data: Form<Register>) -> impl Responder {
 }` "rust" "" }}
       </div>
     </div>
-    <div class="col-md-4">
-      <label for="responders">flexible responders</label>
-      <label for="extractors">powerful extractors</label>
-      <label for="forms">easy form handling</label>
+    <div class="col-md-3 actix-feature-selectors">
+      <ul>
+        <li class="actix-feature-selector"><a href="#responders">flexible responders</label>
+        <li class="actix-feature-selector"><a href="#extractors">powerful extractors</label>
+        <li class="actix-feature-selector"><a href="#forms">easy form handling</label>
+      </ul>
     </div>
   </div>
 </div>
