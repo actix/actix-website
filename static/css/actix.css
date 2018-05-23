@@ -20,10 +20,6 @@ td {
     padding: 4px;
 }
 
-img {
-  max-width: 100%;
-}
-
 /*
  *
  * ===== Content ====
@@ -99,6 +95,10 @@ img {
 
  .navbar-nav {
    display: flex;
+ }
+
+ .navbar-nav img {
+   width: 100%;
  }
 
  .navbar-nav .nav-item {
