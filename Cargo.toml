@@ -13,7 +13,6 @@ categories = ["network-programming", "asynchronous",
               "web-programming::websocket"]
 license = "MIT/Apache-2.0"
 exclude = [".gitignore", ".travis.yml", ".cargo/config", "appveyor.yml"]
-build = "build.rs"
 
 [lib]
 src="src/lib.rs"
@@ -37,9 +36,7 @@ http = "0.1"
 
 [dev-dependencies]
 env_logger = "0.5"
-skeptic = "0.13"
 serde_derive = "1.0"
 
 [build-dependencies]
-skeptic = "0.13"
 futures = "0.1"
