@@ -23,7 +23,7 @@ The prefix should consist of value path segments.
 > any request with the paths `/app`, `/app/`, or `/app/test` would match;
 > however, the path `/application` would not match.
 
-{{< include-example example="application" section="setup" >}}
+{{< include-example example="application" section="make_app" >}}
 
 In this example, an application with the `/app` prefix and a `index.html` resource
 are created. This resource is available through the `/app/index.html` url.
@@ -33,23 +33,7 @@ are created. This resource is available through the `/app/index.html` url.
 
 Multiple applications can be served with one server:
 
-```rust
-# extern crate actix_web;
-use actix_web::{server, App, HttpResponse};
-
-fn main() {
-    server::new(|| vec![
-        App::new()
-            .prefix("/app1")
-            .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-        App::new()
-            .prefix("/app2")
-            .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-        App::new()
-            .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-    ]);
-}
-```
+{{< include-example example="application" section="run_server" >}}
 
 All `/app1` requests route to the first application, `/app2` to the second, and all other to the third.
 **Applications get matched based on registration order**. If an application with a more generic
@@ -67,29 +51,11 @@ State is also available for route matching predicates and middlewares.
 Let's write a simple application that uses shared state. We are going to store request count
 in the state:
 
-```rust
-# extern crate actix_web;
-use std::cell::Cell;
-use actix_web::{App, HttpRequest, http};
+{{< include-example example="application" file="state.rs" section="setup" >}}
 
-// This struct represents state
-struct AppState {
-    counter: Cell<usize>,
-}
+When the app is initialized it needs to be passed the initial state:
 
-fn index(req: HttpRequest<AppState>) -> String {
-    let count = req.state().counter.get() + 1; // <- get count
-    req.state().counter.set(count);            // <- store new count in state
-
-    format!("Request number: {}", count)       // <- response with count
-}
-
-fn main() {
-    App::with_state(AppState{counter: Cell::new(0)})
-        .resource("/", |r| r.method(http::Method::GET).f(index))
-        .finish();
-}
-```
+{{< include-example example="application" file="state.rs" section="make_app" >}}
 
 > **Note**: http server accepts an application factory rather than an application
 > instance. Http server constructs an application instance for each thread, thus application state
@@ -105,30 +71,4 @@ Combining multiple applications with different state is possible as well.
 
 This limitation can easily be overcome with the [App::boxed](https://docs.rs/actix-web/*/actix_web/struct.App.html#method.boxed) method, which converts an App into a boxed trait object.
 
-```rust
-# use std::thread;
-# extern crate actix_web;
-use actix_web::{server, App, HttpResponse};
-
-struct State1;
-struct State2;
-
-fn main() {
-# thread::spawn(|| {
-    server::new(|| {
-        vec![
-            App::with_state(State1)
-                 .prefix("/app1")
-                 .resource("/", |r| r.f(|r| HttpResponse::Ok()))
-                 .boxed(),
-            App::with_state(State2)
-                 .prefix("/app2")
-                 .resource("/", |r| r.f(|r| HttpResponse::Ok()))
-                 .boxed()
-        ]
-    })
-        .bind("127.0.0.1:8080").unwrap()
-        .run()
-# });
-}
-```
+{{< include-example example="application" file="state.rs" section="combine" >}}

@@ -2,6 +2,6 @@
 {{$file := .Get "file" | default "main.rs"}}
 {{$section := .Get "section"}}
 {{$source := readFile (printf "examples/%s/src/%s" $example $file)}}
-{{$source := index (findRE (printf "(?ms)// <%s>$(.*?)// </%s>" $section $section) $source) 0 }}
-{{$source := trim (replaceRE "// <[^>]+>" "" $source) "\n" }}
+{{$source := index (findRE (printf "(?ms)^// <%s>$(.*?)^// </%s>$" $section $section) $source) 0 }}
+{{$source := trim (replaceRE "(?m)^// <[^>]+>" "" $source) "\n" }}
 {{- highlight $source "rust" "" -}}
