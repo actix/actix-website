@@ -30,20 +30,7 @@ routing table. This method accepts a *path pattern*,
 *http method* and a handler function. `route()` method could be called multiple times
 for the same path, in that case, multiple routes register for the same resource path.
 
-```rust
-use actix_web::{App, HttpRequest, HttpResponse, http::Method};
-
-fn index(req: HttpRequest) -> HttpResponse {
-   unimplemented!()
-}
-
-fn main() {
-    App::new()
-        .route("/user/{name}", Method::GET, index)
-        .route("/user/{name}", Method::POST, index)
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" section="main" >}}
 
 While *App::route()* provides simple way of registering routes, to access
 complete resource configuration, different method has to be used.
@@ -51,21 +38,7 @@ The [*App::resource()*](../../actix-web/actix_web/struct.App.html#method.resourc
 adds a single resource to application routing table. This method accepts a *path pattern*
 and a resource configuration function.
 
-```rust
-use actix_web::{App, HttpRequest, HttpResponse, http::Method};
-
-fn index(req: HttpRequest) -> HttpResponse {
-   unimplemented!()
-}
-
-fn main() {
-    App::new()
-        .resource("/prefix", |r| r.f(index))
-        .resource("/user/{name}",
-             |r| r.method(Method::GET).f(|req| HttpResponse::Ok()))
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="resource.rs" section="resource" >}}
 
 The *Configuration function* has the following type:
 
@@ -90,18 +63,7 @@ the order the routes were registered via `Resource::route()`.
 
 > A *Route* can contain any number of *predicates* but only one handler.
 
-```rust
-fn main() {
-    App::new()
-        .resource("/path", |resource|
-            resource.route()
-              .filter(pred::Get())
-              .filter(pred::Header("content-type", "text/plain"))
-              .f(|req| HttpResponse::Ok())
-        )
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="cfg.rs" section="cfg" >}}
 
 In this example, `HttpResponse::Ok()` is returned for *GET* requests.
 If a request contains `Content-Type` header, the value of this header is *text/plain*,
@@ -301,40 +263,13 @@ consisting of "Tasks".  Such paths may include:
 
 A scoped layout of these paths would appear as follows
 
-```rust
-	App::new()
-        .scope("/project", |proj_scope| {
-			proj_scope
-			.resource("", |r| { 
-				r.method(Method::GET)
-				  .f(get_projects);
-				r.method(Method::POST)
-				  .f(create_project)})
-			.resource("/{project_id}", |r| { 
-				  r.method(Method::PUT)
-				   .with(update_project);
-				  r.method(Method::DELETE)
-				   .f(delete_project)})
-			.nested("/{project_id}/task", |task_scope| {
-				task_scope
-				.resource("", |r| {
-					r.method(Method::GET)
-					.f(get_tasks);
-					r.method(Method::POST)
-					.f(create_task)})
-				.resource("/{task_id}", |r| { 
-					r.method(Method::PUT)
-					.with(update_task);
-					r.method(Method::DELETE)
-					.with(delete_task)})})})
-```
+{{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
 
 A *scoped* path can contain variable path segments as resources. Consistent with 
-unscoped paths, a scoped prefix without a trailing slash has one automatically 
-appended to it: `/app` converts to `/app/`.
+unscoped paths.
 
- You can get variable path segments from `HttpRequest::match_info()`.
- `Path` extractor also is able to extract scope level variable segments.
+You can get variable path segments from `HttpRequest::match_info()`.
+`Path` extractor also is able to extract scope level variable segments.
 
 # Match information
 
@@ -347,21 +282,7 @@ Any matched parameter can be deserialized into a specific type if the type
 implements the `FromParam` trait. For example most standard integer types
 the trait, i.e.:
 
-```rust
-use actix_web::*;
-
-fn index(req: HttpRequest) -> Result<String> {
-    let v1: u8 = req.match_info().query("v1")?;
-    let v2: u8 = req.match_info().query("v2")?;
-    Ok(format!("Values {} {}", v1, v2))
-}
-
-fn main() {
-    App::new()
-        .resource(r"/a/{v1}/{v2}/", |r| r.f(index))
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="minfo.rs" section="minfo" >}}
 
 For this example for path '/a/1/2/', values v1 and v2 will resolve to "1" and "2".
 
@@ -381,21 +302,7 @@ an `Err` is returned indicating the condition met:
 As a result of these conditions, a `PathBuf` parsed from request path parameter is
 safe to interpolate within, or use as a suffix of, a path without additional checks.
 
-```rust
-use std::path::PathBuf;
-use actix_web::{App, HttpRequest, Result, http::Method};
-
-fn index(req: HttpRequest) -> Result<String> {
-    let path: PathBuf = req.match_info().query("tail")?;
-    Ok(format!("Path {:?}", path))
-}
-
-fn main() {
-    App::new()
-        .resource(r"/a/{tail:.*}", |r| r.method(Method::GET).f(index))
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="pbuf.rs" section="pbuf" >}}
 
 List of `FromParam` implementations can be found in
 [api docs](../../actix-web/actix_web/dev/trait.FromParam.html#foreign-impls)
@@ -410,45 +317,12 @@ path pattern. i.e. you can match path pattern `/{id}/{username}/` against
 `Pyth<(u32, String)>` type, but `Path<(String, String, String)>` type will
 always fail.
 
-```rust
-use actix_web::{App, Path, Result, http::Method};
-
-// extract path info using serde
-fn index(info: Path<(String, u32)>) -> Result<String> {
-    Ok(format!("Welcome {}! id: {}", info.0, info.1))
-}
-
-fn main() {
-    let app = App::new()
-        .resource("/{username}/{id}/index.html",    // <- define path parameters
-                  |r| r.method(Method::GET).with(index));
-}
-```
-
+{{< include-example example="url-dispatch" file="path.rs" section="path" >}}
 
 It also possible to extract path pattern information to a struct. In this case,
 this struct must implement *serde's *`Deserialize` trait.
 
-```rust
-#[macro_use] extern crate serde_derive;
-use actix_web::{App, Path, Result, http::Method};
-
-#[derive(Deserialize)]
-struct Info {
-    username: String,
-}
-
-// extract path info using serde
-fn index(info: Path<Info>) -> Result<String> {
-    Ok(format!("Welcome {}!", info.username))
-}
-
-fn main() {
-    let app = App::new()
-        .resource("/{username}/index.html",    // <- define path parameters
-                  |r| r.method(Method::GET).with(index));
-}
-```
+{{< include-example example="url-dispatch" file="path2.rs" section="path" >}}
 
 [*Query*](../../actix-web/actix_web/struct.Query.html) provides similar
 functionality for request query parameters.
@@ -459,24 +333,7 @@ Use the [*HttpRequest.url_for()*](../../actix-web/actix_web/struct.HttpRequest.h
 method to generate URLs based on resource patterns. For example, if you've configured a
 resource with the name "foo" and the pattern "{a}/{b}/{c}", you might do this:
 
-```rust
-fn index(req: HttpRequest) -> Result<HttpResponse> {
-    let url = req.url_for("foo", &["1", "2", "3"])?; // <- generate url for "foo" resource
-    Ok(HttpResponse::Found()
-       .header(header::LOCATION, url.as_str())
-       .finish())
-}
-
-fn main() {
-    let app = App::new()
-        .resource("/test/{a}/{b}/{c}", |r| {
-             r.name("foo");  // <- set resource name, then it could be used in `url_for`
-             r.method(Method::GET).f(|_| HttpResponse::Ok());
-        })
-        .route("/test/", Method::GET, index)
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="urls.rs" section="url" >}}
 
 This would return something like the string *http://example.com/test/1/2/3* (at least if
 the current protocol and hostname implied http://example.com).
@@ -489,23 +346,7 @@ can modify this url (add query parameters, anchor, etc).
 Resources that are valid URLs, can be registered as external resources. They are useful
 for URL generation purposes only and are never considered for matching at request time.
 
-```rust
-# extern crate actix_web;
-use actix_web::{App, HttpRequest, HttpResponse, Error};
-
-fn index(mut req: HttpRequest) -> Result<HttpResponse, Error> {
-    let url = req.url_for("youtube", &["oHg5SJYRHA0"])?;
-    assert_eq!(url.as_str(), "https://youtube.com/watch/oHg5SJYRHA0");
-    Ok(HttpResponse::Ok().into())
-}
-
-fn main() {
-    let app = App::new()
-        .resource("/index.html", |r| r.f(index))
-        .external_resource("youtube", "https://youtube.com/watch/{video_id}")
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="url_ext.rs" section="ext" >}}
 
 # Path normalization and redirecting to slash-appended routes
 
@@ -527,16 +368,7 @@ If *merge* is *true*, merge multiple consecutive slashes in the path into one.
 
 This handler designed to be used as a handler for application's *default resource*.
 
-```rust
-use actix_web::http::NormalizePath;
-
-fn main() {
-    let app = App::new()
-        .resource("/resource/", |r| r.f(index))
-        .default_resource(|r| r.h(NormalizePath::default()))
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="norm.rs" section="norm" >}}
 
 In this example `/resource`, `//resource///` will be redirected to `/resource/`.
 
@@ -547,16 +379,7 @@ slash-appending *Not Found* will turn a *POST* request into a GET, losing any
 
 It is possible to register path normalization only for *GET* requests only:
 
-```rust
-use actix_web::{App, HttpRequest, http::Method, http::NormalizePath};
-
-fn main() {
-    let app = App::new()
-        .resource("/resource/", |r| r.f(index))
-        .default_resource(|r| r.method(Method::GET).h(NormalizePath::default()))
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="norm2.rs" section="norm" >}}
 
 ## Using an Application Prefix to Compose Applications
 
@@ -568,18 +391,7 @@ resource names.
 
 For example:
 
-```rust
-fn show_users(req: HttpRequest) -> HttpResponse {
-   unimplemented!()
-}
-
-fn main() {
-    App::new()
-        .prefix("/users")
-        .resource("/show", |r| r.f(show_users))
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="prefix.rs" section="prefix" >}}
 
 In the above example, the *show_users* route will have an effective route pattern of
 */users/show* instead of */show* because the application's prefix argument will be prepended
@@ -597,26 +409,7 @@ several predicates, you can check
 
 Here is a simple predicate that check that a request contains a specific *header*:
 
-```rust
-use actix_web::{http, pred::Predicate, App, HttpMessage, HttpRequest};
-
-struct ContentTypeHeader;
-
-impl<S: 'static> Predicate<S> for ContentTypeHeader {
-
-    fn check(&self, req: &mut HttpRequest<S>) -> bool {
-       req.headers().contains_key(http::header::CONTENT_TYPE)
-    }
-}
-
-fn main() {
-    App::new()
-        .resource("/index.html", |r|
-           r.route()
-              .filter(ContentTypeHeader)
-              .f(|_| HttpResponse::Ok()));
-}
-```
+{{< include-example example="url-dispatch" file="pred.rs" section="pred" >}}
 
 In this example, *index* handler will be called only if request contains *CONTENT-TYPE* header.
 
@@ -630,18 +423,7 @@ You can invert the meaning of any predicate value by wrapping it in a `Not` pred
 For example, if you want to return "METHOD NOT ALLOWED" response for all methods
 except "GET":
 
-```rust
-use actix_web::{pred, App, HttpResponse};
-
-fn main() {
-    App::new()
-        .resource("/index.html", |r|
-           r.route()
-              .filter(pred::Not(pred::Get()))
-              .f(|req| HttpResponse::MethodNotAllowed()))
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="pred2.rs" section="pred" >}}
 
 The `Any` predicate accepts a list of predicates and matches if any of the supplied
 predicates match. i.e:
@@ -665,16 +447,4 @@ It is possible to override the *NOT FOUND* response with `App::default_resource(
 This method accepts a *configuration function* same as normal resource configuration
 with `App::resource()` method.
 
-```rust
-use actix_web::{App, HttpResponse, http::Method, pred};
-
-fn main() {
-    App::new()
-        .default_resource(|r| {
-              r.method(Method::GET).f(|req| HttpResponse::NotFound());
-              r.route().filter(pred::Not(pred::Get()))
-                  .f(|req| HttpResponse::MethodNotAllowed());
-         })
-        .finish();
-}
-```
+{{< include-example example="url-dispatch" file="dhandler.rs" section="default" >}}

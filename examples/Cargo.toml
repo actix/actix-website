@@ -3,4 +3,5 @@ members = [
   "application",
   "getting-started",
   "server",
+  "url-dispatch",
 ]
