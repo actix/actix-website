@@ -1,16 +1,16 @@
 #![allow(unused)]
 extern crate actix_web;
-use actix_web::{App, Responder, HttpRequest, HttpResponse, server, http::Method};
+use actix_web::{http::Method, server, App, HttpRequest, HttpResponse, Responder};
 
 mod state;
 
 fn make_app() {
-// <make_app>
-fn index(req: HttpRequest) -> impl Responder {
-    "Hello world!"
-}
+    // <make_app>
+    fn index(req: HttpRequest) -> impl Responder {
+        "Hello world!"
+    }
 
-let app = App::new()
+    let app = App::new()
     .prefix("/app")
     .resource("/index.html", |r| r.method(Method::GET).f(index))
     .finish()
@@ -19,18 +19,19 @@ let app = App::new()
 }
 
 fn run_server() {
-// <run_server>
-let server = server::new(|| vec![
-    App::new()
-        .prefix("/app1")
-        .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-    App::new()
-        .prefix("/app2")
-        .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-    App::new()
-        .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-]);
-// </run_server>
+    // <run_server>
+    let server = server::new(|| {
+        vec![
+            App::new()
+                .prefix("/app1")
+                .resource("/", |r| r.f(|r| HttpResponse::Ok())),
+            App::new()
+                .prefix("/app2")
+                .resource("/", |r| r.f(|r| HttpResponse::Ok())),
+            App::new().resource("/", |r| r.f(|r| HttpResponse::Ok())),
+        ]
+    });
+    // </run_server>
 }
 
 fn main() {

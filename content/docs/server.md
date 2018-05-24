@@ -21,22 +21,7 @@ To start the http server, one of the start methods.
 
 `HttpServer` is an actix actor. It must be initialized within a properly configured actix system:
 
-```rust
-use actix_web::{server::HttpServer, App, HttpResponse};
-
-fn main() {
-    let sys = actix::System::new("guide");
-
-    HttpServer::new(|| {
-        App::new()
-            .resource("/", |r| r.f(|_| HttpResponse::Ok()))
-    })
-        .bind("127.0.0.1:59080").unwrap()
-        .start();
-
-    let _ = sys.run();
-}
-```
+{{< include-example example="server" section="main" >}}
 
 > It is possible to start a server in a separate thread with the `run()` method. In that
 > case the server spawns a new thread and creates a new actix system in it. To stop
@@ -50,32 +35,7 @@ address of the started http server. It accepts several messages:
 - `ResumeServer` - Resume accepting incoming connections
 - `StopServer` - Stop incoming connection processing, stop all workers and exit
 
-```rust
-use std::thread;
-use std::sync::mpsc;
-use actix_web::{server, App, HttpResponse};
-
-fn main() {
-    let (tx, rx) = mpsc::channel();
-
-    thread::spawn(move || {
-        let sys = actix::System::new("http-server");
-        let addr = server::new(|| {
-            App::new()
-                .resource("/", |r| r.f(|_| HttpResponse::Ok()))
-        })
-            .bind("127.0.0.1:0").expect("Can not bind to 127.0.0.1:0")
-            .shutdown_timeout(60)    // <- Set shutdown timeout to 60 seconds
-            .start();
-        let _ = tx.send(addr);
-        let _ = sys.run();
-    });
-
-    let addr = rx.recv().unwrap();
-    let _ = addr.send(
-         server::StopServer{graceful:true}).wait(); // <- Send `StopServer` message to server.
-}
-```
+{{< include-example example="server" file="signals.rs" section="signals" >}}
 
 ## Multi-threading
 
@@ -83,17 +43,7 @@ fn main() {
 this number is equal to number of logical CPUs in the system. This number
 can be overridden with the `HttpServer::workers()` method.
 
-```rust
-use actix_web::{App, HttpResponse, server::HttpServer};
-
-fn main() {
-    HttpServer::new(|| {
-        App::new()
-            .resource("/", |r| r.f(|_| HttpResponse::Ok()))
-    })
-        .workers(4); // <- Start 4 workers
-}
-```
+{{< include-example example="server" file="workers.rs" section="workers" >}}
 
 The server creates a separate application instance for each created worker. Application state
 is not shared between threads. To share state, `Arc` could be used.
@@ -111,24 +61,7 @@ for `native-tls` integration and `alpn` is for `openssl`.
 actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["alpn"] }
 ```
 
-```rust
-use std::fs::File;
-use actix_web::*;
-
-fn main() {
-    // load ssl keys
-    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
-    builder.set_private_key_file("key.pem", SslFiletype::PEM).unwrap();
-    builder.set_certificate_chain_file("cert.pem").unwrap();
-
-    server::new(|| {
-        App::new()
-            .resource("/index.html", |r| r.f(index))
-    })
-        .bind_ssl("127.0.0.1:8080", builder).unwrap()
-        .serve();
-}
-```
+{{< include-example example="server" file="ssl.rs" section="ssl" >}}
 
 > **Note**: the *HTTP/2.0* protocol requires
 > [tls alpn](https://tools.ietf.org/html/rfc7301).
@@ -156,26 +89,7 @@ Actix can wait for requests on a keep-alive connection.
 - `None` or `KeepAlive::Disabled` - disable *keep alive*.
 - `KeepAlive::Tcp(75)` - use `SO_KEEPALIVE` socket option.
 
-```rust
-use actix_web::{server, App, HttpResponse};
-
-fn main() {
-    server::new(||
-        App::new()
-            .resource("/", |r| r.f(|_| HttpResponse::Ok())))
-        .keep_alive(75); // <- Set keep-alive to 75 seconds
-
-    server::new(||
-        App::new()
-            .resource("/", |r| r.f(|_| HttpResponse::Ok())))
-        .keep_alive(server::KeepAlive::Tcp(75)); // <- Use `SO_KEEPALIVE` socket option.
-
-    server::new(||
-        App::new()
-            .resource("/", |r| r.f(|_| HttpResponse::Ok())))
-        .keep_alive(None); // <- Disable keep-alive
-}
-```
+{{< include-example example="server" file="ka.rs" section="ka" >}}
 
 If the first option is selected, then *keep alive* state is
 calculated based on the response's *connection-type*. By default
@@ -186,16 +100,7 @@ defined by the request's http version.
 
 *Connection type* can be change with `HttpResponseBuilder::connection_type()` method.
 
-```rust
-use actix_web::{HttpRequest, HttpResponse, http};
-
-fn index(req: HttpRequest) -> HttpResponse {
-    HttpResponse::Ok()
-        .connection_type(http::ConnectionType::Close) // <- Close connection
-        .force_close()                                // <- Alternative method
-        .finish()
-}
-```
+{{< include-example example="server" file="ka_tp.rs" section="example" >}}
 
 ## Graceful shutdown
 

@@ -2,4 +2,5 @@
 members = [
   "application",
   "getting-started",
+  "server",
 ]
