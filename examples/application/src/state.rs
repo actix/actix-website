@@ -16,8 +16,8 @@ fn index(req: HttpRequest<AppState>) -> String {
 // </setup>
 
 fn make_app() {
-    // <make_app>
-    App::with_state(AppState { counter: Cell::new(0) })
+// <make_app>
+App::with_state(AppState { counter: Cell::new(0) })
     .resource("/", |r| r.method(http::Method::GET).f(index))
     .finish()
 // </make_app>
@@ -29,27 +29,27 @@ use std::thread;
 
 fn combine() {
     thread::spawn(|| {
-        // <combine>
-        struct State1;
-        struct State2;
+// <combine>
+struct State1;
+struct State2;
 
-        fn main() {
-            server::new(|| {
-                vec![
-                    App::with_state(State1)
-                        .prefix("/app1")
-                        .resource("/", |r| r.f(|r| HttpResponse::Ok()))
-                        .boxed(),
-                    App::with_state(State2)
-                        .prefix("/app2")
-                        .resource("/", |r| r.f(|r| HttpResponse::Ok()))
-                        .boxed(),
+fn main() {
+    server::new(|| {
+        vec![
+            App::with_state(State1)
+                .prefix("/app1")
+                .resource("/", |r| r.f(|r| HttpResponse::Ok()))
+                .boxed(),
+            App::with_state(State2)
+                .prefix("/app2")
+                .resource("/", |r| r.f(|r| HttpResponse::Ok()))
+                .boxed(),
                 ]
-            }).bind("127.0.0.1:8080")
-                .unwrap()
-                .run()
-        }
-        // </combine>
+    }).bind("127.0.0.1:8080")
+        .unwrap()
+        .run()
+}
+// </combine>
     });
 }
 
