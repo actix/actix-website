@@ -13,13 +13,18 @@ serving http requests.
 application factory must have `Send` + `Sync` boundaries. More about that in the
 *multi-threading* section.
 
-To bind to a specific socket address, `bind()` must be used, and it may be
-called multiple times. To bind ssl socket `bind_ssl()` or `bind_tls()` should be used.
-To start the http server, one of the start methods.
+To bind to a specific socket address,
+[`bind()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind)
+must be used, and it may be called multiple times. To bind ssl socket
+[`bind_ssl()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_ssl)
+or [`bind_tls()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_tls)
+should be used. To start the http server, one of the start methods.
 
-- use `start()` for a server
+- use [`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.starT)
+for a server
 
-`HttpServer` is an actix actor. It must be initialized within a properly configured actix system:
+`HttpServer` is an actix actor. It must be initialized within a properly
+configured actix system:
 
 {{< include-example example="server" section="main" >}}
 
@@ -41,7 +46,8 @@ address of the started http server. It accepts several messages:
 
 `HttpServer` automatically starts an number of http workers, by default
 this number is equal to number of logical CPUs in the system. This number
-can be overridden with the `HttpServer::workers()` method.
+can be overridden with the
+[`HttpServer::workers()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.workers) method.
 
 {{< include-example example="server" file="workers.rs" section="workers" >}}
 
