@@ -285,6 +285,57 @@ foo/1/2/           -> Params{'bar':'1', 'tail': '2/'}
 foo/abc/def/a/b/c  -> Params{'bar':u'abc', 'tail': 'def/a/b/c'}
 ```
 
+# Scoping Routes
+
+Scoping helps you organize routes sharing common root paths.  You can nest
+scopes within scopes.
+
+Suppose that you want to organize paths to endpoints used to manage a "Project",
+consisting of "Tasks".  Such paths may include:
+
+- /project
+- /project/{project_id}
+- /project/{project_id}/task
+- /project/{project_id}/task/{task_id}
+
+
+A scoped layout of these paths would appear as follows
+
+```rust
+	App::new()
+        .scope("/project", |proj_scope| {
+			proj_scope
+			.resource("", |r| { 
+				r.method(Method::GET)
+				  .f(get_projects);
+				r.method(Method::POST)
+				  .f(create_project)})
+			.resource("/{project_id}", |r| { 
+				  r.method(Method::PUT)
+				   .with(update_project);
+				  r.method(Method::DELETE)
+				   .f(delete_project)})
+			.nested("/{project_id}/task", |task_scope| {
+				task_scope
+				.resource("", |r| {
+					r.method(Method::GET)
+					.f(get_tasks);
+					r.method(Method::POST)
+					.f(create_task)})
+				.resource("/{task_id}", |r| { 
+					r.method(Method::PUT)
+					.with(update_task);
+					r.method(Method::DELETE)
+					.with(delete_task)})})})
+```
+
+A *scoped* path can contain variable path segments as resources. Consistent with 
+unscoped paths, a scoped prefix without a trailing slash has one automatically 
+appended to it: `/app` converts to `/app/`.
+
+ You can get variable path segments from `HttpRequest::match_info()`.
+ `Path` extractor also is able to extract scope level variable segments.
+
 # Match information
 
 All values representing matched path segments are available in
