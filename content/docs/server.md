@@ -20,7 +20,7 @@ must be used, and it may be called multiple times. To bind ssl socket
 or [`bind_tls()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_tls)
 should be used. To start the http server, one of the start methods.
 
-- use [`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.starT)
+- use [`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.start)
 for a server
 
 `HttpServer` is an actix actor. It must be initialized within a properly
@@ -113,10 +113,13 @@ defined by the request's http version.
 `HttpServer` supports graceful shutdown. After receiving a stop signal, workers
 have a specific amount of time to finish serving requests. Any workers still alive after the
 timeout are force-dropped. By default the shutdown timeout is set to 30 seconds.
-You can change this parameter with the `HttpServer::shutdown_timeout()` method.
+You can change this parameter with the
+[`HttpServer::shutdown_timeout()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.shutdown_timeout) method.
 
 You can send a stop message to the server with the server address and specify if you want
-graceful shutdown or not. The `start()` methods returns address of the server.
+graceful shutdown or not. The
+[`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.start)
+methods returns address of the server.
 
 `HttpServer` handles several OS signals. *CTRL-C* is available on all OSs,
 other signals are available on unix systems.
@@ -125,4 +128,6 @@ other signals are available on unix systems.
 - *SIGTERM* - Graceful shutdown workers
 - *SIGQUIT* - Force shutdown workers
 
-> It is possible to disable signal handling with `HttpServer::disable_signals()` method.
+> It is possible to disable signal handling with
+> [`HttpServer::disable_signals()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.disable_signals)
+> method.
