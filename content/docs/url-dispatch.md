@@ -305,7 +305,7 @@ A scoped layout of these paths would appear as follows
 	App::new()
         .scope("/project", |proj_scope| {
 			proj_scope
-			.resource("/", |r| { 
+			.resource("", |r| { 
 				r.method(Method::GET)
 				  .f(get_projects);
 				r.method(Method::POST)
@@ -317,7 +317,7 @@ A scoped layout of these paths would appear as follows
 				   .f(delete_project)})
 			.nested("/{project_id}/task", |task_scope| {
 				task_scope
-				.resource("/", |r| {
+				.resource("", |r| {
 					r.method(Method::GET)
 					.f(get_tasks);
 					r.method(Method::POST)
