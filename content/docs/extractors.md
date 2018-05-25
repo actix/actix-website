@@ -9,6 +9,62 @@ weight: 170
 Actix provides facility for type-safe request information extraction. By default,
 actix provides several extractor implementations.
 
+# Accessing Extractors
+
+How you access an Extractor depends on whether you are using a handler function
+or a custom Handler type.
+
+## Within Handler Functions
+
+An Extractor can be passed to a handler function as a function parameter
+*or* accessed within the function by calling the ExtractorType::<...>::extract(req)
+function.
+```rust
+
+// Option 1:  passed as a parameter to a handler function
+fn index(params: Path<(String, String,)>, info: Json<MyInfo>) -> HttpResponse {
+   ... 
+}
+
+
+// Option 2:  accessed by calling extract() on the Extractor
+
+fn index(req: HttpRequest) -> HttpResponse {
+	let params = Path::<(String, String)>::extract(req);
+	let info = Json::<MyInfo>::extract(req); 
+
+	...
+}
+```
+
+## Within Custom Handler Types
+
+Like a handler function, a custom Handler type can *access* an Extractor by
+calling the ExtractorType::<...>::extract(req) function.  An Extractor 
+*cannot* be passed as a parameter to a custom Handler type because a custom 
+Handler type must follow the ``handle`` function signature specified by the 
+Handler trait it implements.
+
+```rust
+
+struct MyHandler(String);
+
+impl<S> Handler<S> for MyHandler {
+    type Result = HttpResponse;
+
+    /// Handle request
+    fn handle(&mut self, req: HttpRequest<S>) -> Self::Result {
+		let params = Path::<(String, String)>::extract(req);
+		let info = Json::<MyInfo>::extract(req); 
+
+		...
+			
+        HttpResponse::Ok().into()
+    }
+}
+
+```
+
 # Path
 
 [*Path*](../../actix-web/actix_web/struct.Path.html) provides information that can
