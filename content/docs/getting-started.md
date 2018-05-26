@@ -13,7 +13,7 @@ Let’s write our first actix web application!
 Start by creating a new binary-based Cargo project and changing into the new directory:
 
 ```bash
-cargo new hello-world --bin
+cargo new hello-world
 cd hello-world
 ```
 
