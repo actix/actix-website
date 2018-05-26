@@ -119,12 +119,35 @@ fn register(data: Form<Register>) -> impl Responder {
     format!("Hello {} from {}!", data.username, data.country)
 }` "rust" "" }}
       </div>
+      <div class="actix-feature" id="routing">
+        <h2>Request Routing</h2>
+        <p>
+          An actix app comes with a URL routing system that lets you match on
+          URLs and invoke individual handlers.  For extra flexibility scopes
+          can be used.
+        </p>
+        {{ highlight `fn index(req: HttpRequest) -> impl Responder {
+    "Hello from the index page"
+}
+
+fn hello(req: HttpRequest) -> impl Responder {
+    format!("Hello {}!", req.match_info().get("name").unwrap())
+}
+
+fn main() {
+    App::new()
+        .resource("/", |r| r.method(Method::Get).with(index))
+        .resource("/hello/{name}", |r| r.method(Method::Get).with(hello))
+        .finish();
+}` "rust" "" }}
+      </div>
     </div>
     <div class="col-md-3 actix-feature-selectors">
       <ul>
         <li class="actix-feature-selector"><a href="#responders">flexible responders</label>
         <li class="actix-feature-selector"><a href="#extractors">powerful extractors</label>
         <li class="actix-feature-selector"><a href="#forms">easy form handling</label>
+        <li class="actix-feature-selector"><a href="#routing">request routing</label>
       </ul>
     </div>
   </div>
