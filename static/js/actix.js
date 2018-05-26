@@ -15,6 +15,9 @@
     var active = $(window.location.hash);
     if (active.is('div.actix-feature')) {
       activateFeature(window.location.hash);
+      $('html, body').animate({
+        scrollTop: $('.actix-showcase').offset().top
+      }, 1000);
     } else {
       activateFeature('#' + $('div.actix-feature')[0].id);
     }
