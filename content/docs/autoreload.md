@@ -72,5 +72,5 @@ fn main() {
 To now run the development server invoke this command:
 
 ```
-systemfd -s http::3000 -- cargo watch -x run
+systemfd --no-pid -s http::3000 -- cargo watch -x run
 ```
