@@ -19,7 +19,10 @@
         scrollTop: $('.actix-showcase').offset().top
       }, 1000);
     } else {
-      activateFeature('#' + $('div.actix-feature')[0].id);
+      var firstFeature = $('div.actix-feature')[0];
+      if (firstFeature) {
+        activateFeature('#' + firstFeature.id);
+      }
     }
 
     $('ul li.actix-feature-selector a').on('click', function(evt) {

@@ -123,6 +123,8 @@ td {
 
 .navbar-brand img {
   animation: spin-logo 30s linear infinite;
+  width: 48px;
+  height: 48px;
 }
 
 .navbar-light {
@@ -170,6 +172,16 @@ td {
   padding-top: 0;
 }
 
+.doctoggle {
+  margin: -1rem 0 2rem 0;
+  display: none;
+}
+
+.leftnav {
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
 .leftnav li {
   margin: 1rem 0rem;
 }
@@ -179,8 +191,8 @@ td {
 }
 
 .leftnav li.active {
-  margin: -0.5rem 0 -.5rem -1rem;
-  padding: 0.5rem 0 0.5rem 1rem;
+  margin: -0.5rem -1rem -.5rem -1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   background: #dceaea;
 }
 
@@ -241,6 +253,7 @@ td {
 
 .jumbotron .actix-logo {
   max-height: 10rem;
+  max-width: 80%;
 }
 
 .jumbotron .lead {
@@ -537,6 +550,18 @@ h5:hover a {
 
   .actix-footer-social a .fa-github {
     margin-right: 1rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .doctoggle {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .leftnav {
+    display: block;
   }
 }
 
