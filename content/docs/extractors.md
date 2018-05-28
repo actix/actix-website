@@ -29,9 +29,11 @@ fn index(params: Path<(String, String,)>, info: Json<MyInfo>) -> HttpResponse {
 
 // Option 2:  accessed by calling extract() on the Extractor
 
+use actix_web::FromRequest;
+
 fn index(req: HttpRequest) -> HttpResponse {
-	let params = Path::<(String, String)>::extract(req);
-	let info = Json::<MyInfo>::extract(req); 
+	let params = Path::<(String, String)>::extract(&req);
+	let info = Json::<MyInfo>::extract(&req); 
 
 	...
 }
@@ -40,7 +42,7 @@ fn index(req: HttpRequest) -> HttpResponse {
 ## Within Custom Handler Types
 
 Like a handler function, a custom Handler type can *access* an Extractor by
-calling the ExtractorType::<...>::extract(req) function.  An Extractor 
+calling the ExtractorType::<...>::extract(&req) function.  An Extractor 
 *cannot* be passed as a parameter to a custom Handler type because a custom 
 Handler type must follow the ``handle`` function signature specified by the 
 Handler trait it implements.
@@ -54,8 +56,8 @@ impl<S> Handler<S> for MyHandler {
 
     /// Handle request
     fn handle(&mut self, req: HttpRequest<S>) -> Self::Result {
-		let params = Path::<(String, String)>::extract(req);
-		let info = Json::<MyInfo>::extract(req); 
+		let params = Path::<(String, String)>::extract(&req);
+		let info = Json::<MyInfo>::extract(&req); 
 
 		...
 			
