@@ -314,7 +314,7 @@ Actix provides functionality for type safe path information extraction.
 could be defined in several different forms. Simplest approach is to use
 `tuple` type. Each element in tuple must correpond to one element from
 path pattern. i.e. you can match path pattern `/{id}/{username}/` against
-`Pyth<(u32, String)>` type, but `Path<(String, String, String)>` type will
+`Path<(u32, String)>` type, but `Path<(String, String, String)>` type will
 always fail.
 
 {{< include-example example="url-dispatch" file="path.rs" section="path" >}}
