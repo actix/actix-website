@@ -34,7 +34,7 @@ Development version:
 
 ```ini
 [dependencies]
-actix-web = { git = "https://github.com/actix/actix-web }
+actix-web = { git = "https://github.com/actix/actix-web" }
 ```
 
 # Diving In
