@@ -15,4 +15,4 @@ for issues with the actor framework or [actix-web](https://github.com/actix/acti
 for the high level web framework.
 
 We're a welcoming community so don't be afraid to engage.  Interactions
-are [goverend by our code of conduct](coc/).
+are [governed by our code of conduct](coc/).
