@@ -7,7 +7,7 @@ weight: 1010
 # Diesel
 
 At the moment, Diesel 1.0 does not support asynchronous operations,
-but it possible to use the `actix` synchronous actor system as a database interface api.
+but it's possible to use the `actix` synchronous actor system as a database interface api.
 
 Technically, sync actors are worker style actors. Multiple sync actors
 can be run in parallel and process messages from same queue. Sync actors work in mpsc mode.
