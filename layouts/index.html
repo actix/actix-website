@@ -130,8 +130,8 @@ fn register(data: Form<Register>) -> impl Responder {
     "Hello from the index page"
 }
 
-fn hello(req: HttpRequest) -> impl Responder {
-    format!("Hello {}!", req.match_info().get("name").unwrap())
+fn hello(path: Path<String>) -> impl Responder {
+    format!("Hello {}!", *path)
 }
 
 fn main() {
