@@ -71,10 +71,10 @@ impl<S> Handler<S> for MyHandler {
 be extracted from the Request's path. You can deserialize any variable
 segment from the path.
 
-For instance, for resource that registered for `/users/{userid}/{friend}` path
-two segments could be deserialized, `userid` and `friend`. This segments 
-could be extracted to a `tuple`, i.e. `Path<(u32, String)>` or structure
-that implementd `Deserialize` trait from *serde* crate.
+For instance, for resource that registered for the `/users/{userid}/{friend}` path
+two segments could be deserialized, `userid` and `friend`. These segments 
+could be extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure
+that implements the `Deserialize` trait from the *serde* crate.
 
 ```rust
 use actix_web::{App, Path, Result, http};
@@ -93,12 +93,12 @@ fn main() {
 }
 ```
 
-Remember! handler function that uses extractors has to be registered with 
+Remember! A handler function that uses extractors has to be registered using the 
 [*Route::with()*](../../actix-web/actix_web/dev/struct.Route.html#method.with) method.
 
 It is also possible to extract path information to a specific type that
-implements `Deserialize` trait from *serde*. Here is equivalent example that uses *serde*
-instead of *tuple* type.
+implements the `Deserialize` trait from *serde*. Here is an equivalent example that uses *serde*
+instead of a *tuple* type.
 
 ```rust
 #[macro_use] extern crate serde_derive;
@@ -125,7 +125,7 @@ fn main() {
 # Query
 
 Same can be done with the request's query.
-[*Query*](../../actix-web/actix_web/struct.Query.html)
+The [*Query*](../../actix-web/actix_web/struct.Query.html)
 type provides extraction functionality. Underneath it uses *serde_urlencoded* crate.
 
 ```rust
@@ -152,7 +152,7 @@ fn main() {
 # Json
 
 [*Json*](../../actix-web/actix_web/struct.Json.html) allows to deserialize
-request body to a struct. To extract typed information from request's body,
+a request body into a struct. To extract typed information from a request's body,
 the type `T` must implement the `Deserialize` trait from *serde*.
 
 ```rust
@@ -176,13 +176,13 @@ fn main() {
 }
 ```
 
-Some extractors provide a way to configure extraction process. Json extractor
+Some extractors provide a way to configure the extraction process. Json extractor
 [*JsonConfig*](../../actix-web/actix_web/dev/struct.JsonConfig.html) type for configuration.
-When you register handler `Route::with()` returns configuration instance. In case of
-*Json* extractor it returns *JsonConfig*. You can configure max size of the json
-payload and custom error handler function.
+When you register a handler using `Route::with()`, it returns a configuration instance. In case of
+a *Json* extractor it returns a *JsonConfig*. You can configure the maximum size of the json
+payload as well as a custom error handler function.
 
-Following example limits size of the payload to 4kb and uses custom error hander.
+The following example limits the size of the payload to 4kb and uses a custom error hander.
 
 ```rust
 #[macro_use] extern crate serde_derive;
@@ -214,12 +214,12 @@ fn main() {
 
 # Form
 
-At the moment only url-encoded forms are supported. Url encoded body
+At the moment only url-encoded forms are supported. The url-encoded body
 could be extracted to a specific type. This type must implement
-the `Deserialize` trait from *serde* crate.
+the `Deserialize` trait from the *serde* crate.
 
 [*FormConfig*](../../actix-web/actix_web/dev/struct.FormConfig.html) allows
-to configure extraction process.
+configuring the extraction process.
 
 ```rust
 #[macro_use] extern crate serde_derive;
@@ -231,8 +231,8 @@ struct FormData {
 }
 
 /// extract form data using serde
-/// this handler get called only if content type is *x-www-form-urlencoded*
-/// and content of the request could be deserialized to a `FormData` struct
+/// this handler gets called only if the content type is *x-www-form-urlencoded*
+/// and the content of the request could be deserialized to a `FormData` struct
 fn index(form: Form<FormData>) -> Result<String> {
      Ok(format!("Welcome {}!", form.username))
 }
@@ -241,10 +241,10 @@ fn index(form: Form<FormData>) -> Result<String> {
 
 # Multiple extractors
 
-Actix provides extractor implementation for tuples (up to 10 elements)
-which elements provide `FromRequest` impl.
+Actix provides extractor implementations for tuples (up to 10 elements)
+whose elements implement `FromRequest`.
 
-For example we can use path extractor and query extractor at the same time.
+For example we can use a path extractor and a query extractor at the same time.
 
 ```rust
 #[macro_use] extern crate serde_derive;
@@ -273,11 +273,11 @@ Actix also provides several other extractors:
 
 * [*State*](../../actix-web/actix_web/struct.State.html) - If you need
   access to an application state. This is similar to a `HttpRequest::state()`.
-* *HttpRequest* - *HttpRequest* itself is an extractor which returns self.
-  In case if you need access to the request.
-* *String* - You can convert request's payload to a *String*.
+* *HttpRequest* - *HttpRequest* itself is an extractor which returns self,
+  in case you need access to the request.
+* *String* - You can convert a request's payload to a *String*.
   [*Example*](../../actix-web/actix_web/trait.FromRequest.html#example-1)
   is available in doc strings.
-* *bytes::Bytes* - You can convert request's payload to a *Bytes*.
+* *bytes::Bytes* - You can convert a request's payload into *Bytes*.
   [*Example*](../../actix-web/actix_web/trait.FromRequest.html#example)
   is available in doc strings.
