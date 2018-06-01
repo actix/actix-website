@@ -257,8 +257,7 @@ struct Info {
     username: String,
 }
 
-fn index(data: (Path<(u32, String)>, Query<Info>)) -> String {
-    let (path, query) = data;
+fn index((path, query): (Path<(u32, String)>, Query<Info>)) -> String {
     format!("Welcome {}!", query.username)
 }
 
