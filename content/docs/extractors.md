@@ -22,7 +22,7 @@ function.
 ```rust
 
 // Option 1:  passed as a parameter to a handler function
-fn index(params: Path<(String, String,)>, info: Json<MyInfo>) -> HttpResponse {
+fn index((params, info): (Path<(String, String,)>, Json<MyInfo>)) -> HttpResponse {
    ... 
 }
 
