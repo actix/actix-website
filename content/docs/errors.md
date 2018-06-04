@@ -137,7 +137,7 @@ full list of available error helpers.
 
 Actix-web provides automatic compatibility with the [failure] library so that
 errors deriving `fail` will be converted automatically to an actix error. Keep
-in that those errors will render with the default *500* status code unless you
+in mind that those errors will render with the default *500* status code unless you
 also provide your own `error_response()` implementation for them.
 
 # Error logging
