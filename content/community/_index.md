@@ -6,7 +6,9 @@ description: The best things in life are to be shared
 # Join us
 
 Want to talk to others about questions?  The [actix gitter
-channel](https://gitter.im/actix/actix) is your best starting point.
+channel](https://gitter.im/actix/actix) or
+[reddit community](https://www.reddit.com/r/actix/)
+are your best starting point.
 
 If you think you found a bug it's best to go to the
 [github](https://github.com/actix) directly.  There are two repositories
