@@ -24,6 +24,18 @@ App::with_state(AppState { counter: Cell::new(0) })
 ;
 }
 
+fn start_app() {
+// <start_app>
+server::new(|| {
+    App::with_state(AppState { counter: Cell::new(0) })
+        .resource("/", |r| r.method(http::Method::GET).f(index))
+}).bind("127.0.0.1:8080")
+    .unwrap()
+    .run()
+// </start_app>
+;
+}
+
 use actix_web::{server, HttpResponse};
 use std::thread;
 
