@@ -62,6 +62,10 @@ When the app is initialized it needs to be passed the initial state:
 > must be constructed multiple times. If you want to share state between different threads, a
 > shared object should be used, e.g. `Arc`. Application state does not need to be `Send` and `Sync`,
 > but the application factory must be `Send` + `Sync`.
+>
+> To start the previous app, create it into a closure:
+
+{{< include-example example="application" file="state.rs" section="start_app" >}}
 
 ## Combining applications with different state
 
