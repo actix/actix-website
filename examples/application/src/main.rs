@@ -3,6 +3,7 @@ extern crate actix_web;
 use actix_web::{http::Method, server, App, HttpRequest, HttpResponse, Responder};
 
 mod state;
+mod vh;
 
 fn make_app() {
 // <make_app>
