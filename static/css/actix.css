@@ -569,6 +569,9 @@ h5:hover a {
   .actix-footer-gray {
     width: 960px;
   }
+  .hd-lg-down {
+    padding-right: 35rem;
+  }
 }
 
 @media (min-width: 1200px) {
