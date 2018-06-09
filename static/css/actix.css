@@ -100,7 +100,9 @@ img {
  .navbar-nav {
    display: flex;
  }
-
+ .navbar-nav img {
+     width: 100%;
+  }
  .navbar-nav .nav-item {
    margin-left: 1rem;
    margin-right: 1rem;
@@ -124,6 +126,8 @@ img {
 
 .navbar-brand img {
   animation: spin-logo 30s linear infinite;
+  width: 48px;
+  height: 48px;
 }
 
 .navbar-toggle {
@@ -167,6 +171,16 @@ img {
   padding-top: 0;
 }
 
+.doctoggle {
+    margin: -1rem 0 2rem 0;
+    display: none;
+  }
+  
+  .leftnav {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
 .leftnav li {
   margin: 1rem 0rem;
 }
@@ -176,8 +190,8 @@ img {
 }
 
 .leftnav li.active {
-  margin: -0.5rem 0 -.5rem -1rem;
-  padding: 0.5rem 0 0.5rem 1rem;
+  margin: -0.5rem -1rem -.5rem -1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   background: #dceaea;
 }
 
@@ -238,6 +252,7 @@ img {
 
 .jumbotron .actix-logo {
   max-height: 10rem;
+  max-width: 80%;
 }
 
 .jumbotron .lead {
@@ -292,6 +307,63 @@ img {
   text-align: center;
 }
 
+.actix-showcase {
+  overflow: hidden;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem 1rem 0 1rem;
+  background: #dceaea;
+}
+
+.actix-showcase ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 2;
+}
+
+.actix-showcase input[type="radio"] {
+  display: none;
+}
+
+.actix-showcase div.feature {
+  display: none;
+}
+
+.actix-showcase input[type="radio"]:checked + div.feature {
+  display: block;
+}
+
+.actix-showcase label {
+  display: block;
+  font-weight: bold;
+  color: #156060;
+  cursor: pointer;
+}
+
+.actix-showcase label:hover {
+  color: #003B3B;
+}
+
+.actix-feature-selectors {
+    padding-bottom: 2rem;
+  }
+  
+  .actix-feature-selector {
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+  }
+  
+  .actix-feature-selector.active {
+    background: white;
+  }
+  
+  .actix-feature-selector.active a {
+    color: #333!important;
+    text-decoration: none;
+  }
+  
 /*
  *
  * ===== Footer =====
@@ -395,9 +467,16 @@ h5:hover a {
  * ===== Media queries =====
  *
  */
-
+ @media screen and (max-width: 767px) {
+    .doctoggle {
+      display: block;
+    }
+}
 
  @media (min-width: 768px) {
+  .leftnav {
+    display: block;
+  }
    .bootstrap-vertical-nav .navbar .navbar-collapse {
       padding: 0;
       max-height: none;
