@@ -187,6 +187,9 @@ img {
 
 .leftnav li a {
   color: #888;
+  width:100%;
+  height:100%;
+  word-wrap: break-word;
 }
 
 .leftnav li.active {
@@ -252,7 +255,7 @@ img {
 
 .jumbotron .actix-logo {
   max-height: 10rem;
-  max-width: 80%;
+  max-width: 80%;leadlead
 }
 
 .jumbotron .lead {
@@ -274,6 +277,12 @@ img {
   color: #DADADA;
   font-size: 1.5rem;
   margin-bottom: 0;
+}
+
+.actix-pageheader #blog-title {
+  width:100%;
+  height:100%;
+  word-wrap: break-word;
 }
 
 @media (min-width: 576px) {
