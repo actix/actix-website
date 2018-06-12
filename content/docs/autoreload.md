@@ -34,7 +34,7 @@ an external socket opened by `systemfd`.  Add the listenfd dependency to your
 app:
 
 ```ini
-[dependencices]
+[dependencies]
 listenfd = "0.3"
 ```
 
