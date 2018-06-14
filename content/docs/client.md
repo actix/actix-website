@@ -41,7 +41,7 @@ let sys = actix::System::new("test"); // <- Create a system. The name of the sys
 ```
 
 Make a request and print the response. This doesn't do anything immediately, it just constructs
-the request. 
+the future. 
 
 ```rust
 let req = client::get("http://www.rust-lang.org")   // <- Create request builder
@@ -54,17 +54,8 @@ let req = client::get("http://www.rust-lang.org")   // <- Create request builder
     });
 ```
 
-Spawn the request with our actix::System.
+Finally make the request and print the response.
 
 ```rust
-actix::Arbiter::handle().spawn(req); // <- Get a handle to the event loop and spawn the http request.
+sys.run_until_complete(req).unwrap(); // <- Run the request with our system.
 ```
-
-Finally start our system.
-
-```rust
-sys.run(); // <- Start the system
-```
-
-Note that the program won't quit when the request ends.
-You can close it by sending a SIGINT signal to the process (Pressing ctrl+C in most cases).
