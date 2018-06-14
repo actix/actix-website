@@ -1,6 +1,6 @@
 # Client
 
-Actix provides a client for making http requests.
+actix-web provides a client for making http requests.
 
 # Getting Started
 
