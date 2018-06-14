@@ -45,7 +45,6 @@ the request.
 
 ```rust
 let req = client::get("http://www.rust-lang.org")   // <- Create request builder
-    .header("User-Agent", "Actix-web")
     .finish().unwrap()                    // <- Finish building the request
     .send()                               // <- Send http request
     .map_err(|_| ())                      // <- Ignore error
@@ -66,3 +65,6 @@ Finally start our system.
 ```rust
 sys.run(); // <- Start the system
 ```
+
+Note that the program won't quit when the request ends.
+You can close it by sending a SIGINT signal to the process (Pressing ctrl+C in most cases).
