@@ -47,7 +47,7 @@ pub fn report_actix_error_to_sentry(err: &Error) {
         let mut ptr: Option<&Fail> = err.cause().cause();
         while let Some(cause) = ptr {
             exceptions.push(exception_from_single_fail(cause, cause.backtrace()));
-            ptr = Some(cause);
+            ptr = cause.cause();
         }
         exceptions.reverse();
         client.capture_event(
