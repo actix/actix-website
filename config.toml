@@ -1,26 +1,19 @@
-defaultContentLanguageInSubdir = true
-enableRobotsTXT = true
-
 DefaultContentLanguage = "en"
+enableRobotsTXT = true
+canonifyURLs = true
+googleAnalytics = "UA-110322332-1"
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+baseURL = "https://actix.rs/"
+
 [languages.en]
-    baseURL = "https://actix.rs/en"
     title = "actix"
     languageCode = "en-us"
-    canonifyURLs = true
-    googleAnalytics = "UA-110322332-1"
-    pygmentsUseClasses = true
-    pygmentsCodeFences = true
     weight = 1
 [languages.cn]
-    baseURL = "https://actix.rs/cn"
     title = "actix"
     languageCode = "zh-cn"
-    canonifyURLs = true
-    googleAnalytics = "UA-110322332-1"
-    pygmentsUseClasses = true
-    pygmentsCodeFences = true
     weight = 2
-  
 
 [params]
 actixVersion = "0.5"
