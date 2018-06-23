@@ -195,62 +195,70 @@
         <div class="col-md-8">
           <div class="actix-content">
             {{ highlight `extern crate actix_web;
-              use actix_web::{http::Method, server, App, Path, Responder};
+    use actix_web::{http::Method, server, App, Path, Responder};
               
-              fn index(info: Path<(u32, String)>) -> impl Responder {
-                  format!("Hello {}! id:{}", info.1, info.0)
-              }
+    fn index(info: Path<(u32, String)>) -> impl Responder {
+          format!("Hello {}! id:{}", info.1, info.0)
+    }
               
-              fn main() {
-                  server::new(
-                      || App::new()
-                          .route("/{id}/{name}/index.html", Method::GET, index))
-                      .bind("127.0.0.1:8080").unwrap()
-                      .run();
-              }` "rust" "" }}
+    fn main() {
+        server::new(
+           || App::new()
+                .route("/{id}/{name}/index.html", Method::GET, index))
+                .bind("127.0.0.1:8080").unwrap()
+                .run();
+    }` "rust" "" }}
           </div>
         </div>
       </div>
-      <div class="actix-showcase">
-        <div class="col-md-9">
-          <div class="actix-feature" id="responder">
-            <h2>灵活的请求响应</h2>
-            <p>
-              Actix中的Handler函数可以返回实现该Respondert rait的各种对象。这使得从API返回一致的响应变得轻而易举。
-            </p>
-            {{ highlight `#[derive(Serialize)]
-    struct Measurement {
-        temperature: f32,
-    }
-  
-    fn hello_world() -> impl Responder {
-        "Hello World!"
-    }
-  
-    fn current_temperature(_req: HttpRequest) -> impl Responder {
-        Json(Measurement { temperature: 42.3 })
-    }` "rust" "" }}
-          </div>
-          <div class="actix-feature" id="extractor">
-            <h2>强大的Extractors</h2>
-            <p>
-              Actix提供了一个强大的提取器系统，可以从传入的HTTP请求中提取数据并将其传递给您的视图函数。这不仅可以创建方便的API，
-              而且还意味着您的视图函数可以是同步代码，并且仍然可以受益于异步IO处理。
-            </p>
-            {{ highlight `#[derive(Deserialize)]
+                
+
+      <div id="act-cn-tabs">
+          <ul class="act-menu">
+              <li id="one1" onclick="setTab('one',1)">灵活的请求响应</li>
+              <li id="one2" onclick="setTab('one',2)">强大的Extractors</li>
+              <li id="one3" onclick="setTab('one',3)">轻松处理表单</li>
+              <li id="one4" onclick="setTab('one',4)">请求路由</li>
+            </ul>
+            <div id="content">
+                <div id="con_one_1">
+                    <h2>灵活的请求响应</h2>
+                    <p>
+                      Actix中的Handler函数可以返回实现该<code>Respondert</code> rait的各种对象。这使得从API返回一致的响应变得轻而易举。
+                    </p>
+                    {{ highlight `#[derive(Serialize)]
+      struct Measurement {
+           temperature: f32,
+     }
+          
+      fn hello_world() -> impl Responder {
+          "Hello World!"
+      }
+          
+      fn current_temperature(_req: HttpRequest) -> impl Responder {
+          Json(Measurement { temperature: 42.3 })
+      }` "rust" "" }}
+                </div>
+                <div id="con_one_2" style="display:none;">
+                    <h2>强大的Extractors</h2>
+                    <p>
+                      Actix提供了一个强大的提取器系统，可以从传入的HTTP请求中提取数据并将其传递给您的视图函数。这不仅可以创建方便的API，
+                      而且还意味着您的视图函数可以是同步代码，并且仍然可以受益于异步IO处理。
+                    </p>
+                    {{ highlight `#[derive(Deserialize)]
     struct Event {
-        timestamp: f64,
-        kind: String,
-        tags: Vec<String>,
+      timestamp: f64,
+      kind: String,
+      tags: Vec<String>,
     }
-  
+          
     fn capture_event(evt: Json<Event>) -> impl Responder {
         let id = store_event_in_db(evt.timestamp, evt.kind, evt.tags);
         format!("got event {}", id)
     }` "rust" "" }}
-          </div>
-          <div class="actix-feature" id="forms">
-            <h2>轻松处理表单</h2>
+                </div>
+                <div id="con_one_3" style="display:none;">
+                    <h2>轻松处理表单</h2>
             <p>
               处理multipart/ urlencoded表单数据很容易。只需定义一个可以反序列化的结构，actix就可以处理剩下的部分。
             </p>
@@ -263,39 +271,34 @@
     fn register(data: Form<Register>) -> impl Responder {
         format!("Hello {} from {}!", data.username, data.country)
     }` "rust" "" }}
-          </div>
-          <div class="actix-feature" id="route">
-            <h2>请求路由</h2>
-            <p>
-              一个actix应用程序带有一个URL路由系统，可以让你在URL上匹配并调用单个处理程序。为了获得额外的灵活性，可以使用域。
-            </p>
-            {{ highlight `fn index(req: HttpRequest) -> impl Responder {
-        "Hello from the index page"
+                </div>
+                <div id="con_one_4" style="display:none;">
+                    <h2>请求路由</h2>
+                    <p>
+                      一个actix应用程序带有一个URL路由系统，可以让你在URL上匹配并调用单个处理程序。为了获得额外的灵活性，可以使用域。
+                    </p>
+                    {{ highlight `fn index(req: HttpRequest) -> impl Responder {
+      "Hello from the index page"
     }
-  
+                
     fn hello(path: Path<String>) -> impl Responder {
-        format!("Hello {}!", *path)
+         format!("Hello {}!", *path)
     }
-  
+                
     fn main() {
-        App::new()
-            .resource("/", |r| r.method(Method::Get).with(index))
-            .resource("/hello/{name}", |r| r.method(Method::Get).with(hello))
-            .finish();
+       App::new()
+          .resource("/", |r| r.method(Method::Get).with(index))
+          .resource("/hello/{name}", |r| r.method(Method::Get).with(hello))
+          .finish();
     }` "rust" "" }}
-          </div>
-        </div>
-        <div class="col-md-3 actix-feature-selectors">
-          <ul>
-            <li class="actix-feature-selector"><a href="#responder">灵活的请求响应</label>
-            <li class="actix-feature-selector"><a href="#extractor">强大的Extractors</label>
-            <li class="actix-feature-selector"><a href="#form">轻松处理表单</label>
-            <li class="actix-feature-selector"><a href="#route">请求路由</label>
-          </ul>
-        </div>
+                </div>
+            </div>
       </div>
+
+
+
     </div>
-  </div>
+</div>
 
 
 {{ partial "footer" . }}

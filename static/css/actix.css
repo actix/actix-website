@@ -600,3 +600,27 @@ h5:hover a {
     width: 88%;
   }
 }
+
+
+#act-cn-tabs {
+  padding: 2rem 1.5rem 0.5rem 2rem;
+  margin: 2rem auto;
+  background:#dceaea;
+}
+
+.act-menu{
+  width: 24%;
+  float: right;
+  border-right:#cccccc solid 1px;
+}
+.act-menu li{
+  text-align:center;
+  line-height:44px;
+  font-size:15px;
+  overflow:hidden;
+}
+.act-menu li.off{
+  background:#FFFFFF;
+  color:#000000;
+  font-weight:bold;
+}
