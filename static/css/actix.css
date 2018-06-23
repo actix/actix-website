@@ -603,15 +603,9 @@ h5:hover a {
 
 
 #act-cn-tabs {
-  padding: 2rem 1.5rem 0.5rem 2rem;
+  padding: 2rem 2rem 1rem 2rem;
   margin: 2rem auto;
   background:#dceaea;
-}
-
-.act-menu{
-  width: 24%;
-  float: right;
-  border-right:#cccccc solid 1px;
 }
 .act-menu li{
   text-align:center;
@@ -620,7 +614,19 @@ h5:hover a {
   overflow:hidden;
 }
 .act-menu li.off{
+  padding: 0 1.5rem;
   background:#FFFFFF;
-  color:#000000;
+  color:#589c9e;
   font-weight:bold;
+}
+
+@media (min-width: 768px) {
+  #act-cn-tabs {
+    display: flex;
+    flex-flow: row;
+    padding: 2rem 1rem 1rem 2rem;
+  }
+  #act-cn-tabs #content {
+      width: 77%;
+  }
 }
