@@ -169,8 +169,19 @@ img {
   line-height: 60px;
   height: 60px;
   padding-top: 0;
+  list-style: none;
 }
-
+.navbar-nav #language ul {
+    display: none;
+}
+.navbar-nav #language:hover .subitem {
+    margin: -1rem 0 0 -6.6rem;
+    display: block;
+    background-color: #e8f9fc;
+}
+.navbar-nav #language ul li {
+    display: block;
+}
 .doctoggle {
     margin: -1rem 0 2rem 0;
     display: none;
@@ -559,6 +570,11 @@ h5:hover a {
 
   .actix-footer-social a .fa-github {
     margin-right: 1rem;
+  }
+  .navbar-nav #language:hover .subitem {
+    margin: 0 -2rem 0 -1rem;
+    display: block;
+    background-color: #e8f9fc;
   }
 }
 @media (min-width: 480px) and (max-width: 576px) {
