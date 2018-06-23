@@ -15,5 +15,18 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/actix.js"></script>
     {{ template "_internal/google_analytics.html" . }}
+
+    <script type="text/javascript" async>
+      window.onload = function(){
+        if (window.location.href.indexOf("https://actix.rs/cn/") == 0) {
+            var actix_home = document.getElementById("act-home")
+            actix_home.style.display = "none"
+        }
+        if (window.location.href.indexOf("https://actix.rs/") == 0) {
+            var actix_home_cn = document.getElementById("act-home-cn")
+            actix_home_cn.style.display = "none"
+        }
+      }
+    </script>
   </body>
 </html>

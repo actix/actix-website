@@ -1,3 +1,3 @@
 ---
-title: Actix中文社区
+title: Actix中文
 ---
