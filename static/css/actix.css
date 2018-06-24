@@ -387,6 +387,23 @@ img {
     color: #333!important;
     text-decoration: none;
   }
+
+/*
+ *
+ * ===== blog =====
+ *
+ */
+ #collapsing-docnav details {
+  border: none;
+}
+#collapsing-docnav details summary {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+#collapsing-docnav details ul {
+  margin: 1rem;
+}
   
 /*
  *
