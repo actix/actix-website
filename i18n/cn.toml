@@ -1,0 +1,8 @@
+[home]
+other = "首页"
+[docs]
+other = "文档"
+[community]
+other = "社区"
+[code]
+other = "源码"

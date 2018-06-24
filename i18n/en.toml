@@ -1,0 +1,8 @@
+[home]
+other = "Home"
+[docs]
+other = "Documentation"
+[community]
+other = "Community"
+[code]
+other = "Code"

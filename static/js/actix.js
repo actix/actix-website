@@ -1,37 +1,3 @@
-window.onload = function(){
-  if (window.location.href.search("cn") != -1) {
-      if (document.getElementById("act-home")){
-        document.getElementById("act-home").style.display = "none"
-      }
-  }else{
-      if (document.getElementById("act-home-cn")){
-        document.getElementById("act-home-cn").style.display = "none"
-      }
-  }
-  if (window.location.href.search("cn") != -1) {
-        document.getElementById("ul-en").style.display = "none"
-  }else{
-        document.getElementById("ul-zh").style.display = "none"
-  }
-}
-
-function setTab(name,cursel){
-  let tlinks = document.getElementById("act-cn-tabs").getElementsByTagName('li')
-  for(var i=1; i<=tlinks.length; i++){
-      var menu = document.getElementById(name+i);
-      var menudiv = document.getElementById("con_"+name+"_"+i);
-      if(i==cursel){
-          menu.className="off";
-          menudiv.style.display="block";
-      }
-      else{
-          menu.className="";
-          menudiv.style.display="none";
-      }
-  }
-}
-
-
 (function() {
   function activateFeature(sel) {
     $('div.actix-feature').hide();
@@ -70,5 +36,3 @@ function setTab(name,cursel){
     initFeatureSelector();
   });
 })();
-
-

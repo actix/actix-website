@@ -28,55 +28,29 @@
         <div class="navbar-collapse collapse" id="actix-main-nav">
           <ul class="nav navbar-nav" id="ul-en">
             <li class="nav-item hd-lg-down">
-              <a class="navbar-brand" href="/"><img src="/img/logo-nav.png" class="align-middle" alt=""></a>
+              <a class="navbar-brand" href="{{ "/" | absLangURL }}"><img src="/img/logo-nav.png" class="align-middle" alt=""></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="{{ "/" | absLangURL }}">{{ T "home" }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/docs/">Documentation</a>
+              <a class="nav-link" href="{{ "/docs/" | absLangURL }}">{{ T "docs" }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/community/">Community</a>
+              <a class="nav-link" href="{{ "/community/" | absLangURL }}">{{ T "community" }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/code/">Code</a>
+              <a class="nav-link" href="{{ "/code/" | absLangURL }}">{{ T "code" }}</a>
             </li>
-            <li class="nav-item" id="language">
-                <img src="/img/i18n.jpeg"/>
-                <ul class="subitem">
-                    <li class="submenu-item"><a href="https://actix.rs">English</a></li>
-                    <li class="submenu-item"><a href="https://actix.rs/cn" target="view_window">中文</a> </li>
-                </ul>
+            <li class="nav-item language-selector">
+              <i class="fa fa-fw fa-globe" aria-hidden="false"></i>
+              <ul class="subitem">
+              {{ range $.Site.Home.AllTranslations }}
+                <li class="submenu-item"><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
+              {{ end }}
+              </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav" id="ul-zh">
-              <li class="nav-item hd-lg-down">
-                <a class="navbar-brand" href="/"><img src="/img/logo-nav.png" class="align-middle" alt=""></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/">首页</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/docs/">文档</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/blog/">博客</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/community/">社区</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/code/">源码</a>
-              </li>
-              <li class="nav-item" id="language">
-                  <img src="/img/i18n.jpeg"/>
-                  <ul class="subitem">
-                      <li class="submenu-item"><a href="https://actix.rs" target="view_window">English</a></li>
-                      <li class="submenu-item"><a href="https://actix.rs/cn">中文</a> </li>
-                  </ul>
-              </li>
-            </ul>
         </div>
       </nav>
     </header>

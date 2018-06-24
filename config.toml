@@ -3,20 +3,19 @@ canonifyURLs = true
 googleAnalytics = "UA-110322332-1"
 pygmentsUseClasses = true
 pygmentsCodeFences = true
-
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
-
+enableMissingTranslationPlaceholders = true
 DefaultContentLanguage = "en"
+baseURL = "https://actix.rs"
 
-[languages]
 [languages.en]
-  baseURL = "https://actix.rs"
-  languageCode = "en-us"
+  languageCode = "en-US"
+  languageName = "English"
   weight = 1
 [languages.cn]
-  baseURL = "https://actix.rs/cn"
-  languageCode = "zh-cn"
+  languageCode = "zh-CN"
+  languageName = "中文"
   weight = 2
 
 [params]

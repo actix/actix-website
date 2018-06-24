@@ -1,0 +1,149 @@
+{{ partial "header" . }}
+
+<div id="act-home">
+    <div class="jumbotron">
+      <div class="actix-jumbotron">
+        <img src="/img/logo-large.png" class="align-middle actix-logo" alt="">
+        <p class="lead">Rust强大的actor系统和有趣的web框架</p>
+      </div>
+    </div>
+  
+    <div class="container actix-home">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="actix-features">
+            <h2>
+              <i class="fa fa-fw fa-shield" aria-hidden="true"></i>
+              类型安全
+            </h2>
+            <p>忘记关于字符串类型的对象，从请求到响应，一切都有类型，异步。</p>
+  
+            <h2>
+              <i class="fa fa-fw fa-battery-full" aria-hidden="true"></i>
+              特性丰富
+            </h2>
+            <p>Actix提供了丰富的特性开箱即用。WebSockets，HTTP/2，流，管道，SSL，异步HTTTP客户端等一应俱全.</p>
+  
+            <h2>
+              <i class="fa fa-fw fa-puzzle-piece" aria-hidden="true"></i>
+              扩展性强
+            </h2>
+            <p>轻松创建任何基于Actix应用的自己的特色库。</p>
+  
+            <h2>
+              <i class="fa fa-fw fa-dashboard" aria-hidden="true"></i>
+              速度极快
+            </h2>
+            <p>Actix 具有顶级的速度. <a href="https://www.techempower.com/benchmarks/#section=data-r16&hw=ph&test=plaintext">Check yourself</a>.</p>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="actix-content">
+            {{ highlight `extern crate actix_web;
+use actix_web::{http::Method, server, App, Path, Responder};
+          
+fn index(info: Path<(u32, String)>) -> impl Responder {
+      format!("Hello {}! id:{}", info.1, info.0)
+}
+          
+fn main() {
+    server::new(
+       || App::new()
+            .route("/{id}/{name}/index.html", Method::GET, index))
+            .bind("127.0.0.1:8080").unwrap()
+            .run();
+}` "rust" "" }}
+          </div>
+        </div>
+      </div>
+                
+
+    <div class="actix-showcase">
+      <div class="col-md-9">
+                <div class="actix-feature" id="responders">
+                    <h2>灵活的请求响应</h2>
+                    <p>
+                      Actix中的Handler函数可以返回实现该<code>Respondert</code> rait的各种对象。这使得从API返回一致的响应变得轻而易举。
+                    </p>
+                    {{ highlight `#[derive(Serialize)]
+ struct Measurement {
+    temperature: f32,
+}
+     
+fn hello_world() -> impl Responder {
+    "Hello World!"
+}
+     
+fn current_temperature(_req: HttpRequest) -> impl Responder {
+    Json(Measurement { temperature: 42.3 })
+}` "rust" "" }}
+                </div>
+                <div class="actix-feature" id="extractors">
+                    <h2>强大的Extractors</h2>
+                    <p>
+                      Actix提供了一个强大的提取器系统，可以从传入的HTTP请求中提取数据并将其传递给您的视图函数。这不仅可以创建方便的API，
+                      而且还意味着您的视图函数可以是同步代码，并且仍然可以受益于异步IO处理。
+                    </p>
+                    {{ highlight `#[derive(Deserialize)]
+struct Event {
+  timestamp: f64,
+  kind: String,
+  tags: Vec<String>,
+}
+      
+fn capture_event(evt: Json<Event>) -> impl Responder {
+    let id = store_event_in_db(evt.timestamp, evt.kind, evt.tags);
+    format!("got event {}", id)
+}` "rust" "" }}
+                </div>
+                <div class="actix-feature" id="forms">
+                    <h2>轻松处理表单</h2>
+            <p>
+              处理multipart/ urlencoded表单数据很容易。只需定义一个可以反序列化的结构，actix就可以处理剩下的部分。
+            </p>
+            {{ highlight `#[derive(Deserialize)]
+struct Register {
+    username: String,
+    country: String,
+}
+
+fn register(data: Form<Register>) -> impl Responder {
+    format!("Hello {} from {}!", data.username, data.country)
+}` "rust" "" }}
+                </div>
+                <div class="actix-feature" id="routing">
+                    <h2>请求路由</h2>
+                    <p>
+                      一个actix应用程序带有一个URL路由系统，可以让你在URL上匹配并调用单个处理程序。为了获得额外的灵活性，可以使用域。
+                    </p>
+                    {{ highlight `fn index(req: HttpRequest) -> impl Responder {
+  "Hello from the index page"
+}
+            
+fn hello(path: Path<String>) -> impl Responder {
+     format!("Hello {}!", *path)
+}
+            
+fn main() {
+    App::new()
+        .resource("/", |r| r.method(Method::Get).with(index))
+        .resource("/hello/{name}", |r| r.method(Method::Get).with(hello))
+        .finish();
+}` "rust" "" }}
+                </div>
+            </div>
+
+            <div class="col-md-3 actix-feature-selectors">
+              <ul class="act-menu">
+                <li class="actix-feature-selector"><a href="#responders">灵活的请求响应</a></li>
+                <li class="actix-feature-selector"><a href="#extractors">强大的Extractors</a></li>
+                <li class="actix-feature-selector"><a href="#forms">轻松处理表单</a></li>
+                <li class="actix-feature-selector"><a href="#routing">请求路由</a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+{{ partial "footer" . }}

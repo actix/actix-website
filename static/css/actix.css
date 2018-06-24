@@ -171,30 +171,45 @@ img {
   padding-top: 0;
   list-style: none;
 }
-.navbar-nav #language img {
-    width: 25px;
-    height:22px;
+
+.navbar-nav .language-selector {
+  position: relative;
 }
-.navbar-nav #language ul {
-    display: none;
+
+.navbar-nav .language-selector ul.subitem {
+  display: none;
+  position: absolute;
+  right: 0;
 }
-.navbar-nav #language:hover .subitem {
-    margin: -1rem 0 0 -6.6rem;
-    display: block;
-    background-color: #dcfaf7;
+
+.navbar-nav .language-selector:hover .subitem {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background-color: #dcfaf7;
 }
-.navbar-nav #language ul li {
-    display: block;
+
+.navbar-nav .language-selector ul li {
+  padding: 0;
+  margin: 0;
+  height: auto;
+  line-height: 1;
 }
+
+.navbar-nav .language-selector ul li a {
+  display: block;
+  padding: 1em;
+}
+
 .doctoggle {
-    margin: -1rem 0 2rem 0;
-    display: none;
-  }
+  margin: -1rem 0 2rem 0;
+  display: none;
+}
   
-  .leftnav {
-    margin: 0 -1rem;
-    padding: 0 1rem;
-  }
+.leftnav {
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
 
 .leftnav li {
   margin: 1rem 0rem;
@@ -592,12 +607,13 @@ h5:hover a {
   .actix-footer-social a .fa-github {
     margin-right: 1rem;
   }
-  .navbar-nav #language:hover .subitem {
+  .navbar-nav .language-selector:hover .subitem {
     margin: 0 -2rem 0 -1rem;
     display: block;
     background-color: #e8f9fc;
   }
 }
+
 @media (min-width: 480px) and (max-width: 576px) {
   header .nav {
     width: 100%;
