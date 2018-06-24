@@ -1,10 +1,17 @@
 window.onload = function(){
   if (window.location.href.search("cn") != -1) {
-      var actix_home = document.getElementById("act-home")
-      actix_home.style.display = "none"
+      if (document.getElementById("act-home")){
+        document.getElementById("act-home").style.display = "none"
+      }
   }else{
-      var actix_home_cn = document.getElementById("act-home-cn")
-      actix_home_cn.style.display = "none"
+      if (document.getElementById("act-home-cn")){
+        document.getElementById("act-home-cn").style.display = "none"
+      }
+  }
+  if (window.location.href.search("cn") != -1) {
+        document.getElementById("ul-en").style.display = "none"
+  }else{
+        document.getElementById("ul-zh").style.display = "none"
   }
 }
 

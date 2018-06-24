@@ -171,13 +171,17 @@ img {
   padding-top: 0;
   list-style: none;
 }
+.navbar-nav #language img {
+    width: 25px;
+    height:22px;
+}
 .navbar-nav #language ul {
     display: none;
 }
 .navbar-nav #language:hover .subitem {
     margin: -1rem 0 0 -6.6rem;
     display: block;
-    background-color: #e8f9fc;
+    background-color: #dcfaf7;
 }
 .navbar-nav #language ul li {
     display: block;
