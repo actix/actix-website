@@ -2,8 +2,6 @@
 other = "首页"
 [docs]
 other = "文档"
-[blog]
-other = "博客"
 [community]
 other = "社区"
 [code]
