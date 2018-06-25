@@ -36,9 +36,6 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ "/docs/" | absLangURL }}">{{ T "docs" }}</a>
             </li>
-            <li class="nav-item" id="nav-blog">
-              <a class="nav-link" href="{{ "/blog/" | absLangURL }}">{{ T "blog" }}</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ "/community/" | absLangURL }}">{{ T "community" }}</a>
             </li>
@@ -51,6 +48,7 @@
               {{ range $.Site.Home.AllTranslations }}
                 <li class="submenu-item"><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
               {{ end }}
+              <li ><a href="https://actix-cn.github.io/">中文</a></li>
               </ul>
             </li>
           </ul>

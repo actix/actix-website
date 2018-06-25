@@ -13,10 +13,6 @@ baseURL = "https://actix.rs"
   languageCode = "en-US"
   languageName = "English"
   weight = 1
-[languages.cn]
-  languageCode = "zh-CN"
-  languageName = "中文"
-  weight = 2
 
 [params]
 actixVersion = "0.5"
