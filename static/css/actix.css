@@ -171,7 +171,9 @@ img {
   padding-top: 0;
   list-style: none;
 }
-
+.navbar-nav #nav-blog {
+    display: none;
+}
 .navbar-nav .language-selector {
   position: relative;
 }

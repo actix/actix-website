@@ -39,7 +39,7 @@
 
 
 window.onload = function(){
-    if (window.location.href.search("cn") == -1) {
-        document.getElementById("nav-blog").style.display = "none"
+    if (window.location.href.search("cn") != -1) {
+        document.getElementById("nav-blog").style.display = "inline"
     }
 }
