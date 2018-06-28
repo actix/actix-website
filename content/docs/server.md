@@ -15,7 +15,7 @@ application factory must have `Send` + `Sync` boundaries. More about that in the
 
 To bind to a specific socket address,
 [`bind()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind)
-must be used, and it may be called multiple times. To bind ssl socket
+must be used, and it may be called multiple times. To bind ssl socket,
 [`bind_ssl()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_ssl)
 or [`bind_tls()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_tls)
 should be used. To start the http server, one of the start methods.
