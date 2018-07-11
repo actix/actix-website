@@ -184,7 +184,7 @@ When you register a handler using `Route::with()`, it returns a configuration in
 a *Json* extractor it returns a *JsonConfig*. You can configure the maximum size of the json
 payload as well as a custom error handler function.
 
-The following example limits the size of the payload to 4kb and uses a custom error hander.
+The following example limits the size of the payload to 4kb and uses a custom error handler.
 
 ```rust
 #[macro_use] extern crate serde_derive;

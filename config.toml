@@ -1,10 +1,18 @@
-baseurl = "https://actix.rs"
 title = "actix"
-languageCode = "en-us"
 canonifyURLs = true
 googleAnalytics = "UA-110322332-1"
 pygmentsUseClasses = true
 pygmentsCodeFences = true
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+enableMissingTranslationPlaceholders = true
+DefaultContentLanguage = "en"
+baseURL = "https://actix.rs"
+
+[languages.en]
+  languageCode = "en-US"
+  languageName = "English"
+  weight = 1
 
 [params]
 actixVersion = "0.5"
