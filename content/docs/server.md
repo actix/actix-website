@@ -104,7 +104,7 @@ defined by the request's http version.
 
 > *keep alive* is **off** for *HTTP/1.0* and is **on** for *HTTP/1.1* and *HTTP/2.0*.
 
-*Connection type* can be change with `HttpResponseBuilder::connection_type()` method.
+*Connection type* can be changed with `HttpResponseBuilder::connection_type()` method.
 
 {{< include-example example="server" file="ka_tp.rs" section="example" >}}
 
