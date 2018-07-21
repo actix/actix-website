@@ -23,13 +23,13 @@ such as `&'static str`, `String`, etc.
 Examples of valid handlers:
 
 ```rust
-fn index(req: HttpRequest) -> &'static str {
+fn index(req: &HttpRequest) -> &'static str {
     "Hello world!"
 }
 ```
 
 ```rust
-fn index(req: HttpRequest) -> String {
+fn index(req: &HttpRequest) -> String {
     "Hello world!".to_owned()
 }
 ```
@@ -38,13 +38,13 @@ You can also change the signature to return `impl Responder` which works well if
 complex types are involved.
 
 ```rust
-fn index(req: HttpRequest) -> impl Responder {
+fn index(req: &HttpRequest) -> impl Responder {
     Bytes::from_static("Hello world!")
 }
 ```
 
 ```rust,ignore
-fn index(req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
+fn index(req: &HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
     ...
 }
 ```
@@ -54,8 +54,8 @@ Application state is accessible from the handler with the `HttpRequest::state()`
 however, state is accessible as a read-only reference. If you need mutable access to state,
 it must be implemented.
 
-> **Note**: Alternatively, the handler can mutably access its own state because the `handle` method takes
-> mutable reference to *self*. **Beware**, actix creates multiple copies
+> **Note**: Alternatively, the handler can use interior mutably to access its own
+> state. **Beware**, actix creates multiple copies
 > of the application state and the handlers, unique for each thread. If you run your
 > application in several threads, actix will create the same amount as number of threads
 > of application state objects and handler objects.
@@ -65,14 +65,15 @@ Here is an example of a handler that stores the number of processed requests:
 ```rust
 use actix_web::{App, HttpRequest, HttpResponse, dev::Handler};
 
-struct MyHandler(usize);
+struct MyHandler(Cell<usize>);
 
 impl<S> Handler<S> for MyHandler {
     type Result = HttpResponse;
 
     /// Handle request
-    fn handle(&mut self, req: HttpRequest<S>) -> Self::Result {
-        self.0 += 1;
+    fn handle(&self, req: &HttpRequest<S>) -> Self::Result {
+        let i = self.0.get();
+        self.0.set(i + 1);
         HttpResponse::Ok().into()
     }
 }
@@ -92,7 +93,7 @@ impl<S> Handler<S> for MyHandler {
     type Result = HttpResponse;
 
     /// Handle request
-    fn handle(&mut self, req: HttpRequest<S>) -> Self::Result {
+    fn handle(&self, req: &HttpRequest<S>) -> Self::Result {
         self.0.fetch_add(1, Ordering::Relaxed);
         HttpResponse::Ok().into()
     }
@@ -156,7 +157,7 @@ impl Responder for MyObj {
     }
 }
 
-fn index(req: HttpRequest) -> impl Responder {
+fn index(req: &HttpRequest) -> impl Responder {
     MyObj { name: "user" }
 }
 
@@ -187,7 +188,7 @@ use bytes::Bytes;
 use futures::stream::once;
 use futures::future::{Future, result};
 
-fn index(req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
+fn index(req: &HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
 
     result(Ok(HttpResponse::Ok()
               .content_type("text/html")
@@ -195,7 +196,7 @@ fn index(req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
            .responder()
 }
 
-fn index2(req: HttpRequest) -> Box<Future<Item=&'static str, Error=Error>> {
+fn index2(req: &HttpRequest) -> Box<Future<Item=&'static str, Error=Error>> {
     result(Ok("Welcome!"))
         .responder()
 }
@@ -216,7 +217,7 @@ use actix_web::*;
 use bytes::Bytes;
 use futures::stream::once;
 
-fn index(req: HttpRequest) -> HttpResponse {
+fn index(req: &HttpRequest) -> HttpResponse {
     let body = once(Ok(Bytes::from_static(b"test")));
 
     HttpResponse::Ok()
@@ -243,7 +244,7 @@ use bytes::Bytes;
 use futures::stream::once;
 use futures::future::{Future, result};
 
-fn index(req: HttpRequest) -> Result<Box<Future<Item=HttpResponse, Error=Error>>, Error> {
+fn index(req: &HttpRequest) -> Result<Box<Future<Item=HttpResponse, Error=Error>>, Error> {
     if is_error() {
        Err(error::ErrorBadRequest("bad request"))
     } else {
@@ -269,7 +270,7 @@ use actix_web::{Either, Error, HttpResponse};
 
 type RegisterResult = Either<HttpResponse, Box<Future<Item=HttpResponse, Error=Error>>>;
 
-fn index(req: HttpRequest) -> impl Responder {
+fn index(req: &HttpRequest) -> impl Responder {
     if is_a_variant() { // <- choose variant A
         Either::A(
             HttpResponse::BadRequest().body("Bad data"))
@@ -281,12 +282,3 @@ fn index(req: HttpRequest) -> impl Responder {
     }
 }
 ```
-
-## Tokio core handle
-
-Any `actix-web` handler runs within a properly configured
-[actix system](https://actix.github.io/actix/actix/struct.System.html)
-and [arbiter](https://actix.github.io/actix/actix/struct.Arbiter.html).
-You can always get access to the tokio handle via the
-[Arbiter::handle()](https://actix.github.io/actix/actix/struct.Arbiter.html#method.handle)
-method.

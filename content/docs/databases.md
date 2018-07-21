@@ -79,7 +79,7 @@ can access it.
 ```rust
 /// This is state where we will store *DbExecutor* address.
 struct State {
-    db: Addr<Syn, DbExecutor>,
+    db: Addr<DbExecutor>,
 }
 
 fn main() {
@@ -109,7 +109,7 @@ thus, we receive the message response asynchronously.
 
 ```rust
 /// Async handler
-fn index(req: HttpRequest<State>) -> Box<Future<Item=HttpResponse, Error=Error>> {
+fn index(req: &HttpRequest<State>) -> Box<Future<Item=HttpResponse, Error=Error>> {
     let name = &req.match_info()["name"];
 
     // Send message to `DbExecutor` actor
@@ -129,4 +129,4 @@ fn index(req: HttpRequest<State>) -> Box<Future<Item=HttpResponse, Error=Error>>
 > [examples directory](https://github.com/actix/examples/tree/master/diesel/).
 
 > More information on sync actors can be found in the
-> [actix documentation](https://docs.rs/actix/0.5.0/actix/sync/index.html).
+> [actix documentation](https://docs.rs/actix/0.7.0/actix/sync/index.html).

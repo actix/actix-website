@@ -58,7 +58,7 @@ struct MyObj {
     number: i32,
 }
 
-fn index(mut req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
+fn index(req: &HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
     req.json().from_err()
         .and_then(|val: MyObj| {
             println!("model: {:?}", val);
@@ -80,7 +80,7 @@ use futures::{Future, Stream};
 #[derive(Serialize, Deserialize)]
 struct MyObj {name: String, number: i32}
 
-fn index(req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
+fn index(req: &HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
    // `concat2` will asynchronously read each chunk of the request body and
    // return a single, concatenated, chunk
    req.concat2()
@@ -120,7 +120,7 @@ The following demonstrates multipart stream handling for a simple form:
 ```rust
 use actix_web::*;
 
-fn index(req: HttpRequest) -> Box<Future<...>> {
+fn index(req: &HttpRequest) -> Box<Future<...>> {
     // get multipart and iterate over multipart items
     req.multipart()
        .and_then(|item| {
@@ -171,7 +171,7 @@ struct FormData {
     username: String,
 }
 
-fn index(mut req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
+fn index(req: &HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
     req.urlencoded::<FormData>() // <- get UrlEncoded future
        .from_err()
        .and_then(|data| {        // <- deserialized instance
@@ -195,8 +195,10 @@ use actix_web::*;
 use futures::{Future, Stream};
 
 
-fn index(mut req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
-    req.from_err()
+fn index(req: &HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
+    req
+       .payload()
+       .from_err()
        .fold((), |_, chunk| {
             println!("Chunk: {:?}", chunk);
             result::<_, error::PayloadError>(Ok(()))

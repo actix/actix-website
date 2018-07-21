@@ -46,7 +46,7 @@ extern crate listenfd;
 use listenfd::ListenFd;
 use actix_web::{server, App, HttpRequest, Responder};
 
-fn index(_req: HttpRequest) -> impl Responder {
+fn index(_req: &HttpRequest) -> impl Responder {
     "Hello World!"
 }
 

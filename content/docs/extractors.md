@@ -31,9 +31,9 @@ fn index((params, info): (Path<(String, String,)>, Json<MyInfo>)) -> HttpRespons
 
 use actix_web::FromRequest;
 
-fn index(req: HttpRequest) -> HttpResponse {
-	let params = Path::<(String, String)>::extract(&req);
-	let info = Json::<MyInfo>::extract(&req); 
+fn index(req: &HttpRequest) -> HttpResponse {
+	let params = Path::<(String, String)>::extract(req);
+	let info = Json::<MyInfo>::extract(req); 
 
 	...
 }
@@ -55,9 +55,9 @@ impl<S> Handler<S> for MyHandler {
     type Result = HttpResponse;
 
     /// Handle request
-    fn handle(&mut self, req: HttpRequest<S>) -> Self::Result {
-		let params = Path::<(String, String)>::extract(&req);
-		let info = Json::<MyInfo>::extract(&req); 
+    fn handle(&self, req: &HttpRequest<S>) -> Self::Result {
+		let params = Path::<(String, String)>::extract(req);
+		let info = Json::<MyInfo>::extract(req); 
 
 		...
 			
@@ -204,12 +204,13 @@ fn main() {
     let app = App::new().resource(
        "/index.html", |r| {
            r.method(http::Method::POST)
-              .with(index)
-              .limit(4096)   // <- change json extractor configuration
-              .error_handler(|err, req| {  // <- create custom error response
-                  error::InternalError::from_response(
-                     err, HttpResponse::Conflict().finish()).into()
-              });
+              .with_config(index, |cfg| {
+                  cfg.limit(4096)   // <- change json extractor configuration
+                  cfg.error_handler(|err, req| {  // <- create custom error response
+                      error::InternalError::from_response(
+                         err, HttpResponse::Conflict().finish()).into()
+              })
+           });
        });
 }
 ```

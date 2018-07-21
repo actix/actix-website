@@ -40,15 +40,13 @@ impl<S> Middleware<S> for Headers {
 
     /// Method is called when request is ready. It may return
     /// future, which should resolve before next middleware get called.
-    fn start(&self, req: &mut HttpRequest<S>) -> Result<Started> {
-        req.headers_mut().insert(
-            header::CONTENT_TYPE, header::HeaderValue::from_static("text/plain"));
+    fn start(&self, req: &HttpRequest<S>) -> Result<Started> {
         Ok(Started::Done)
     }
 
     /// Method is called when handler returns response,
     /// but before sending http message to peer.
-    fn response(&self, req: &mut HttpRequest<S>, mut resp: HttpResponse)
+    fn response(&self, req: &HttpRequest<S>, mut resp: HttpResponse)
         -> Result<Response>
     {
         resp.headers_mut().insert(
@@ -190,7 +188,7 @@ session data.
 use actix_web::{server, App, HttpRequest, Result};
 use actix_web::middleware::session::{RequestSession, SessionStorage, CookieSessionBackend};
 
-fn index(mut req: HttpRequest) -> Result<&'static str> {
+fn index(req: &HttpRequest) -> Result<&'static str> {
     // access session data
     if let Some(count) = req.session().get::<i32>("counter")? {
         println!("SESSION value: {}", count);
@@ -230,7 +228,7 @@ use actix_web::{
     App, HttpRequest, HttpResponse, Result,
     http, middleware::Response, middleware::ErrorHandlers};
 
-fn render_500<S>(_: &mut HttpRequest<S>, resp: HttpResponse) -> Result<Response> {
+fn render_500<S>(_: &HttpRequest<S>, resp: HttpResponse) -> Result<Response> {
    let mut builder = resp.into_builder();
    builder.header(http::header::CONTENT_TYPE, "application/json");
    Ok(Response::Done(builder.into()))

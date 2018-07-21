@@ -20,7 +20,7 @@ builder instance multiple times, the builder will panic.
 ```rust
 use actix_web::{HttpRequest, HttpResponse, http::ContentEncoding};
 
-fn index(req: HttpRequest) -> HttpResponse {
+fn index(req: &HttpRequest) -> HttpResponse {
     HttpResponse::Ok()
         .content_encoding(ContentEncoding::Br)
         .content_type("plain/text")
@@ -107,7 +107,7 @@ struct MyObj {
     name: String,
 }
 
-fn index(req: HttpRequest) -> Result<Json<MyObj>> {
+fn index(req: &HttpRequest) -> Result<Json<MyObj>> {
     Ok(Json(MyObj{name: req.match_info().query("name")?}))
 }
 

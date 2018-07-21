@@ -15,5 +15,5 @@ baseURL = "https://actix.rs"
   weight = 1
 
 [params]
-actixVersion = "0.5"
-actixWebVersion = "0.6"
+actixVersion = "0.7"
+actixWebVersion = "0.7"

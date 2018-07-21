@@ -40,7 +40,7 @@ converted into an `HttpInternalServerError`:
 ```rust
 use std::io;
 
-fn index(req: HttpRequest) -> io::Result<fs::NamedFile> {
+fn index(req: &HttpRequest) -> io::Result<fs::NamedFile> {
     Ok(fs::NamedFile::open("static/index.html")?)
 }
 ```
@@ -64,7 +64,7 @@ struct MyError {
 // Use default implementation for `error_response()` method
 impl error::ResponseError for MyError {}
 
-fn index(req: HttpRequest) -> Result<&'static str, MyError> {
+fn index(req: &HttpRequest) -> Result<&'static str, MyError> {
     Err(MyError{name: "test"})
 }
 ```
@@ -102,7 +102,7 @@ impl error::ResponseError for MyError {
     }
 }
 
-fn index(req: HttpRequest) -> Result<&'static str, MyError> {
+fn index(req: &HttpRequest) -> Result<&'static str, MyError> {
     Err(MyError::BadClientData)
 }
 ```
@@ -123,7 +123,7 @@ struct MyError {
    name: &'static str
 }
 
-fn index(req: HttpRequest) -> Result<&'static str> {
+fn index(req: &HttpRequest) -> Result<&'static str> {
     let result: Result<&'static str, MyError> = Err(MyError{name: "test"});
 
     Ok(result.map_err(|e| error::ErrorBadRequest(e.name))?)
@@ -220,7 +220,7 @@ impl error::ResponseError for UserError {
     }
 }
 
-fn index(_req: HttpRequest) -> Result<&'static str, UserError> {
+fn index(_: &HttpRequest) -> Result<&'static str, UserError> {
     fs::NamedFile::open("static/index.html").map_err(|_e| UserError::InternalError)?;
     Ok("success!")
 }

@@ -13,7 +13,7 @@ match a path tail, we can use a `[.*]` regex.
 use std::path::PathBuf;
 use actix_web::{App, HttpRequest, Result, http::Method, fs::NamedFile};
 
-fn index(req: HttpRequest) -> Result<NamedFile> {
+fn index(req: &HttpRequest) -> Result<NamedFile> {
     let path: PathBuf = req.match_info().query("tail")?;
     Ok(NamedFile::open(path)?)
 }

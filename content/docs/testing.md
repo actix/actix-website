@@ -20,7 +20,7 @@ run your handler with `run()` or `run_async()`.
 ```rust
 use actix_web::{http, test, HttpRequest, HttpResponse, HttpMessage};
 
-fn index(req: HttpRequest) -> HttpResponse {
+fn index(req: &HttpRequest) -> HttpResponse {
      if let Some(hdr) = req.headers().get(http::header::CONTENT_TYPE) {
         if let Ok(s) = hdr.to_str() {
             return HttpResponse::Ok().into()
@@ -87,7 +87,7 @@ function the same way as you would for real http server configuration.
 ```rust
 use actix_web::{http, test, App, HttpRequest, HttpResponse};
 
-fn index(req: HttpRequest) -> HttpResponse {
+fn index(req: &HttpRequest) -> HttpResponse {
      HttpResponse::Ok().into()
 }
 

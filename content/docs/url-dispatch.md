@@ -82,7 +82,7 @@ builder-like pattern. Following configuration methods are available:
   Usually handler registration
   is the last config operation. Handler function can be a function or closure
   and has the type
-  `Fn(HttpRequest<S>) -> R + 'static`
+  `Fn(&HttpRequest<S>) -> R + 'static`
 * [*Route::h()*](../../actix-web/actix_web/dev/struct.Route.html#method.h) registers
   a handler object that implements the `Handler` trait. This is
   similar to `f()` method - only one handler can
@@ -91,7 +91,7 @@ builder-like pattern. Following configuration methods are available:
   an async handler function for this route. Only one handler can be registered.
   Handler registration is the last config operation. Handler function can
   be a function or closure and has the type
-  `Fn(HttpRequest<S>) -> Future<Item = HttpResponse, Error = Error> + 'static`
+  `Fn(&HttpRequest<S>) -> Future<Item = HttpResponse, Error = Error> + 'static`
 
 # Route matching
 
