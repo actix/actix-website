@@ -2,7 +2,7 @@
 use actix_web::{server, App, HttpRequest, Responder};
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
-fn index(req: HttpRequest) -> impl Responder {
+fn index(req: &HttpRequest) -> impl Responder {
     "Welcome!"
 }
 

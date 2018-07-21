@@ -1,7 +1,7 @@
 use actix_web::{App, HttpRequest, HttpResponse};
 
 // <prefix>
-fn show_users(req: HttpRequest) -> HttpResponse {
+fn show_users(req: &HttpRequest) -> HttpResponse {
     unimplemented!()
 }
 

@@ -1,22 +1,22 @@
 #![allow(dead_code)]
 use actix_web::{http::Method, App, HttpRequest};
 
-fn get_projects(_: HttpRequest) -> String {
+fn get_projects(_: &HttpRequest) -> String {
     unimplemented!()
 }
-fn create_project(_: HttpRequest) -> String {
+fn create_project(_: &HttpRequest) -> String {
     unimplemented!()
 }
 fn update_project(_: HttpRequest) -> String {
     unimplemented!()
 }
-fn delete_project(_: HttpRequest) -> String {
+fn delete_project(_: &HttpRequest) -> String {
     unimplemented!()
 }
-fn get_tasks(_: HttpRequest) -> String {
+fn get_tasks(_: &HttpRequest) -> String {
     unimplemented!()
 }
-fn create_task(_: HttpRequest) -> String {
+fn create_task(_: &HttpRequest) -> String {
     unimplemented!()
 }
 fn update_task(_: HttpRequest) -> String {

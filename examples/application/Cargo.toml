@@ -1,7 +1,7 @@
 [package]
 name = "application"
-version = "0.6.0"
+version = "0.7.0"
 workspace = "../"
 
 [dependencies]
-actix-web = "0.6"
+actix-web = "0.7"

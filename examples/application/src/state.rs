@@ -7,7 +7,7 @@ struct AppState {
     counter: Cell<usize>,
 }
 
-fn index(req: HttpRequest<AppState>) -> String {
+fn index(req: &HttpRequest<AppState>) -> String {
     let count = req.state().counter.get() + 1; // <- get count
     req.state().counter.set(count); // <- store new count in state
 

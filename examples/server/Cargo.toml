@@ -1,10 +1,10 @@
 [package]
 name = "server"
-version = "0.6.0"
+version = "0.7.0"
 workspace = "../"
 
 [dependencies]
-actix = "0.5"
-actix-web = { version="0.6", features=["alpn"] }
+actix = "0.7"
+actix-web = { version="0.7", features=["alpn"] }
 futures = "0.1"
 openssl = "0.10"

@@ -7,7 +7,7 @@ mod vh;
 
 fn make_app() {
 // <make_app>
-fn index(req: HttpRequest) -> impl Responder {
+fn index(req: &HttpRequest) -> impl Responder {
     "Hello world!"
 }
 

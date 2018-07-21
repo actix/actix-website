@@ -10,6 +10,6 @@ fn main() {
 // </norm>
 
 use actix_web::HttpRequest;
-fn index(req: HttpRequest) -> String {
+fn index(req: &HttpRequest) -> String {
     unimplemented!()
 }

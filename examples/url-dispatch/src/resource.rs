@@ -1,7 +1,7 @@
 // <resource>
 use actix_web::{http::Method, App, HttpRequest, HttpResponse};
 
-fn index(req: HttpRequest) -> HttpResponse {
+fn index(req: &HttpRequest) -> HttpResponse {
     unimplemented!()
 }
 
