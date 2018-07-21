@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["CsrfError","Potential cross-site request forgery detected."]],"struct":[["CsrfFilter","A middleware that filters cross-site requests."]]});
