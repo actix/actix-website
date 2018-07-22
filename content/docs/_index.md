@@ -20,5 +20,5 @@ API stability point of view the most stable.
 If you haven't used actix yet it's best to start with the [getting started
 guide](getting-started/).  If you already know your ways around and you need
 specific information you might want to read the [actix-web API
-docs](https://docs.rs/actix-web) (or the lower level [actix API
+docs](https://actix.rs/api/actix-web/stable/actix_web/) (or the lower level [actix API
 docs](https://docs.rs/actix)).
