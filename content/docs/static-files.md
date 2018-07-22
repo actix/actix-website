@@ -10,6 +10,7 @@ It is possible to serve static files with a custom path pattern and `NamedFile`.
 match a path tail, we can use a `[.*]` regex.
 
 ```rust
+extern crate actix_web;
 use std::path::PathBuf;
 use actix_web::{App, HttpRequest, Result, http::Method, fs::NamedFile};
 
@@ -32,6 +33,7 @@ To serve files from specific directories and sub-directories, `StaticFiles` can 
 it will be unable to serve sub-paths.
 
 ```rust
+extern crate actix_web;
 use actix_web::{App, fs};
 
 fn main() {
@@ -39,6 +41,7 @@ fn main() {
         .handler(
             "/static",
             fs::StaticFiles::new(".")
+                .unwrap()
                 .show_files_listing())
         .finish();
 }
