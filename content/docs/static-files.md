@@ -123,7 +123,7 @@ fn main() {
     App::new()
         .handler(
             "/static",
-            StaticFiles::with_config(".", MyConfig)
+            StaticFiles::with_config(".", MyConfig).unwrap()
                 .show_files_listing()
         ).finish();
 }
