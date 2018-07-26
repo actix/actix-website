@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["run","Start the System and execute supplied future."],["spawn","Spawns a future on the current arbiter."]],"mod":[["actix",""],["fut","Custom `Future` implementation with `Actix` support"],["msgs","Actix system messages"],["resolver","DNS resolver and connector utility actor"],["signal","An actor implementation of Unix signal handling"]]});
