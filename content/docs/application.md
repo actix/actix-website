@@ -14,7 +14,7 @@ All actix web servers are built around the `App` instance.  It is used for
 registering routes for resources and middlewares.  It also stores application
 state shared across all handlers within same application.
 
-Applications act as a namespace for all routes, i.e all routes for a specific application
+Applications act as a namespace for all routes, i.e. all routes for a specific application
 have the same url path prefix. The application prefix always contains a leading "/" slash.
 If a supplied prefix does not contain leading slash, it is automatically inserted.
 The prefix should consist of value path segments.
@@ -44,7 +44,7 @@ as the first application, it would match all incoming requests.
 ## State
 
 Application state is shared with all routes and resources within the same application.
-When using an http actor,state can be accessed with the `HttpRequest::state()` as read-only,
+When using an http actor, state can be accessed with the `HttpRequest::state()` as read-only,
 but interior mutability with `RefCell` can be used to achieve state mutability.
 State is also available for route matching predicates and middlewares.
 
