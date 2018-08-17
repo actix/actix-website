@@ -21,6 +21,12 @@ hugo server
 
 Then visit [http://localhost:1313](http://localhost:1313).
 
+For epub version, go to epub file. It needs python and pandoc.
+
+```sh
+./do.sh
+```
+
 # License
 
 Pretty murky.  Right now a massive clone of the tokio website.  Will get this
