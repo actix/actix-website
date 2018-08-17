@@ -135,7 +135,7 @@ Let's create a response for a custom type that serializes to an `application/jso
 extern crate serde;
 extern crate serde_json;
 #[macro_use] extern crate serde_derive;
-use actix_web::{server, App, HttpRequest, HttpResponse, Error, Responder, http};
+use actix_web::{server, App, HttpRequest, HttpResponse, Error, Responder, Result, http};
 
 #[derive(Serialize)]
 struct MyObj {
