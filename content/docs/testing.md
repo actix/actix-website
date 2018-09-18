@@ -31,12 +31,12 @@ fn index(req: &HttpRequest) -> HttpResponse {
 
 fn main() {
     let resp = test::TestRequest::with_header("content-type", "text/plain")
-        .run(index)
+        .run(&index)
         .unwrap();
     assert_eq!(resp.status(), http::StatusCode::OK);
 
     let resp = test::TestRequest::default()
-        .run(index)
+        .run(&index)
         .unwrap();
     assert_eq!(resp.status(), http::StatusCode::BAD_REQUEST);
 }
