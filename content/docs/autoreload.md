@@ -41,6 +41,7 @@ listenfd = "0.3"
 Then modify your server code to only invoke `bind` as a fallback:
 
 ```rust
+extern crate actix_web;
 extern crate listenfd;
 
 use listenfd::ListenFd;
