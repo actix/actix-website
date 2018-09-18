@@ -17,8 +17,8 @@ you will probably find yourself at home quickly, but even if you are coming from
 another programming language you should find actix-web easy to pick up.
 
 An application developed with `actix-web` will expose an HTTP server contained
-within a native executable.  You can put this behind another HTTP server like
-nginx or serve it up as such.  Even in the complete absence of another HTTP
+within a native executable.  You can either put this behind another HTTP server like
+nginx or serve it up as-is.  Even in the complete absence of another HTTP
 server `actix-web` is powerful enough to provide HTTP 1 and HTTP 2 support as
 well as SSL/TLS.  This makes it useful for building small services ready for
 distribution.
