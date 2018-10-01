@@ -265,7 +265,7 @@ A scoped layout of these paths would appear as follows
 
 {{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
 
-A *scoped* path can contain variable path segments as resources. Consistent with 
+A *scoped* path can contain variable path segments as resources. Consistent with
 unscoped paths.
 
 You can get variable path segments from `HttpRequest::match_info()`.
@@ -274,9 +274,9 @@ You can get variable path segments from `HttpRequest::match_info()`.
 # Match information
 
 All values representing matched path segments are available in
-[`HttpRequest::match_info`](../actix_web/struct.HttpRequest.html#method.match_info).
+[`HttpRequest::match_info`](../../actix-web/actix_web/struct.HttpRequest.html#method.match_info).
 Specific values can be retrieved with
-[`Params::get()`](../actix_web/dev/struct.Params.html#method.get).
+[`Params::get()`](../../actix-web/actix_web/dev/struct.Params.html#method.get).
 
 Any matched parameter can be deserialized into a specific type if the type
 implements the `FromParam` trait. For example most standard integer types
@@ -403,7 +403,7 @@ it will generate a URL with that same path.
 
 You can think of a predicate as a simple function that accepts a *request* object reference
 and returns *true* or *false*. Formally, a predicate is any object that implements the
-[`Predicate`](../actix_web/pred/trait.Predicate.html) trait. Actix provides
+[`Predicate`](../../actix-web/actix_web/pred/trait.Predicate.html) trait. Actix provides
 several predicates, you can check
 [functions section](../../actix-web/actix_web/pred/index.html#functions) of api docs.
 

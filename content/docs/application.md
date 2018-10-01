@@ -71,7 +71,7 @@ When the app is initialized it needs to be passed the initial state:
 
 Combining multiple applications with different state is possible as well.
 
-[server::new](https://docs.rs/actix-web/*/actix_web/server/fn.new.html) requires the handler to have a single type. 
+[server::new](https://docs.rs/actix-web/*/actix_web/server/fn.new.html) requires the handler to have a single type.
 
 This limitation can easily be overcome with the [App::boxed](https://docs.rs/actix-web/*/actix_web/struct.App.html#method.boxed) method, which converts an App into a boxed trait object.
 
@@ -99,13 +99,13 @@ it will generate a URL with that same path.
 
 You can think of a predicate as a simple function that accepts a *request* object reference
 and returns *true* or *false*. Formally, a predicate is any object that implements the
-[`Predicate`](../actix_web/pred/trait.Predicate.html) trait. Actix provides
+[`Predicate`](../../actix-web/actix_web/pred/trait.Predicate.html) trait. Actix provides
 several predicates, you can check
 [functions section](../../actix-web/actix_web/pred/index.html#functions) of api docs.
 
-Any of this predicates could be used 
-with [`App::filter()`](../actix_web/struct.App.html#method.filter) method. One of the
-provided predicates is [`Host`](../actix_web/pred/fn.Host.html), it can be used
+Any of this predicates could be used
+with [`App::filter()`](../../actix-web/actix_web/struct.App.html#method.filter) method. One of the
+provided predicates is [`Host`](../../actix-web/actix_web/pred/fn.Host.html), it can be used
 as application's filter based on request's host information.
 
 {{< include-example example="application" file="vh.rs" section="vh" >}}
