@@ -1,62 +1,1241 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `HttpResponse` struct in crate `actix_web`."><meta name="keywords" content="rust, rustlang, rust-lang, HttpResponse"><title>actix_web::HttpResponse - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script></head><body class="rustdoc struct"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><p class='location'>Struct HttpResponse</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.Ok">Ok</a><a href="#method.Created">Created</a><a href="#method.Accepted">Accepted</a><a href="#method.NonAuthoritativeInformation">NonAuthoritativeInformation</a><a href="#method.NoContent">NoContent</a><a href="#method.ResetContent">ResetContent</a><a href="#method.PartialContent">PartialContent</a><a href="#method.MultiStatus">MultiStatus</a><a href="#method.AlreadyReported">AlreadyReported</a><a href="#method.MultipleChoices">MultipleChoices</a><a href="#method.MovedPermanenty">MovedPermanenty</a><a href="#method.MovedPermanently">MovedPermanently</a><a href="#method.Found">Found</a><a href="#method.SeeOther">SeeOther</a><a href="#method.NotModified">NotModified</a><a href="#method.UseProxy">UseProxy</a><a href="#method.TemporaryRedirect">TemporaryRedirect</a><a href="#method.PermanentRedirect">PermanentRedirect</a><a href="#method.BadRequest">BadRequest</a><a href="#method.NotFound">NotFound</a><a href="#method.Unauthorized">Unauthorized</a><a href="#method.PaymentRequired">PaymentRequired</a><a href="#method.Forbidden">Forbidden</a><a href="#method.MethodNotAllowed">MethodNotAllowed</a><a href="#method.NotAcceptable">NotAcceptable</a><a href="#method.ProxyAuthenticationRequired">ProxyAuthenticationRequired</a><a href="#method.RequestTimeout">RequestTimeout</a><a href="#method.Conflict">Conflict</a><a href="#method.Gone">Gone</a><a href="#method.LengthRequired">LengthRequired</a><a href="#method.PreconditionFailed">PreconditionFailed</a><a href="#method.PayloadTooLarge">PayloadTooLarge</a><a href="#method.UriTooLong">UriTooLong</a><a href="#method.UnsupportedMediaType">UnsupportedMediaType</a><a href="#method.RangeNotSatisfiable">RangeNotSatisfiable</a><a href="#method.ExpectationFailed">ExpectationFailed</a><a href="#method.InternalServerError">InternalServerError</a><a href="#method.NotImplemented">NotImplemented</a><a href="#method.BadGateway">BadGateway</a><a href="#method.ServiceUnavailable">ServiceUnavailable</a><a href="#method.GatewayTimeout">GatewayTimeout</a><a href="#method.VersionNotSupported">VersionNotSupported</a><a href="#method.VariantAlsoNegotiates">VariantAlsoNegotiates</a><a href="#method.InsufficientStorage">InsufficientStorage</a><a href="#method.LoopDetected">LoopDetected</a><a href="#method.build">build</a><a href="#method.build_from">build_from</a><a href="#method.new">new</a><a href="#method.with_body">with_body</a><a href="#method.from_error">from_error</a><a href="#method.into_builder">into_builder</a><a href="#method.error">error</a><a href="#method.version">version</a><a href="#method.headers">headers</a><a href="#method.headers_mut">headers_mut</a><a href="#method.cookies">cookies</a><a href="#method.add_cookie">add_cookie</a><a href="#method.del_cookie">del_cookie</a><a href="#method.status">status</a><a href="#method.status_mut">status_mut</a><a href="#method.reason">reason</a><a href="#method.set_reason">set_reason</a><a href="#method.set_connection_type">set_connection_type</a><a href="#method.upgrade">upgrade</a><a href="#method.keep_alive">keep_alive</a><a href="#method.chunked">chunked</a><a href="#method.content_encoding">content_encoding</a><a href="#method.set_content_encoding">set_content_encoding</a><a href="#method.body">body</a><a href="#method.set_body">set_body</a><a href="#method.replace_body">replace_body</a><a href="#method.response_size">response_size</a><a href="#method.write_buffer_capacity">write_buffer_capacity</a><a href="#method.set_write_buffer_capacity">set_write_buffer_capacity</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Responder">Responder</a><a href="#impl-Debug">Debug</a><a href="#impl-From%3CResult%3CI%2C%20E%3E%3E">From&lt;Result&lt;I, E&gt;&gt;</a><a href="#impl-From%3CHttpResponseBuilder%3E">From&lt;HttpResponseBuilder&gt;</a><a href="#impl-From%3C%26%27static%20str%3E">From&lt;&amp;&#39;static str&gt;</a><a href="#impl-From%3C%26%27static%20%5Bu8%5D%3E">From&lt;&amp;&#39;static [u8]&gt;</a><a href="#impl-From%3CString%3E">From&lt;String&gt;</a><a href="#impl-From%3C%26%27a%20String%3E">From&lt;&amp;&#39;a String&gt;</a><a href="#impl-From%3CBytes%3E">From&lt;Bytes&gt;</a><a href="#impl-From%3CBytesMut%3E">From&lt;BytesMut&gt;</a><a href="#impl-From%3CError%3E">From&lt;Error&gt;</a></div><a class="sidebar-title" href="#synthetic-implementations">Auto Trait Implementations</a><div class="sidebar-links"><a href="#impl-Send">!Send</a><a href="#impl-Sync">!Sync</a></div></div><p class='location'><a href='index.html'>actix_web</a></p><script>window.sidebarCurrent = {name: 'HttpResponse', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>actix_web</a>::<wbr><a class="struct" href=''>HttpResponse</a></span><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/actix_web/httpresponse.rs.html#38' title='goto source code'>[src]</a></span></h1><div class="docblock type-decl"><pre class='rust struct'>pub struct HttpResponse(_, _);</pre></div><div class='docblock'><p>An HTTP Response</p>
-</div>
-                    <h2 id='methods' class='small-section-header'>
-                      Methods<a href='#methods' class='anchor'></a>
-                    </h2>
-                <h3 id='impl' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#15-71' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.Ok' class="method"><span id='Ok.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Ok' class='fnname'>Ok</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.Created' class="method"><span id='Created.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Created' class='fnname'>Created</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.Accepted' class="method"><span id='Accepted.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Accepted' class='fnname'>Accepted</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.NonAuthoritativeInformation' class="method"><span id='NonAuthoritativeInformation.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.NonAuthoritativeInformation' class='fnname'>NonAuthoritativeInformation</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.NoContent' class="method"><span id='NoContent.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.NoContent' class='fnname'>NoContent</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.ResetContent' class="method"><span id='ResetContent.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.ResetContent' class='fnname'>ResetContent</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.PartialContent' class="method"><span id='PartialContent.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.PartialContent' class='fnname'>PartialContent</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.MultiStatus' class="method"><span id='MultiStatus.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.MultiStatus' class='fnname'>MultiStatus</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.AlreadyReported' class="method"><span id='AlreadyReported.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.AlreadyReported' class='fnname'>AlreadyReported</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.MultipleChoices' class="method"><span id='MultipleChoices.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.MultipleChoices' class='fnname'>MultipleChoices</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.MovedPermanenty' class="method"><span id='MovedPermanenty.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.MovedPermanenty' class='fnname'>MovedPermanenty</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.MovedPermanently' class="method"><span id='MovedPermanently.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.MovedPermanently' class='fnname'>MovedPermanently</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.Found' class="method"><span id='Found.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Found' class='fnname'>Found</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.SeeOther' class="method"><span id='SeeOther.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.SeeOther' class='fnname'>SeeOther</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.NotModified' class="method"><span id='NotModified.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.NotModified' class='fnname'>NotModified</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.UseProxy' class="method"><span id='UseProxy.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.UseProxy' class='fnname'>UseProxy</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.TemporaryRedirect' class="method"><span id='TemporaryRedirect.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.TemporaryRedirect' class='fnname'>TemporaryRedirect</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.PermanentRedirect' class="method"><span id='PermanentRedirect.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.PermanentRedirect' class='fnname'>PermanentRedirect</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.BadRequest' class="method"><span id='BadRequest.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.BadRequest' class='fnname'>BadRequest</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.NotFound' class="method"><span id='NotFound.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.NotFound' class='fnname'>NotFound</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.Unauthorized' class="method"><span id='Unauthorized.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Unauthorized' class='fnname'>Unauthorized</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.PaymentRequired' class="method"><span id='PaymentRequired.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.PaymentRequired' class='fnname'>PaymentRequired</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.Forbidden' class="method"><span id='Forbidden.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Forbidden' class='fnname'>Forbidden</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.MethodNotAllowed' class="method"><span id='MethodNotAllowed.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.MethodNotAllowed' class='fnname'>MethodNotAllowed</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.NotAcceptable' class="method"><span id='NotAcceptable.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.NotAcceptable' class='fnname'>NotAcceptable</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.ProxyAuthenticationRequired' class="method"><span id='ProxyAuthenticationRequired.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.ProxyAuthenticationRequired' class='fnname'>ProxyAuthenticationRequired</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.RequestTimeout' class="method"><span id='RequestTimeout.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.RequestTimeout' class='fnname'>RequestTimeout</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.Conflict' class="method"><span id='Conflict.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Conflict' class='fnname'>Conflict</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.Gone' class="method"><span id='Gone.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.Gone' class='fnname'>Gone</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.LengthRequired' class="method"><span id='LengthRequired.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.LengthRequired' class='fnname'>LengthRequired</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.PreconditionFailed' class="method"><span id='PreconditionFailed.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.PreconditionFailed' class='fnname'>PreconditionFailed</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.PayloadTooLarge' class="method"><span id='PayloadTooLarge.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.PayloadTooLarge' class='fnname'>PayloadTooLarge</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.UriTooLong' class="method"><span id='UriTooLong.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.UriTooLong' class='fnname'>UriTooLong</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.UnsupportedMediaType' class="method"><span id='UnsupportedMediaType.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.UnsupportedMediaType' class='fnname'>UnsupportedMediaType</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.RangeNotSatisfiable' class="method"><span id='RangeNotSatisfiable.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.RangeNotSatisfiable' class='fnname'>RangeNotSatisfiable</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.ExpectationFailed' class="method"><span id='ExpectationFailed.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.ExpectationFailed' class='fnname'>ExpectationFailed</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.InternalServerError' class="method"><span id='InternalServerError.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.InternalServerError' class='fnname'>InternalServerError</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.NotImplemented' class="method"><span id='NotImplemented.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.NotImplemented' class='fnname'>NotImplemented</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.BadGateway' class="method"><span id='BadGateway.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.BadGateway' class='fnname'>BadGateway</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.ServiceUnavailable' class="method"><span id='ServiceUnavailable.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.ServiceUnavailable' class='fnname'>ServiceUnavailable</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.GatewayTimeout' class="method"><span id='GatewayTimeout.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.GatewayTimeout' class='fnname'>GatewayTimeout</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.VersionNotSupported' class="method"><span id='VersionNotSupported.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.VersionNotSupported' class='fnname'>VersionNotSupported</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.VariantAlsoNegotiates' class="method"><span id='VariantAlsoNegotiates.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.VariantAlsoNegotiates' class='fnname'>VariantAlsoNegotiates</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.InsufficientStorage' class="method"><span id='InsufficientStorage.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.InsufficientStorage' class='fnname'>InsufficientStorage</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><h4 id='method.LoopDetected' class="method"><span id='LoopDetected.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.LoopDetected' class='fnname'>LoopDetected</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4></div><h3 id='impl-1' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-1' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#40-300' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.build' class="method"><span id='build.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.build' class='fnname'>build</a>(status: <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a>) -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#53-55' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Create http response builder with specific status.</p>
-</div><h4 id='method.build_from' class="method"><span id='build_from.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.build_from' class='fnname'>build_from</a>&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a>&gt;&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;source: T<br>) -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#59-61' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Create http response builder</p>
-</div><h4 id='method.new' class="method"><span id='new.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.new' class='fnname'>new</a>(status: <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a>) -&gt; <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#65-67' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Constructs a response</p>
-</div><h4 id='method.with_body' class="method"><span id='with_body.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.with_body' class='fnname'>with_body</a>&lt;B:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a>&gt;&gt;(status: <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a>, body: B) -&gt; <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#71-73' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Constructs a response with body</p>
-</div><h4 id='method.from_error' class="method"><span id='from_error.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.from_error' class='fnname'>from_error</a>(error: <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>) -&gt; <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#77-81' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Constructs an error response</p>
-</div><h4 id='method.into_builder' class="method"><span id='into_builder.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.into_builder' class='fnname'>into_builder</a>(self) -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#85-104' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Convert <code>HttpResponse</code> to a <code>HttpResponseBuilder</code></p>
-</div><h4 id='method.error' class="method"><span id='error.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.error' class='fnname'>error</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#108-110' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>The source <code>error</code> for this response</p>
-</div><h4 id='method.version' class="method"><span id='version.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.version' class='fnname'>version</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../actix_web/http/struct.Version.html" title="struct actix_web::http::Version">Version</a>&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#114-116' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Get the HTTP version of this response</p>
-</div><h4 id='method.headers' class="method"><span id='headers.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.headers' class='fnname'>headers</a>(&amp;self) -&gt; &amp;<a class="struct" href="../actix_web/http/header/struct.HeaderMap.html" title="struct actix_web::http::header::HeaderMap">HeaderMap</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#120-122' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Get the headers from the response</p>
-</div><h4 id='method.headers_mut' class="method"><span id='headers_mut.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.headers_mut' class='fnname'>headers_mut</a>(&amp;mut self) -&gt; &amp;mut <a class="struct" href="../actix_web/http/header/struct.HeaderMap.html" title="struct actix_web::http::header::HeaderMap">HeaderMap</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#126-128' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Get a mutable reference to the headers</p>
-</div><h4 id='method.cookies' class="method"><span id='cookies.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.cookies' class='fnname'>cookies</a>(&amp;self) -&gt; CookieIter</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#132-136' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Get an iterator for the cookies set by this response</p>
-</div><h4 id='method.add_cookie' class="method"><span id='add_cookie.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.add_cookie' class='fnname'>add_cookie</a>(&amp;mut self, cookie: &amp;<a class="struct" href="../actix_web/http/struct.Cookie.html" title="struct actix_web::http::Cookie">Cookie</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>, <a class="struct" href="https://docs.rs/http/0.1.7/http/error/struct.Error.html" title="struct http::error::Error">HttpError</a>&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#140-147' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Add a cookie to this response</p>
-</div><h4 id='method.del_cookie' class="method"><span id='del_cookie.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.del_cookie' class='fnname'>del_cookie</a>(&amp;mut self, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#152-174' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Remove all cookies with the given name from this response. Returns
-the number of cookies removed.</p>
-</div><h4 id='method.status' class="method"><span id='status.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.status' class='fnname'>status</a>(&amp;self) -&gt; <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#178-180' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Get the response status code</p>
-</div><h4 id='method.status_mut' class="method"><span id='status_mut.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.status_mut' class='fnname'>status_mut</a>(&amp;mut self) -&gt; &amp;mut <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#184-186' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set the <code>StatusCode</code> for this response</p>
-</div><h4 id='method.reason' class="method"><span id='reason.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.reason' class='fnname'>reason</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#190-199' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Get custom reason for the response</p>
-</div><h4 id='method.set_reason' class="method"><div class="important-traits"><div class='tooltip'>ⓘ<span class='tooltiptext'>Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R</span></div><div class="content hidden"><h3 class="important">Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R</h3><code class="content"><span class="where fmt-newline">impl&lt;'a, R&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, W&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>W <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, I&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>I <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;I: <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">    type <a href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item' class="type">Item</a> = &lt;I as <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item" title="type core::iter::iterator::Iterator::Item">Item</a>;</span></code></div></div><span id='set_reason.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.set_reason' class='fnname'>set_reason</a>(&amp;mut self, reason: &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#203-206' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set the custom reason for the response</p>
-</div><h4 id='method.set_connection_type' class="method"><div class="important-traits"><div class='tooltip'>ⓘ<span class='tooltiptext'>Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R</span></div><div class="content hidden"><h3 class="important">Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R</h3><code class="content"><span class="where fmt-newline">impl&lt;'a, R&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, W&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>W <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, I&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>I <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;I: <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">    type <a href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item' class="type">Item</a> = &lt;I as <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item" title="type core::iter::iterator::Iterator::Item">Item</a>;</span></code></div></div><span id='set_connection_type.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.set_connection_type' class='fnname'>set_connection_type</a>(&amp;mut self, conn: <a class="enum" href="../actix_web/http/enum.ConnectionType.html" title="enum actix_web::http::ConnectionType">ConnectionType</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#209-212' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set connection type</p>
-</div><h4 id='method.upgrade' class="method"><span id='upgrade.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.upgrade' class='fnname'>upgrade</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#216-218' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Connection upgrade status</p>
-</div><h4 id='method.keep_alive' class="method"><span id='keep_alive.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.keep_alive' class='fnname'>keep_alive</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#221-230' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Keep-alive status for this connection</p>
-</div><h4 id='method.chunked' class="method"><span id='chunked.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.chunked' class='fnname'>chunked</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#234-236' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>is chunked encoding enabled</p>
-</div><h4 id='method.content_encoding' class="method"><span id='content_encoding.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.content_encoding' class='fnname'>content_encoding</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="../actix_web/http/enum.ContentEncoding.html" title="enum actix_web::http::ContentEncoding">ContentEncoding</a>&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#240-242' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Content encoding</p>
-</div><h4 id='method.set_content_encoding' class="method"><div class="important-traits"><div class='tooltip'>ⓘ<span class='tooltiptext'>Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R</span></div><div class="content hidden"><h3 class="important">Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R</h3><code class="content"><span class="where fmt-newline">impl&lt;'a, R&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, W&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>W <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, I&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>I <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;I: <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">    type <a href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item' class="type">Item</a> = &lt;I as <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item" title="type core::iter::iterator::Iterator::Item">Item</a>;</span></code></div></div><span id='set_content_encoding.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.set_content_encoding' class='fnname'>set_content_encoding</a>(&amp;mut self, enc: <a class="enum" href="../actix_web/http/enum.ContentEncoding.html" title="enum actix_web::http::ContentEncoding">ContentEncoding</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#245-248' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set content encoding</p>
-</div><h4 id='method.body' class="method"><span id='body.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.body' class='fnname'>body</a>(&amp;self) -&gt; &amp;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#252-254' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Get body os this response</p>
-</div><h4 id='method.set_body' class="method"><span id='set_body.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.set_body' class='fnname'>set_body</a>&lt;B:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a>&gt;&gt;(&amp;mut self, body: B)</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#257-259' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set a body</p>
-</div><h4 id='method.replace_body' class="method"><span id='replace_body.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.replace_body' class='fnname'>replace_body</a>&lt;B:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a>&gt;&gt;(&amp;mut self, body: B) -&gt; <a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#262-264' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set a body and return previous body value</p>
-</div><h4 id='method.response_size' class="method"><span id='response_size.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.response_size' class='fnname'>response_size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#267-269' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Size of response in bytes, excluding HTTP headers</p>
-</div><h4 id='method.write_buffer_capacity' class="method"><span id='write_buffer_capacity.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.write_buffer_capacity' class='fnname'>write_buffer_capacity</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#277-279' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set write buffer capacity</p>
-</div><h4 id='method.set_write_buffer_capacity' class="method"><span id='set_write_buffer_capacity.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.set_write_buffer_capacity' class='fnname'>set_write_buffer_capacity</a>(&amp;mut self, cap: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>)</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#282-284' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Set write buffer capacity</p>
-</div></div>
-                <h2 id='implementations' class='small-section-header'>
-                  Trait Implementations<a href='#implementations' class='anchor'></a>
-                </h2>
-                <div id='implementations-list'><h3 id='impl-Responder' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="../actix_web/trait.Responder.html" title="trait actix_web::Responder">Responder</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-Responder' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/handler.rs.html#302-312' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='associatedtype.Item' class="type"><span id='Item.t' class='invisible'><code>type <a href='../actix_web/trait.Responder.html#associatedtype.Item' class="type">Item</a> = <a class="struct" href="../actix_web/dev/struct.AsyncResult.html" title="struct actix_web::dev::AsyncResult">AsyncResult</a>&lt;<a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a>&gt;</code></span></h4>
-<div class='docblock'><p>The associated item which can be returned.</p>
-</div><h4 id='associatedtype.Error' class="type"><span id='Error.t' class='invisible'><code>type <a href='../actix_web/trait.Responder.html#associatedtype.Error' class="type">Error</a> = <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a></code></span></h4>
-<div class='docblock'><p>The associated error which can be returned.</p>
-</div><h4 id='method.respond_to' class="method"><span id='respond_to.v' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='../actix_web/trait.Responder.html#tymethod.respond_to' class='fnname'>respond_to</a>&lt;S&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;_: &amp;<a class="struct" href="../actix_web/struct.HttpRequest.html" title="struct actix_web::HttpRequest">HttpRequest</a>&lt;S&gt;<br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../actix_web/dev/struct.AsyncResult.html" title="struct actix_web::dev::AsyncResult">AsyncResult</a>&lt;<a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a>&gt;, <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/handler.rs.html#307-311' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Convert itself to <code>AsyncResult</code> or <code>Error</code>.</p>
-</div></div><h3 id='impl-Debug' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-Debug' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#302-318' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#303-317' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
-</div></div><h3 id='impl-From%3CResult%3CI%2C%20E%3E%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl&lt;I:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a>&gt;, E:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt;&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;I, E&gt;&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3CResult%3CI%2C%20E%3E%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#702-709' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='docblock'><p>Helper converters</p>
-</div><div class='impl-items'><h4 id='method.from' class="method"><span id='from.v' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(res: <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;I, E&gt;) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#703-708' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CHttpResponseBuilder%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3CHttpResponseBuilder%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#711-715' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.from-1' class="method"><span id='from.v-1' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(builder: <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#712-714' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3C%26%27static%20str%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;&amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3C%26%27static%20str%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#727-733' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.from-2' class="method"><span id='from.v-2' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#728-732' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3C%26%27static%20%5Bu8%5D%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;'static [</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3C%26%27static%20%5Bu8%5D%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#747-753' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.from-3' class="method"><span id='from.v-3' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;'static [</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#748-752' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CString%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3CString%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#767-773' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.from-4' class="method"><span id='from.v-4' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#768-772' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3C%26%27a%20String%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;&amp;'a <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3C%26%27a%20String%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#787-793' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.from-5' class="method"><span id='from.v-5' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: &amp;'a <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#788-792' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CBytes%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.Bytes.html" title="struct bytes::bytes::Bytes">Bytes</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3CBytes%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#807-813' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.from-6' class="method"><span id='from.v-6' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.Bytes.html" title="struct bytes::bytes::Bytes">Bytes</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#808-812' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CBytesMut%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.BytesMut.html" title="struct bytes::bytes::BytesMut">BytesMut</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3CBytesMut%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#827-833' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.from-7' class="method"><span id='from.v-7' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.BytesMut.html" title="struct bytes::bytes::BytesMut">BytesMut</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#828-832' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CError%3E' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-From%3CError%3E' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/error.rs.html#172-176' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='docblock'><p>Convert <code>Error</code> to a <code>HttpResponse</code> instance</p>
-</div><div class='impl-items'><h4 id='method.from-8' class="method"><span id='from.v-8' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(err: <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>) -&gt; Self</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/error.rs.html#173-175' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Performs the conversion.</p>
-</div></div></div>
-                <h2 id='synthetic-implementations' class='small-section-header'>
-                  Auto Trait Implementations<a href='#synthetic-implementations' class='anchor'></a>
-                </h2>
-                <div id='synthetic-implementations-list'>
-            <h3 id='impl-Send' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl !<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-Send' class='anchor'></a></span></td><td><span class='out-of-band'></span></td></tr></tbody></table></h3><div class='impl-items'></div><h3 id='impl-Sync' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl !<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a href='#impl-Sync' class='anchor'></a></span></td><td><span class='out-of-band'></span></td></tr></tbody></table></h3><div class='impl-items'></div></div></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "actix_web";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="rustdoc">
+  <meta name="description" content="API documentation for the Rust `HttpResponse` struct in crate `actix_web`.">
+  <meta name="keywords" content="rust, rustlang, rust-lang, HttpResponse">
+  <title>actix_web::HttpResponse - Rust</title>
+  <link rel="stylesheet" type="text/css" href="../normalize.css">
+  <link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle">
+  <link rel="stylesheet" type="text/css" href="../dark.css">
+  <link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle">
+  <script src="../storage.js"></script>
+</head>
+
+<body class="rustdoc struct">
+  <!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+  <nav class="sidebar">
+    <div class="sidebar-menu">&#9776;</div>
+    <p class='location'>Struct HttpResponse</p>
+    <div class="sidebar-elems">
+      <div class="block items"><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.Ok">Ok</a><a href="#method.Created">Created</a><a
+            href="#method.Accepted">Accepted</a><a href="#method.NonAuthoritativeInformation">NonAuthoritativeInformation</a><a
+            href="#method.NoContent">NoContent</a><a href="#method.ResetContent">ResetContent</a><a href="#method.PartialContent">PartialContent</a><a
+            href="#method.MultiStatus">MultiStatus</a><a href="#method.AlreadyReported">AlreadyReported</a><a href="#method.MultipleChoices">MultipleChoices</a><a
+            href="#method.MovedPermanenty">MovedPermanenty</a><a href="#method.MovedPermanently">MovedPermanently</a><a href="#method.Found">Found</a><a
+            href="#method.SeeOther">SeeOther</a><a href="#method.NotModified">NotModified</a><a href="#method.UseProxy">UseProxy</a><a
+            href="#method.TemporaryRedirect">TemporaryRedirect</a><a href="#method.PermanentRedirect">PermanentRedirect</a><a
+            href="#method.BadRequest">BadRequest</a><a href="#method.NotFound">NotFound</a><a href="#method.Unauthorized">Unauthorized</a><a
+            href="#method.PaymentRequired">PaymentRequired</a><a href="#method.Forbidden">Forbidden</a><a href="#method.MethodNotAllowed">MethodNotAllowed</a><a
+            href="#method.NotAcceptable">NotAcceptable</a><a href="#method.ProxyAuthenticationRequired">ProxyAuthenticationRequired</a><a
+            href="#method.RequestTimeout">RequestTimeout</a><a href="#method.Conflict">Conflict</a><a href="#method.Gone">Gone</a><a
+            href="#method.LengthRequired">LengthRequired</a><a href="#method.PreconditionFailed">PreconditionFailed</a><a href="#method.PayloadTooLarge">PayloadTooLarge</a><a
+            href="#method.UriTooLong">UriTooLong</a><a href="#method.UnsupportedMediaType">UnsupportedMediaType</a><a href="#method.RangeNotSatisfiable">RangeNotSatisfiable</a><a
+            href="#method.ExpectationFailed">ExpectationFailed</a><a href="#method.InternalServerError">InternalServerError</a><a
+            href="#method.NotImplemented">NotImplemented</a><a href="#method.BadGateway">BadGateway</a><a href="#method.ServiceUnavailable">ServiceUnavailable</a><a
+            href="#method.GatewayTimeout">GatewayTimeout</a><a href="#method.VersionNotSupported">VersionNotSupported</a><a
+            href="#method.VariantAlsoNegotiates">VariantAlsoNegotiates</a><a href="#method.InsufficientStorage">InsufficientStorage</a><a
+            href="#method.LoopDetected">LoopDetected</a><a href="#method.build">build</a><a href="#method.build_from">build_from</a><a
+            href="#method.new">new</a><a href="#method.with_body">with_body</a><a href="#method.from_error">from_error</a><a
+            href="#method.into_builder">into_builder</a><a href="#method.error">error</a><a href="#method.version">version</a><a
+            href="#method.headers">headers</a><a href="#method.headers_mut">headers_mut</a><a href="#method.cookies">cookies</a><a
+            href="#method.add_cookie">add_cookie</a><a href="#method.del_cookie">del_cookie</a><a href="#method.status">status</a><a
+            href="#method.status_mut">status_mut</a><a href="#method.reason">reason</a><a href="#method.set_reason">set_reason</a><a
+            href="#method.set_connection_type">set_connection_type</a><a href="#method.upgrade">upgrade</a><a href="#method.keep_alive">keep_alive</a><a
+            href="#method.chunked">chunked</a><a href="#method.content_encoding">content_encoding</a><a href="#method.set_content_encoding">set_content_encoding</a><a
+            href="#method.body">body</a><a href="#method.set_body">set_body</a><a href="#method.replace_body">replace_body</a><a
+            href="#method.response_size">response_size</a><a href="#method.write_buffer_capacity">write_buffer_capacity</a><a
+            href="#method.set_write_buffer_capacity">set_write_buffer_capacity</a></div><a class="sidebar-title" href="#implementations">Trait
+          Implementations</a><div class="sidebar-links"><a href="#impl-Responder">Responder</a><a href="#impl-Debug">Debug</a><a
+            href="#impl-From%3CResult%3CI%2C%20E%3E%3E">From&lt;Result&lt;I, E&gt;&gt;</a><a href="#impl-From%3CHttpResponseBuilder%3E">From&lt;HttpResponseBuilder&gt;</a><a
+            href="#impl-From%3C%26%27static%20str%3E">From&lt;&amp;&#39;static str&gt;</a><a href="#impl-From%3C%26%27static%20%5Bu8%5D%3E">From&lt;&amp;&#39;static
+            [u8]&gt;</a><a href="#impl-From%3CString%3E">From&lt;String&gt;</a><a href="#impl-From%3C%26%27a%20String%3E">From&lt;&amp;&#39;a
+            String&gt;</a><a href="#impl-From%3CBytes%3E">From&lt;Bytes&gt;</a><a href="#impl-From%3CBytesMut%3E">From&lt;BytesMut&gt;</a><a
+            href="#impl-From%3CError%3E">From&lt;Error&gt;</a></div><a class="sidebar-title" href="#synthetic-implementations">Auto
+          Trait Implementations</a><div class="sidebar-links"><a href="#impl-Send">!Send</a><a href="#impl-Sync">!Sync</a></div>
+      </div>
+      <p class='location'><a href='index.html'>actix_web</a></p>
+      <script>window.sidebarCurrent = { name: 'HttpResponse', ty: 'struct', relpath: '' };</script>
+      <script defer src="sidebar-items.js"></script>
+    </div>
+  </nav>
+  <div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div
+      id="theme-choices"></div>
+  </div>
+  <script src="../theme.js"></script>
+  <nav class="sub">
+    <form class="search-form js-only">
+      <div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+          type="search"><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div>
+    </form>
+  </nav>
+  <section id="main" class="content">
+    <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>actix_web</a>::<wbr><a class="struct" href=''>HttpResponse</a></span><span
+        class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span
+              class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/actix_web/httpresponse.rs.html#38' title='goto source code'>[src]</a></span></h1>
+    <div
+      class="docblock type-decl">
+      <pre class='rust struct'>pub struct HttpResponse(_, _);</pre>
+    </div>
+    <div class='docblock'>
+      <p>An HTTP Response</p>
+    </div>
+    <h2 id='methods' class='small-section-header'>
+      Methods<a href='#methods' class='anchor'></a>
+    </h2>
+    <h3 id='impl' class='impl'><span class='in-band'><table class='table-display'>
+          <tbody>
+            <tr>
+              <td><code>impl <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                  href='#impl' class='anchor'></a></span></td>
+      <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#15-71'
+            title='goto source code'>[src]</a></span></td>
+      </tr>
+      </tbody>
+      </table>
+    </h3>
+    <div class='impl-items'>
+      <h4 id='method.Ok' class="method"><span id='Ok.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Ok' class='fnname'>Ok</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.Created' class="method"><span id='Created.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Created' class='fnname'>Created</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.Accepted' class="method"><span id='Accepted.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Accepted' class='fnname'>Accepted</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.NonAuthoritativeInformation' class="method"><span id='NonAuthoritativeInformation.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.NonAuthoritativeInformation' class='fnname'>NonAuthoritativeInformation</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.NoContent' class="method"><span id='NoContent.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.NoContent' class='fnname'>NoContent</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.ResetContent' class="method"><span id='ResetContent.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.ResetContent' class='fnname'>ResetContent</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.PartialContent' class="method"><span id='PartialContent.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.PartialContent' class='fnname'>PartialContent</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.MultiStatus' class="method"><span id='MultiStatus.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.MultiStatus' class='fnname'>MultiStatus</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.AlreadyReported' class="method"><span id='AlreadyReported.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.AlreadyReported' class='fnname'>AlreadyReported</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.MultipleChoices' class="method"><span id='MultipleChoices.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.MultipleChoices' class='fnname'>MultipleChoices</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.MovedPermanenty' class="method"><span id='MovedPermanenty.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.MovedPermanenty' class='fnname'>MovedPermanenty</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.MovedPermanently' class="method"><span id='MovedPermanently.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.MovedPermanently' class='fnname'>MovedPermanently</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.Found' class="method"><span id='Found.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Found' class='fnname'>Found</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.SeeOther' class="method"><span id='SeeOther.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.SeeOther' class='fnname'>SeeOther</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.NotModified' class="method"><span id='NotModified.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.NotModified' class='fnname'>NotModified</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.UseProxy' class="method"><span id='UseProxy.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.UseProxy' class='fnname'>UseProxy</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.TemporaryRedirect' class="method"><span id='TemporaryRedirect.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.TemporaryRedirect' class='fnname'>TemporaryRedirect</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.PermanentRedirect' class="method"><span id='PermanentRedirect.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.PermanentRedirect' class='fnname'>PermanentRedirect</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.BadRequest' class="method"><span id='BadRequest.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.BadRequest' class='fnname'>BadRequest</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.NotFound' class="method"><span id='NotFound.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.NotFound' class='fnname'>NotFound</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.Unauthorized' class="method"><span id='Unauthorized.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Unauthorized' class='fnname'>Unauthorized</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.PaymentRequired' class="method"><span id='PaymentRequired.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.PaymentRequired' class='fnname'>PaymentRequired</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.Forbidden' class="method"><span id='Forbidden.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Forbidden' class='fnname'>Forbidden</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.MethodNotAllowed' class="method"><span id='MethodNotAllowed.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.MethodNotAllowed' class='fnname'>MethodNotAllowed</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.NotAcceptable' class="method"><span id='NotAcceptable.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.NotAcceptable' class='fnname'>NotAcceptable</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.ProxyAuthenticationRequired' class="method"><span id='ProxyAuthenticationRequired.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.ProxyAuthenticationRequired' class='fnname'>ProxyAuthenticationRequired</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.RequestTimeout' class="method"><span id='RequestTimeout.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.RequestTimeout' class='fnname'>RequestTimeout</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.Conflict' class="method"><span id='Conflict.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Conflict' class='fnname'>Conflict</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.Gone' class="method"><span id='Gone.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.Gone' class='fnname'>Gone</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.LengthRequired' class="method"><span id='LengthRequired.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.LengthRequired' class='fnname'>LengthRequired</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.PreconditionFailed' class="method"><span id='PreconditionFailed.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.PreconditionFailed' class='fnname'>PreconditionFailed</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.PayloadTooLarge' class="method"><span id='PayloadTooLarge.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.PayloadTooLarge' class='fnname'>PayloadTooLarge</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.UriTooLong' class="method"><span id='UriTooLong.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.UriTooLong' class='fnname'>UriTooLong</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.UnsupportedMediaType' class="method"><span id='UnsupportedMediaType.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.UnsupportedMediaType' class='fnname'>UnsupportedMediaType</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.RangeNotSatisfiable' class="method"><span id='RangeNotSatisfiable.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.RangeNotSatisfiable' class='fnname'>RangeNotSatisfiable</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.ExpectationFailed' class="method"><span id='ExpectationFailed.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.ExpectationFailed' class='fnname'>ExpectationFailed</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.InternalServerError' class="method"><span id='InternalServerError.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.InternalServerError' class='fnname'>InternalServerError</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.NotImplemented' class="method"><span id='NotImplemented.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.NotImplemented' class='fnname'>NotImplemented</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.BadGateway' class="method"><span id='BadGateway.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.BadGateway' class='fnname'>BadGateway</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.ServiceUnavailable' class="method"><span id='ServiceUnavailable.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.ServiceUnavailable' class='fnname'>ServiceUnavailable</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.GatewayTimeout' class="method"><span id='GatewayTimeout.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.GatewayTimeout' class='fnname'>GatewayTimeout</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.VersionNotSupported' class="method"><span id='VersionNotSupported.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.VersionNotSupported' class='fnname'>VersionNotSupported</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.VariantAlsoNegotiates' class="method"><span id='VariantAlsoNegotiates.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.VariantAlsoNegotiates' class='fnname'>VariantAlsoNegotiates</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.InsufficientStorage' class="method"><span id='InsufficientStorage.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.InsufficientStorage' class='fnname'>InsufficientStorage</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <h4 id='method.LoopDetected' class="method"><span id='LoopDetected.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.LoopDetected' class='fnname'>LoopDetected</a>() -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpcodes.rs.html#9-11'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+    </div>
+    <h3 id='impl-1' class='impl'><span class='in-band'><table class='table-display'>
+          <tbody>
+            <tr>
+              <td><code>impl <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                  href='#impl-1' class='anchor'></a></span></td>
+      <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#40-300'
+            title='goto source code'>[src]</a></span></td>
+      </tr>
+      </tbody>
+      </table>
+    </h3>
+    <div class='impl-items'>
+      <h4 id='method.build' class="method"><span id='build.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.build' class='fnname'>build</a>(status: <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a>) -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#53-55'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Create http response builder with specific status.</p>
+      </div>
+      <h4 id='method.build_from' class="method"><span id='build_from.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.build_from' class='fnname'>build_from</a>&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a>&gt;&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;source: T<br>) -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#59-61'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Create http response builder</p>
+      </div>
+      <h4 id='method.new' class="method"><span id='new.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.new' class='fnname'>new</a>(status: <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a>) -&gt; <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#65-67'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Constructs a response</p>
+      </div>
+      <h4 id='method.with_body' class="method"><span id='with_body.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.with_body' class='fnname'>with_body</a>&lt;B:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a>&gt;&gt;(status: <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a>, body: B) -&gt; <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#71-73'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Constructs a response with body</p>
+      </div>
+      <h4 id='method.from_error' class="method"><span id='from_error.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.from_error' class='fnname'>from_error</a>(error: <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>) -&gt; <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#77-81'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Constructs an error response</p>
+      </div>
+      <h4 id='method.into_builder' class="method"><span id='into_builder.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.into_builder' class='fnname'>into_builder</a>(self) -&gt; <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#85-104'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Convert <code>HttpResponse</code> to a <code>HttpResponseBuilder</code></p>
+      </div>
+      <h4 id='method.error' class="method"><span id='error.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.error' class='fnname'>error</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt;</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#108-110'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>The source <code>error</code> for this response</p>
+      </div>
+      <h4 id='method.version' class="method"><span id='version.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.version' class='fnname'>version</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../actix_web/http/struct.Version.html" title="struct actix_web::http::Version">Version</a>&gt;</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#114-116'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get the HTTP version of this response</p>
+      </div>
+      <h4 id='method.headers' class="method"><span id='headers.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.headers' class='fnname'>headers</a>(&amp;self) -&gt; &amp;<a class="struct" href="../actix_web/http/header/struct.HeaderMap.html" title="struct actix_web::http::header::HeaderMap">HeaderMap</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#120-122'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get the headers from the response</p>
+      </div>
+      <h4 id='method.headers_mut' class="method"><span id='headers_mut.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.headers_mut' class='fnname'>headers_mut</a>(&amp;mut self) -&gt; &amp;mut <a class="struct" href="../actix_web/http/header/struct.HeaderMap.html" title="struct actix_web::http::header::HeaderMap">HeaderMap</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#126-128'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get a mutable reference to the headers</p>
+      </div>
+      <h4 id='method.cookies' class="method"><span id='cookies.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.cookies' class='fnname'>cookies</a>(&amp;self) -&gt; CookieIter</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#132-136'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get an iterator for the cookies set by this response</p>
+      </div>
+      <h4 id='method.add_cookie' class="method"><span id='add_cookie.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.add_cookie' class='fnname'>add_cookie</a>(&amp;mut self, cookie: &amp;<a class="struct" href="../actix_web/http/struct.Cookie.html" title="struct actix_web::http::Cookie">Cookie</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>, <a class="struct" href="https://docs.rs/http/0.1.7/http/error/struct.Error.html" title="struct http::error::Error">HttpError</a>&gt;</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#140-147'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Add a cookie to this response</p>
+      </div>
+      <h4 id='method.del_cookie' class="method"><span id='del_cookie.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.del_cookie' class='fnname'>del_cookie</a>(&amp;mut self, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#152-174'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Remove all cookies with the given name from this response. Returns the number of cookies removed.</p>
+      </div>
+      <h4 id='method.status' class="method"><span id='status.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.status' class='fnname'>status</a>(&amp;self) -&gt; <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#178-180'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get the response status code</p>
+      </div>
+      <h4 id='method.status_mut' class="method"><span id='status_mut.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.status_mut' class='fnname'>status_mut</a>(&amp;mut self) -&gt; &amp;mut <a class="struct" href="../actix_web/http/struct.StatusCode.html" title="struct actix_web::http::StatusCode">StatusCode</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#184-186'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Set the <code>StatusCode</code> for this response</p>
+      </div>
+      <h4 id='method.reason' class="method"><span id='reason.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.reason' class='fnname'>reason</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#190-199'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get custom reason for the response</p>
+      </div>
+      <h4 id='method.set_reason' class="method">
+        <div class="important-traits">
+          <div class='tooltip'>ⓘ<span class='tooltiptext'>Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a
+                mut </a>R</span></div>
+          <div class="content hidden">
+            <h3 class="important">Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a
+                mut </a>R</h3><code class="content"><span class="where fmt-newline">impl&lt;'a, R&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, W&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>W <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, I&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>I <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;I: <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">    type <a href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item' class="type">Item</a> = &lt;I as <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item" title="type core::iter::iterator::Iterator::Item">Item</a>;</span></code></div>
+        </div><span id='set_reason.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.set_reason' class='fnname'>set_reason</a>(&amp;mut self, reason: &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>Self</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#203-206'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Set the custom reason for the response</p>
+      </div>
+      <h4 id='method.set_connection_type' class="method">
+        <div class="important-traits">
+          <div class='tooltip'>ⓘ<span class='tooltiptext'>Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a
+                mut </a>R</span></div>
+          <div class="content hidden">
+            <h3 class="important">Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a
+                mut </a>R</h3><code class="content"><span class="where fmt-newline">impl&lt;'a, R&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, W&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>W <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, I&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>I <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;I: <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">    type <a href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item' class="type">Item</a> = &lt;I as <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item" title="type core::iter::iterator::Iterator::Item">Item</a>;</span></code></div>
+        </div><span id='set_connection_type.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.set_connection_type' class='fnname'>set_connection_type</a>(&amp;mut self, conn: <a class="enum" href="../actix_web/http/enum.ConnectionType.html" title="enum actix_web::http::ConnectionType">ConnectionType</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>Self</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#209-212'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Set connection type</p>
+      </div>
+      <h4 id='method.upgrade' class="method"><span id='upgrade.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.upgrade' class='fnname'>upgrade</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#216-218'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Connection upgrade status</p>
+      </div>
+      <h4 id='method.keep_alive' class="method"><span id='keep_alive.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.keep_alive' class='fnname'>keep_alive</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>&gt;</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#221-230'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Keep-alive status for this connection</p>
+      </div>
+      <h4 id='method.chunked' class="method"><span id='chunked.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.chunked' class='fnname'>chunked</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>&gt;</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#234-236'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>is chunked encoding enabled</p>
+      </div>
+      <h4 id='method.content_encoding' class="method"><span id='content_encoding.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.content_encoding' class='fnname'>content_encoding</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="../actix_web/http/enum.ContentEncoding.html" title="enum actix_web::http::ContentEncoding">ContentEncoding</a>&gt;</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#240-242'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Content encoding</p>
+      </div>
+      <h4 id='method.set_content_encoding' class="method">
+        <div class="important-traits">
+          <div class='tooltip'>ⓘ<span class='tooltiptext'>Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a
+                mut </a>R</span></div>
+          <div class="content hidden">
+            <h3 class="important">Important traits for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a
+                mut </a>R</h3><code class="content"><span class="where fmt-newline">impl&lt;'a, R&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>R <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, W&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>W <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">impl&lt;'a, I&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> for <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>I <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;I: <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a> + ?<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></span><span class="where fmt-newline">    type <a href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item' class="type">Item</a> = &lt;I as <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html" title="trait core::iter::iterator::Iterator">Iterator</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html#associatedtype.Item" title="type core::iter::iterator::Iterator::Item">Item</a>;</span></code></div>
+        </div><span id='set_content_encoding.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.set_content_encoding' class='fnname'>set_content_encoding</a>(&amp;mut self, enc: <a class="enum" href="../actix_web/http/enum.ContentEncoding.html" title="enum actix_web::http::ContentEncoding">ContentEncoding</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>Self</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#245-248'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Set content encoding</p>
+      </div>
+      <h4 id='method.body' class="method"><span id='body.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.body' class='fnname'>body</a>(&amp;self) -&gt; &amp;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#252-254'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get body os this response</p>
+      </div>
+      <h4 id='method.set_body' class="method"><span id='set_body.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.set_body' class='fnname'>set_body</a>&lt;B:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a>&gt;&gt;(&amp;mut self, body: B)</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#257-259'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Set a body</p>
+      </div>
+      <h4 id='method.replace_body' class="method"><span id='replace_body.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.replace_body' class='fnname'>replace_body</a>&lt;B:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a>&gt;&gt;(&amp;mut self, body: B) -&gt; <a class="enum" href="../actix_web/enum.Body.html" title="enum actix_web::Body">Body</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#262-264'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Set a body and return previous body value</p>
+      </div>
+      <h4 id='method.response_size' class="method"><span id='response_size.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.response_size' class='fnname'>response_size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#267-269'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Size of response in bytes, excluding HTTP headers</p>
+      </div>
+      <h4 id='method.write_buffer_capacity' class="method"><span id='write_buffer_capacity.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.write_buffer_capacity' class='fnname'>write_buffer_capacity</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#277-279'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Get write buffer capacity</p>
+      </div>
+      <h4 id='method.set_write_buffer_capacity' class="method"><span id='set_write_buffer_capacity.v' class='invisible'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>pub fn <a href='#method.set_write_buffer_capacity' class='fnname'>set_write_buffer_capacity</a>(&amp;mut self, cap: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>)</code></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#282-284'
+              title='goto source code'>[src]</a></td>
+        </tr>
+        </tbody>
+        </table></span></h4>
+      <div class='docblock'>
+        <p>Set write buffer capacity</p>
+      </div>
+    </div>
+    <h2 id='implementations' class='small-section-header'>
+      Trait Implementations<a href='#implementations' class='anchor'></a>
+    </h2>
+    <div id='implementations-list'>
+      <h3 id='impl-Responder' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="../actix_web/trait.Responder.html" title="trait actix_web::Responder">Responder</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-Responder' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/handler.rs.html#302-312'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='associatedtype.Item' class="type"><span id='Item.t' class='invisible'><code>type <a href='../actix_web/trait.Responder.html#associatedtype.Item' class="type">Item</a> = <a class="struct" href="../actix_web/dev/struct.AsyncResult.html" title="struct actix_web::dev::AsyncResult">AsyncResult</a>&lt;<a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a>&gt;</code></span></h4>
+        <div class='docblock'>
+          <p>The associated item which can be returned.</p>
+        </div>
+        <h4 id='associatedtype.Error' class="type"><span id='Error.t' class='invisible'><code>type <a href='../actix_web/trait.Responder.html#associatedtype.Error' class="type">Error</a> = <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a></code></span></h4>
+        <div class='docblock'>
+          <p>The associated error which can be returned.</p>
+        </div>
+        <h4 id='method.respond_to' class="method"><span id='respond_to.v' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='../actix_web/trait.Responder.html#tymethod.respond_to' class='fnname'>respond_to</a>&lt;S&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;_: &amp;<a class="struct" href="../actix_web/struct.HttpRequest.html" title="struct actix_web::HttpRequest">HttpRequest</a>&lt;S&gt;<br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../actix_web/dev/struct.AsyncResult.html" title="struct actix_web::dev::AsyncResult">AsyncResult</a>&lt;<a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a>&gt;, <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt;</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/handler.rs.html#307-311'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Convert itself to <code>AsyncResult</code> or <code>Error</code>.</p>
+        </div>
+      </div>
+      <h3 id='impl-Debug' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-Debug' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#302-318'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#303-317'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read
+              more</a></p>
+        </div>
+      </div>
+      <h3 id='impl-From%3CResult%3CI%2C%20E%3E%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl&lt;I:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a>&gt;, E:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt;&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;I, E&gt;&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3CResult%3CI%2C%20E%3E%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#702-709'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='docblock'>
+        <p>Helper converters</p>
+      </div>
+      <div class='impl-items'>
+        <h4 id='method.from' class="method"><span id='from.v' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(res: <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;I, E&gt;) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#703-708'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3CHttpResponseBuilder%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3CHttpResponseBuilder%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#711-715'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.from-1' class="method"><span id='from.v-1' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(builder: <a class="struct" href="../actix_web/dev/struct.HttpResponseBuilder.html" title="struct actix_web::dev::HttpResponseBuilder">HttpResponseBuilder</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#712-714'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3C%26%27static%20str%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;&amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3C%26%27static%20str%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#727-733'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.from-2' class="method"><span id='from.v-2' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#728-732'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3C%26%27static%20%5Bu8%5D%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;'static [</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3C%26%27static%20%5Bu8%5D%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#747-753'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.from-3' class="method"><span id='from.v-3' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;'static [</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#748-752'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3CString%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3CString%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#767-773'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.from-4' class="method"><span id='from.v-4' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#768-772'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3C%26%27a%20String%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;&amp;'a <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3C%26%27a%20String%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#787-793'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.from-5' class="method"><span id='from.v-5' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: &amp;'a <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#788-792'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3CBytes%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.Bytes.html" title="struct bytes::bytes::Bytes">Bytes</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3CBytes%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#807-813'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.from-6' class="method"><span id='from.v-6' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.Bytes.html" title="struct bytes::bytes::Bytes">Bytes</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#808-812'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3CBytesMut%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.BytesMut.html" title="struct bytes::bytes::BytesMut">BytesMut</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3CBytesMut%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#827-833'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'>
+        <h4 id='method.from-7' class="method"><span id='from.v-7' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(val: <a class="struct" href="https://docs.rs/bytes/0.4.8/bytes/bytes/struct.BytesMut.html" title="struct bytes::bytes::BytesMut">BytesMut</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/httpresponse.rs.html#828-832'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+      <h3 id='impl-From%3CError%3E' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>&gt; for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-From%3CError%3E' class='anchor'></a></span></td>
+        <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/error.rs.html#172-176'
+              title='goto source code'>[src]</a></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='docblock'>
+        <p>Convert <code>Error</code> to a <code>HttpResponse</code> instance</p>
+      </div>
+      <div class='impl-items'>
+        <h4 id='method.from-8' class="method"><span id='from.v-8' class='invisible'><table class='table-display'>
+              <tbody>
+                <tr>
+                  <td><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(err: <a class="struct" href="../actix_web/error/struct.Error.html" title="struct actix_web::error::Error">Error</a>) -&gt; Self</code></span></td>
+          <td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/actix_web/error.rs.html#173-175'
+                title='goto source code'>[src]</a></td>
+          </tr>
+          </tbody>
+          </table></span></h4>
+        <div class='docblock'>
+          <p>Performs the conversion.</p>
+        </div>
+      </div>
+    </div>
+    <h2 id='synthetic-implementations' class='small-section-header'>
+      Auto Trait Implementations<a href='#synthetic-implementations' class='anchor'></a>
+    </h2>
+    <div id='synthetic-implementations-list'>
+      <h3 id='impl-Send' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl !<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-Send' class='anchor'></a></span></td>
+        <td><span class='out-of-band'></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'></div>
+      <h3 id='impl-Sync' class='impl'><span class='in-band'><table class='table-display'>
+            <tbody>
+              <tr>
+                <td><code>impl !<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> for <a class="struct" href="../actix_web/struct.HttpResponse.html" title="struct actix_web::HttpResponse">HttpResponse</a></code><a
+                    href='#impl-Sync' class='anchor'></a></span></td>
+        <td><span class='out-of-band'></span></td>
+        </tr>
+        </tbody>
+        </table>
+      </h3>
+      <div class='impl-items'></div>
+    </div>
+  </section>
+  <section id="search" class="content hidden"></section>
+  <section class="footer"></section>
+  <aside id="help" class="hidden">
+    <div>
+      <h1 class="hidden">Help</h1>
+      <div class="shortcuts">
+        <h2>Keyboard Shortcuts</h2>
+        <dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move
+            up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch
+            tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse
+            all sections</dd>
+        </dl>
+      </div>
+      <div class="infos">
+        <h2>Search Tricks</h2>
+        <p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p>
+        <p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>,
+          <code>type</code>, <code>macro</code>, and <code>const</code>.</p>
+        <p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p>
+        <p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p>
+      </div>
+    </div>
+  </aside>
+  <script>window.rootPath = "../"; window.currentCrate = "actix_web";</script>
+  <script src="../aliases.js"></script>
+  <script src="../main.js"></script>
+  <script defer src="../search-index.js"></script>
+</body>
+
+</html>
