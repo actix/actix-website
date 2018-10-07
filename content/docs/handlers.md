@@ -77,6 +77,14 @@ impl<S> Handler<S> for MyHandler {
         HttpResponse::Ok().into()
     }
 }
+
+fn main(){
+    server::new(|| App::new()
+                .resource("/", |r| r.h(MyHandler(Cell::new(0)))))  //use r.h() to bind handler, not the r.f()
+    .bind("127.0.0.1:8080")
+    .unwrap()
+    .run();
+}
 ```
 
 Although this handler will work, `self.0` will be different depending on the number of threads and
