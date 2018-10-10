@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["FramedWrite","Wrapper for `AsyncWrite` and `Encoder` types"],["Writer","Wrapper for `AsyncWrite` types"]],"trait":[["WriteHandler","Write handler"]]});
