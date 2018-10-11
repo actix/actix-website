@@ -33,7 +33,7 @@ for the same path, in that case, multiple routes register for the same resource 
 {{< include-example example="url-dispatch" section="main" >}}
 
 While *App::route()* provides simple way of registering routes, to access
-complete resource configuration, different method has to be used.
+complete resource configuration, a different method has to be used.
 The [*App::resource()*](../../actix-web/actix_web/struct.App.html#method.resource) method
 adds a single resource to application routing table. This method accepts a *path pattern*
 and a resource configuration function.
