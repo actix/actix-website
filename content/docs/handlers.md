@@ -278,7 +278,7 @@ use actix_web::{Either, Error, HttpResponse};
 
 type RegisterResult = Either<HttpResponse, Box<Future<Item=HttpResponse, Error=Error>>>;
 
-fn index(req: &HttpRequest) -> impl Responder {
+fn index(req: &HttpRequest) -> RegisterResult {
     if is_a_variant() { // <- choose variant A
         Either::A(
             HttpResponse::BadRequest().body("Bad data"))
