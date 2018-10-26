@@ -15,7 +15,7 @@ Then, get the website running locally:
 
 ```sh
 git clone https://github.com/mitsuhiko/actix-website
-cd website
+cd actix-website
 hugo server
 ```
 
