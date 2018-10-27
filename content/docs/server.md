@@ -18,7 +18,7 @@ To bind to a specific socket address,
 must be used, and it may be called multiple times. To bind ssl socket,
 [`bind_ssl()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_ssl)
 or [`bind_tls()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_tls)
-should be used. To start the http server, one of the start methods.
+should be used. To start the http server, use one of the start methods.
 
 - use [`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.start)
 for a server
