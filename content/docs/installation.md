@@ -18,7 +18,7 @@ guide will assume that you actually run Rust 1.26 or later.
 
 # Installing `actix-web`
 
-Thank's to Rust's `cargo` package manger you won't need to explicitly install
+Thank's to Rust's `cargo` package manager you won't need to explicitly install
 `actix-web`.  Just depend on it and you're ready to go.  For the unlikely
 case that you want to use the development version of actix-web you can
 depend on the git repository directly.
