@@ -352,8 +352,8 @@ for URL generation purposes only and are never considered for matching at reques
 
 By normalizing it means:
 
-* Add a trailing slash to the path.
-* Double slashes are replaced by one.
+* To add a trailing slash to the path.
+* To replace multiple slashes with one.
 
 The handler returns as soon as it finds a path that resolves
 correctly. The order if all enable is 1) merge, 2) both merge and append
