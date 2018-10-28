@@ -356,7 +356,7 @@ By normalizing it means:
 * Double slashes are replaced by one.
 
 The handler returns as soon as it finds a path that resolves
-correctly. The order if all enable is 1) merge, 2) both merge and append
+correctly. The order of normalization conditions, if all are enabled, is 1) merge, 2) both merge and append
 and 3) append. If the path resolves with
 at least one of those conditions, it will redirect to the new path.
 
