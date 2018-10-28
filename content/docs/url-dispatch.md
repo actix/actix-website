@@ -20,9 +20,9 @@ a particular handler object is invoked.
 Resource configuration is the act of adding a new resources to an application.
 A resource has a name, which acts as an identifier to be used for URL generation.
 The name also allows developers to add routes to existing resources.
-A resource also has a pattern, meant to match against the *PATH* portion of a *URL*.
-It does not match against the *QUERY* portion (the portion following the scheme and
-port, e.g., */foo/bar* in the *URL* *http://localhost:8080/foo/bar?q=value*).
+A resource also has a pattern, meant to match against the *PATH* portion of a *URL* (the portion following the scheme and
+port, e.g. */foo/bar* in the *URL* *http://localhost:8080/foo/bar?q=value*).
+It does not match against the *QUERY* portion (the portion that follows *?*, e.g. *q=value* in *http://localhost:8080/foo/bar?q=value*).
 
 The [*App::route()*](../../actix-web/actix_web/struct.App.html#method.route) method provides
 simple way of registering routes. This method adds a single route to application
