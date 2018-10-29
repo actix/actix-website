@@ -81,9 +81,10 @@ use futures::{Future, Stream};
 struct MyObj {name: String, number: i32}
 
 fn index(req: &HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> {
-   // `concat2` will asynchronously read each chunk of the request body and
-   // return a single, concatenated, chunk
-   req.concat2()
+   req.payload()
+      // `concat2` will asynchronously read each chunk of the request body and
+      // return a single, concatenated, chunk
+      .concat2()
       // `Future::from_err` acts like `?` in that it coerces the error type from
       // the future into the final error type
       .from_err()
