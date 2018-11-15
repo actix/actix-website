@@ -118,10 +118,10 @@ fn main() {
             App::new()
                 .resource("/", move |r| r.h(MyHandler(cloned)))
         })
-        .bind("127.0.0.1:8088").unwrap()
+        .bind("127.0.0.1:8080").unwrap()
         .start();
 
-    println!("Started http server: 127.0.0.1:8088");
+    println!("Started http server: 127.0.0.1:8080");
     let _ = sys.run();
 }
 ```
@@ -175,10 +175,10 @@ fn main() {
     server::new(
         || App::new()
             .resource("/", |r| r.method(http::Method::GET).f(index)))
-        .bind("127.0.0.1:8088").unwrap()
+        .bind("127.0.0.1:8080").unwrap()
         .start();
 
-    println!("Started http server: 127.0.0.1:8088");
+    println!("Started http server: 127.0.0.1:8080");
     let _ = sys.run();
 }
 ```

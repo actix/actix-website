@@ -61,7 +61,7 @@ fn main() {
     server = if let Some(l) = listenfd.take_tcp_listener(0).unwrap() {
         server.listen(l)
     } else {
-        server.bind("127.0.0.1:3000").unwrap()
+        server.bind("127.0.0.1:8080").unwrap()
     };
 
     server.run();
@@ -73,5 +73,5 @@ fn main() {
 To now run the development server invoke this command:
 
 ```
-systemfd --no-pid -s http::3000 -- cargo watch -x run
+systemfd --no-pid -s http::8080 -- cargo watch -x run
 ```

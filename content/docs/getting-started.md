@@ -44,7 +44,7 @@ function is shortcut for `HttpServer::new`:
 {{< include-example example="getting-started" section="main" >}}
 
 That's it! Now, compile and run the program with `cargo run`.
-Head over to ``http://localhost:8088/`` to see the results.
+Head over to ``http://localhost:8080/`` to see the results.
 
 If you want you can have an automatic reloading server during development
 that recompiles on demand.  To see how this can be accomplished have a look
