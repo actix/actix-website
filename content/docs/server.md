@@ -119,7 +119,7 @@ You can change this parameter with the
 You can send a stop message to the server with the server address and specify if you want
 graceful shutdown or not. The
 [`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.start)
-methods returns address of the server.
+method returns address of the server.
 
 `HttpServer` handles several OS signals. *CTRL-C* is available on all OSs,
 other signals are available on unix systems.
