@@ -14,6 +14,7 @@ The following program changes have been known to optimize the performance of act
 
 ## actix
 * [API] Replace usage of do_send() with an async equivalent such as send().
+* [API] Remove Futures chained following `send().into_actor(self)` from hot call sites as the Tokio event loop becomes overwhelmed.
 * [ARCHITECTURE] Move high traffic (sending/receiving messages) actors into their own Arbiter. (thread)
 * [DEBUG MODE] A panic with the message "Use Self::Context::notify() instead of direct use of address" can be generated under high load in [debug mode](https://github.com/actix/actix/blob/f4319ae1946233e7054091b281b95c6fa08081c1/src/mailbox.rs#L103).
 
