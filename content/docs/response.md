@@ -71,6 +71,28 @@ fn index(req: HttpRequest) -> HttpResponse {
 }
 ```
 
+When dealing with an already compressed body (for example when serving assets),
+set the content encoding to `Identity` to avoid compressing the already compressed 
+data and set the `content-encoding` header manually:
+
+```rust
+use actix_web::{HttpRequest, HttpResponse, http::ContentEncoding};
+
+static HELLO_WORLD: &[u8] = &[
+    0x1f,0x8b,0x08,0x00,0xa2,0x30,0x10,0x5c,
+    0x00,0x03,0xcb,0x48,0xcd,0xc9,0xc9,0x57,
+    0x28,0xcf,0x2f,0xca,0x49,0xe1,0x02,0x00,
+    0x2d,0x3b,0x08,0xaf,0x0c,0x00,0x00,0x00
+];
+
+pub fn index(req: HttpRequest) -> HttpResponse {
+    HttpResponse::Ok()
+        .content_encoding(ContentEncoding::Identity)
+        .header("content-encoding", "gzip")
+        .body(HELLO_WORLD)
+}
+```
+
 Also it is possible to set default content encoding on application level, by
 default `ContentEncoding::Auto` is used, which implies automatic content compression
 negotiation.
