@@ -44,7 +44,7 @@ address of the started http server. It accepts several messages:
 
 ## Multi-threading
 
-`HttpServer` automatically starts an number of http workers, by default
+`HttpServer` automatically starts a number of http workers, by default
 this number is equal to number of logical CPUs in the system. This number
 can be overridden with the
 [`HttpServer::workers()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.workers) method.
