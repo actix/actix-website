@@ -29,7 +29,7 @@ use sentry_actix::SentryMiddleware;
 use std::env;
 
 fn main() {
-    sentry::init("SENTRY_DSN_GOES_HERE");
+    let _guard = sentry::init("SENTRY_DSN_GOES_HERE");
     env::set_var("RUST_BACKTRACE", "1");
     sentry::integrations::panic::register_panic_handler();
 
