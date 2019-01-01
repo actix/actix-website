@@ -28,7 +28,7 @@ a result immediately or a *future* object.
 The following demonstrates using middleware to add request and response headers:
 
 ```rust
-use http::{header, HttpTryFrom};
+use actix_web::http::{header, HttpTryFrom};
 use actix_web::{App, HttpRequest, HttpResponse, Result};
 use actix_web::middleware::{Middleware, Started, Response};
 
