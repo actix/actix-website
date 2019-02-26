@@ -60,10 +60,11 @@ When the app is initialized it needs to be passed the initial state:
 > **Note**: http server accepts an application factory rather than an application
 > instance. Http server constructs an application instance for each thread, thus application state
 > must be constructed multiple times. If you want to share state between different threads, a
-> shared object should be used, e.g. `Arc`. Application state does not need to be `Send` and `Sync`,
-> but the application factory must be `Send` + `Sync`.
+> shared object should be used, e.g. `Arc`. There is also an [Example](https://github.com/actix/examples/blob/master/state/src/main.rs) use Arc for this. Application state does not need to be `Send` and `Sync`,
+> but the application factory must be `Send` + `Sync`. 
 >
-> To start the previous app, create it into a closure:
+
+To start the previous app, create it into a closure:
 
 {{< include-example example="application" file="state.rs" section="start_app" >}}
 
