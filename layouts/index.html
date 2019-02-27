@@ -137,8 +137,8 @@ fn hello(path: Path<String>) -> impl Responder {
 
 fn main() {
     App::new()
-        .resource("/", |r| r.method(Method::Get).with(index))
-        .resource("/hello/{name}", |r| r.method(Method::Get).with(hello))
+        .resource("/", |r| r.method(Method::GET).with(index))
+        .resource("/hello/{name}", |r| r.method(Method::GET).with(hello))
         .finish();
 }` "rust" "" }}
         </div>
