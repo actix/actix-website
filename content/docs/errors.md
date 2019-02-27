@@ -45,7 +45,7 @@ fn index(req: &HttpRequest) -> io::Result<fs::NamedFile> {
 }
 ```
 
-See [the actix-web API documentation](responseerrorimpls) for a full list of
+See [the actix-web API documentation][responseerrorimpls] for a full list of
 foreign implementations for `ResponseError`.
 
 ## An example of a custom error response
