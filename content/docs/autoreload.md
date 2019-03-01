@@ -58,8 +58,8 @@ fn main() {
             .resource("/", |r| r.f(index))
     });
 
-    server = if let Some(l) = listenfd.take_tcp_listener(0).unwrap() {
-        server.listen(l)
+    server = if let Some(listener) = listenfd.take_tcp_listener(0).unwrap() {
+        server.listen(listener)
     } else {
         server.bind("127.0.0.1:3000").unwrap()
     };
