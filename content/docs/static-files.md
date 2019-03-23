@@ -89,7 +89,7 @@ impl StaticFileConfig for MyConfig {
     }
 }
 
-fn index(req: &HttpRequest) -> Result<NamedFile> {
+fn index(req: &HttpRequest) -> Result<NamedFile<MyConfig>> {
     let path: PathBuf = req.match_info().query("tail")?;
     Ok(NamedFile::open_with_config(path, MyConfig)?)
 }
