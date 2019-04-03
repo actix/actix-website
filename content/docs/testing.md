@@ -63,7 +63,7 @@ use actix_web::{HttpRequest, HttpMessage};
 use actix_web::test::TestServer;
 use std::str;
 
-fn index(req: HttpRequest) -> &'static str {
+fn index(req: &HttpRequest) -> &'static str {
      "Hello world!"
 }
 
@@ -151,17 +151,17 @@ use bytes::Bytes;
 use futures::stream::poll_fn;
 use futures::{Async, Poll, Stream};
 
-use actix_web::{HttpRequest, HttpResponse, Error};
+use actix_web::{Error, HttpMessage, HttpRequest, HttpResponse};
 use actix_web::http::{ContentEncoding, StatusCode};
 use actix_web::test::TestServer;
 
 
-fn sse(_req: HttpRequest) -> HttpResponse {
+fn sse(_req: &HttpRequest) -> HttpResponse {
     let mut counter = 5usize;
     // yields `data: N` where N in [5; 1]
     let server_events = poll_fn(move || -> Poll<Option<Bytes>, Error> {
         if counter == 0 {
-            return Ok(Async::NotReady);
+            return Ok(Async::Ready(None));
         }
         let payload = format!("data: {}\n\n", counter);
         counter -= 1;
@@ -185,12 +185,17 @@ fn main() {
     assert!(response.status().is_success());
 
     // convert ClientResponse to future, start read body and wait first chunk
-    let (bytes, response) = srv.execute(response.into_future()).unwrap();
-    assert_eq!(bytes.unwrap(), Bytes::from("data: 5\n\n"));
-
-    // next chunk
-    let (bytes, _) = srv.execute(response.into_future()).unwrap();
-    assert_eq!(bytes.unwrap(), Bytes::from("data: 4\n\n"));
+    let mut stream = response.payload();
+    loop {
+        match srv.execute(stream.into_future()) {
+            Ok((Some(bytes), remain)) => {
+                println!("{:?}", bytes);
+                stream = remain
+            }
+            Ok((None, _)) => break,
+            Err(_) => panic!(),
+        }
+    }
 }
 ```
 
@@ -205,6 +210,7 @@ result of the future computation.
 The following example demonstrates how to test a websocket handler:
 
 ```rust
+use actix::{Actor, StreamHandler};
 use actix_web::*;
 use futures::Stream;
 
