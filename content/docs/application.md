@@ -102,7 +102,7 @@ You can think of a predicate as a simple function that accepts a *request* objec
 and returns *true* or *false*. Formally, a predicate is any object that implements the
 [`Predicate`](../actix_web/pred/trait.Predicate.html) trait. Actix provides
 several predicates, you can check
-[functions section](../../actix-web/actix_web/pred/index.html#functions) of api docs.
+[functions section](https://actix.rs/api/actix-web/stable/actix_web/pred/index.html) of api docs.
 
 Any of this predicates could be used 
 with [`App::filter()`](../actix_web/struct.App.html#method.filter) method. One of the
