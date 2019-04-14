@@ -44,98 +44,101 @@ fn main() {
 
 # Integration tests
 
-There are several methods for testing your application. Actix provides
-[*TestServer*](../../actix-web/actix_web/test/struct.TestServer.html), which can be used
-to run the application with specific handlers in a real http server.
+For integration testing, Actix provides a way to init the test app via [*init_service*](../../actix-web/actix_web/test/fn.init_service.html).
 
-`TestServer::get()`, `TestServer::post()`, and `TestServer::client()`
-methods can be used to send requests to the test server.
-
-A simple form `TestServer` can be configured to use a handler.
-`TestServer::new` method accepts a configuration function, and the only argument 
-for this function is a *test application* instance.
-
-> Check the [api documentation](../../actix-web/actix_web/test/struct.TestApp.html)
-> for more information.
+Here's an example how to use the method with a test app configuration:
 
 ```rust
-use actix_web::{HttpRequest, HttpMessage};
-use actix_web::test::TestServer;
-use std::str;
-
-fn index(req: &HttpRequest) -> &'static str {
-     "Hello world!"
-}
+use actix_service::Service;
+use actix_web::{test, web, App, HttpResponse, http::StatusCode};
 
 fn main() {
-    // start new test server
-    let mut srv = TestServer::new(|app| app.handler(index));
+    let mut app = test::init_service(
+        App::new()
+            .service(web::resource("/test").to(|| HttpResponse::Ok()))
+    );
 
-    let request = srv.get().finish().unwrap();
-    let response = srv.execute(request.send()).unwrap();
-    assert!(response.status().is_success());
+    // Create request object
+    let req = test::TestRequest::with_uri("/test").to_request();
 
-    let bytes = srv.execute(response.body()).unwrap();
-    let body = str::from_utf8(&bytes).unwrap();
-    assert_eq!(body, "Hello world!");
+    // Execute application
+    let resp = test::block_on(app.call(req)).unwrap();
+    assert_eq!(resp.status(), StatusCode::OK);
 }
 ```
 
-The other option is to use an application factory. In this case, you need to pass the factory
-function the same way as you would for real http server configuration.
+In a real life, what's usually needed is to test an existing application configuration and, preferrably have it defined only once while it can be reused
+both in tests and in production.
+
+Actix provides a way to do this with the [configure](../../actix-web/actix_web/struct.App.html#method.configure) method of an `App` struct.
+
+First, define the method that will be configuring an `App` in the place that can be exported later in both tests and the production code:
 
 ```rust
-use actix_web::{http, test, App, HttpRequest, HttpResponse};
-
-fn index(req: &HttpRequest) -> HttpResponse {
-     HttpResponse::Ok().into()
-}
-
-/// This function get called by http server.
-fn create_app() -> App {
-    App::new()
-        .resource("/test", |r| r.h(index))
-}
-
-fn main() {
-    let mut srv = test::TestServer::with_factory(create_app);
-
-    let request = srv.client(
-         http::Method::GET, "/test").finish().unwrap();
-    let response = srv.execute(request.send()).unwrap();
-
-    assert!(response.status().is_success());
+// file src/lib.rs
+pub fn config_app<P>(cfg: &mut web::RouterConfig<P>)
+    where P: Stream<Item=Bytes, Error=error::PayloadError> + 'static {
+    cfg.service(web::resource("/test").to(|| HttpResponse::Ok()
+        .content_type("test/plain").body("This is a test response")));
 }
 ```
 
-If you need more complex application configuration, use the `TestServer::build_with_state()`
-method. For example, you may need to initialize application state or start `SyncActor`'s for diesel
-interation. This method accepts a closure that constructs the application state,
-and it runs when the actix system is configured. Thus, you can initialize any additional actors.
+Then use this method in the production code:
 
 ```rust
+// file src/main.rs
+use actix_web::{App, HttpServer};
+
+use my_test_app::config_app;
+
+fn main() -> std::io::Result<()> {
+    let sys = actix_rt::System::new("my_test_app");
+    HttpServer::new(|| App::new().configure(config_app))
+        .bind("127.0.0.1:8888")?
+        .start();
+
+    println!("Starting http server: 127.0.0.1:8888");
+    sys.run()
+}
+```
+
+and the testing code:
+
+```rust
+// file tests/integration-tests.rs
+
+use actix_service::Service;
+use actix_web::{App, http::StatusCode, test};
+use actix_web::dev::{Body, ResponseBody, ServiceResponse};
+
+use my_test_app::config_app;
+
 #[test]
-fn test() {
-    let srv = TestServer::build_with_state(|| {
-        // we can start diesel actors
-        let addr = SyncArbiter::start(3, || {
-            DbExecutor(SqliteConnection::establish("test.db").unwrap())
-        });
-        // then we can construct custom state, or it could be `()`
-        MyState{addr: addr}
-   })
+fn integration_test() {
+    let mut app = test::init_service(App::new().configure(config_app));
+    let request = test::TestRequest::with_uri("/test").to_request();
 
-   // register server handlers and start test server
-   .start(|app| {
-        app.resource(
-            "/{username}/index.html", |r| r.with(
-                |p: Path<PParam>| format!("Welcome {}!", p.username)));
-    });
-    
-    // now we can run our test code
-);
+    let response = test::block_on(app.call(request)).unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
+
+    let response_body = extract_response_body(&response).expect("Should have the response body");
+    assert_eq!(response_body, "This is a test response");
+}
+
+fn extract_response_body(response: &ServiceResponse<Body>) -> Option<&str> {
+    fn process_body(body: &Body) -> Option<&str> {
+        match body {
+            Body::Bytes(bytes) => return Some(std::str::from_utf8(bytes.as_ref()).unwrap()),
+            unexpected => panic!("Unexpected response: {:?}", unexpected)
+        }
+    }
+
+    match response.response().body() {
+        ResponseBody::Body(body) => process_body(body),
+        ResponseBody::Other(body) => process_body(body)
+    }
+}
 ```
-
 
 # Stream response tests
 
