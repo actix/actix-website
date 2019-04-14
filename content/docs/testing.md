@@ -76,8 +76,9 @@ First, define the method that will be configuring an `App` in the place that can
 
 ```rust
 // file src/lib.rs
-pub fn config_app<P>(cfg: &mut web::RouterConfig<P>)
-    where P: Stream<Item=Bytes, Error=error::PayloadError> + 'static {
+use actix_web::{HttpResponse, web};
+
+pub fn config_app(cfg: &mut web::RouterConfig) {
     cfg.service(web::resource("/test").to(|| HttpResponse::Ok()
         .content_type("test/plain").body("This is a test response")));
 }
