@@ -78,7 +78,7 @@ First, define the method that will be configuring an `App` in the place that can
 // file src/lib.rs
 use actix_web::{HttpResponse, web};
 
-pub fn config_app(cfg: &mut web::RouterConfig) {
+pub fn config_app(cfg: &mut web::ServiceConfig) {
     cfg.service(web::resource("/test").to(|| HttpResponse::Ok()
         .content_type("test/plain").body("This is a test response")));
 }
@@ -122,22 +122,9 @@ fn integration_test() {
     let response = test::block_on(app.call(request)).unwrap();
     assert_eq!(response.status(), StatusCode::OK);
 
-    let response_body = extract_response_body(&response).expect("Should have the response body");
+    let response_body = String::from_utf8(test::read_body(response).to_vec())
+        .expect("Failed to read response bytes into string");
     assert_eq!(response_body, "This is a test response");
-}
-
-fn extract_response_body(response: &ServiceResponse<Body>) -> Option<&str> {
-    fn process_body(body: &Body) -> Option<&str> {
-        match body {
-            Body::Bytes(bytes) => return Some(std::str::from_utf8(bytes.as_ref()).unwrap()),
-            unexpected => panic!("Unexpected response: {:?}", unexpected)
-        }
-    }
-
-    match response.response().body() {
-        ResponseBody::Body(body) => process_body(body),
-        ResponseBody::Other(body) => process_body(body)
-    }
 }
 ```
 
