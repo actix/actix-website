@@ -50,12 +50,12 @@ fn main() {
 The parameter is the base directory. By default files listing for sub-directories
 is disabled. Attempt to load directory listing will return *404 Not Found* response.
 To enable files listing, use
-[*StaticFiles::show_files_listing()*](../../actix-web/actix_web/fs/struct.StaticFiles.html#method.show_files_listing)
+[*StaticFiles::show_files_listing()*](../../api/actix-web/stable/actix_web/fs/struct.StaticFiles.html#method.show_files_listing)
 method.
 
 Instead of showing files listing for directory, it is possible to redirect
 to a specific index file. Use the
-[*StaticFiles::index_file()*](../../actix-web/actix_web/fs/struct.StaticFiles.html#method.index_file)
+[*StaticFiles::index_file()*](../../api/actix-web/stable/actix_web/fs/struct.StaticFiles.html#method.index_file)
 method to configure this redirect.
 
 # Configuration
