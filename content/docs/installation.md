@@ -12,9 +12,9 @@ installation.  The [official rust
 guide](https://doc.rust-lang.org/book/second-edition/ch01-01-installation.html)
 has a wonderful section on getting started.
 
-We currently require at least Rust 1.24 so make sure you run `rustup update`
+We currently require at least Rust 1.34 so make sure you run `rustup update`
 to have the latest and greatest Rust version available.  In particular this
-guide will assume that you actually run Rust 1.26 or later.
+guide will assume that you actually run Rust 1.34 or later.
 
 # Installing `actix-web`
 
