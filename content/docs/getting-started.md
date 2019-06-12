@@ -35,7 +35,6 @@ Filename: `src/main.rs`
 
 {{< include-example example="getting-started" section="setup" >}}
 
-<!-- TODO: Return ->
 Next, create an `Application` instance and register the request handler with
 the application's `resource` on a particular *HTTP method* and *path* and
 after that, the application instance can be used with `HttpServer` to listen
