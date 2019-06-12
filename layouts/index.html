@@ -91,16 +91,18 @@ fn current_temperature(_req: HttpRequest) -> impl Responder {
             your view functions can be synchronous code and still benefit
             from asynchronous IO handling.
           </p>
-          {{ highlight `#[derive(Deserialize)]
+          {{ highlight `#[derive(Deserialize, Serialize)]
 struct Event {
+    id: Option<i32>,
     timestamp: f64,
     kind: String,
     tags: Vec<String>,
 }
-
-fn capture_event(evt: Json<Event>) -> impl Responder {
-    let id = store_event_in_db(evt.timestamp, evt.kind, evt.tags);
-    format!("got event {}", id)
+fn capture_event(evt: web::Json<Event>) -> actix_web::Result<HttpResponse> {
+    let new_event = store_event_in_db(evt.timestamp,
+                                      evt.kind.clone(),
+                                      evt.tags.clone());
+    Ok(HttpResponse::Ok().json(new_event))
 }` "rust" "" }}
         </div>
         <div class="actix-feature" id="forms">
@@ -116,8 +118,11 @@ struct Register {
     country: String,
 }
 
-fn register(data: Form<Register>) -> impl Responder {
-    format!("Hello {} from {}!", data.username, data.country)
+fn register(params: web::Form<Register>) -> actix_web::Result<HttpResponse> {
+    Ok(HttpResponse::Ok().body(format!(
+        "Hello {} from {}!",
+        params.username, params.country
+    )))
 }` "rust" "" }}
         </div>
         <div class="actix-feature" id="routing">
@@ -127,19 +132,18 @@ fn register(data: Form<Register>) -> impl Responder {
             URLs and invoke individual handlers.  For extra flexibility, scopes
             can be used.
           </p>
-          {{ highlight `fn index(req: HttpRequest) -> impl Responder {
-    "Hello from the index page"
+          {{ highlight `fn index(_req: HttpRequest) -> HttpResponse {
+    HttpResponse::Ok().body("Hello from the index page!")
 }
 
-fn hello(path: Path<String>) -> impl Responder {
-    format!("Hello {}!", *path)
+fn hello(path: web::Path<String>) -> HttpResponse {
+    HttpResponse::Ok().body(format!("Hello {}!", &path))
 }
 
 fn main() {
     App::new()
-        .resource("/", |r| r.method(Method::GET).with(index))
-        .resource("/hello/{name}", |r| r.method(Method::GET).with(hello))
-        .finish();
+        .route("/", web::get().to(index))
+        .route("/{name}", web::get().to(hello));
 }` "rust" "" }}
         </div>
       </div>

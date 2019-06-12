@@ -8,10 +8,10 @@ struct Register {
     country: String,
 }
 
-fn index() -> actix_web::Result<HttpResponse> {
-    Ok(HttpResponse::Ok()
+fn index() -> HttpResponse {
+    HttpResponse::Ok()
         .content_type("text/html; charset=utf-8")
-        .body(include_str!("../static/form.html")))
+        .body(include_str!("../static/form.html"))
 }
 
 fn register(params: web::Form<Register>) -> actix_web::Result<HttpResponse> {

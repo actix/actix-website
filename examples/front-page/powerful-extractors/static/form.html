@@ -1,0 +1,36 @@
+<!doctype htmtl>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Forms</title>
+  </head>
+
+  <body>
+    <h3>Submit Json</h3>
+
+    <button onclick="submitJson()">Submit</button>
+
+    <script>
+      function submitJson() {
+        fetch('http://localhost:8000/event', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            timestamp: 12345,
+            kind: "this is a kind",
+            tags: ['tag1', 'tag2', 'tag3'],
+          })
+        })
+          .then(function (res) {
+            return res.text();
+          })
+          .then(function (data) {
+            console.log(data);
+          });
+      }
+    </script>
+  </body>
+</html>
