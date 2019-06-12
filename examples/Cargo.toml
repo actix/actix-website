@@ -1,6 +1,7 @@
 [workspace]
 members = [
   "application",
+  "front-page",
   "getting-started",
   "server",
   "url-dispatch",

@@ -1,0 +1,8 @@
+[workspace]
+members = [
+  "main-example",
+  "flexible-responders",
+  "easy-form-handling",
+  "request-routing",
+  "powerful-extractors",
+]
