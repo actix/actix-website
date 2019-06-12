@@ -5,7 +5,7 @@ workspace = "../"
 
 [dependencies]
 actix = "0.7"
-actix-web = "0.7"
+actix-web = "1.0"
 futures = "0.1"
 openssl = "0.10"
 serde = "1.0"

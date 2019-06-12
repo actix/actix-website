@@ -9,7 +9,7 @@ weight: 110
 Since `actix-web` is a Rust framework you will need Rust to get started with it.
 If you don't have it yet we recommend you use `rustup` to manage your Rust
 installation.  The [official rust
-guide](https://doc.rust-lang.org/book/second-edition/ch01-01-installation.html)
+guide](https://doc.rust-lang.org/book/ch01-01-installation.html)
 has a wonderful section on getting started.
 
 We currently require at least Rust 1.24 so make sure you run `rustup update`
@@ -18,7 +18,7 @@ guide will assume that you actually run Rust 1.26 or later.
 
 # Installing `actix-web`
 
-Thank's to Rust's `cargo` package manager you won't need to explicitly install
+Thanks to Rust's `cargo` package manager you won't need to explicitly install
 `actix-web`.  Just depend on it and you're ready to go.  For the unlikely
 case that you want to use the development version of actix-web you can
 depend on the git repository directly.

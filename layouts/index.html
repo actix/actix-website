@@ -39,23 +39,23 @@
     </div>
     <div class="col-md-8">
       <div class="actix-content">
-          {{ highlight `extern crate actix_web;
-use actix_web::{server, App, HttpRequest, Responder};
+        {{ highlight `use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer};
 
-fn greet(req: &HttpRequest) -> impl Responder {
-    let to = req.match_info().get("name").unwrap_or("World");
-    format!("Hello {}!", to)
+fn greet(req: HttpRequest) -> HttpResponse {
+    let name = req.match_info().get("name").unwrap_or("World");
+    HttpResponse::Ok().body(format!("Hello {}!", &name))
 }
 
 fn main() {
-    server::new(|| {
+    HttpServer::new(|| {
         App::new()
-            .resource("/", |r| r.f(greet))
-            .resource("/{name}", |r| r.f(greet))
+            .service(web::resource("/").to(greet))
+            .service(web::resource("/{name}").to(greet))
     })
     .bind("127.0.0.1:8000")
     .expect("Can not bind to port 8000")
-    .run();
+    .run()
+    .unwrap();
 }` "rust" "" }}
         </div>
       </div>

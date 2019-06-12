@@ -27,6 +27,7 @@ actix-web = "{{< actix-version "actix-web" >}}"
 
 In order to implement a web server, we first need to create a request handler.
 
+<!-- TODO: Handler has been deprecated -->
 A request handler is a function that accepts an `HttpRequest` instance as its only parameter
 and returns a type that can be converted into `HttpResponse`:
 
@@ -34,12 +35,12 @@ Filename: `src/main.rs`
 
 {{< include-example example="getting-started" section="setup" >}}
 
+<!-- TODO: Return ->
 Next, create an `Application` instance and register the request handler with
 the application's `resource` on a particular *HTTP method* and *path* and
 after that, the application instance can be used with `HttpServer` to listen
 for incoming connections. The server accepts a function that should return an
-`HttpHandler` instance.  For simplicity `server::new` could be used, this
-function is shortcut for `HttpServer::new`:
+`HttpResponse`.
 
 {{< include-example example="getting-started" section="main" >}}
 

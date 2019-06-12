@@ -5,6 +5,6 @@ workspace = "../"
 
 [dependencies]
 actix = "0.7"
-actix-web = { version="0.7", features=["alpn"] }
+actix-web = "1.0"
 futures = "0.1"
 openssl = "0.10"
