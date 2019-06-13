@@ -1,22 +1,26 @@
 // <ssl>
-use actix_web::{server, App, HttpRequest, Responder};
+use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
-fn index(req: &HttpRequest) -> impl Responder {
+fn index(_req: HttpRequest) -> impl Responder {
     "Welcome!"
 }
 
-fn main() {
+pub fn main() {
     // load ssl keys
-    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
+    let mut builder =
+        SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder
         .set_private_key_file("key.pem", SslFiletype::PEM)
         .unwrap();
     builder.set_certificate_chain_file("cert.pem").unwrap();
 
-    server::new(|| App::new().resource("/index.html", |r| r.f(index)))
-        .bind_ssl("127.0.0.1:8080", builder)
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind_ssl("127.0.0.1:8088", builder)
         .unwrap()
-        .run();
+        .run()
+        .unwrap();
 }
 // </ssl>
+//
+// sssl rust-tls

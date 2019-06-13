@@ -17,14 +17,11 @@ To bind to a specific socket address,
 [`bind()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind)
 must be used, and it may be called multiple times. To bind ssl socket,
 [`bind_ssl()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_ssl)
-or [`bind_tls()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_tls)
+or [`bind_rustls()`](../../actix-web/1.0.0/actix_web/struct.HttpServer.html#method.bind_rustls)
 should be used. To start the http server, use one of the start methods.
 
 - use [`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.start)
 for a server
-
-`HttpServer` is an actix actor. It must be initialized within a properly
-configured actix system:
 
 {{< include-example example="server" section="main" >}}
 
@@ -59,12 +56,12 @@ is not shared between threads. To share state, `Arc` could be used.
 
 ## SSL
 
-There are two features for ssl server: `tls` and `alpn`. The `tls` feature is
-for `native-tls` integration and `alpn` is for `openssl`.
+There are two features for ssl server: `rust-tls` and `ssl`. The `tls` feature is
+for `rust-tls` integration and `ssl` is for `openssl`.
 
 ```toml
 [dependencies]
-actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["alpn"] }
+actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["ssl"] }
 ```
 
 {{< include-example example="server" file="ssl.rs" section="ssl" >}}
@@ -95,7 +92,7 @@ Actix can wait for requests on a keep-alive connection.
 - `None` or `KeepAlive::Disabled` - disable *keep alive*.
 - `KeepAlive::Tcp(75)` - use `SO_KEEPALIVE` socket option.
 
-{{< include-example example="server" file="ka.rs" section="ka" >}}
+{{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
 
 If the first option is selected, then *keep alive* state is
 calculated based on the response's *connection-type*. By default
@@ -106,7 +103,7 @@ defined by the request's http version.
 
 *Connection type* can be changed with `HttpResponseBuilder::connection_type()` method.
 
-{{< include-example example="server" file="ka_tp.rs" section="example" >}}
+{{< include-example example="server" file="keep_alive_tp.rs" section="example" >}}
 
 ## Graceful shutdown
 

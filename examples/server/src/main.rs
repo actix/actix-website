@@ -1,24 +1,21 @@
-extern crate actix;
-extern crate actix_web;
-extern crate futures;
-extern crate openssl;
-
-mod ka;
-mod ka_tp;
+mod keep_alive;
+mod keep_alive_tp;
 mod signals;
 mod ssl;
 mod workers;
 
 // <main>
-use actix_web::{server::HttpServer, App, HttpResponse};
+use actix_web::{web, App, HttpResponse, HttpServer};
 
 fn main() {
-    let sys = actix::System::new("guide");
+    let sys = actix_rt::System::new("example");
 
-    HttpServer::new(|| App::new().resource("/", |r| r.f(|_| HttpResponse::Ok())))
-        .bind("127.0.0.1:59080")
-        .unwrap()
-        .start();
+    HttpServer::new(|| {
+        App::new().route("/", web::get().to(|| HttpResponse::Ok()))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .start();
 
     let _ = sys.run();
 }
