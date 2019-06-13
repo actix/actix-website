@@ -21,8 +21,8 @@ fn main() {
             .service(web::resource("/").to(hello_world))
             .service(web::resource("/temp").to(current_temperature))
     })
-    .bind("127.0.0.1:8000")
-    .expect("Can not bind to port 8000")
+    .bind("127.0.0.1:8088")
+    .unwrap()
     .run()
     .unwrap();
 }

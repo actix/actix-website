@@ -37,8 +37,8 @@ fn main() {
             .route("/", web::get().to(index))
             .route("/event", web::post().to(capture_event))
     })
-    .bind("127.0.0.1:8000")
-    .expect("Can not bind to port 8000")
+    .bind("127.0.0.1:8088")
+    .unwrap()
     .run()
     .unwrap();
 }

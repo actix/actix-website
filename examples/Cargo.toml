@@ -1,8 +1,12 @@
 [workspace]
 members = [
   "application",
-  "front-page",
+  "easy-form-handling",
+  "flexible-responders",
   "getting-started",
+  "main-example",
+  "powerful-extractors",
+  "request-routing",
   "server",
   "url-dispatch",
 ]

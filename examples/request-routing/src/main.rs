@@ -15,7 +15,7 @@ fn main() {
             .service(web::resource("/").to(index))
             .service(web::resource("/{name}").to(hello))
     })
-    .bind("127.0.0.1:8000")
+    .bind("127.0.0.1:8088")
     .unwrap()
     .run()
     .unwrap();
