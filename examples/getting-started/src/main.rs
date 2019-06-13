@@ -9,8 +9,8 @@ fn index(_req: HttpRequest) -> HttpResponse {
 
 // <main>
 fn main() {
-    HttpServer::new(|| App::new().service(web::resource("/").to(index)))
-        .bind("127.0.0.1:8000")
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind("127.0.0.1:8088")
         .unwrap()
         .run()
         .unwrap();
