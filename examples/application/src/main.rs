@@ -1,36 +1,31 @@
-#![allow(unused)]
-extern crate actix_web;
-use actix_web::{http::Method, server, App, HttpRequest, HttpResponse, Responder};
+#![allow(unused_variables)]
+use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
 mod state;
 mod vh;
 
+#[rustfmt::skip]
 fn make_app() {
+
 // <make_app>
-fn index(req: &HttpRequest) -> impl Responder {
+fn index(_req: HttpRequest) -> impl Responder {
     "Hello world!"
 }
 
 let app = App::new()
-    .prefix("/app")
-    .resource("/index.html", |r| r.method(Method::GET).f(index))
-    .finish()
+    .service(web::scope("/app").route("/index.html", web::get().to(index)));
 // </make_app>
-;
+
 }
 
+#[rustfmt::skip]
 fn run_server() {
 // <run_server>
-let server = server::new(|| {
-    vec![
-        App::new()
-            .prefix("/app1")
-            .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-        App::new()
-            .prefix("/app2")
-            .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-        App::new().resource("/", |r| r.f(|r| HttpResponse::Ok())),
-    ]
+let server = HttpServer::new(|| {
+    App::new()
+        .service(web::scope("/app1").route("/", web::to(|| HttpResponse::Ok())))
+        .service(web::scope("/app2").route("/", web::to(|| HttpResponse::Ok())))
+        .route("/", web::to(|| HttpResponse::Ok()))
 });
 // </run_server>
 }

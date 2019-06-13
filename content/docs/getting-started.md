@@ -27,7 +27,6 @@ actix-web = "{{< actix-version "actix-web" >}}"
 
 In order to implement a web server, we first need to create a request handler.
 
-<!-- TODO: Handler has been deprecated -->
 A request handler is a function that accepts an `HttpRequest` instance as its only parameter
 and returns a type that can be converted into `HttpResponse`:
 

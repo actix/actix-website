@@ -78,35 +78,33 @@ This limitation can easily be overcome with the [App::boxed](https://docs.rs/act
 
 {{< include-example example="application" file="state.rs" section="combine" >}}
 
-## Using an Application Prefix to Compose Applications
+## Using an Application Scope to Compose Applications
 
-The `App::prefix()` method allows to set a specific application prefix.
-This prefix represents a resource prefix that will be prepended to all resource patterns added
+The `web::wcope()` method allows to set a specific application prefix.
+This scope represents a resource prefix that will be prepended to all resource patterns added
 by the resource configuration. This can be used to help mount a set of routes at a different
 location than the included callable's author intended while still maintaining the same
 resource names.
 
 For example:
 
-{{< include-example example="url-dispatch" file="prefix.rs" section="prefix" >}}
+{{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
 
 In the above example, the *show_users* route will have an effective route pattern of
-*/users/show* instead of */show* because the application's prefix argument will be prepended
+*/users/show* instead of */show* because the application's scope argument will be prepended
 to the pattern. The route will then only match if the URL path is */users/show*,
 and when the `HttpRequest.url_for()` function is called with the route name show_users,
 it will generate a URL with that same path.
 
-## Application predicates and virtual hosting
+## Application guards and virtual hosting
 
-You can think of a predicate as a simple function that accepts a *request* object reference
-and returns *true* or *false*. Formally, a predicate is any object that implements the
-[`Predicate`](../actix_web/pred/trait.Predicate.html) trait. Actix provides
-several predicates, you can check
-[functions section](../../actix-web/actix_web/pred/index.html#functions) of api docs.
+You can think of a guard as a simple function that accepts a *request* object reference
+and returns *true* or *false*. Formally, a guard is any object that implements the
+[`Guard`](../actix_web/guard/trait.Guard.html) trait. Actix provides
+several guards, you can check
+[functions section](../../actix-web/actix_web/guard/index.html#functions) of api docs.
 
-Any of this predicates could be used 
-with [`App::filter()`](../actix_web/struct.App.html#method.filter) method. One of the
-provided predicates is [`Host`](../actix_web/pred/fn.Host.html), it can be used
+One of the provided guards is [`Host`](../actix_web/guard/fn.Host.html), it can be used
 as application's filter based on request's host information.
 
 {{< include-example example="application" file="vh.rs" section="vh" >}}

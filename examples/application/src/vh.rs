@@ -1,20 +1,22 @@
 #![allow(unused)]
-use actix_web::{http::Method, pred, server, App, HttpRequest, HttpResponse, Responder};
+use actix_web::{guard, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
 // <vh>
 fn main() {
-    let server = server::new(|| {
-        vec![
-            App::new()
-                .filter(pred::Host("www.rust-lang.org"))
-                .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-            App::new()
-                .filter(pred::Host("users.rust-lang.org"))
-                .resource("/", |r| r.f(|r| HttpResponse::Ok())),
-            App::new().resource("/", |r| r.f(|r| HttpResponse::Ok())),
-        ]
-    });
-
-    server.run();
+    HttpServer::new(|| {
+        App::new()
+            .service(
+                web::scope("/")
+                    .guard(guard::Header("Host", "www.rust-lang.org"))
+                    .route("", web::to(|| HttpResponse::Ok())),
+            )
+            .service(
+                web::scope("/")
+                    .guard(guard::Header("Host", "users.rust-lang.org"))
+                    .route("", web::to(|| HttpResponse::Ok())),
+            )
+            .route("/", web::to(|| HttpResponse::Ok()))
+    })
+    .run();
 }
 // </vh>

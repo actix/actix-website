@@ -391,7 +391,7 @@ resource names.
 
 For example:
 
-{{< include-example example="url-dispatch" file="prefix.rs" section="prefix" >}}
+{{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
 
 In the above example, the *show_users* route will have an effective route pattern of
 */users/show* instead of */show* because the application's prefix argument will be prepended

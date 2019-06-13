@@ -3,7 +3,6 @@ extern crate actix_web;
 extern crate futures;
 extern crate openssl;
 #[macro_use]
-extern crate serde_derive;
 extern crate serde;
 
 mod cfg;
@@ -16,8 +15,8 @@ mod path2;
 mod pbuf;
 mod pred;
 mod pred2;
-mod prefix;
 mod resource;
+mod scope;
 mod scope;
 mod url_ext;
 mod urls;
