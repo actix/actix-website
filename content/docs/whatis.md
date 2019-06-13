@@ -23,5 +23,5 @@ server `actix-web` is powerful enough to provide HTTP 1 and HTTP 2 support as
 well as SSL/TLS.  This makes it useful for building small services ready for
 distribution.
 
-Most importantly: `actix-web` runs on Rust 1.26 or later and it works with
-stable releases.
+Most importantly: `actix-web` runs on Rust {{< rust-version "actix-web" >}} or later
+and it works with stable releases.
