@@ -11,6 +11,12 @@
     <button onclick="submitJson()">Submit</button>
 
     <script>
+      let payload = {
+        timestamp: 12345,
+        kind: "this is a kind",
+        tags: ['tag1', 'tag2', 'tag3'],
+      }
+
       function submitJson() {
         fetch('http://localhost:8000/event', {
           method: 'POST',
@@ -18,17 +24,18 @@
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            timestamp: 12345,
-            kind: "this is a kind",
-            tags: ['tag1', 'tag2', 'tag3'],
-          })
+          body: JSON.stringify(payload)
         })
           .then(function (res) {
-            return res.text();
+            return res.json();
           })
           .then(function (data) {
-            console.log(data);
+            let expected = {
+              ...payload,
+              id: 1
+            };
+            console.log("expected: ", expected);
+            console.log("received: ", data);
           });
       }
     </script>

@@ -79,7 +79,7 @@ fn hello_world() -> impl Responder {
 }
 
 fn current_temperature(_req: HttpRequest) -> impl Responder {
-    Json(Measurement { temperature: 42.3 })
+    web::Json(Measurement { temperature: 42.3 })
 }` "rust" "" }}
         </div>
         <div class="actix-feature" id="extractors">
