@@ -80,7 +80,7 @@ This limitation can easily be overcome with the [App::boxed](https://docs.rs/act
 
 ## Using an Application Scope to Compose Applications
 
-The `web::wcope()` method allows to set a specific application prefix.
+The `web::scope()` method allows to set a specific application prefix.
 This scope represents a resource prefix that will be prepended to all resource patterns added
 by the resource configuration. This can be used to help mount a set of routes at a different
 location than the included callable's author intended while still maintaining the same
