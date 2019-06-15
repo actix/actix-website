@@ -1,0 +1,9 @@
+[package]
+name = "async-handlers"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "0.7"
+futures = "0.1"
+bytes = "0.4"
