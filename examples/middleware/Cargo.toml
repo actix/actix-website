@@ -1,0 +1,11 @@
+[package]
+name = "middleware"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "1.0"
+actix-service = "0.4"
+actix-session = "0.1"
+futures = "0.1"
+env_logger = "0.6"
