@@ -9,53 +9,24 @@ weight: 230
 It is possible to serve static files with a custom path pattern and `NamedFile`. To
 match a path tail, we can use a `[.*]` regex.
 
-```rust
-extern crate actix_web;
-use std::path::PathBuf;
-use actix_web::{App, HttpRequest, Result, http::Method, fs::NamedFile};
-
-fn index(req: &HttpRequest) -> Result<NamedFile> {
-    let path: PathBuf = req.match_info().query("tail")?;
-    Ok(NamedFile::open(path)?)
-}
-
-fn main() {
-    App::new()
-        .resource(r"/a/{tail:.*}", |r| r.method(Method::GET).f(index))
-        .finish();
-}
-```
+{{< include-example example="static-files" file="main.rs" section="individual-file" >}}
 
 # Directory
 
-To serve files from specific directories and sub-directories, `StaticFiles` can be used.
-`StaticFiles` must be registered with an `App::handler()` method, otherwise
+To serve files from specific directories and sub-directories, `Files` can be used.
+`Files` must be registered with an `App::service()` method, otherwise
 it will be unable to serve sub-paths.
 
-```rust
-extern crate actix_web;
-use actix_web::{App, fs};
+{{< include-example example="static-files" file="directory.rs" section="directory" >}}
 
-fn main() {
-    App::new()
-        .handler(
-            "/static",
-            fs::StaticFiles::new(".")
-                .unwrap()
-                .show_files_listing())
-        .finish();
-}
-```
-
-The parameter is the base directory. By default files listing for sub-directories
-is disabled. Attempt to load directory listing will return *404 Not Found* response.
-To enable files listing, use
-[*StaticFiles::show_files_listing()*](../../actix-web/actix_web/fs/struct.StaticFiles.html#method.show_files_listing)
+By default files listing for sub-directories is disabled. Attempt to load directory
+listing will return *404 Not Found* response.  To enable files listing, use
+[*Files::show_files_listing()*](https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html)
 method.
 
 Instead of showing files listing for directory, it is possible to redirect
 to a specific index file. Use the
-[*StaticFiles::index_file()*](../../actix-web/actix_web/fs/struct.StaticFiles.html#method.index_file)
+[*Files::index_file()*](https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html#method.index_file)
 method to configure this redirect.
 
 # Configuration
@@ -71,63 +42,8 @@ for serving files:
 All of the above methods are optional and provided with the best defaults.
 But it is possible to customize any of them by implementing the trait onto own struct.
 
-```rust
-extern crate mime;
-extern crate actix_web;
-use actix_web::{App, HttpRequest, Result, http::Method};
-use actix_web::fs::{StaticFileConfig, NamedFile};
-use actix_web::http::header::DispositionType;
-
-use std::path::PathBuf;
-
-#[derive(Default)]
-struct MyConfig;
-
-impl StaticFileConfig for MyConfig {
-    fn content_disposition_map(typ: mime::Name) -> DispositionType {
-        DispositionType::Attachment
-    }
-}
-
-fn index(req: &HttpRequest) -> Result<NamedFile<MyConfig>> {
-    let path: PathBuf = req.match_info().query("tail")?;
-    Ok(NamedFile::open_with_config(path, MyConfig)?)
-}
-
-fn main() {
-    App::new()
-        .resource(r"/a/{tail:.*}", |r| r.method(Method::GET).f(index))
-        .finish();
-}
-```
+{{< include-example example="static-files" file="configuration.rs" section="config-one" >}}
 
 The Configuration cal also be applied to directory service:
 
-```rust
-extern crate actix_web;
-
-use actix_web::{App};
-use actix_web::fs::{StaticFileConfig, StaticFiles};
-
-#[derive(Default)]
-struct MyConfig;
-
-impl StaticFileConfig for MyConfig {
-    fn is_use_etag() -> bool {
-        false
-    }
-
-    fn is_use_last_modifier() -> bool {
-        false
-    }
-}
-
-fn main() {
-    App::new()
-        .handler(
-            "/static",
-            StaticFiles::with_config(".", MyConfig).unwrap()
-                .show_files_listing()
-        ).finish();
-}
-```
+{{< include-example example="static-files" file="configuration_two.rs" section="config-two" >}}

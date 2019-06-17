@@ -22,4 +22,5 @@ exclude = [
   "responses",
   "testing",
   "middleware",
+  "static-files",
 ]
