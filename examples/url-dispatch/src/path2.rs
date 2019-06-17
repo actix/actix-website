@@ -1,5 +1,5 @@
 // <path>
-use actix_web::{http::Method, web, App, Result};
+use actix_web::{web, App, Result};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -13,9 +13,9 @@ fn index(info: web::Path<Info>) -> Result<String> {
 }
 
 fn main() {
-    let app = App::new().resource(
+    App::new().route(
         "/{username}/index.html", // <- define path parameters
-        |r| r.method(Method::GET).with(index),
+        web::get().to(index),
     );
 }
 // </path>

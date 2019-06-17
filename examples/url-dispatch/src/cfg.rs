@@ -1,15 +1,14 @@
 // <cfg>
-use actix_web::{pred, App, HttpResponse};
+use actix_web::{guard, web, App, HttpResponse};
 
-fn main() {
-    App::new()
-        .resource("/path", |resource| {
-            resource
-                .route()
-                .filter(pred::Get())
-                .filter(pred::Header("content-type", "text/plain"))
-                .f(|req| HttpResponse::Ok())
-        })
-        .finish();
+pub fn main() {
+    App::new().service(
+        web::resource("/").route(
+            web::route()
+                .guard(guard::Get())
+                .guard(guard::Header("content-type", "text/plain"))
+                .to(|| HttpResponse::Ok()),
+        ),
+    );
 }
 // </cfg>

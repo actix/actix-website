@@ -1,14 +1,17 @@
-// <default>
-use actix_web::{http::Method, pred, App, HttpResponse};
+use actix_web::{guard, web, App, HttpRequest, HttpResponse, Responder};
 
+fn index(_req: HttpRequest) -> impl Responder {
+    "Welcome!"
+}
+
+// <default>
 fn main() {
     App::new()
-        .default_resource(|r| {
-            r.method(Method::GET).f(|req| HttpResponse::NotFound());
-            r.route()
-                .filter(pred::Not(pred::Get()))
-                .f(|req| HttpResponse::MethodNotAllowed());
-        })
-        .finish();
+        .service(web::resource("/").route(web::get().to(index)))
+        .default_service(
+            web::route()
+                .guard(guard::Not(guard::Get()))
+                .to(|| HttpResponse::MethodNotAllowed()),
+        );
 }
 // </default>

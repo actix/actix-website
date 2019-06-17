@@ -1,13 +1,12 @@
 // <pred>
-use actix_web::{pred, App, HttpResponse};
+use actix_web::{guard, web, App, HttpResponse};
 
 fn main() {
-    App::new()
-        .resource("/index.html", |r| {
-            r.route()
-                .filter(pred::Not(pred::Get()))
-                .f(|req| HttpResponse::MethodNotAllowed())
-        })
-        .finish();
+    App::new().route(
+        "/",
+        web::route()
+            .guard(guard::Not(guard::Get()))
+            .to(|| HttpResponse::MethodNotAllowed()),
+    );
 }
 // </pred>

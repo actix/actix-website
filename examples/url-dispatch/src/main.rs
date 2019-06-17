@@ -16,14 +16,13 @@ mod urls;
 // <main>
 use actix_web::{web, App, HttpRequest, HttpResponse};
 
-fn index(req: HttpRequest) -> HttpResponse {
+fn index(_req: HttpRequest) -> HttpResponse {
     unimplemented!()
 }
 
 fn main() {
     App::new()
         .route("/user/{name}", web::get().to(index))
-        .route("/user/{name}", web::get().to(index))
-        .finish();
+        .route("/user/{name}", web::get().to(index));
 }
 // </main>
