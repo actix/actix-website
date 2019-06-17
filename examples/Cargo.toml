@@ -20,4 +20,5 @@ exclude = [
   "errors",
   "requests",
   "responses",
+  "testing",
 ]
