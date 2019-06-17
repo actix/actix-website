@@ -23,4 +23,5 @@ exclude = [
   "testing",
   "middleware",
   "static-files",
+  "websockets",
 ]

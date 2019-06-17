@@ -1,0 +1,9 @@
+[package]
+name = "websockets"
+version = "0.1.0"
+authors = ["Cameron Dershem <cameron@pinkhatbeard.com>"]
+edition = "2018"
+
+[dependencies]
+actix = "0.7"
+actix-web = "1.0"

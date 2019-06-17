@@ -12,36 +12,7 @@ with an http actor.
 
 The following is an example of a simple websocket echo server:
 
-```rust
-use actix::*;
-use actix_web::*;
-
-/// Define http actor
-struct Ws;
-
-impl Actor for Ws {
-    type Context = ws::WebsocketContext<Self>;
-}
-
-/// Handler for ws::Message message
-impl StreamHandler<ws::Message, ws::ProtocolError> for Ws {
-
-    fn handle(&mut self, msg: ws::Message, ctx: &mut Self::Context) {
-        match msg {
-            ws::Message::Ping(msg) => ctx.pong(&msg),
-            ws::Message::Text(text) => ctx.text(text),
-            ws::Message::Binary(bin) => ctx.binary(bin),
-            _ => (),
-        }
-    }
-}
-
-fn main() {
-    App::new()
-      .resource("/ws/", |r| r.f(|req| ws::start(req, Ws)))
-      .finish();
-}
-```
+{{< include-example example="websockets" file="main.rs" section="websockets" >}}
 
 > A simple websocket echo server example is available in the
 > [examples directory](https://github.com/actix/examples/tree/master/websocket/).
