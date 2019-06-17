@@ -1,6 +1,7 @@
 [package]
 name = "url-dispatch"
 version = "0.7.0"
+edition = "2018"
 workspace = "../"
 
 [dependencies]

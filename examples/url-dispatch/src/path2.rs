@@ -1,6 +1,6 @@
 // <path>
-extern crate serde_derive;
-use actix_web::{http::Method, App, Path, Result};
+use actix_web::{http::Method, web, App, Result};
+use serde::Deserialize;
 
 #[derive(Deserialize)]
 struct Info {
@@ -8,7 +8,7 @@ struct Info {
 }
 
 // extract path info using serde
-fn index(info: Path<Info>) -> Result<String> {
+fn index(info: web::Path<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
 
