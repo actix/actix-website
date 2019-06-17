@@ -1,7 +1,6 @@
 [package]
 name = "static-files"
 version = "0.1.0"
-authors = ["Cameron Dershem <cameron@pinkhatbeard.com>"]
 edition = "2018"
 
 [dependencies]
