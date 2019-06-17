@@ -1,15 +1,15 @@
 // <path>
-use actix_web::{http::Method, App, Path, Result};
+use actix_web::{web, App, Result};
 
 // extract path info using serde
-fn index(info: Path<(String, u32)>) -> Result<String> {
+fn index(info: web::Path<(String, u32)>) -> Result<String> {
     Ok(format!("Welcome {}! id: {}", info.0, info.1))
 }
 
 fn main() {
-    let app = App::new().resource(
+    App::new().route(
         "/{username}/{id}/index.html", // <- define path parameters
-        |r| r.method(Method::GET).with(index),
+        web::get().to(index),
     );
 }
 // </path>

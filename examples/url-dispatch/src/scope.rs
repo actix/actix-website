@@ -1,4 +1,4 @@
-use actix_web::{App, HttpRequest, HttpResponse};
+use actix_web::{web, App, HttpRequest, HttpResponse};
 
 // <scope>
 fn show_users(_req: HttpRequest) -> HttpResponse {
@@ -7,7 +7,8 @@ fn show_users(_req: HttpRequest) -> HttpResponse {
 
 #[rustfmt::skip]
 fn main() {
-    App::new().service(
-        web::scope("/users") .route("/show", web::to(show_users)))
+    App::new()
+        .service(web::scope("/users")
+                 .route("/show", web::get().to(show_users)));
 }
 // </scope>

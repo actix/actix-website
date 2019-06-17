@@ -1,16 +1,16 @@
 // <norm>
-use actix_web::{http::Method, http::NormalizePath, App};
+use actix_web::{http::Method, middleware, web, App};
 
 fn main() {
-    let app = App::new()
-        .resource("/resource/", |r| r.f(index))
-        .default_resource(|r| r.method(Method::GET).h(NormalizePath::default()))
-        .finish();
+    App::new()
+        .wrap(middleware::NormalizePath)
+        .route("/resource/", web::get().to(index))
+        .default_service(web::route().method(Method::GET));
 }
 // </norm>
 
 use actix_web::HttpRequest;
 
-fn index(req: &HttpRequest) -> String {
+fn index(_req: HttpRequest) -> String {
     unimplemented!()
 }

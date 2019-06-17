@@ -1,5 +1,7 @@
 // <url>
-use actix_web::{http::header, http::Method, App, HttpRequest, HttpResponse, Result};
+use actix_web::{
+    guard, http::header, http::Method, web, App, HttpRequest, HttpResponse, Result,
+};
 
 fn index(req: HttpRequest) -> Result<HttpResponse> {
     let url = req.url_for("foo", &["1", "2", "3"])?; // <- generate url for "foo" resource
@@ -9,12 +11,13 @@ fn index(req: HttpRequest) -> Result<HttpResponse> {
 }
 
 fn main() {
-    let app = App::new()
-        .resource("/test/{a}/{b}/{c}", |r| {
-            r.name("foo"); // <- set resource name, then it could be used in `url_for`
-            r.method(Method::GET).f(|_| HttpResponse::Ok());
-        })
-        .route("/test/", Method::GET, index)
-        .finish();
+    App::new()
+        .service(
+            web::resource("/test/{a}/{b}/{c}")
+                .name("foo") // <- set resource name, then it could be used in `url_for`
+                .guard(guard::Get())
+                .to(|| HttpResponse::Ok()),
+        )
+        .route("/test/", web::get().to(index));
 }
 // </url>
