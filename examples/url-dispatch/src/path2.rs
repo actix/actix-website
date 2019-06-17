@@ -12,7 +12,7 @@ fn index(info: web::Path<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
 
-fn main() {
+pub fn main() {
     App::new().route(
         "/{username}/index.html", // <- define path parameters
         web::get().to(index),

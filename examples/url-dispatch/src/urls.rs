@@ -10,7 +10,7 @@ fn index(req: HttpRequest) -> Result<HttpResponse> {
         .finish())
 }
 
-fn main() {
+pub fn main() {
     App::new()
         .service(
             web::resource("/test/{a}/{b}/{c}")

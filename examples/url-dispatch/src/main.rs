@@ -23,6 +23,6 @@ fn index(_req: HttpRequest) -> HttpResponse {
 fn main() {
     App::new()
         .route("/user/{name}", web::get().to(index))
-        .route("/user/{name}", web::get().to(index));
+        .route("/user/{name}", web::post().to(index));
 }
 // </main>

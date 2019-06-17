@@ -7,7 +7,7 @@ fn index(_req: HttpRequest) -> HttpResponse {
 
 fn main() {
     App::new()
-        .service(web::resource("/prefix").route(web::get().to(index)))
+        .service(web::resource("/prefix").to(index))
         .service(
             web::resource("/user/{name}").route(web::get().to(|| HttpResponse::Ok())),
         );
