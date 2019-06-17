@@ -1,12 +1,12 @@
 // <request-routing>
-use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer};
+use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 
-fn index(_req: HttpRequest) -> HttpResponse {
-    HttpResponse::Ok().body("Hello from the index page.")
+fn index(_req: HttpRequest) -> impl Responder {
+    "Hello from the index page."
 }
 
-fn hello(path: web::Path<String>) -> HttpResponse {
-    HttpResponse::Ok().body(format!("Hello {}!", &path))
+fn hello(path: web::Path<String>) -> impl Responder {
+    format!("Hello {}!", &path)
 }
 
 fn main() {

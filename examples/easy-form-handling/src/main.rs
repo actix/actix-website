@@ -1,5 +1,5 @@
 // <easy-form-handling>
-use actix_web::{web, App, HttpResponse, HttpServer};
+use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -14,11 +14,8 @@ fn index() -> HttpResponse {
         .body(include_str!("../static/form.html"))
 }
 
-fn register(params: web::Form<Register>) -> actix_web::Result<HttpResponse> {
-    Ok(HttpResponse::Ok().body(format!(
-        "Hello {} from {}!",
-        params.username, params.country
-    )))
+fn register(params: web::Form<Register>) -> impl Responder {
+    format!("Hello {} from {}!", params.username, params.country)
 }
 
 fn main() {

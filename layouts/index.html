@@ -41,9 +41,9 @@
       <div class="actix-content">
         {{ highlight `use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer};
 
-fn greet(req: HttpRequest) -> HttpResponse {
+fn greet(req: HttpRequest) -> impl Responder {
     let name = req.match_info().get("name").unwrap_or("World");
-    HttpResponse::Ok().body(format!("Hello {}!", &name))
+    format!("Hello {}!", &name)
 }
 
 fn main() {
@@ -98,11 +98,11 @@ struct Event {
     kind: String,
     tags: Vec<String>,
 }
-fn capture_event(evt: web::Json<Event>) -> actix_web::Result<HttpResponse> {
+fn capture_event(evt: web::Json<Event>) -> impl Responder {
     let new_event = store_event_in_db(evt.timestamp,
                                       evt.kind.clone(),
                                       evt.tags.clone());
-    Ok(HttpResponse::Ok().json(new_event))
+    format!("got event {}", new_event.id.unwrap())
 }` "rust" "" }}
         </div>
         <div class="actix-feature" id="forms">
@@ -118,11 +118,8 @@ struct Register {
     country: String,
 }
 
-fn register(params: web::Form<Register>) -> actix_web::Result<HttpResponse> {
-    Ok(HttpResponse::Ok().body(format!(
-        "Hello {} from {}!",
-        params.username, params.country
-    )))
+fn register(params: web::Form<Register>) -> impl Responder {
+    format!("Hello {} from {}!", params.username, params.country)
 }` "rust" "" }}
         </div>
         <div class="actix-feature" id="routing">
@@ -132,12 +129,12 @@ fn register(params: web::Form<Register>) -> actix_web::Result<HttpResponse> {
             URLs and invoke individual handlers.  For extra flexibility, scopes
             can be used.
           </p>
-          {{ highlight `fn index(_req: HttpRequest) -> HttpResponse {
-    HttpResponse::Ok().body("Hello from the index page!")
+          {{ highlight `fn index(_req: HttpRequest) -> impl Responder {
+    "Hello from the index page!"
 }
 
-fn hello(path: web::Path<String>) -> HttpResponse {
-    HttpResponse::Ok().body(format!("Hello {}!", &path))
+fn hello(path: web::Path<String>) -> impl Responder {
+    format!("Hello {}!", &path)
 }
 
 fn main() {

@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpResponse, HttpServer};
+use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize)]
@@ -20,9 +20,9 @@ fn store_event_in_db(timestamp: f64, kind: String, tags: Vec<String>) -> Event {
     }
 }
 
-fn capture_event(evt: web::Json<Event>) -> actix_web::Result<HttpResponse> {
+fn capture_event(evt: web::Json<Event>) -> impl Responder {
     let new_event = store_event_in_db(evt.timestamp, evt.kind.clone(), evt.tags.clone());
-    Ok(HttpResponse::Ok().json(new_event))
+    format!("got event {}", new_event.id.unwrap())
 }
 
 fn index() -> HttpResponse {

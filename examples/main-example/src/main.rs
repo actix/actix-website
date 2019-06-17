@@ -1,9 +1,9 @@
 // <main-example>
-use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer};
+use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 
-fn greet(req: HttpRequest) -> HttpResponse {
+fn greet(req: HttpRequest) -> impl Responder {
     let name = req.match_info().get("name").unwrap_or("World");
-    HttpResponse::Ok().body(format!("Hello {}!", &name))
+    format!("Hello {}!", &name)
 }
 
 fn main() {
