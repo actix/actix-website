@@ -17,4 +17,5 @@ exclude = [
   "async-handlers",
   "extractors",
   "autoreload",
+  "errors"
 ]
