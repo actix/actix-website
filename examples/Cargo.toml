@@ -15,4 +15,5 @@ members = [
 exclude = [
   "request-handlers",
   "async-handlers",
+  "extractors",
 ]

@@ -1,0 +1,11 @@
+[package]
+name = "extractors"
+version = "0.1.0"
+authors = ["Cameron Dershem <cameron@pinkhatbeard.com>"]
+edition = "2018"
+
+[dependencies]
+actix-web = "1.0"
+serde = "1.0"
+futures = "0.1"
+serde_json = "1.0"

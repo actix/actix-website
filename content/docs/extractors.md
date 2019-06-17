@@ -19,25 +19,8 @@ or a custom Handler type.
 An Extractor can be passed to a handler function as a function parameter
 *or* accessed within the function by calling the ExtractorType::<...>::extract(req)
 function.
-```rust
 
-// Option 1:  passed as a parameter to a handler function
-fn index((params, info): (Path<(String, String,)>, Json<MyInfo>)) -> HttpResponse {
-   ... 
-}
-
-
-// Option 2:  accessed by calling extract() on the Extractor
-
-use actix_web::FromRequest;
-
-fn index(req: &HttpRequest) -> HttpResponse {
-	let params = Path::<(String, String)>::extract(req);
-	let info = Json::<MyInfo>::extract(req); 
-
-	...
-}
-```
+{{< include-example example="extractors" file="main.rs" section="main" >}}
 
 ## Within Custom Handler Types
 
@@ -47,25 +30,7 @@ calling the ExtractorType::<...>::extract(&req) function.  An Extractor
 Handler type must follow the ``handle`` function signature specified by the 
 Handler trait it implements.
 
-```rust
-
-struct MyHandler(String);
-
-impl<S> Handler<S> for MyHandler {
-    type Result = HttpResponse;
-
-    /// Handle request
-    fn handle(&self, req: &HttpRequest<S>) -> Self::Result {
-		let params = Path::<(String, String)>::extract(req);
-		let info = Json::<MyInfo>::extract(req); 
-
-		...
-			
-        HttpResponse::Ok().into()
-    }
-}
-
-```
+{{< include-example example="extractors" file="custom_handler.rs" section="custom-handler" >}}
 
 # Path
 
@@ -78,51 +43,13 @@ two segments could be deserialized, `userid` and `friend`. These segments
 could be extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure
 that implements the `Deserialize` trait from the *serde* crate.
 
-```rust
-use actix_web::{App, Path, Result, http};
-
-/// extract path info from "/users/{userid}/{friend}" url
-/// {userid} -  - deserializes to a u32
-/// {friend} - deserializes to a String
-fn index(info: Path<(u32, String)>) -> Result<String> {
-    Ok(format!("Welcome {}! {}", info.1, info.0))
-}
-
-fn main() {
-    let app = App::new().resource(
-        "/users/{userid}/{friend}",                    // <- define path parameters
-        |r| r.method(http::Method::GET).with(index));  // <- use `with` extractor
-}
-```
-
-Remember! A handler function that uses extractors has to be registered using the 
-[*Route::with()*](../../actix-web/actix_web/dev/struct.Route.html#method.with) method.
+{{< include-example example="extractors" file="path_one.rs" section="path-one" >}}
 
 It is also possible to extract path information to a specific type that
 implements the `Deserialize` trait from *serde*. Here is an equivalent example that uses *serde*
 instead of a *tuple* type.
 
-```rust
-#[macro_use] extern crate serde_derive;
-use actix_web::{App, Path, Result, http};
-
-#[derive(Deserialize)]
-struct Info {
-    userid: u32,
-    friend: String,
-}
-
-/// extract path info using serde
-fn index(info: Path<Info>) -> Result<String> {
-     Ok(format!("Welcome {}!", info.friend))
-}
-
-fn main() {
-    let app = App::new().resource(
-       "/users/{userid}/{friend}",                    // <- define path parameters
-       |r| r.method(http::Method::GET).with(index));  // <- use `with` extractor
-}
-```
+{{< include-example example="extractors" file="path_two.rs" section="path-two" >}}
 
 # Query
 
@@ -130,26 +57,7 @@ Same can be done with the request's query.
 The [*Query*](../../actix-web/actix_web/struct.Query.html)
 type provides extraction functionality. Underneath it uses *serde_urlencoded* crate.
 
-```rust
-#[macro_use] extern crate serde_derive;
-use actix_web::{App, Query, http};
-
-#[derive(Deserialize)]
-struct Info {
-    username: String,
-}
-
-// this handler get called only if the request's query contains `username` field
-fn index(info: Query<Info>) -> String {
-    format!("Welcome {}!", info.username)
-}
-
-fn main() {
-    let app = App::new().resource(
-       "/index.html",
-       |r| r.method(http::Method::GET).with(index)); // <- use `with` extractor
-}
-```
+{{< include-example example="extractors" file="query.rs" section="query" >}}
 
 # Json
 
@@ -157,26 +65,7 @@ fn main() {
 a request body into a struct. To extract typed information from a request's body,
 the type `T` must implement the `Deserialize` trait from *serde*.
 
-```rust
-#[macro_use] extern crate serde_derive;
-use actix_web::{App, Json, Result, http};
-
-#[derive(Deserialize)]
-struct Info {
-    username: String,
-}
-
-/// deserialize `Info` from request's body
-fn index(info: Json<Info>) -> Result<String> {
-    Ok(format!("Welcome {}!", info.username))
-}
-
-fn main() {
-    let app = App::new().resource(
-       "/index.html",
-       |r| r.method(http::Method::POST).with(index));  // <- use `with` extractor
-}
-```
+{{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
 
 Some extractors provide a way to configure the extraction process. Json extractor
 [*JsonConfig*](../../actix-web/actix_web/dev/struct.JsonConfig.html) type for configuration.
@@ -186,34 +75,7 @@ payload as well as a custom error handler function.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
 
-```rust
-#[macro_use] extern crate serde_derive;
-use actix_web::{App, Json, HttpResponse, Result, http, error};
-
-#[derive(Deserialize)]
-struct Info {
-    username: String,
-}
-
-/// deserialize `Info` from request's body, max payload size is 4kb
-fn index(info: Json<Info>) -> Result<String> {
-    Ok(format!("Welcome {}!", info.username))
-}
-
-fn main() {
-    let app = App::new().resource(
-       "/index.html", |r| {
-           r.method(http::Method::POST)
-              .with_config(index, |cfg| {
-                  cfg.limit(4096)   // <- change json extractor configuration
-                  cfg.error_handler(|err, req| {  // <- create custom error response
-                      error::InternalError::from_response(
-                         err, HttpResponse::Conflict().finish()).into()
-              })
-           });
-       });
-}
-```
+{{< include-example example="extractors" file="json_two.rs" section="json-two" >}}
 
 # Form
 
@@ -224,23 +86,7 @@ the `Deserialize` trait from the *serde* crate.
 [*FormConfig*](../../actix-web/actix_web/dev/struct.FormConfig.html) allows
 configuring the extraction process.
 
-```rust
-#[macro_use] extern crate serde_derive;
-use actix_web::{App, Form, Result};
-
-#[derive(Deserialize)]
-struct FormData {
-    username: String,
-}
-
-/// extract form data using serde
-/// this handler gets called only if the content type is *x-www-form-urlencoded*
-/// and the content of the request could be deserialized to a `FormData` struct
-fn index(form: Form<FormData>) -> Result<String> {
-     Ok(format!("Welcome {}!", form.username))
-}
-# fn main() {}
-```
+{{< include-example example="extractors" file="form.rs" section="form" >}}
 
 # Multiple extractors
 
@@ -249,32 +95,14 @@ whose elements implement `FromRequest`.
 
 For example we can use a path extractor and a query extractor at the same time.
 
-```rust
-#[macro_use] extern crate serde_derive;
-use actix_web::{App, Query, Path, http};
-
-#[derive(Deserialize)]
-struct Info {
-    username: String,
-}
-
-fn index((path, query): (Path<(u32, String)>, Query<Info>)) -> String {
-    format!("Welcome {}!", query.username)
-}
-
-fn main() {
-    let app = App::new().resource(
-       "/users/{userid}/{friend}",                    // <- define path parameters
-       |r| r.method(http::Method::GET).with(index)); // <- use `with` extractor
-}
-```
+{{< include-example example="extractors" file="multiple.rs" section="multi" >}}
 
 # Other
 
 Actix also provides several other extractors:
 
-* [*State*](../../actix-web/actix_web/struct.State.html) - If you need
-  access to an application state. This is similar to a `HttpRequest::state()`.
+* [*Data*](../../actix-web/actix_web/web/struct.Data.html) - If you need
+  access to an application state. This is similar to a `HttpRequest::app_data()`.
 * *HttpRequest* - *HttpRequest* itself is an extractor which returns self,
   in case you need access to the request.
 * *String* - You can convert a request's payload to a *String*.
