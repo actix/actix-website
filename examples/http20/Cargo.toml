@@ -1,0 +1,9 @@
+[package]
+name = "http20"
+version = "0.1.0"
+authors = ["Cameron Dershem <cameron@pinkhatbeard.com>"]
+edition = "2018"
+
+[dependencies]
+actix-web = { version = "1.0", features = ["ssl"] }
+openssl = { version = "0.10", features = ["v110"] }

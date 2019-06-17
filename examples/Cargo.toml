@@ -24,4 +24,5 @@ exclude = [
   "middleware",
   "static-files",
   "websockets",
+  "http20",
 ]

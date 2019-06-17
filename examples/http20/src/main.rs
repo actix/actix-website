@@ -1,0 +1,21 @@
+// <main>
+use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
+
+fn index(_req: HttpRequest) -> impl Responder {
+    "Hello."
+}
+
+fn main() {
+    // load ssl keys
+    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
+    builder
+        .set_private_key_file("key.pem", SslFiletype::PEM)
+        .unwrap();
+    builder.set_certificate_chain_file("cert.pem").unwrap();
+
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind_ssl("127.0.0.1:8088", builder)
+        .unwrap();
+}
+// </main>
