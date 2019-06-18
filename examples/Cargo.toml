@@ -24,7 +24,7 @@ exclude = [
   "middleware",
   "static-files",
   "websockets",
-  "http20",
+  "http2",
   "databases",
   "og_databases",
   "sentry",

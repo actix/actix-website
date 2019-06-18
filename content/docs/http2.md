@@ -21,7 +21,7 @@ weight: 250
 actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["ssl"] }
 openssl = { version = "0.10", features = ["v110"] }
 ```
-{{< include-example example="http20" file="main.rs" section="main" >}}
+{{< include-example example="http2" file="main.rs" section="main" >}}
 
 Upgrades to *HTTP/2.0* schema described in
 [rfc section 3.2](https://http2.github.io/http2-spec/#rfc.section.3.2) is not supported.

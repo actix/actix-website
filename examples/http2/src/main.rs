@@ -8,6 +8,8 @@ fn index(_req: HttpRequest) -> impl Responder {
 
 fn main() {
     // load ssl keys
+    // to create a self-signed temporary cert for testing:
+    // `openssl req -x509 -newkey rsa:4096 -nodes -keyout key.pem -out cert.pem -days 365 -subj '/CN=localhost'`
     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder
         .set_private_key_file("key.pem", SslFiletype::PEM)
@@ -16,6 +18,8 @@ fn main() {
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
         .bind_ssl("127.0.0.1:8088", builder)
+        .unwrap()
+        .run()
         .unwrap();
 }
 // </main>
