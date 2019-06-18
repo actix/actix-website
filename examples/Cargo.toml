@@ -25,4 +25,6 @@ exclude = [
   "static-files",
   "websockets",
   "http20",
+  "databases",
+  "og_databases",
 ]
