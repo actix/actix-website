@@ -16,7 +16,7 @@ Let's create a simple database api that can insert a new user row into a SQLite 
 We must define a sync actor and a connection that this actor will use. The same approach
 can be used for other databases.
 
-{{< include-example example="databases" file="main.rs" section="actor" >}}
+{{< include-example example="og_databases" file="main.rs" section="actor" >}}
 
 This is the definition of our actor. Now, we must define the *create user* message and response.
 
