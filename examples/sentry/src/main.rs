@@ -23,9 +23,9 @@
 
 // let hub = Hub::from_request(req);
 // hub.capture_message("Something is not well", Level::Warning);
-// // </hub>
+// </hub>
 
-// // <hub2>
+// <hub2>
 // use sentry::{Hub, Level};
 // use sentry_actix::ActixWebHubExt;
 
