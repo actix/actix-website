@@ -20,47 +20,16 @@ initialized and configured and the [sentry-actix middleware](https://crates.io/c
 needs to be added.  Additionally it makes sense to also register the panic handler
 to be informed about hard panics.
 
-```rust
-extern crate sentry;
-extern crate sentry_actix;
-
-use sentry_actix::SentryMiddleware;
-
-use std::env;
-
-fn main() {
-    sentry::init("SENTRY_DSN_GOES_HERE");
-    env::set_var("RUST_BACKTRACE", "1");
-    sentry::integrations::panic::register_panic_handler();
-
-    let mut app = App::with_state(state)
-        .middleware(SentryMiddleware::new())
-        // ...
-}
-```
+{{< include-example example="sentry" file="main.rs" section="middleware" >}}
 
 # Reusing the Hub
 
 If you use this integration the default sentry hub (`Hub::current()`) is typically the wrong one.
 To get the request specific one you need to use the `ActixWebHubExt` trait:
 
-```rust
-use sentry::{Hub, Level};
-use sentry_actix::ActixWebHubExt;
-
-let hub = Hub::from_request(req);
-hub.capture_message("Something is not well", Level::Warning);
-```
+{{< include-example example="sentry" file="main.rs" section="hub" >}}
 
 The hub can also be made current for the duration of a call.  Then `Hub::current()` works correctly
 until the end of the `run` block.
 
-```rust
-use sentry::{Hub, Level};
-use sentry_actix::ActixWebHubExt;
-
-let hub = Hub::from_request(req);
-Hub::run(hub, || {
-    sentry::capture_message("Something is not well", Level::Warning);
-});
-```
+{{< include-example example="sentry" file="main.rs" section="hub2" >}}

@@ -27,4 +27,5 @@ exclude = [
   "http20",
   "databases",
   "og_databases",
+  "sentry",
 ]

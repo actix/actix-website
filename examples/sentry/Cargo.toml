@@ -1,0 +1,10 @@
+[package]
+name = "sentry"
+version = "0.1.0"
+authors = ["Cameron Dershem <cameron@pinkhatbeard.com>"]
+edition = "2018"
+
+[dependencies]
+actix-web = "1.0"
+sentry-actix = "0.15"
+sentry = "0.15"
