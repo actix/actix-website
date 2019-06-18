@@ -1,8 +1,7 @@
 // <setup>
-extern crate actix_web;
-use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer};
+use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
-fn index(_req: HttpRequest) -> HttpResponse {
+fn index(_req: HttpRequest) -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
 }
 // </setup>
