@@ -10,7 +10,7 @@ members = [
   "server",
   "url-dispatch",
   "responder-trait",
-  "either"
+  "either",
 ]
 exclude = [
   "request-handlers",
@@ -25,7 +25,6 @@ exclude = [
   "static-files",
   "websockets",
   "http2",
-  "databases",
   "og_databases",
   "sentry",
 ]
