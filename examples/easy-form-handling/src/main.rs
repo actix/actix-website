@@ -14,8 +14,8 @@ fn index() -> HttpResponse {
         .body(include_str!("../static/form.html"))
 }
 
-fn register(params: web::Form<Register>) -> impl Responder {
-    format!("Hello {} from {}!", params.username, params.country)
+fn register(form: web::Form<Register>) -> impl Responder {
+    format!("Hello {} from {}!", form.username, form.country)
 }
 
 fn main() {

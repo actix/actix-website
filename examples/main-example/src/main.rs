@@ -9,8 +9,8 @@ fn greet(req: HttpRequest) -> impl Responder {
 fn main() {
     HttpServer::new(|| {
         App::new()
-            .service(web::resource("/").to(greet))
-            .service(web::resource("/{name}").to(greet))
+            .route("/", web::get().to(greet))
+            .route("/{name}", web::get().to(greet))
     })
     .bind("127.0.0.1:8088")
     .unwrap()

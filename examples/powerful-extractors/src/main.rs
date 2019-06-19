@@ -9,19 +9,19 @@ struct Event {
     tags: Vec<String>,
 }
 
-fn store_event_in_db(timestamp: f64, kind: String, tags: Vec<String>) -> Event {
+fn store_in_db(timestamp: f64, kind: &String, tags: &Vec<String>) -> Event {
     // store item in db and get new_event
     // use id to lookup item
     Event {
         id: Some(1),
         timestamp: timestamp,
-        kind: kind,
-        tags: tags,
+        kind: kind.to_string(),
+        tags: tags.to_vec(),
     }
 }
 
 fn capture_event(evt: web::Json<Event>) -> impl Responder {
-    let new_event = store_event_in_db(evt.timestamp, evt.kind.clone(), evt.tags.clone());
+    let new_event = store_in_db(evt.timestamp, &evt.kind, &evt.tags);
     format!("got event {}", new_event.id.unwrap())
 }
 
