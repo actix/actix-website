@@ -1,8 +1,8 @@
-mod json_two;
-mod manual;
-mod multipart;
-mod streaming;
-mod urlencoded;
+pub mod json_two;
+pub mod manual;
+pub mod multipart;
+pub mod streaming;
+pub mod urlencoded;
 // <json-request>
 use actix_web::{web, App, Result};
 use serde::Deserialize;

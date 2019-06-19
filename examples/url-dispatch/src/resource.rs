@@ -1,11 +1,11 @@
 // <resource>
-use actix_web::{http::Method, web, App, HttpRequest, HttpResponse};
+use actix_web::{web, App, HttpRequest, HttpResponse};
 
 fn index(_req: HttpRequest) -> HttpResponse {
     unimplemented!()
 }
 
-fn main() {
+pub fn main() {
     App::new()
         .service(web::resource("/prefix").to(index))
         .service(

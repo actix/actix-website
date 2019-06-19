@@ -1,7 +1,7 @@
 // <norm>
 use actix_web::{http::Method, middleware, web, App};
 
-fn main() {
+pub fn main() {
     App::new()
         .wrap(middleware::NormalizePath)
         .route("/resource/", web::get().to(index))

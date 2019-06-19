@@ -1,5 +1,5 @@
 // <minfo>
-use actix_web::{web, App, HttpRequest, HttpServer, Result};
+use actix_web::{web, App, HttpRequest, Result};
 
 fn index(req: HttpRequest) -> Result<String> {
     let v1: u8 = req.match_info().get("v1").unwrap().parse().unwrap();
@@ -8,7 +8,7 @@ fn index(req: HttpRequest) -> Result<String> {
     Ok(format!("Values {} {} {} {}", v1, v2, v3, v4))
 }
 
-fn main() {
+pub fn main() {
     App::new()
         .route("/a/{v1}/{v2}/", web::get().to(index))
         .route("", web::get().to(|| actix_web::HttpResponse::Ok()));

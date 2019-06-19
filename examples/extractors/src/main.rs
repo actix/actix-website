@@ -2,14 +2,14 @@ use actix_web::{web, App, FromRequest, HttpRequest, HttpServer, Responder};
 use futures::future::Future;
 use serde::Deserialize;
 
-// mod custom_handler;
-mod form;
-mod json_one;
-mod json_two;
-mod multiple;
-mod path_one;
-mod path_two;
-mod query;
+// pub mod custom_handler;
+pub mod form;
+pub mod json_one;
+pub mod json_two;
+pub mod multiple;
+pub mod path_one;
+pub mod path_two;
+pub mod query;
 
 #[derive(Deserialize, Debug)]
 struct MyInfo {

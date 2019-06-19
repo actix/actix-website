@@ -1,5 +1,5 @@
 // <json-manual>
-use actix_web::{error, web, Error, HttpResponse};
+use actix_web::{error, web, App, Error, HttpResponse};
 use bytes::BytesMut;
 use futures::{Future, Stream};
 use serde::{Deserialize, Serialize};
@@ -13,7 +13,7 @@ struct MyObj {
 
 const MAX_SIZE: usize = 262_144; // max payload size is 256k
 
-fn index_manual(
+pub fn index_manual(
     payload: web::Payload,
 ) -> impl Future<Item = HttpResponse, Error = Error> {
     // payload is a stream of Bytes objects
@@ -41,3 +41,7 @@ fn index_manual(
         })
 }
 // </json-manual>
+
+pub fn main() {
+    App::new().route("/", web::post().to_async(index_manual));
+}

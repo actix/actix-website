@@ -2,7 +2,7 @@
 // use actix_web::{error, Error, HttpRequest, HttpResponse};
 // use futures::Future;
 
-// fn index(req: HttpRequest) -> Box<Future<Item = HttpResponse, Error = Error>> {
+// pub fn index(req: HttpRequest) -> Box<Future<Item = HttpResponse, Error = Error>> {
 //     // get multipart and iterate over multipart items
 //     req.multipart().and_then(|item| match item {
 //         multipart::MultipartItem::Field(field) => {

@@ -1,7 +1,5 @@
 // <url>
-use actix_web::{
-    guard, http::header, http::Method, web, App, HttpRequest, HttpResponse, Result,
-};
+use actix_web::{guard, http::header, web, App, HttpRequest, HttpResponse, Result};
 
 fn index(req: HttpRequest) -> Result<HttpResponse> {
     let url = req.url_for("foo", &["1", "2", "3"])?; // <- generate url for "foo" resource

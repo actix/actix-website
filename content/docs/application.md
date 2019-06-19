@@ -23,7 +23,7 @@ The prefix should consist of value path segments.
 > any request with the paths `/app`, `/app/`, or `/app/test` would match;
 > however, the path `/application` would not match.
 
-{{< include-example example="application" section="make_app" >}}
+{{< include-example example="application" file="app.rs" section="setup" >}}
 
 In this example, an application with the `/app` prefix and a `index.html` resource
 are created. This resource is available through the `/app/index.html` url.
@@ -33,7 +33,7 @@ are created. This resource is available through the `/app/index.html` url.
 
 Multiple applications can be served with one server:
 
-{{< include-example example="application" section="run_server" >}}
+{{< include-example example="application" file="main.rs" section="run_server" >}}
 
 All `/app1` requests route to the first application, `/app2` to the second, and all other to the third.
 **Applications get matched based on registration order**. If an application with a more generic
@@ -61,8 +61,7 @@ When the app is initialized it needs to be passed the initial state:
 > instance. Http server constructs an application instance for each thread, thus application state
 > must be constructed multiple times. If you want to share state between different threads, a
 > shared object should be used, e.g. `Arc`. There is also an [Example](https://github.com/actix/examples/blob/master/state/src/main.rs) using `Arc` for this. Application state does not need to be `Send` and `Sync`,
-> but the application factory must be `Send` + `Sync`. 
->
+> but the application factory must be `Send` + `Sync`.
 
 To start the previous app, create it into a closure:
 
@@ -76,7 +75,7 @@ Combining multiple applications with different state is possible as well.
 
 This limitation can easily be overcome with the [App::boxed](https://docs.rs/actix-web/*/actix_web/struct.App.html#method.boxed) method, which converts an App into a boxed trait object.
 
-{{< include-example example="application" file="state.rs" section="combine" >}}
+{{< include-example example="application" file="combine.rs" section="combine" >}}
 
 ## Using an Application Scope to Compose Applications
 

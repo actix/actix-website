@@ -7,7 +7,7 @@ fn index(req: HttpRequest) -> Result<String> {
     Ok(format!("Path {:?}", path))
 }
 
-fn main() {
+pub fn main() {
     App::new().route(r"/a/{tail:.*}", web::get().to(index));
 }
 // </pbuf>

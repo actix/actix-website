@@ -1,5 +1,6 @@
+use actix_web::App;
 // <recommend-two>
-use actix_web::{error, fs, http, App, HttpRequest, HttpResponse};
+use actix_web::{error, fs, http, HttpRequest, HttpResponse};
 use failure::Fail;
 
 #[derive(Fail, Debug)]
@@ -23,3 +24,6 @@ fn index(_req: HttpRequest) -> Result<&'static str, UserError> {
     Ok("success!")
 }
 // </recommend-two>
+pub fn main() {
+    App::new().route("/", web::get().to(index));
+}

@@ -1,7 +1,7 @@
 // <default-headers>
 use actix_web::{http, middleware, web, App, HttpResponse};
 
-fn main() {
+pub fn main() {
     App::new()
         .wrap(middleware::DefaultHeaders::new().header("X-Version", "0.2"))
         .service(

@@ -5,7 +5,7 @@ fn index(_req: HttpRequest) -> impl Responder {
 }
 
 // <default>
-fn main() {
+pub fn main() {
     App::new()
         .service(web::resource("/").route(web::get().to(index)))
         .default_service(

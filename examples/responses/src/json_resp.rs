@@ -13,7 +13,7 @@ fn index(req: HttpRequest) -> Result<web::Json<MyObj>> {
     }))
 }
 
-fn main() {
+pub fn main() {
     App::new().route(r"/a/{name}", web::get().to(index));
 }
 // </json-resp>

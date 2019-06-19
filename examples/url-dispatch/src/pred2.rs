@@ -1,7 +1,7 @@
 // <pred>
 use actix_web::{guard, web, App, HttpResponse};
 
-fn main() {
+pub fn main() {
     App::new().route(
         "/",
         web::route()

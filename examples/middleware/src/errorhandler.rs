@@ -10,7 +10,7 @@ fn render_500<B>(mut res: dev::ServiceResponse<B>) -> Result<ErrorHandlerRespons
     Ok(ErrorHandlerResponse::Response(res))
 }
 
-fn main() {
+pub fn main() {
     App::new()
         .wrap(
             ErrorHandlers::new()

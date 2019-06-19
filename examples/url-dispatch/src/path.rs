@@ -6,7 +6,7 @@ fn index(info: web::Path<(String, u32)>) -> Result<String> {
     Ok(format!("Welcome {}! id: {}", info.0, info.1))
 }
 
-fn main() {
+pub fn main() {
     App::new().route(
         "/{username}/{id}/index.html", // <- define path parameters
         web::get().to(index),

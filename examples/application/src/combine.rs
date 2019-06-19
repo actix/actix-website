@@ -1,22 +1,25 @@
 use actix_web::{web, App, HttpResponse, HttpServer};
 
-pub mod app;
-pub mod combine;
-pub mod state;
-pub mod vh;
+// <combine>
+struct State1;
+struct State2;
 
 #[rustfmt::skip]
-// <run_server>
-fn main() {
+pub fn main() {
     HttpServer::new(|| {
         App::new()
+            .data(State1)
+            .data(State2)
             .service(
                 web::scope("/app1")
                     .route("/", web::to(|| HttpResponse::Ok())))
             .service(
                 web::scope("/app2")
                     .route("/", web::to(|| HttpResponse::Ok())))
-            .route("/", web::to(|| HttpResponse::Ok()))
-    });
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
-// </run_server>
+// </combine>

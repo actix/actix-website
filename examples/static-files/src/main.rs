@@ -1,6 +1,6 @@
-mod configuration;
-mod configuration_two;
-mod directory;
+pub mod configuration;
+pub mod configuration_two;
+pub mod directory;
 // <individual-file>
 use actix_files::NamedFile;
 use actix_web::{web, App, HttpRequest, Result};

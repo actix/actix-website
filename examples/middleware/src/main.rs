@@ -1,7 +1,7 @@
-mod default_headers;
-mod errorhandler;
-mod logger;
-mod user_sessions;
+pub mod default_headers;
+pub mod errorhandler;
+pub mod logger;
+pub mod user_sessions;
 // <main>
 use actix_service::{Service, Transform};
 use actix_web::{dev::ServiceRequest, dev::ServiceResponse, web, App, Error};

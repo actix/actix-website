@@ -1,3 +1,4 @@
+use actix_web::{web, App};
 // <override>
 use actix_web::{error, http, HttpRequest, HttpResponse};
 use failure::Fail;
@@ -24,7 +25,21 @@ impl error::ResponseError for MyError {
     }
 }
 
-fn index(req: &HttpRequest) -> Result<&'static str, MyError> {
+fn index(_req: HttpRequest) -> Result<&'static str, MyError> {
     Err(MyError::BadClientData)
 }
 // </override>
+pub fn main() {
+    App::new()
+        .route("/", web::get().to(index))
+        .route("/e2", web::get().to(error2))
+        .route("/e3", web::get().to(error3));
+}
+
+fn error2(_req: HttpRequest) -> Result<&'static str, MyError> {
+    Err(MyError::InternalError)
+}
+
+fn error3(_req: HttpRequest) -> Result<&'static str, MyError> {
+    Err(MyError::Timeout)
+}

@@ -10,7 +10,7 @@ struct Info {
 
 /// extract path info using serde
 fn index(info: web::Path<Info>) -> Result<String> {
-    Ok(format!("Welcome {}!", info.friend))
+    Ok(format!("Welcome {}, userid {}!", info.friend, info.userid))
 }
 
 pub fn main() {

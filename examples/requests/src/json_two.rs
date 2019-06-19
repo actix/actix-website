@@ -9,7 +9,7 @@
 //     number: i32,
 // }
 
-// fn index(req: HttpRequest) -> Box<Future<Item = HttpResponse, Error = Error>> {
+// pub fn index(req: HttpRequest) -> Box<Future<Item = HttpResponse, Error = Error>> {
 //     req.json()
 //         .from_err()
 //         .and_then(|val: MyObj| {

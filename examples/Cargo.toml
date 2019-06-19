@@ -11,20 +11,20 @@ members = [
   "url-dispatch",
   "responder-trait",
   "either",
-]
-exclude = [
-  "request-handlers",
-  "async-handlers",
   "extractors",
   "autoreload",
   "errors",
   "requests",
   "responses",
-  "testing",
   "middleware",
   "static-files",
-  "websockets",
   "http2",
+]
+exclude = [
+  "testing",
+  "async-handlers",
+  "websockets",
+  "request-handlers",
   "og_databases",
   "sentry",
 ]

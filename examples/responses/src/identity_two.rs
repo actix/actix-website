@@ -16,3 +16,8 @@ pub fn index(_req: HttpRequest) -> HttpResponse {
         .body(HELLO_WORLD)
 }
 // </identity-two>
+
+use actix_web::{web, App};
+pub fn main() {
+    App::new().route("/", web::get().to(index));
+}

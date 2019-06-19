@@ -9,7 +9,7 @@ impl Guard for ContentTypeHeader {
     }
 }
 
-fn main() {
+pub fn main() {
     App::new().route(
         "",
         web::route()

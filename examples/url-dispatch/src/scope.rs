@@ -5,10 +5,7 @@ fn show_users(_req: HttpRequest) -> HttpResponse {
     unimplemented!()
 }
 
-#[rustfmt::skip]
-fn main() {
-    App::new()
-        .service(web::scope("/users")
-                 .route("/show", web::get().to(show_users)));
+pub fn main() {
+    App::new().service(web::scope("/users").route("/show", web::get().to(show_users)));
 }
 // </scope>

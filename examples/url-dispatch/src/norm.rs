@@ -1,10 +1,10 @@
 // <norm>
-use actix_web::{middleware, web, App, HttpResponse};
+use actix_web::{middleware, web, App};
 
-fn main() {
+pub fn main() {
     App::new()
         .wrap(middleware::NormalizePath)
-        .route("/", web::get().to(|| HttpResponse::Ok()));
+        .route("/", web::get().to(index));
 }
 // </norm>
 

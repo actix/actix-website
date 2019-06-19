@@ -11,4 +11,4 @@
 //         ))))))
 // }
 // </chunked>
-fn main() {}
+pub fn main() {}
