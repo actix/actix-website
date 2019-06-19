@@ -8,13 +8,13 @@ struct State2;
 pub fn main() {
     HttpServer::new(|| {
         App::new()
-            .data(State1)
-            .data(State2)
             .service(
                 web::scope("/app1")
+                    .data(State1)
                     .route("/", web::to(|| HttpResponse::Ok())))
             .service(
                 web::scope("/app2")
+                    .data(State2)
                     .route("/", web::to(|| HttpResponse::Ok())))
     })
     .bind("127.0.0.1:8088")

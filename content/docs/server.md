@@ -6,7 +6,7 @@ weight: 150
 
 # The HTTP Server
 
-The [**HttpServer**](../../actix-web/actix_web/server/struct.HttpServer.html) type is responsible for
+The [**HttpServer**](https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html) type is responsible for
 serving http requests.
 
 `HttpServer` accepts an application factory as a parameter, and the

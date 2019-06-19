@@ -4,7 +4,7 @@ use std::cell::Cell;
 
 // This struct represents state
 struct AppState {
-    counter: Cell<usize>,
+    counter: Cell<i32>,
 }
 
 fn index(data: web::Data<AppState>) -> String {
