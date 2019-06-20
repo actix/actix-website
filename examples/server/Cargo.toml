@@ -9,3 +9,4 @@ actix-rt = "0.2"
 actix-web = { version = "1.0", features = ["ssl"] }
 futures = "0.1"
 openssl = "0.10"
+actix-http = "0.2"
