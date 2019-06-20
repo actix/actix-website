@@ -1,4 +1,4 @@
-// <main>
+// <either>
 use actix_web::{web, App, Either, Error, HttpRequest, HttpResponse};
 use futures::future::{ok, Future};
 
@@ -22,7 +22,7 @@ fn index(_req: HttpRequest) -> RegisterResult {
 fn main() {
     App::new().route("/", web::get().to(index));
 }
-// </main>
+// </either>
 
 fn is_a_variant() -> bool {
     true

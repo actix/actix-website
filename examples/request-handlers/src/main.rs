@@ -1,5 +1,5 @@
 mod handlers_arc;
-// <main>
+// <handler>
 use actix_web::{dev::Handler, server, App, HttpRequest, HttpResponse};
 use std::cell::Cell;
 
@@ -22,4 +22,4 @@ fn main() {
         .unwrap()
         .run();
 }
-// </main>
+// </handler>

@@ -1,7 +1,6 @@
-// <main>
+// <responder-trait>
 use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpServer, Responder};
 use serde::Serialize;
-use serde_json;
 
 #[derive(Serialize)]
 struct MyObj {
@@ -23,9 +22,10 @@ impl Responder for MyObj {
     }
 }
 
-fn index(_req: HttpRequest) -> impl Responder {
+fn index() -> impl Responder {
     MyObj { name: "user" }
 }
+// </responder-trait>
 
 fn main() {
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
@@ -34,4 +34,3 @@ fn main() {
         .run()
         .unwrap();
 }
-// </main>
