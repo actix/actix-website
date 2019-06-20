@@ -1,5 +1,5 @@
 // <path-two>
-use actix_web::{web, App, Result};
+use actix_web::{web, App, HttpServer, Result};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -14,9 +14,15 @@ fn index(info: web::Path<Info>) -> Result<String> {
 }
 
 pub fn main() {
-    App::new().route(
-        "/users/{userid}/{friend}", // <- define path parameters
-        web::get().to(index),
-    );
+    HttpServer::new(|| {
+        App::new().route(
+            "/users/{userid}/{friend}", // <- define path parameters
+            web::get().to(index),
+        )
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </path-two>

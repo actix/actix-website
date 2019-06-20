@@ -8,6 +8,7 @@ pub mod json_one;
 pub mod json_two;
 pub mod multiple;
 pub mod path_one;
+pub mod path_three;
 pub mod path_two;
 pub mod query;
 
@@ -17,13 +18,13 @@ struct MyInfo {
     id: u32,
 }
 
-// <main>
-// Option 1:  passed as a parameter to a handler function
+// <option-one>
 fn index(path: web::Path<(String, String)>, json: web::Json<MyInfo>) -> impl Responder {
     format!("{} {} {} {}", path.0, path.1, json.id, json.username)
 }
+// </option-one>
 
-// Option 2:  accessed by calling extract() on the Extractor
+// <option-two>
 fn extract(req: HttpRequest) -> impl Responder {
     let params = web::Path::<(String, String)>::extract(&req).unwrap();
 
@@ -33,7 +34,7 @@ fn extract(req: HttpRequest) -> impl Responder {
 
     format!("{} {} {} {}", params.0, params.1, info.username, info.id)
 }
-// </main>
+// </option-two>
 
 fn main() {
     HttpServer::new(|| {

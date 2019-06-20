@@ -1,5 +1,5 @@
 // <multi>
-use actix_web::{web, App};
+use actix_web::{web, App, HttpServer};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -7,14 +7,23 @@ struct Info {
     username: String,
 }
 
-fn index((_path, query): (web::Path<(u32, String)>, web::Query<Info>)) -> String {
-    format!("Welcome {}!", query.username)
+fn index((path, query): (web::Path<(u32, String)>, web::Query<Info>)) -> String {
+    format!(
+        "Welcome {}, friend {}, useri {}!",
+        query.username, path.1, path.0
+    )
 }
 
 pub fn main() {
-    App::new().route(
-        "/users/{userid}/{friend}", // <- define path parameters
-        web::get().to(index),
-    );
+    HttpServer::new(|| {
+        App::new().route(
+            "/users/{userid}/{friend}", // <- define path parameters
+            web::get().to(index),
+        )
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </multi>

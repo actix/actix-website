@@ -1,25 +1,38 @@
-mod handlers_arc;
-// <handler>
-use actix_web::{dev::Handler, server, App, HttpRequest, HttpResponse};
+pub mod handlers_arc;
+// <data>
+use actix_web::{web, App, HttpServer, Responder};
 use std::cell::Cell;
 
-struct MyHandler(Cell<usize>);
+#[derive(Clone)]
+struct AppState {
+    count: Cell<i32>,
+}
 
-impl<S> Handler<S> for MyHandler {
-    type Result = HttpResponse;
+fn show_count(data: web::Data<AppState>) -> impl Responder {
+    format!("count: {}", data.count.get())
+}
 
-    /// Handle request
-    fn handle(&self, _req: &HttpRequest<S>) -> Self::Result {
-        let i = self.0.get();
-        self.0.set(i + 1);
-        HttpResponse::Ok().into()
-    }
+fn add_one(data: web::Data<AppState>) -> impl Responder {
+    let count = data.count.get();
+    data.count.set(count + 1);
+
+    format!("count: {}", data.count.get())
 }
 
 fn main() {
-    server::new(|| App::new().resource("/", |r| r.h(MyHandler(Cell::new(0))))) //use r.h() to bind handler, not the r.f()
-        .bind("127.0.0.1:8088")
-        .unwrap()
-        .run();
+    let data = AppState {
+        count: Cell::new(0),
+    };
+
+    HttpServer::new(move || {
+        App::new()
+            .data(data.clone())
+            .route("/", web::to(show_count))
+            .route("/add", web::to(add_one))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
-// </handler>
+// </data>

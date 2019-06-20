@@ -6,37 +6,26 @@ weight: 170
 
 # Type-safe information extraction
 
-Actix provides facility for type-safe request information extraction. By default,
-actix provides several extractor implementations.
+Actix-web provides a facility for type-safe request information access called *extractors*
+(ie, `impl FromRequest`). By default, actix-web provides several extractor implementations.
 
-# Accessing Extractors
+## Extractors Within Handler Functions
 
-How you access an Extractor depends on whether you are using a handler function
-or a custom Handler type.
+An extractor can be accessed in a few different ways.
 
-## Within Handler Functions
+Option 1 - passed as a parameter to a handler function:
 
-An Extractor can be passed to a handler function as a function parameter
-*or* accessed within the function by calling the ExtractorType::<...>::extract(req)
-function.
+{{< include-example example="extractors" file="main.rs" section="option-one" >}}
 
-{{< include-example example="extractors" file="main.rs" section="main" >}}
+Option 2 - accessed by calling `extract()` on the Extractor
 
-## Within Custom Handler Types
-
-Like a handler function, a custom Handler type can *access* an Extractor by
-calling the ExtractorType::<...>::extract(&req) function.  An Extractor 
-*cannot* be passed as a parameter to a custom Handler type because a custom 
-Handler type must follow the ``handle`` function signature specified by the 
-Handler trait it implements.
-
-{{< include-example example="extractors" file="custom_handler.rs" section="custom-handler" >}}
+{{< include-example example="extractors" file="main.rs" section="option-two" >}}
 
 # Path
 
-[*Path*](../../actix-web/actix_web/struct.Path.html) provides information that can
-be extracted from the Request's path. You can deserialize any variable
-segment from the path.
+[*Path*](https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.Path.html) provides
+information that can be extracted from the Request's path. You can deserialize any
+variable segment from the path.
 
 For instance, for resource that registered for the `/users/{userid}/{friend}` path
 two segments could be deserialized, `userid` and `friend`. These segments 
@@ -51,27 +40,31 @@ instead of a *tuple* type.
 
 {{< include-example example="extractors" file="path_two.rs" section="path-two" >}}
 
+It is also possible to `get` or `query` the request for path parameters by name:
+
+{{< include-example example="extractors" file="path_three.rs" section="path-three" >}}
+
 # Query
 
-Same can be done with the request's query.
-The [*Query*](../../actix-web/actix_web/struct.Query.html)
-type provides extraction functionality. Underneath it uses *serde_urlencoded* crate.
+The [*Query*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Query.html)
+type provides extraction functionality for the request's query parameters. Underneath it
+uses *serde_urlencoded* crate.
 
 {{< include-example example="extractors" file="query.rs" section="query" >}}
 
 # Json
 
-[*Json*](../../actix-web/actix_web/struct.Json.html) allows to deserialize
+[*Json*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Json.html) allows to deserialize
 a request body into a struct. To extract typed information from a request's body,
 the type `T` must implement the `Deserialize` trait from *serde*.
 
 {{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
 
 Some extractors provide a way to configure the extraction process. Json extractor
-[*JsonConfig*](../../actix-web/actix_web/dev/struct.JsonConfig.html) type for configuration.
-When you register a handler using `Route::with()`, it returns a configuration instance. In case of
-a *Json* extractor it returns a *JsonConfig*. You can configure the maximum size of the json
-payload as well as a custom error handler function.
+[*JsonConfig*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.JsonConfig.html) type
+for configuration.  When you register a handler using `Route::with()`, it returns a
+configuration instance. In case of a *Json* extractor it returns a *JsonConfig*. You can
+configure the maximum size of the json payload as well as a custom error handler function.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
 
@@ -83,14 +76,14 @@ At the moment only url-encoded forms are supported. The url-encoded body
 could be extracted to a specific type. This type must implement
 the `Deserialize` trait from the *serde* crate.
 
-[*FormConfig*](../../actix-web/actix_web/dev/struct.FormConfig.html) allows
+[*FormConfig*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.FormConfig.html) allows
 configuring the extraction process.
 
 {{< include-example example="extractors" file="form.rs" section="form" >}}
 
 # Multiple extractors
 
-Actix provides extractor implementations for tuples (up to 10 elements)
+Actix-web provides extractor implementations for tuples (up to 10 elements)
 whose elements implement `FromRequest`.
 
 For example we can use a path extractor and a query extractor at the same time.
@@ -99,15 +92,42 @@ For example we can use a path extractor and a query extractor at the same time.
 
 # Other
 
-Actix also provides several other extractors:
+Actix-web also provides several other extractors:
 
-* [*Data*](../../actix-web/actix_web/web/struct.Data.html) - If you need
-  access to an application state. This is similar to a `HttpRequest::app_data()`.
+* [*Data*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Data.html) - If you need
+  access to an application state.
 * *HttpRequest* - *HttpRequest* itself is an extractor which returns self,
   in case you need access to the request.
 * *String* - You can convert a request's payload to a *String*.
-  [*Example*](../../actix-web/actix_web/trait.FromRequest.html#example-1)
+  [*Example*](https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-2)
   is available in doc strings.
 * *bytes::Bytes* - You can convert a request's payload into *Bytes*.
-  [*Example*](../../actix-web/actix_web/trait.FromRequest.html#example)
+  [*Example*](https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-4)
   is available in doc strings.
+* *Payload* - You can access a request's payload.
+  [*Example*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Payload.html)
+
+# Async Data Access
+
+Application state is accessible from the handler with the `web::Data` extractor;
+however, state is accessible as a read-only reference. If you need mutable access to state,
+it must be implemented.
+
+> **Beware**, actix creates multiple copies of the application state and the handlers,
+> unique for each thread. If you run your application in several threads, actix will
+> create the same amount as number of threads of application state objects and handler
+> objects.
+
+Here is an example of a handler that stores the number of processed requests:
+
+{{< include-example example="request-handlers" file="main.rs" section="data" >}}
+
+Although this handler will work, `self.0` will be different depending on the number of threads and
+number of requests processed per thread. A proper implementation would use `Arc` and `AtomicUsize`.
+
+{{< include-example example="request-handlers" file="handlers_arc.rs" section="arc" >}}
+
+> Be careful with synchronization primitives like `Mutex` or `RwLock`. The `actix-web` framework
+> handles requests asynchronously. By blocking thread execution, all concurrent
+> request handling processes would block. If you need to share or update some state
+> from multiple threads, consider using the [actix](https://actix.github.io/actix/actix/) actor system.

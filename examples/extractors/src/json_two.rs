@@ -1,5 +1,5 @@
 // <json-two>
-use actix_web::{error, web, App, FromRequest, HttpResponse, Responder};
+use actix_web::{error, web, App, FromRequest, HttpResponse, HttpServer, Responder};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -13,22 +13,28 @@ fn index(info: web::Json<Info>) -> impl Responder {
 }
 
 pub fn main() {
-    App::new().service(
-        web::resource("/")
-            .data(
-                // change json extractor configuration
-                web::Json::<Info>::configure(|cfg| {
-                    cfg.limit(4096).error_handler(|err, _req| {
-                        // <- create custom error response
-                        error::InternalError::from_response(
-                            err,
-                            HttpResponse::Conflict().finish(),
-                        )
-                        .into()
-                    })
-                }),
-            )
-            .route(web::post().to(index)),
-    );
+    HttpServer::new(|| {
+        App::new().service(
+            web::resource("/")
+                .data(
+                    // change json extractor configuration
+                    web::Json::<Info>::configure(|cfg| {
+                        cfg.limit(4096).error_handler(|err, _req| {
+                            // <- create custom error response
+                            error::InternalError::from_response(
+                                err,
+                                HttpResponse::Conflict().finish(),
+                            )
+                            .into()
+                        })
+                    }),
+                )
+                .route(web::post().to(index)),
+        )
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </json-two>
