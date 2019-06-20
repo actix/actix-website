@@ -62,8 +62,8 @@ the type `T` must implement the `Deserialize` trait from *serde*.
 
 Some extractors provide a way to configure the extraction process. Json extractor
 [*JsonConfig*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.JsonConfig.html) type
-for configuration.  When you register a handler using `Route::with()`, it returns a
-configuration instance. In case of a *Json* extractor it returns a *JsonConfig*. You can
+for configuration. To configure an extractor, pass it's configuration object to the resource's
+`.data()` method. In case of a *Json* extractor it returns a *JsonConfig*. You can
 configure the maximum size of the json payload as well as a custom error handler function.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
