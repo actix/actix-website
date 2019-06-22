@@ -14,7 +14,7 @@ fn index(_req: HttpRequest) -> RegisterResult {
             // <- variant B
             Box::new(ok(HttpResponse::Ok()
                 .content_type("text/html")
-                .body(format!("Hello!")))),
+                .body("Hello!".to_string()))),
         )
     }
 }

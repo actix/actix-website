@@ -9,12 +9,12 @@ struct Event {
     tags: Vec<String>,
 }
 
-fn store_in_db(timestamp: f64, kind: &String, tags: &Vec<String>) -> Event {
+fn store_in_db(timestamp: f64, kind: &str, tags: &[String]) -> Event {
     // store item in db and get new_event
     // use id to lookup item
     Event {
         id: Some(1),
-        timestamp: timestamp,
+        timestamp,
         kind: kind.to_string(),
         tags: tags.to_vec(),
     }
