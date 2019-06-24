@@ -1,22 +1,33 @@
+use actix_web::{HttpRequest, Responder};
+
+#[allow(dead_code)]
+fn index(_req: HttpRequest) -> impl Responder {
+    "Hello world!"
+}
+
 // <integration-one>
-// use actix_web::test::TestServer;
-// use actix_web::HttpRequest;
-// use std::str;
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use actix_web::dev::Service;
+    use actix_web::{test, web, App};
 
-// fn index(req: HttpRequest) -> &'static str {
-//     "Hello world!"
-// }
+    #[test]
+    fn test_index_get() {
+        let mut app = test::init_service(App::new().route("/", web::get().to(index)));
+        let req = test::TestRequest::get().uri("/").to_request();
+        let resp = test::block_on(app.call(req)).unwrap();
 
-// fn main() {
-//     // start new test server
-//     let mut srv = TestServer::new(|app| app.handler(index));
+        assert!(resp.status().is_success());
+    }
 
-//     let request = srv.get().finish().unwrap();
-//     let response = srv.execute(request.send()).unwrap();
-//     assert!(response.status().is_success());
+    #[test]
+    fn test_index_post() {
+        let mut app = test::init_service(App::new().route("/", web::get().to(index)));
+        let req = test::TestRequest::post().uri("/").to_request();
+        let resp = test::block_on(app.call(req)).unwrap();
 
-//     let bytes = srv.execute(response.body()).unwrap();
-//     let body = str::from_utf8(&bytes).unwrap();
-//     assert_eq!(body, "Hello world!");
-// }
+        assert!(resp.status().is_client_error());
+    }
+}
 // </integration-one>
