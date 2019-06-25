@@ -13,9 +13,17 @@ fn index(info: web::Path<Info>) -> Result<String> {
 }
 
 pub fn main() {
-    App::new().route(
-        "/{username}/index.html", // <- define path parameters
-        web::get().to(index),
-    );
+    use actix_web::HttpServer;
+
+    HttpServer::new(|| {
+        App::new().route(
+            "/{username}/index.html", // <- define path parameters
+            web::get().to(index),
+        )
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </path>

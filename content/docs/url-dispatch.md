@@ -10,9 +10,10 @@ URL dispatch provides a simple way for mapping URLs to handler code using a simp
 matching language. If one of the patterns matches the path information associated with a request,
 a particular handler object is invoked.
 
-> A handler is a specific object that implements the `Handler` trait, defined in your
-> application, that receives the request and returns a response object. More information
-> is available in the [handler section][sec4handler].
+> A request handler is a function that accepts zero or more parameters that can be extracted
+> from a request (ie, [*impl FromRequest*][implfromrequest]) and returns a type that can
+> be converted into an HttpResponse (ie, [*impl Responder*][implresponder]).  More information
+> is available in the [handler section][handlersection].
 
 # Resource configuration
 
@@ -32,40 +33,33 @@ for the same path, in that case, multiple routes register for the same resource 
 {{< include-example example="url-dispatch" section="main" >}}
 
 While *App::route()* provides simple way of registering routes, to access complete resource
-configuration, a different method has to be used.  The [*App::resource()*][appresource] method
-adds a single resource to application routing table. This method accepts a *path pattern*
-and a resource configuration function.
+configuration, a different method has to be used.  The [*App::service()*][appservice] method
+adds a single [resource][webresource] to application routing table. This method accepts a
+*path pattern*, guards, and one or more routes.
 
 {{< include-example example="url-dispatch" file="resource.rs" section="resource" >}}
 
-The *Configuration function* has the following type:
-
-```rust
-FnOnce(&mut Resource<_>) -> ()
-```
-
-The *Configuration function* can set a name and register specific routes.
 If a resource does not contain any route or does not have any matching routes, it
 returns *NOT FOUND* http response.
 
 ## Configuring a Route
 
-Resource contains a set of routes. Each route in turn has a set of predicates and a handler.
+Resource contains a set of routes. Each route in turn has a set of `guards` and a handler.
 New routes can be created with `Resource::route()` method which returns a reference
-to new *Route* instance. By default the *route* does not contain any predicates, so matches
+to new *Route* instance. By default the *route* does not contain any guards, so matches
 all requests and the default handler is `HttpNotFound`.
 
 The application routes incoming requests based on route criteria which are defined during
 resource registration and route registration. Resource matches all routes it contains in
 the order the routes were registered via `Resource::route()`.
 
-> A *Route* can contain any number of *predicates* but only one handler.
+> A *Route* can contain any number of *guards* but only one handler.
 
 {{< include-example example="url-dispatch" file="cfg.rs" section="cfg" >}}
 
-In this example, `HttpResponse::Ok()` is returned for *GET* requests.
-If a request contains `Content-Type` header, the value of this header is *text/plain*,
-and path equals to `/path`, Resource calls handle of the first matching route.
+In this example, `HttpResponse::Ok()` is returned for *GET* requests if the request
+contains `Content-Type` header, the value of this header is *text/plain*, and path
+equals to `/path`.
 
 If a resource can not match any route, a "NOT FOUND" response is returned.
 
@@ -77,19 +71,16 @@ can be configured with a builder-like pattern. Following configuration methods a
 * [*Route::method()*][routemethod] registers a method guard. Any number of guards can be
   registered for each route.
 * [*Route::to()*][routeto] registers handler function for this route. Only one handler
-  can be registered.  Usually handler registration is the last config operation. Handler
-  function can be a function or closure and has the type `Fn(HttpRequest<S>) -> R + 'static`
+  can be registered.  Usually handler registration is the last config operation.
 * [*Route::to_async()*][routetoasync] registers an async handler function for this route.
   Only one handler can be registered.  Handler registration is the last config operation.
-  Handler function can be a function or closure and has the type
-  `Fn(HttpRequest<S>) -> Future<Item = HttpResponse, Error = Error> + 'static`
 
 # Route matching
 
 The main purpose of route configuration is to match (or not match) the request's `path`
 against a URL path pattern. `path` represents the path portion of the URL that was requested.
 
-The way that *actix* does this is very simple. When a request enters the system,
+The way that *actix-web* does this is very simple. When a request enters the system,
 for each resource configuration declaration present in the system, actix checks
 the request's path against the pattern declared. This checking happens in the order that
 the routes were declared via `App::resource()` method. If resource can not be found,
@@ -261,12 +252,12 @@ A *scoped* path can contain variable path segments as resources. Consistent with
 unscoped paths.
 
 You can get variable path segments from `HttpRequest::match_info()`.
-`Path` extractor also is able to extract scope level variable segments.
+[`Path` extractor][pathextractor] also is able to extract scope level variable segments.
 
 # Match information
 
 All values representing matched path segments are available in [`HttpRequest::match_info`][matchinfo].
-Specific values can be retrieved with [`Params::get()`][paramsget].
+Specific values can be retrieved with [`Path::get()`][pathget].
 
 {{< include-example example="url-dispatch" file="minfo.rs" section="minfo" >}}
 
@@ -339,16 +330,9 @@ normalization conditions, if all are enabled, is 1) merge, 2) both merge and app
 3) append. If the path resolves with at least one of those conditions, it will redirect
 to the new path.
 
-If *append* is *true*, append slash when needed. If a resource is defined with trailing
-slash and the request doesn't have one, it will be appended automatically.
-
-If *merge* is *true*, merge multiple consecutive slashes in the path into one.
-
-This handler designed to be used as a handler for application's *default resource*.
-
 {{< include-example example="url-dispatch" file="norm.rs" section="norm" >}}
 
-In this example `/resource`, `//resource///` will be redirected to `/resource/`.
+In this example `//resource///` will be redirected to `/resource/`.
 
 In this example, the path normalization handler is registered for all methods,
 but you should not rely on this mechanism to redirect *POST* requests. The redirect of the
@@ -385,12 +369,12 @@ and returns *true* or *false*. Formally, a guard is any object that implements t
 
 Here is a simple guard that check that a request contains a specific *header*:
 
-{{< include-example example="url-dispatch" file="pred.rs" section="pred" >}}
+{{< include-example example="url-dispatch" file="guard.rs" section="guard" >}}
 
 In this example, *index* handler will be called only if request contains *CONTENT-TYPE* header.
 
-Guards have access to the application's state via `HttpRequest::data()`.  Also predicates
-can store extra information in [request extensions][httprequest].
+Guards can not access or modify the request object, but it is possible to store extra
+information in [request extensions][requestextensions].
 
 ## Modifying guard values
 
@@ -398,7 +382,7 @@ You can invert the meaning of any predicate value by wrapping it in a `Not` pred
 For example, if you want to return "METHOD NOT ALLOWED" response for all methods
 except "GET":
 
-{{< include-example example="url-dispatch" file="pred2.rs" section="pred" >}}
+{{< include-example example="url-dispatch" file="guard2.rs" section="guard2" >}}
 
 The `Any` guard accepts a list of guards and matches if any of the supplied
 guards match. i.e:
@@ -424,21 +408,25 @@ with `App::service()` method.
 
 {{< include-example example="url-dispatch" file="dhandler.rs" section="default" >}}
 
-[sec4handler]: sec-4-handler.html
-[approute]: ../../actix-web/actix_web/struct.App.html#method.route
-[appresource]: ../../actix-web/actix_web/struct.App.html#method.resource
-[resourcehandler]: ../../actix-web/actix_web/dev/struct.ResourceHandler.html#method.route
-[route]: ../../actix-web/actix_web/dev/struct.Route.html
-[routeguard]: ../../actix-web/actix_web/dev/struct.Route.html#method.guard
-[routemethod]: ../../actix-web/actix_web/dev/struct.Route.html#method.method
-[routeto]: ../../actix-web/actix_web/dev/struct.Route.html#method.to
-[routetoasync]: ../../actix-web/actix_web/dev/struct.Route.html#method.to_async
-[matchinfo]: ../actix_web/struct.HttpRequest.html#method.match_info
-[paramsget]: ../actix_web/dev/struct.Params.html#method.get
-[pathstruct]: ../../actix-web/actix_web/struct.Path.html
-[query]: ../../actix-web/actix_web/struct.Query.html
-[urlfor]: ../../actix-web/actix_web/struct.HttpRequest.html#method.url_for
-[urlobj]: https://docs.rs/url/1.7.0/url/struct.Url.html
-[guardtrait]: ../actix_web/guard/trait.Guard.html
-[guardfuncs]: ../../actix-web/actix_web/guard/index.html#functions
-[httprequest]: ../../actix-web/actix_web/struct.HttpRequest.html#method.extensions
+[handlersection]: ../handlers/
+[approute]: https://docs.rs/actix-web/1.0.2/actix_web/struct.App.html#method.route
+[appservice]: https://docs.rs/actix-web/1.0.2/actix_web/struct.App.html?search=#method.service
+[webresource]: https://docs.rs/actix-web/1.0.2/actix_web/struct.Resource.html
+[resourcehandler]: https://docs.rs/actix-web/1.0.2/actix_web/struct.Resource.html#method.route
+[route]: https://docs.rs/actix-web/1.0.2/actix_web/struct.Route.html
+[routeguard]: https://docs.rs/actix-web/1.0.2/actix_web/struct.Route.html#method.guard
+[routemethod]: https://docs.rs/actix-web/1.0.2/actix_web/struct.Route.html#method.method
+[routeto]: https://docs.rs/actix-web/1.0.2/actix_web/struct.Route.html#method.to
+[routetoasync]: https://docs.rs/actix-web/1.0.2/actix_web/struct.Route.html#method.to_async
+[matchinfo]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpRequest.html#method.match_info
+[pathget]: https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.Path.html#method.get
+[pathstruct]: https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.Path.html
+[query]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Query.html
+[urlfor]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpRequest.html#method.url_for
+[urlobj]: https://docs.rs/url/1.7.2/url/struct.Url.html
+[guardtrait]: https://docs.rs/actix-web/1.0.2/actix_web/guard/trait.Guard.html
+[guardfuncs]: https://docs.rs/actix-web/1.0.2/actix_web/guard/index.html#functions
+[requestextensions]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpRequest.html#method.extensions
+[implfromrequest]: https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html
+[implresponder]: https://docs.rs/actix-web/1.0.2/actix_web/trait.Responder.html
+[pathextractor]: ../extractors

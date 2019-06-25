@@ -9,9 +9,17 @@ fn index(req: HttpRequest) -> impl Responder {
 }
 
 pub fn main() {
-    App::new()
-        .route("/index.html", web::get().to(index))
-        .external_resource("youtube", "https://youtube.com/watch/{video_id}")
-        .route("/", actix_web::web::get().to(index));
+    use actix_web::HttpServer;
+
+    HttpServer::new(|| {
+        App::new()
+            .route("/", web::get().to(index))
+            .external_resource("youtube", "https://youtube.com/watch/{video_id}")
+            .route("/", actix_web::web::get().to(index))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </ext>

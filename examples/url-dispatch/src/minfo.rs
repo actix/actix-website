@@ -9,8 +9,16 @@ fn index(req: HttpRequest) -> Result<String> {
 }
 
 pub fn main() {
-    App::new()
-        .route("/a/{v1}/{v2}/", web::get().to(index))
-        .route("", web::get().to(|| actix_web::HttpResponse::Ok()));
+    use actix_web::HttpServer;
+
+    HttpServer::new(|| {
+        App::new()
+            .route("/a/{v1}/{v2}/", web::get().to(index))
+            .route("", web::get().to(|| actix_web::HttpResponse::Ok()))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </minfo>

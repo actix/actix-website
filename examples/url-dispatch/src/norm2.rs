@@ -1,16 +1,22 @@
 // <norm>
-use actix_web::{http::Method, middleware, web, App};
+use actix_web::{http::Method, middleware, web, App, HttpServer};
 
 pub fn main() {
-    App::new()
-        .wrap(middleware::NormalizePath)
-        .route("/resource/", web::get().to(index))
-        .default_service(web::route().method(Method::GET));
+    HttpServer::new(|| {
+        App::new()
+            .wrap(middleware::NormalizePath)
+            .route("/resource/", web::get().to(index))
+            .default_service(web::route().method(Method::GET))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </norm>
 
-use actix_web::HttpRequest;
+use actix_web::HttpResponse;
 
-fn index(_req: HttpRequest) -> String {
-    unimplemented!()
+fn index() -> HttpResponse {
+    HttpResponse::Ok().body("Hello")
 }

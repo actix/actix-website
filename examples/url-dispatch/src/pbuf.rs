@@ -8,6 +8,12 @@ fn index(req: HttpRequest) -> Result<String> {
 }
 
 pub fn main() {
-    App::new().route(r"/a/{tail:.*}", web::get().to(index));
+    use actix_web::HttpServer;
+
+    HttpServer::new(|| App::new().route(r"/a/{tail:.*}", web::get().to(index)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }
 // </pbuf>
