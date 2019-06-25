@@ -39,8 +39,10 @@ thus, we receive the message response asynchronously.
 
 {{< include-example example="og_databases" file="main.rs" section="index" >}}
 
-> A full example is available in the
-> [examples directory](https://github.com/actix/examples/tree/master/diesel/).
+> A full example is available in the [examples directory][examples].
 
 > More information on sync actors can be found in the
-> [actix documentation](https://docs.rs/actix/0.7.0/actix/sync/index.html).
+> [actix documentation][actixdocs].
+
+[examples]: https://github.com/actix/examples/tree/master/diesel/
+[actixdocs]: https://docs.rs/actix/0.7.0/actix/sync/index.html

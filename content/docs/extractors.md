@@ -23,19 +23,18 @@ Option 2 - accessed by calling `extract()` on the Extractor
 
 # Path
 
-[*Path*](https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.Path.html) provides
-information that can be extracted from the Request's path. You can deserialize any
-variable segment from the path.
+[*Path*][pathstruct] provides information that can be extracted from the Request's
+path. You can deserialize any variable segment from the path.
 
 For instance, for resource that registered for the `/users/{userid}/{friend}` path
-two segments could be deserialized, `userid` and `friend`. These segments 
-could be extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure
-that implements the `Deserialize` trait from the *serde* crate.
+two segments could be deserialized, `userid` and `friend`. These segments could be
+extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure that implements
+the `Deserialize` trait from the *serde* crate.
 
 {{< include-example example="extractors" file="path_one.rs" section="path-one" >}}
 
-It is also possible to extract path information to a specific type that
-implements the `Deserialize` trait from *serde*. Here is an equivalent example that uses *serde*
+It is also possible to extract path information to a specific type that implements the
+`Deserialize` trait from *serde*. Here is an equivalent example that uses *serde*
 instead of a *tuple* type.
 
 {{< include-example example="extractors" file="path_two.rs" section="path-two" >}}
@@ -46,25 +45,24 @@ It is also possible to `get` or `query` the request for path parameters by name:
 
 # Query
 
-The [*Query*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Query.html)
-type provides extraction functionality for the request's query parameters. Underneath it
-uses *serde_urlencoded* crate.
+The [*Query*][querystruct] type provides extraction functionality for the request's
+query parameters. Underneath it uses *serde_urlencoded* crate.
 
 {{< include-example example="extractors" file="query.rs" section="query" >}}
 
 # Json
 
-[*Json*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Json.html) allows to deserialize
-a request body into a struct. To extract typed information from a request's body,
-the type `T` must implement the `Deserialize` trait from *serde*.
+[*Json*][jsonstruct] allows to deserialize a request body into a struct. To extract
+typed information from a request's body, the type `T` must implement the `Deserialize`
+trait from *serde*.
 
 {{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
 
 Some extractors provide a way to configure the extraction process. Json extractor
-[*JsonConfig*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.JsonConfig.html) type
-for configuration. To configure an extractor, pass it's configuration object to the resource's
-`.data()` method. In case of a *Json* extractor it returns a *JsonConfig*. You can
-configure the maximum size of the json payload as well as a custom error handler function.
+[*JsonConfig*][jsonconfig] type for configuration. To configure an extractor, pass it's
+configuration object to the resource's `.data()` method. In case of a *Json* extractor
+it returns a *JsonConfig*. You can configure the maximum size of the json payload as
+well as a custom error handler function.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
 
@@ -72,19 +70,18 @@ The following example limits the size of the payload to 4kb and uses a custom er
 
 # Form
 
-At the moment only url-encoded forms are supported. The url-encoded body
-could be extracted to a specific type. This type must implement
-the `Deserialize` trait from the *serde* crate.
+At the moment only url-encoded forms are supported. The url-encoded body could be
+extracted to a specific type. This type must implement the `Deserialize` trait from
+the *serde* crate.
 
-[*FormConfig*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.FormConfig.html) allows
-configuring the extraction process.
+[*FormConfig*][formconfig] allows configuring the extraction process.
 
 {{< include-example example="extractors" file="form.rs" section="form" >}}
 
 # Multiple extractors
 
-Actix-web provides extractor implementations for tuples (up to 10 elements)
-whose elements implement `FromRequest`.
+Actix-web provides extractor implementations for tuples (up to 10 elements) whose
+elements implement `FromRequest`.
 
 For example we can use a path extractor and a query extractor at the same time.
 
@@ -94,18 +91,16 @@ For example we can use a path extractor and a query extractor at the same time.
 
 Actix-web also provides several other extractors:
 
-* [*Data*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Data.html) - If you need
-  access to an application state.
-* *HttpRequest* - *HttpRequest* itself is an extractor which returns self,
-  in case you need access to the request.
-* *String* - You can convert a request's payload to a *String*.
-  [*Example*](https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-2)
+* [*Data*][datastruct] - If you need access to an application state.
+* *HttpRequest* - *HttpRequest* itself is an extractor which returns self, in case you
+  need access to the request.
+* *String* - You can convert a request's payload to a *String*.  [*Example*][stringexample]
   is available in doc strings.
 * *bytes::Bytes* - You can convert a request's payload into *Bytes*.
-  [*Example*](https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-4)
+  [*Example*][bytesexample]
   is available in doc strings.
 * *Payload* - You can access a request's payload.
-  [*Example*](https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Payload.html)
+  [*Example*][payloadexample]
 
 # Async Data Access
 
@@ -130,4 +125,15 @@ number of requests processed per thread. A proper implementation would use `Arc`
 > Be careful with synchronization primitives like `Mutex` or `RwLock`. The `actix-web` framework
 > handles requests asynchronously. By blocking thread execution, all concurrent
 > request handling processes would block. If you need to share or update some state
-> from multiple threads, consider using the [actix](https://actix.github.io/actix/actix/) actor system.
+> from multiple threads, consider using the [actix][actix] actor system.
+
+[pathstruct]: (https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.Path.html
+[querystruct]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Query.html
+[jsonstruct]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Json.html
+[jsonconfig]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.JsonConfig.html
+[formconfig]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.FormConfig.html
+[datastruct]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Data.html
+[stringexample]: https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-2
+[bytesexample]: https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-4
+[payloadexample]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Payload.html
+[actix]: https://actix.github.io/actix/actix/

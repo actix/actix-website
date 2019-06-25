@@ -19,12 +19,10 @@ Typically, middleware is involved in the following actions:
 * Modify application state
 * Access external services (redis, logging, sessions)
 
-Middleware is registered for each application and executed in same order as
-registration. In general, a *middleware* is a type that implements the
-[*Service trait*](../../actix-web/actix_web/dev/trait.Service.html) and
-[*Transform trait*](../../actix-web/actix_web/dev/trait.Transform.html).
-Each method in the traits has a default implementation. Each method can return
-a result immediately or a *future* object.
+Middleware is registered for each application and executed in same order as registration.
+In general, a *middleware* is a type that implements the [*Service trait*][servicetrait] and
+[*Transform trait*][transformtrait].  Each method in the traits has a default
+implementation. Each method can return a result immediately or a *future* object.
 
 The following demonstrates creating a simple middleware:
 
@@ -39,7 +37,7 @@ It is common to register a logging middleware as the first middleware for the ap
 Logging middleware must be registered for each application.
 
 The `Logger` middleware uses the standard log crate to log information. You should enable logger
-for *actix_web* package to see access log ([env_logger](https://docs.rs/env_logger/*/env_logger/)
+for *actix_web* package to see access log ([env_logger][envlogger]
 or similar).
 
 ## Usage
@@ -96,31 +94,30 @@ a specified header.
 
 ## User sessions
 
-Actix provides a general solution for session management. The
-[**actix-session**](https://docs.rs/actix-session/0.1.1/actix_session/) middleware can be
-used with different backend types to store session data in different backends.
+Actix provides a general solution for session management. The [**actix-session**][actixsession]
+middleware can be used with different backend types to store session data in different backends.
 
 > By default, only cookie session backend is implemented. Other backend implementations
 > can be added.
 
-[**CookieSession**](../../actix-web/actix_web/middleware/session/struct.CookieSessionBackend.html)
-uses cookies as session storage. `CookieSessionBackend` creates sessions which
-are limited to storing fewer than 4000 bytes of data, as the payload must fit into a
-single cookie. An internal server error is generated if a session contains more than 4000 bytes.
+[**CookieSession**][cookiesession] uses cookies as session storage. `CookieSessionBackend`
+creates sessions which are limited to storing fewer than 4000 bytes of data, as the payload
+must fit into a single cookie. An internal server error is generated if a session
+contains more than 4000 bytes.
 
-A cookie may have a security policy of *signed* or *private*. Each has a respective `CookieSession` constructor.
+A cookie may have a security policy of *signed* or *private*. Each has a respective
+`CookieSession` constructor.
 
-A *signed* cookie may be viewed but not modified by the client. A *private* cookie may neither be viewed nor modified by the client.
+A *signed* cookie may be viewed but not modified by the client. A *private* cookie may
+neither be viewed nor modified by the client.
 
-The constructors take a key as an argument. This is the private key for cookie session - when this value is changed, all session data is lost.
+The constructors take a key as an argument. This is the private key for cookie session -
+when this value is changed, all session data is lost.
 
-In general, you create a
-`SessionStorage` middleware and initialize it with specific backend implementation,
-such as a `CookieSession`. To access session data,
-[*HttpRequest::session()*](../../actix-web/actix_web/middleware/session/trait.RequestSession.html#tymethod.session)
- must be used. This method returns a
-[*Session*](../../actix-web/actix_web/middleware/session/struct.Session.html) object, which allows us to get or set
-session data.
+In general, you create a `SessionStorage` middleware and initialize it with specific
+backend implementation, such as a `CookieSession`. To access session data,
+[*HttpRequest::session()*][requestsession] must be used. This method returns a
+[*Session*][sessionobj] object, which allows us to get or set session data.
 
 {{< include-example example="middleware" file="user_sessions.rs" section="user-session" >}}
 
@@ -134,3 +131,11 @@ one. The error handler can return a response immediately or return a future that
 into a response.
 
 {{< include-example example="middleware" file="errorhandler.rs" section="error-handler" >}}
+
+[sessionobj]: ../../actix-web/actix_web/middleware/session/struct.Session.html
+[requestsession]: ../../actix-web/actix_web/middleware/session/trait.RequestSession.html#tymethod.session
+[cookiesession]: ../../actix-web/actix_web/middleware/session/struct.CookieSessionBackend.html
+[actixsession]: https://docs.rs/actix-session/0.1.1/actix_session/
+[envlogger]: https://docs.rs/env_logger/*/env_logger/
+[servicetrait]: ../../actix-web/actix_web/dev/trait.Service.html
+[transformtrait]: ../../actix-web/actix_web/dev/trait.Transform.html

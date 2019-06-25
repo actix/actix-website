@@ -12,9 +12,8 @@ integration tests.
 # Unit Tests
 
 For unit testing, actix-web provides a request builder type and a simple handler runner.
-[*TestRequest*](https://docs.rs/actix-web/1.0.2/actix_web/test/struct.TestRequest.html)
-implements a builder-like pattern.
-You can generate a `HttpRequest` instance with `to_http_request()`, or you can
+[*TestRequest*][testrequest] implements a builder-like pattern.  You can generate a
+`HttpRequest` instance with `to_http_request()`, or you can
 run your handler with `block_on()`.
 
 {{< include-example example="testing" file="main.rs" section="unit-tests" >}}
@@ -30,8 +29,7 @@ methods can be used to send requests to the test server.
 To create a `Service` for testing, use the `test::init_serivce` method which accepts a
 regular `App` builder.
 
-> Check the [api documentation](https://docs.rs/actix-web/1.0.2/actix_web/test/index.html)
-> for more information.
+> Check the [api documentation][actixdocs] for more information.
 
 {{< include-example example="testing" file="integration_one.rs" section="integration-one" >}}
 
@@ -43,10 +41,13 @@ the normal application. For example, you may need to initialize application stat
 
 # Stream response tests
 
-If you need to test stream it would be enough to convert a
-[*ClientResponse*](../../actix-web/actix_web/client/struct.ClientResponse.html) to future
-and execute it.
-For example of testing
-[*Server Sent Events*](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).
+If you need to test stream it would be enough to convert a [*ClientResponse*][clientresponse]
+to future and execute it.
+For example of testing [*Server Sent Events*][serversentevents].
 
 {{< include-example example="testing" file="stream_response.rs" section="stream-response" >}}
+
+[serversentevents]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+[clientresponse]: ../../actix-web/actix_web/client/struct.ClientResponse.html
+[actixdocs]: (https://docs.rs/actix-web/1.0.2/actix_web/test/index.html)
+[testrequest]: https://docs.rs/actix-web/1.0.2/actix_web/error/trait.ResponseError.html#foreign-impls

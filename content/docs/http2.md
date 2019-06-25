@@ -8,13 +8,12 @@ weight: 250
 
 # Negotiation
 
-*HTTP/2.0* protocol over tls without prior knowledge requires
-[tls alpn](https://tools.ietf.org/html/rfc7301).
+*HTTP/2.0* protocol over tls without prior knowledge requires [tls alpn][tlsalpn].
 
 > Currently, only `rust-openssl` has support.
 
 `alpn` negotiation requires enabling the feature. When enabled, `HttpServer` provides the
-[bind_ssl](../../actix-web/actix_web/server/struct.HttpServer.html#method.serve_tls) method.
+[bind_ssl][bindssl] method.
 
 ```toml
 [dependencies]
@@ -23,10 +22,14 @@ openssl = { version = "0.10", features = ["v110"] }
 ```
 {{< include-example example="http2" file="main.rs" section="main" >}}
 
-Upgrades to *HTTP/2.0* schema described in
-[rfc section 3.2](https://http2.github.io/http2-spec/#rfc.section.3.2) is not supported.
-Starting *HTTP/2* with prior knowledge is supported for both clear text connection
-and tls connection. [rfc section 3.4](https://http2.github.io/http2-spec/#rfc.section.3.4)
+Upgrades to *HTTP/2.0* schema described in [rfc section 3.2][rfcsection32] is not
+supported.  Starting *HTTP/2* with prior knowledge is supported for both clear text
+connection and tls connection. [rfc section 3.4][rfcsection34].
 
-> Check out [examples/tls](https://github.com/actix/examples/tree/master/tls)
-> for a concrete example.
+> Check out [examples/tls][examples] for a concrete example.
+
+[rfcsection32]: https://http2.github.io/http2-spec/#rfc.section.3.2
+[rfcsection34]: https://http2.github.io/http2-spec/#rfc.section.3.4
+[bindssl]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.serve_tls
+[tlsalpn]: https://tools.ietf.org/html/rfc7301
+[examples]: https://github.com/actix/examples/tree/master/tls

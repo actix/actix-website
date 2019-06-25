@@ -18,8 +18,7 @@ Actix automatically *decompresses* payloads. The following codecs are supported:
 * EncodingExt
 
 If request headers contain a `Content-Encoding` header, the request payload is decompressed
-according to the header value. Multiple codecs are not supported,
-i.e: `Content-Encoding: br, gzip`.
+according to the header value. Multiple codecs are not supported, i.e: `Content-Encoding: br, gzip`.
 
 # JSON Request
 
@@ -39,8 +38,7 @@ body first and then deserialize the json into an object.
 
 {{< include-example example="requests" file="manual.rs" section="json-manual" >}}
 
-> A complete example for both options is available in
-> [examples directory](https://github.com/actix/examples/tree/master/json/).
+> A complete example for both options is available in [examples directory][examples].
 
 # Chunked transfer encoding
 
@@ -51,26 +49,22 @@ compression codecs (br, gzip, deflate), then the byte stream is decompressed.
 # Multipart body
 
 Actix provides multipart stream support.
-[*Multipart*](../../actix-web/actix_web/multipart/struct.Multipart.html) is implemented as
-a stream of multipart items. Each item can be a
-[*Field*](../../actix-web/actix_web/multipart/struct.Field.html) or a nested
-*Multipart* stream.`HttpResponse::multipart()` returns the *Multipart* stream
-for the current request.
+[*Multipart*][multipartstruct] is implemented as a stream of multipart items. Each item
+can be a [*Field*][fieldstruct] or a nested *Multipart* stream.`HttpResponse::multipart()`
+returns the *Multipart* stream for the current request.
 
 The following demonstrates multipart stream handling for a simple form:
 
 {{< include-example example="requests" file="multipart.rs" section="multipart" >}}
 
-> A full example is available in the
-> [examples directory](https://github.com/actix/examples/tree/master/multipart/).
+> A full example is available in the [examples directory][multipartexample].
 
 # Urlencoded body
 
 Actix provides support for *application/x-www-form-urlencoded* encoded bodies.
-`HttpResponse::urlencoded()` returns a
-[*UrlEncoded*](../../actix-web/actix_web/dev/struct.UrlEncoded.html) future, which resolves
-to the deserialized instance. The type of the instance must implement the
-`Deserialize` trait from *serde*.
+`HttpResponse::urlencoded()` returns a [*UrlEncoded*][urlencoder] future, which resolves
+to the deserialized instance. The type of the instance must implement the `Deserialize`
+trait from *serde*.
 
 The *UrlEncoded* future can resolve into an error in several cases:
 
@@ -89,3 +83,9 @@ body payload.
 In the following example, we read and print the request payload chunk by chunk:
 
 {{< include-example example="requests" file="streaming.rs" section="streaming" >}}
+
+[examples]: https://github.com/actix/examples/tree/master/json/
+[multipartstruct]: ../../actix-web/actix_web/multipart/struct.Multipart.html
+[fieldstruct]: ../../actix-web/actix_web/multipart/struct.Field.html
+[multipartexample]: https://github.com/actix/examples/tree/master/multipart/
+[urlencoder]: ../../actix-web/actix_web/dev/struct.UrlEncoded.html

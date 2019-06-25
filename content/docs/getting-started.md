@@ -45,4 +45,6 @@ Head over to ``http://localhost:8088/`` to see the results.
 
 If you want, you can have an automatic reloading server during development
 that recompiles on demand.  To see how this can be accomplished have a look
-at the [autoreload pattern](../autoreload/).
+at the [autoreload pattern][autoload].
+
+[autoload]: ../autoreload/

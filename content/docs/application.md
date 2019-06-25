@@ -28,8 +28,7 @@ it is automatically inserted.  The prefix should consist of value path segments.
 In this example, an application with the `/app` prefix and a `index.html` resource
 are created. This resource is available through the `/app/index.html` url.
 
-> For more information, check the
-> [URL Dispatch](/docs/url-dispatch/index.html#using-an-application-prefix-to-compose-applications) section.
+> For more information, check the [URL Dispatch][usingappprefix] section.
 
 Multiple application scopes can be served with one server:
 
@@ -61,9 +60,8 @@ When the app is initialized it needs to be passed the initial state:
 > instance. `HttpServer` constructs an application instance for each thread, thus
 > application state must be constructed multiple times. If you want to share state between
 > different threads, a shared object should be used, e.g. `Arc`. There is also an
-> [Example](https://github.com/actix/examples/blob/master/state/src/main.rs) using `Arc`
-> for this. Application state does not need to be `Send` and `Sync`,
-> but the application factory must be `Send` + `Sync`.
+> [Example][stateexample] using `Arc` for this. Application state does not need to be
+> `Send` and `Sync`, but the application factory must be `Send` + `Sync`.
 
 To start the previous app, create it into a closure:
 
@@ -77,11 +75,10 @@ Combining multiple applications with different state is possible as well.
 
 ## Using an Application Scope to Compose Applications
 
-The `web::scope()` method allows to set a specific application prefix.
-This scope represents a resource prefix that will be prepended to all resource patterns added
-by the resource configuration. This can be used to help mount a set of routes at a different
-location than the included callable's author intended while still maintaining the same
-resource names.
+The `web::scope()` method allows to set a specific application prefix.  This scope represents
+a resource prefix that will be prepended to all resource patterns added by the resource
+configuration. This can be used to help mount a set of routes at a different location
+than the included callable's author intended while still maintaining the same resource names.
 
 For example:
 
@@ -97,13 +94,11 @@ it will generate a URL with that same path.
 
 You can think of a guard as a simple function that accepts a *request* object reference
 and returns *true* or *false*. Formally, a guard is any object that implements the
-[`Guard`](https://docs.rs/actix-web/1.0.2/actix_web/guard/trait.Guard.html) trait. Actix-web
-provides several guards, you can check
-[functions section](https://docs.rs/actix-web/1.0.2/actix_web/guard/index.html#functions)
-of api docs.
+[`Guard`][guardtrait] trait. Actix-web provides several guards, you can check
+[functions section][guardfuncs] of api docs.
 
-One of the provided guards is [`Header`](https://docs.rs/actix-web/1.0.2/actix_web/guard/fn.Header.html),
-it can be used as application's filter based on request's header information.
+One of the provided guards is [`Header`][guardheader], it can be used as application's
+filter based on request's header information.
 
 {{< include-example example="application" file="vh.rs" section="vh" >}}
 
@@ -125,3 +120,9 @@ The result of the above example would be:
 ```
 
 Each `ServiceConfig` can have it's own `data`, `routes`, and `services`
+
+[usingappprefix]: /docs/url-dispatch/index.html#using-an-application-prefix-to-compose-applications
+[stateexample]: https://github.com/actix/examples/blob/master/state/src/main.rs
+[guardtrait]: https://docs.rs/actix-web/1.0.2/actix_web/guard/trait.Guard.html
+[guardfuncs]: https://docs.rs/actix-web/1.0.2/actix_web/guard/index.html#functions
+[guardheader]: ((https://docs.rs/actix-web/1.0.2/actix_web/guard/fn.Header.html

@@ -21,13 +21,11 @@ it will be unable to serve sub-paths.
 
 By default files listing for sub-directories is disabled. Attempt to load directory
 listing will return *404 Not Found* response.  To enable files listing, use
-[*Files::show_files_listing()*](https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html)
+[*Files::show_files_listing()*][showfileslisting]
 method.
 
-Instead of showing files listing for directory, it is possible to redirect
-to a specific index file. Use the
-[*Files::index_file()*](https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html#method.index_file)
-method to configure this redirect.
+Instead of showing files listing for directory, it is possible to redirect to a specific
+index file. Use the [*Files::index_file()*][indexfile] method to configure this redirect.
 
 # Configuration
 
@@ -47,3 +45,6 @@ But it is possible to customize any of them by implementing the trait onto own s
 The Configuration cal also be applied to directory service:
 
 {{< include-example example="static-files" file="configuration_two.rs" section="config-two" >}}
+
+[showfileslisting]: https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html
+[indexfile]: https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html#method.index_file

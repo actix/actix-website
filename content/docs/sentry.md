@@ -6,19 +6,18 @@ weight: 1020
 
 # Sentry Crash Reporting
 
-[Sentry](https://sentry.io/) is a crash reporting system that supports the
-failure crate which is the base of the actix error reporting.  With a
-middleware it's possible to automatically report server errors to Sentry.
+[Sentry][sentrysite] is a crash reporting system that supports the failure crate which
+is the base of the actix error reporting.  With a middleware it's possible to
+automatically report server errors to Sentry.
 
 # Middleware
 
 This middleware captures any error in the server error range (500 - 599)
 and sends the attached error to sentry with its stacktrace.
 
-To use the middleware the [sentry crate](https://crates.io/crates/sentry) needs to be
-initialized and configured and the [sentry-actix middleware](https://crates.io/crates/sentry-actix)
-needs to be added.  Additionally it makes sense to also register the panic handler
-to be informed about hard panics.
+To use the middleware the [sentry crate][sentrycrate] needs to be initialized and configured
+and the [sentry-actix middleware][sentrymiddleware] needs to be added.  Additionally it
+makes sense to also register the panic handler to be informed about hard panics.
 
 {{< include-example example="sentry" file="main.rs" section="middleware" >}}
 
@@ -33,3 +32,7 @@ The hub can also be made current for the duration of a call.  Then `Hub::current
 until the end of the `run` block.
 
 {{< include-example example="sentry" file="main.rs" section="hub2" >}}
+
+[sentrysite]: https://sentry.io/
+[sentrycrate]: https://crates.io/crates/sentry
+[sentrymiddleware]: https://crates.io/crates/sentry-actix

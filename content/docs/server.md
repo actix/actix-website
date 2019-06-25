@@ -6,22 +6,17 @@ weight: 150
 
 # The HTTP Server
 
-The [**HttpServer**](https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html) type is responsible for
-serving http requests.
+The [**HttpServer**][httpserverstruct] type is responsible for serving http requests.
 
-`HttpServer` accepts an application factory as a parameter, and the
-application factory must have `Send` + `Sync` boundaries. More about that in the
-*multi-threading* section.
+`HttpServer` accepts an application factory as a parameter, and the application factory
+must have `Send` + `Sync` boundaries. More about that in the *multi-threading* section.
 
-To bind to a specific socket address,
-[`bind()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind)
-must be used, and it may be called multiple times. To bind ssl socket,
-[`bind_ssl()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_ssl)
-or [`bind_rustls()`](../../actix-web/1.0.0/actix_web/struct.HttpServer.html#method.bind_rustls)
-should be used. To start the http server, use one of the start methods.
+To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be
+called multiple times. To bind ssl socket, [`bind_ssl()`][bindsslmethod] or
+[`bind_rustls()`][bindrusttls] should be used. To start the http server, use one of the
+start methods.
 
-- use [`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.start)
-for a server
+- use [`start()`] for a server
 
 {{< include-example example="server" section="main" >}}
 
@@ -30,8 +25,8 @@ for a server
 > this server, send a `StopServer` message.
 
 `HttpServer` is implemented as an actix actor. It is possible to communicate with the server
-via a messaging system. Start method, e.g. `start()`, returns the
-address of the started http server. It accepts several messages:
+via a messaging system. Start method, e.g. `start()`, returns the address of the started
+http server. It accepts several messages:
 
 - `PauseServer` - Pause accepting incoming connections
 - `ResumeServer` - Resume accepting incoming connections
@@ -41,18 +36,16 @@ address of the started http server. It accepts several messages:
 
 ## Multi-threading
 
-`HttpServer` automatically starts a number of http workers, by default
-this number is equal to number of logical CPUs in the system. This number
-can be overridden with the
-[`HttpServer::workers()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.workers) method.
+`HttpServer` automatically starts a number of http workers, by default this number is
+equal to number of logical CPUs in the system. This number can be overridden with the
+[`HttpServer::workers()`][workers] method.
 
 {{< include-example example="server" file="workers.rs" section="workers" >}}
 
 The server creates a separate application instance for each created worker. Application state
 is not shared between threads. To share state, `Arc` could be used.
 
-> Application state does not need to be `Send` and `Sync`,
-> but factories must be `Send` + `Sync`.
+> Application state does not need to be `Send` and `Sync`, but factories must be `Send` + `Sync`.
 
 ## SSL
 
@@ -66,18 +59,16 @@ actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["ssl"] 
 
 {{< include-example example="server" file="ssl.rs" section="ssl" >}}
 
-> **Note**: the *HTTP/2.0* protocol requires
-> [tls alpn](https://tools.ietf.org/html/rfc7301).
+> **Note**: the *HTTP/2.0* protocol requires [tls alpn][tlsalpn].
 > At the moment, only `openssl` has `alpn` support.
-> For a full example, check out
-> [examples/tls](https://github.com/actix/examples/tree/master/tls).
+> For a full example, check out [examples/tls][exampletls].
 
 To create the key.pem and cert.pem use the command. **Fill in your own subject**
 ```bash
 $ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem \
   -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
 ```
-To remove the password, then copy nopass.pem to key.pem 
+To remove the password, then copy nopass.pem to key.pem
 ```bash
 $ openssl rsa -in key.pem -out nopass.pem
 ```
@@ -94,10 +85,9 @@ Actix can wait for requests on a keep-alive connection.
 
 {{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
 
-If the first option is selected, then *keep alive* state is
-calculated based on the response's *connection-type*. By default
-`HttpResponse::connection_type` is not defined. In that case *keep alive* is
-defined by the request's http version.
+If the first option is selected, then *keep alive* state is calculated based on the
+response's *connection-type*. By default `HttpResponse::connection_type` is not
+defined. In that case *keep alive* is defined by the request's http version.
 
 > *keep alive* is **off** for *HTTP/1.0* and is **on** for *HTTP/1.1* and *HTTP/2.0*.
 
@@ -109,22 +99,30 @@ defined by the request's http version.
 
 `HttpServer` supports graceful shutdown. After receiving a stop signal, workers
 have a specific amount of time to finish serving requests. Any workers still alive after the
-timeout are force-dropped. By default the shutdown timeout is set to 30 seconds.
-You can change this parameter with the
-[`HttpServer::shutdown_timeout()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.shutdown_timeout) method.
+timeout are force-dropped. By default the shutdown timeout is set to 30 seconds.  You
+can change this parameter with the [`HttpServer::shutdown_timeout()`][shutdowntimeout]
+method.
 
 You can send a stop message to the server with the server address and specify if you want
-graceful shutdown or not. The
-[`start()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.start)
-method returns address of the server.
+graceful shutdown or not. The [`start()`][startmethod] method returns address of the server.
 
-`HttpServer` handles several OS signals. *CTRL-C* is available on all OSs,
-other signals are available on unix systems.
+`HttpServer` handles several OS signals. *CTRL-C* is available on all OSs, other signals
+are available on unix systems.
 
 - *SIGINT* - Force shutdown workers
 - *SIGTERM* - Graceful shutdown workers
 - *SIGQUIT* - Force shutdown workers
 
 > It is possible to disable signal handling with
-> [`HttpServer::disable_signals()`](../../actix-web/actix_web/server/struct.HttpServer.html#method.disable_signals)
-> method.
+[`HttpServer::disable_signals()`][disablesignals] method.
+
+[httpserverstruct]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html
+[bindmethod]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.bind
+[bindsslmethod]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_ssl
+[bindrusttls]: ../../actix-web/1.0.0/actix_web/struct.HttpServer.html#method.bind_rustls
+[startmethod]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.start
+[workers]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.workers
+[tlsalpn]: https://tools.ietf.org/html/rfc7301
+[exampletls]: https://github.com/actix/examples/tree/master/tls
+[shutdowntimeout]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.shutdown_timeout
+[disablesignals]: (../../actix-web/actix_web/server/struct.HttpServer.html#method.disable_signals)

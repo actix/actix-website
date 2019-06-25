@@ -10,8 +10,7 @@ A builder-like pattern is used to construct an instance of `HttpResponse`.
 `HttpResponse` provides several methods that return a `HttpResponseBuilder` instance,
 which implements various convenience methods for building responses.
 
-> Check the [documentation](../../actix-web/actix_web/dev/struct.HttpResponseBuilder.html)
-> for type descriptions.
+> Check the [documentation][responsebuilder] for type descriptions.
 
 The methods `.body`, `.finish`, and `.json` finalize response creation and
 return a constructed *HttpResponse* instance. If this methods is called on the same
@@ -21,7 +20,7 @@ builder instance multiple times, the builder will panic.
 
 # Content encoding
 
-Actix automatically *compresses* payloads. The following codecs are supported:
+Actix-web automatically *compresses* payloads. The following codecs are supported:
 
 * Brotli
 * Gzip
@@ -75,3 +74,5 @@ is enabled automatically.
 > Enabling chunked encoding for *HTTP/2.0* responses is forbidden.
 
 {{< include-example example="responses" file="chunked.rs" section="chunked" >}}
+
+[responsebuilder]: ../../actix-web/actix_web/dev/struct.HttpResponseBuilder.html
