@@ -29,12 +29,6 @@ fn index(_req: HttpRequest) -> Result<&'static str, MyError> {
     Err(MyError::BadClientData)
 }
 // </override>
-pub fn main() {
-    App::new()
-        .route("/", web::get().to(index))
-        .route("/e2", web::get().to(error2))
-        .route("/e3", web::get().to(error3));
-}
 
 fn error2(_req: HttpRequest) -> Result<&'static str, MyError> {
     Err(MyError::InternalError)
@@ -42,4 +36,19 @@ fn error2(_req: HttpRequest) -> Result<&'static str, MyError> {
 
 fn error3(_req: HttpRequest) -> Result<&'static str, MyError> {
     Err(MyError::Timeout)
+}
+
+pub fn main() {
+    use actix_web::HttpServer;
+
+    HttpServer::new(|| {
+        App::new()
+            .route("/", web::get().to(index))
+            .route("/e2", web::get().to(error2))
+            .route("/e3", web::get().to(error3))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }

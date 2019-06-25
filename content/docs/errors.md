@@ -6,13 +6,13 @@ weight: 180
 
 # Errors
 
-Actix uses its own [`actix_web::error::Error`][actixerror] type and
+Actix-web uses its own [`actix_web::error::Error`][actixerror] type and
 [`actix_web::error::ResponseError`][responseerror] trait for error handling
 from web handlers.
 
 If a handler returns an `Error` (referring to the [general Rust trait
 `std::error::Error`][stderror]) in a `Result` that also implements the
-`ResponseError` trait, actix will render that error as an HTTP response.
+`ResponseError` trait, actix-web will render that error as an HTTP response.
 `ResponseError` has a single function called `error_response()` that returns
 `HttpResponse`:
 
@@ -30,7 +30,7 @@ A `Responder` coerces compatible `Result`s into HTTP responses:
 impl<T: Responder, E: Into<Error>> Responder for Result<T, E>
 ```
 
-`Error` in the code above is actix's error definition, and any errors that
+`Error` in the code above is actix-web's error definition, and any errors that
 implement `ResponseError` can be converted to one automatically.
 
 Actix-web provides `ResponseError` implementations for some common non-actix
@@ -45,8 +45,8 @@ fn index(req: &HttpRequest) -> io::Result<fs::NamedFile> {
 }
 ```
 
-See [the actix-web API documentation][responseerrorimpls] for a full list of
-foreign implementations for `ResponseError`.
+See [the actix-web API documentation][responseerrorimpls] for a full list of foreign
+implementations for `ResponseError`.
 
 ## An example of a custom error response
 
@@ -64,15 +64,15 @@ Override `error_response()` to produce more useful results:
 
 # Error helpers
 
-Actix provides a set of error helper functions that are useful for generating
+Actix-web provides a set of error helper functions that are useful for generating
 specific HTTP error codes from other errors. Here we convert `MyError`, which
 doesn't implement the `ResponseError` trait, to a *400* (bad request) using
 `map_err`:
 
 {{< include-example example="errors" file="helpers.rs" section="helpers" >}}
 
-See the [API documentation for actix-web's `error` module][errorhelpers] for a
-full list of available error helpers.
+See the [API documentation for actix-web's `error` module][actixerror]
+for a full list of available error helpers.
 
 # Compatibility with failure
 
@@ -128,9 +128,9 @@ By dividing errors into those which are user facing and those which are not, we
 can ensure that we don't accidentally expose users to errors thrown by
 application internals which they weren't meant to see.
 
-[actixerror]: ../../actix-web/actix_web/error/struct.Error.html
-[errorhelpers]: ../../actix-web/actix_web/error/index.html#functions
+[actixerror]: https://docs.rs/actix-web/1.0.2/actix_web/error/struct.Error.html
+[errorhelpers]: https://docs.rs/actix-web/1.0.2/actix_web/trait.ResponseError.html
 [failure]: https://github.com/rust-lang-nursery/failure
-[responseerror]: ../../actix-web/actix_web/error/trait.ResponseError.html
-[responseerrorimpls]: ../../actix-web/actix_web/error/trait.ResponseError.html#foreign-impls
+[responseerror]: https://docs.rs/actix-web/1.0.2/actix_web/error/trait.ResponseError.html
+[responseerrorimpls]: https://docs.rs/actix-web/1.0.2/actix_web/error/trait.ResponseError.html#foreign-impls
 [stderror]: https://doc.rust-lang.org/std/error/trait.Error.html

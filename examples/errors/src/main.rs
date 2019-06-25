@@ -1,9 +1,10 @@
 pub mod helpers;
 pub mod override_error;
 pub mod recommend_one;
-use actix_web::{web, App};
+pub mod recommend_two;
+
 // <response-error>
-use actix_web::{error, HttpRequest};
+use actix_web::{error, HttpRequest, Result};
 use failure::Fail;
 
 #[derive(Fail, Debug)]
@@ -19,6 +20,14 @@ fn index(_req: HttpRequest) -> Result<&'static str, MyError> {
     Err(MyError { name: "test" })
 }
 // </response-error>
+
 pub fn main() {
-    App::new().route("/", web::get().to(index));
+    // use actix_web::{web, App, HttpServer};
+
+    // HttpServer::new(|| App::new().route("/", web::get().to(index)))
+    //     .bind("127.0.0.1:8088")
+    //     .unwrap()
+    //     .run()
+    //     .unwrap();
+    recommend_two::main();
 }

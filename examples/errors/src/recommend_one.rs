@@ -1,4 +1,3 @@
-use actix_web::{web, App, HttpRequest};
 // <recommend-one>
 use actix_web::{error, http, HttpResponse};
 use failure::Fail;
@@ -19,12 +18,18 @@ impl error::ResponseError for UserError {
     }
 }
 // </recommend-one>
-pub fn main() {
-    App::new().route("/", web::get().to(index));
-}
-
-fn index(_req: HttpRequest) -> Result<&'static str, UserError> {
+fn index() -> Result<&'static str, UserError> {
     Err(UserError::ValidationError {
         field: "bad stuff".to_string(),
     })
+}
+
+pub fn main() {
+    use actix_web::{web, App, HttpServer};
+
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }
