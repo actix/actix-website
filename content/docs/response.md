@@ -6,15 +6,15 @@ weight: 210
 
 # Response
 
-A builder-like pattern is used to construct an instance of `HttpResponse`.
-`HttpResponse` provides several methods that return a `HttpResponseBuilder` instance,
-which implements various convenience methods for building responses.
+A builder-like pattern is used to construct an instance of `HttpResponse`.  `HttpResponse`
+provides several methods that return a `HttpResponseBuilder` instance, which implements
+various convenience methods for building responses.
 
 > Check the [documentation][responsebuilder] for type descriptions.
 
-The methods `.body`, `.finish`, and `.json` finalize response creation and
-return a constructed *HttpResponse* instance. If this methods is called on the same
-builder instance multiple times, the builder will panic.
+The methods `.body`, `.finish`, and `.json` finalize response creation and return a
+constructed *HttpResponse* instance. If this methods is called on the same builder
+instance multiple times, the builder will panic.
 
 {{< include-example example="responses" file="main.rs" section="builder" >}}
 
@@ -39,8 +39,8 @@ For example, to enable `brotli` use `ContentEncoding::Br`:
 
 {{< include-example example="responses" file="brotli.rs" section="brotli" >}}
 
-In this case we explicitly disable content compression
-by setting content encoding to a `Identity` value:
+In this case we explicitly disable content compression by setting content encoding to
+an `Identity` value:
 
 {{< include-example example="responses" file="identity.rs" section="identity" >}}
 

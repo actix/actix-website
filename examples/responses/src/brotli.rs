@@ -1,16 +1,19 @@
 // <brotli>
-use actix_web::{
-    http::ContentEncoding, middleware::BodyEncoding, HttpRequest, HttpResponse,
-};
+use actix_web::{http::ContentEncoding, middleware::BodyEncoding, HttpResponse};
 
-fn index_br(_req: HttpRequest) -> HttpResponse {
+fn index_br() -> HttpResponse {
     HttpResponse::Ok()
         .encoding(ContentEncoding::Br)
         .body("data")
 }
 // </brotli>
 
-use actix_web::{web, App};
 pub fn main() {
-    App::new().route("/", web::get().to(index_br));
+    use actix_web::{web, App, HttpServer};
+
+    HttpServer::new(|| App::new().route("/", web::get().to(index_br)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }

@@ -1,9 +1,7 @@
 // <identity>
-use actix_web::{
-    http::ContentEncoding, middleware::BodyEncoding, HttpRequest, HttpResponse,
-};
+use actix_web::{http::ContentEncoding, middleware::BodyEncoding, HttpResponse};
 
-fn index(_req: HttpRequest) -> HttpResponse {
+fn index() -> HttpResponse {
     HttpResponse::Ok()
         // v- disable compression
         .encoding(ContentEncoding::Identity)
@@ -11,7 +9,12 @@ fn index(_req: HttpRequest) -> HttpResponse {
 }
 // </identity>
 
-use actix_web::{web, App};
 pub fn main() {
-    App::new().route("/", web::get().to(index));
+    use actix_web::{web, App, HttpServer};
+
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }
