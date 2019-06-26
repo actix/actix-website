@@ -6,7 +6,7 @@ weight: 200
 
 # Content Encoding
 
-Actix automatically *decompresses* payloads. The following codecs are supported:
+Actix-web automatically *decompresses* payloads. The following codecs are supported:
 
 * Brotli
 * Chunked
@@ -42,29 +42,24 @@ body first and then deserialize the json into an object.
 
 # Chunked transfer encoding
 
-Actix automatically decodes *chunked* encoding. `HttpRequest::payload()` already contains
-the decoded byte stream. If the request payload is compressed with one of the supported
-compression codecs (br, gzip, deflate), then the byte stream is decompressed.
+Actix automatically decodes *chunked* encoding. The [`web::Payload`][payloadextractor]
+extractor already contains the decoded byte stream. If the request payload is compressed
+with one of the supported compression codecs (br, gzip, deflate), then the byte stream
+is decompressed.
 
 # Multipart body
 
-Actix provides multipart stream support.
-[*Multipart*][multipartstruct] is implemented as a stream of multipart items. Each item
-can be a [*Field*][fieldstruct] or a nested *Multipart* stream.`HttpResponse::multipart()`
-returns the *Multipart* stream for the current request.
+Actix provides multipart stream support with an external crate, [`actix-multipart`][multipartcrate].
 
 The following demonstrates multipart stream handling for a simple form:
-
-{{< include-example example="requests" file="multipart.rs" section="multipart" >}}
 
 > A full example is available in the [examples directory][multipartexample].
 
 # Urlencoded body
 
-Actix provides support for *application/x-www-form-urlencoded* encoded bodies.
-`HttpResponse::urlencoded()` returns a [*UrlEncoded*][urlencoder] future, which resolves
-to the deserialized instance. The type of the instance must implement the `Deserialize`
-trait from *serde*.
+Actix-web provides support for *application/x-www-form-urlencoded* encoded bodies with
+the [`web::Form`][urlencoded] extractor which resolves to the deserialized instance. The
+type of the instance must implement the `Deserialize` trait from *serde*.
 
 The *UrlEncoded* future can resolve into an error in several cases:
 
@@ -89,3 +84,6 @@ In the following example, we read and print the request payload chunk by chunk:
 [fieldstruct]: ../../actix-web/actix_web/multipart/struct.Field.html
 [multipartexample]: https://github.com/actix/examples/tree/master/multipart/
 [urlencoder]: ../../actix-web/actix_web/dev/struct.UrlEncoded.html
+[payloadextractor]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Payload.html
+[multipartcrate]: https://crates.io/crates/actix-multipart
+[urlencoded]:Jhttps://docs.rs/actix-web/1.0.2/actix_web/web/struct.Form.html

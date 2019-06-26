@@ -43,5 +43,11 @@ pub fn index_manual(
 // </json-manual>
 
 pub fn main() {
-    App::new().route("/", web::post().to_async(index_manual));
+    use actix_web::HttpServer;
+
+    HttpServer::new(|| App::new().route("/", web::post().to_async(index_manual)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }

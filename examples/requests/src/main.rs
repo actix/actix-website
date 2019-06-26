@@ -3,8 +3,9 @@ pub mod manual;
 pub mod multipart;
 pub mod streaming;
 pub mod urlencoded;
+
 // <json-request>
-use actix_web::{web, App, Result};
+use actix_web::{web, App, HttpServer, Result};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -18,6 +19,10 @@ fn index(info: web::Json<Info>) -> Result<String> {
 }
 
 fn main() {
-    App::new().route("/index.html", web::post().to(index));
+    HttpServer::new(|| App::new().route("/", web::post().to(index)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }
 // </json-request>
