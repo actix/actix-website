@@ -1,5 +1,5 @@
 // <compress>
-use actix_web::{http::ContentEncoding, middleware, HttpResponse};
+use actix_web::{middleware, HttpResponse};
 
 fn index_br() -> HttpResponse {
     HttpResponse::Ok().body("data")

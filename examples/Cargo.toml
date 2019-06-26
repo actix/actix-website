@@ -19,12 +19,12 @@ members = [
   "middleware",
   "static-files",
   "http2",
-]
-exclude = [
   "testing",
   "async-handlers",
   "websockets",
   "request-handlers",
+]
+exclude = [
   "og_databases",
   "sentry",
 ]
