@@ -117,12 +117,12 @@ are available on unix systems.
 [`HttpServer::disable_signals()`][disablesignals] method.
 
 [httpserverstruct]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html
-[bindmethod]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.bind
-[bindsslmethod]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.bind_ssl
-[bindrusttls]: ../../actix-web/1.0.0/actix_web/struct.HttpServer.html#method.bind_rustls
-[startmethod]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.start
-[workers]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.workers
+[bindmethod]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.bind
+[bindsslmethod]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.bind_ssl
+[bindrusttls]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.bind_rustls
+[startmethod]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.start
+[workers]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.workers
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [exampletls]: https://github.com/actix/examples/tree/master/tls
-[shutdowntimeout]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.shutdown_timeout
-[disablesignals]: (../../actix-web/actix_web/server/struct.HttpServer.html#method.disable_signals)
+[shutdowntimeout]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.shutdown_timeout
+[disablesignals]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.disable_signals

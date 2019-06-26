@@ -58,7 +58,7 @@ The following demonstrates multipart stream handling for a simple form:
 # Urlencoded body
 
 Actix-web provides support for *application/x-www-form-urlencoded* encoded bodies with
-the [`web::Form`][urlencoded] extractor which resolves to the deserialized instance. The
+the [`web::Form`][formencoded] extractor which resolves to the deserialized instance. The
 type of the instance must implement the `Deserialize` trait from *serde*.
 
 The *UrlEncoded* future can resolve into an error in several cases:
@@ -80,10 +80,10 @@ In the following example, we read and print the request payload chunk by chunk:
 {{< include-example example="requests" file="streaming.rs" section="streaming" >}}
 
 [examples]: https://github.com/actix/examples/tree/master/json/
-[multipartstruct]: ../../actix-web/actix_web/multipart/struct.Multipart.html
-[fieldstruct]: ../../actix-web/actix_web/multipart/struct.Field.html
+[multipartstruct]: https://docs.rs/actix-multipart/0.1.2/actix_multipart/struct.Multipart.html
+[fieldstruct]: https://docs.rs/actix-multipart/0.1.2/actix_multipart/struct.Field.html
 [multipartexample]: https://github.com/actix/examples/tree/master/multipart/
-[urlencoder]: ../../actix-web/actix_web/dev/struct.UrlEncoded.html
+[urlencoded]: https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.UrlEncoded.html
 [payloadextractor]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Payload.html
 [multipartcrate]: https://crates.io/crates/actix-multipart
-[urlencoded]:Jhttps://docs.rs/actix-web/1.0.2/actix_web/web/struct.Form.html
+[formencoded]:Jhttps://docs.rs/actix-web/1.0.2/actix_web/web/struct.Form.html

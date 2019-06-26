@@ -91,5 +91,5 @@ different responder types into a single type.
 [implfromrequest]: https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html
 [implresponder]: https://docs.rs/actix-web/1.0.2/actix_web/trait.Responder.html
 [respondertrait]: https://docs.rs/actix-web/1.0.2/actix_web/trait.Responder.html
-[responderimpls]: ../../actix-web/actix_web/trait.Responder.html#foreign-impls
-[either]: ../../actix-web/actix_web/enum.Either.html
+[responderimpls]: https://docs.rs/actix-web/1.0.2/actix_web/trait.Responder.html#foreign-impls
+[either]: https://docs.rs/actix-web/1.0.2/actix_web/enum.Either.html

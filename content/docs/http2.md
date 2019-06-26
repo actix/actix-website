@@ -30,6 +30,6 @@ connection and tls connection. [rfc section 3.4][rfcsection34].
 
 [rfcsection32]: https://http2.github.io/http2-spec/#rfc.section.3.2
 [rfcsection34]: https://http2.github.io/http2-spec/#rfc.section.3.4
-[bindssl]: ../../actix-web/actix_web/server/struct.HttpServer.html#method.serve_tls
+[bindssl]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.bind_ssl
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [examples]: https://github.com/actix/examples/tree/master/tls

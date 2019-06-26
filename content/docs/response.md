@@ -75,4 +75,4 @@ is enabled automatically.
 
 {{< include-example example="responses" file="chunked.rs" section="chunked" >}}
 
-[responsebuilder]: ../../actix-web/actix_web/dev/struct.HttpResponseBuilder.html
+[responsebuilder]: https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.HttpResponseBuilder.html
