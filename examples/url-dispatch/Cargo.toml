@@ -5,7 +5,7 @@ edition = "2018"
 workspace = "../"
 
 [dependencies]
-actix = "0.7"
+actix = "0.8"
 actix-web = "1.0"
 futures = "0.1"
 openssl = "0.10"

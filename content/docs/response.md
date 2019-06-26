@@ -20,24 +20,31 @@ instance multiple times, the builder will panic.
 
 # Content encoding
 
-Actix-web automatically *compresses* payloads. The following codecs are supported:
+Actix-web can automatically *compresses* payloads with the [*Compress middleware*][compressmidddleware].
+The following codecs are supported:
 
 * Brotli
 * Gzip
 * Deflate
 * Identity
 
+{{< include-example example="responses" file="compress.rs" section="compress" >}}
+
 Response payload is compressed based on the *encoding* parameter from the
-`middleware::BodyEncoding` trait.  By default, `ContentEncoding::Auto` is
-used. If `ContentEncoding::Auto` is selected, then the compression depends
-on the request's `Accept-Encoding` header.
+`middleware::BodyEncoding` trait.  By default, `ContentEncoding::Auto` is used. If
+`ContentEncoding::Auto` is selected, then the compression depends on the request's
+`Accept-Encoding` header.
 
 > `ContentEncoding::Identity` can be used to disable compression.
 > If another content encoding is selected, the compression is enforced for that codec.
 
-For example, to enable `brotli` use `ContentEncoding::Br`:
+For example, to enable `brotli` for a single handler use `ContentEncoding::Br`:
 
 {{< include-example example="responses" file="brotli.rs" section="brotli" >}}
+
+or for the entire application:
+
+{{< include-example example="responses" file="brotli_two.rs" section="brotli-two" >}}
 
 In this case we explicitly disable content compression by setting content encoding to
 an `Identity` value:
@@ -45,7 +52,7 @@ an `Identity` value:
 {{< include-example example="responses" file="identity.rs" section="identity" >}}
 
 When dealing with an already compressed body (for example when serving assets),
-set the content encoding to `Identity` to avoid compressing the already compressed 
+set the content encoding to `Identity` to avoid compressing the already compressed
 data and set the `content-encoding` header manually:
 
 {{< include-example example="responses" file="identity_two.rs" section="identity-two" >}}
@@ -76,3 +83,4 @@ is enabled automatically.
 {{< include-example example="responses" file="chunked.rs" section="chunked" >}}
 
 [responsebuilder]: https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.HttpResponseBuilder.html
+[compressmidddleware]: https://docs.rs/actix-web/1.0.2/actix_web/middleware/struct.Compress.html
