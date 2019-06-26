@@ -1,27 +1,24 @@
 // <config-one>
-// extern crate actix_web;
-// extern crate mime;
-// use actix_files::{FileConfig, NamedFile};
-// use actix_web::http::header::DispositionType;
-// use actix_web::{http::Method, App, HttpRequest, Result};
+use actix_files as fs;
+use actix_web::http::header::{ContentDisposition, DispositionType};
+use actix_web::{web, App, Error, HttpRequest, HttpServer};
 
-// use std::path::PathBuf;
+fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
+    let path: std::path::PathBuf = req.match_info().query("filename").parse().unwrap();
+    let file = fs::NamedFile::open(path)?;
+    Ok(file
+        .use_last_modified(true)
+        .set_content_disposition(ContentDisposition {
+            disposition: DispositionType::Attachment,
+            parameters: vec![],
+        }))
+}
 
-// #[derive(Default)]
-// struct MyConfig;
-
-// impl FileConfig for MyConfig {
-//     fn content_disposition_map(typ: mime::Name) -> DispositionType {
-//         DispositionType::Attachment
-//     }
-// }
-
-// fn index(req: &HttpRequest) -> Result<NamedFile<MyConfig>> {
-//     let path: PathBuf = req.match_info().query("tail")?;
-//     Ok(NamedFile::open_with_config(path, MyConfig)?)
-// }
-
-// fn main() {
-//     App::new().resource(r"/a/{tail:.*}", |r| r.method(Method::GET).f(index));
-// }
+pub fn main() {
+    HttpServer::new(|| App::new().route("/{filename:.*}", web::get().to(index)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
+}
 // </config-one>

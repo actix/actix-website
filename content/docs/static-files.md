@@ -29,20 +29,18 @@ index file. Use the [*Files::index_file()*][indexfile] method to configure this 
 
 # Configuration
 
-Generic trait `StaticFileConfig` can be used to specify various options
-for serving files:
+`NamedFiles` can specify various options for serving files:
 
-- `content_disposition_map` - function to be used for mapping file's mime to corresponding `Content-Disposition` type
-- `is_use_etag` - specifies whether `ETag` shall be calculated and included in headers.
-- `is_use_last_modifier` - specifies whether file modified timestamp should be used and added to `Last-Modified` header.
-- `is_method_allowed` - allows to control which HTTP methods are allowed to be used when accessing file.
+- `set_content_dispostion` - function to be used for mapping file's mime to corresponding `Content-Disposition` type
+- `use_etag` - specifies whether `ETag` shall be calculated and included in headers.
+- `use_last_modifier` - specifies whether file modified timestamp should be used and added to `Last-Modified` header.
 
-All of the above methods are optional and provided with the best defaults.
-But it is possible to customize any of them by implementing the trait onto own struct.
+All of the above methods are optional and provided with the best defaults, But it is
+possible to customize any of them.
 
 {{< include-example example="static-files" file="configuration.rs" section="config-one" >}}
 
-The Configuration cal also be applied to directory service:
+The Configuration can also be applied to directory service:
 
 {{< include-example example="static-files" file="configuration_two.rs" section="config-two" >}}
 
