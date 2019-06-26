@@ -2,9 +2,10 @@ pub mod default_headers;
 pub mod errorhandler;
 pub mod logger;
 pub mod user_sessions;
-// <main>
+
+// <simple>
 use actix_service::{Service, Transform};
-use actix_web::{dev::ServiceRequest, dev::ServiceResponse, web, App, Error};
+use actix_web::{dev::ServiceRequest, dev::ServiceResponse, Error};
 use futures::future::{ok, FutureResult};
 use futures::{Future, Poll};
 
@@ -63,10 +64,19 @@ where
         }))
     }
 }
-// </main>
+// </simple>
+
 fn main() {
-    App::new().wrap(SayHi).service(
-        web::resource("/")
-            .to(|| "Hello, middleware! Check the console where the server is run."),
-    );
+    use actix_web::{web, App, HttpServer};
+
+    HttpServer::new(|| {
+        App::new().wrap(SayHi).service(
+            web::resource("/")
+                .to(|| "Hello, middleware! Check the console where the server is run."),
+        )
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }

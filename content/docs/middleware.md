@@ -6,9 +6,9 @@ weight: 220
 
 # Middleware
 
-Actix's middleware system allows us to add additional behavior to request/response processing.
-Middleware can hook into an incoming request process, enabling us to modify requests
-as well as halt request processing to return a response early.
+Actix-web's middleware system allows us to add additional behavior to request/response
+processing.  Middleware can hook into an incoming request process, enabling us to modify
+requests as well as halt request processing to return a response early.
 
 Middleware can also hook into response processing.
 
@@ -19,31 +19,32 @@ Typically, middleware is involved in the following actions:
 * Modify application state
 * Access external services (redis, logging, sessions)
 
-Middleware is registered for each application and executed in same order as registration.
-In general, a *middleware* is a type that implements the [*Service trait*][servicetrait] and
-[*Transform trait*][transformtrait].  Each method in the traits has a default
-implementation. Each method can return a result immediately or a *future* object.
+Middleware is registered for each `App`, `scope`, or `Resource` and executed in opposite
+order as registration.  In general, a *middleware* is a type that implements the
+[*Service trait*][servicetrait] and [*Transform trait*][transformtrait].  Each method in
+the traits has a default implementation. Each method can return a result immediately
+or a *future* object.
 
 The following demonstrates creating a simple middleware:
 
-{{< include-example example="middleware" file="main.rs" section="main" >}}
+{{< include-example example="middleware" file="main.rs" section="simple" >}}
 
-> Actix provides several useful middlewares, such as *logging*, *user sessions*, etc.
+> Actix-web provides several useful middlewares, such as *logging*, *user sessions*,
+> *compress*, etc.
 
 # Logging
 
-Logging is implemented as a middleware.
-It is common to register a logging middleware as the first middleware for the application.
-Logging middleware must be registered for each application.
+Logging is implemented as a middleware.  It is common to register a logging middleware
+as the first middleware for the application.  Logging middleware must be registered for
+each application.
 
 The `Logger` middleware uses the standard log crate to log information. You should enable logger
-for *actix_web* package to see access log ([env_logger][envlogger]
-or similar).
+for *actix_web* package to see access log ([env_logger][envlogger] or similar).
 
 ## Usage
 
-Create `Logger` middleware with the specified `format`.
-Default `Logger` can be created with `default` method, it uses the default format:
+Create `Logger` middleware with the specified `format`.  Default `Logger` can be created
+with `default` method, it uses the default format:
 
 ```ignore
   %a %t "%r" %s %b "%{Referer}i" "%{User-Agent}i" %T
@@ -60,29 +61,18 @@ INFO:actix_web::middleware::logger: 127.0.0.1:59947 [02/Dec/2017:00:22:40 -0800]
 
 ## Format
 
- `%%`  The percent sign
-
- `%a`  Remote IP-address (IP-address of proxy if using reverse proxy)
-
- `%t`  Time when the request was started to process
-
- `%P`  The process ID of the child that serviced the request
-
- `%r`  First line of request
-
- `%s`  Response status code
-
- `%b`  Size of response in bytes, including HTTP headers
-
- `%T`  Time taken to serve the request, in seconds with floating fraction in .06f format
-
- `%D`  Time taken to serve the request, in milliseconds
-
- `%{FOO}i`  request.headers['FOO']
-
- `%{FOO}o`  response.headers['FOO']
-
- `%{FOO}e`  os.environ['FOO']
+- `%%`  The percent sign
+- `%a`  Remote IP-address (IP-address of proxy if using reverse proxy)
+- `%t`  Time when the request was started to process
+- `%P`  The process ID of the child that serviced the request
+- `%r`  First line of request
+- `%s`  Response status code
+- `%b`  Size of response in bytes, including HTTP headers
+- `%T`  Time taken to serve the request, in seconds with floating fraction in .06f format
+- `%D`  Time taken to serve the request, in milliseconds
+- `%{FOO}i`  request.headers['FOO']
+- `%{FOO}o`  response.headers['FOO']
+- `%{FOO}e`  os.environ['FOO']
 
 ## Default headers
 
@@ -94,8 +84,9 @@ a specified header.
 
 ## User sessions
 
-Actix provides a general solution for session management. The [**actix-session**][actixsession]
-middleware can be used with different backend types to store session data in different backends.
+Actix-web provides a general solution for session management. The
+[**actix-session**][actixsession] middleware can be used with different backend types
+to store session data in different backends.
 
 > By default, only cookie session backend is implemented. Other backend implementations
 > can be added.
@@ -115,8 +106,8 @@ The constructors take a key as an argument. This is the private key for cookie s
 when this value is changed, all session data is lost.
 
 In general, you create a `SessionStorage` middleware and initialize it with specific
-backend implementation, such as a `CookieSession`. To access session data,
-[*HttpRequest::session()*][requestsession] must be used. This method returns a
+backend implementation, such as a `CookieSession`. To access session data the
+[`Session`][requestsession] extractor must be used. This method returns a
 [*Session*][sessionobj] object, which allows us to get or set session data.
 
 {{< include-example example="middleware" file="user_sessions.rs" section="user-session" >}}
@@ -132,10 +123,10 @@ into a response.
 
 {{< include-example example="middleware" file="errorhandler.rs" section="error-handler" >}}
 
-[sessionobj]: ../../actix-web/actix_web/middleware/session/struct.Session.html
-[requestsession]: ../../actix-web/actix_web/middleware/session/trait.RequestSession.html#tymethod.session
-[cookiesession]: ../../actix-web/actix_web/middleware/session/struct.CookieSessionBackend.html
+[sessionobj]: https://docs.rs/actix-session/0.1.1/actix_session/struct.Session.html
+[requestsession]: https://docs.rs/actix-session/0.1.1/actix_session/struct.Session.html
+[cookiesession]: https://docs.rs/actix-session/0.1.1/actix_session/struct.CookieSession.html
 [actixsession]: https://docs.rs/actix-session/0.1.1/actix_session/
 [envlogger]: https://docs.rs/env_logger/*/env_logger/
-[servicetrait]: ../../actix-web/actix_web/dev/trait.Service.html
-[transformtrait]: ../../actix-web/actix_web/dev/trait.Transform.html
+[servicetrait]: https://docs.rs/actix-web/1.0.2/actix_web/dev/trait.Service.html
+[transformtrait]: https://docs.rs/actix-web/1.0.2/actix_web/dev/trait.Transform.html

@@ -1,37 +1,33 @@
 // <user-session>
 use actix_session::{CookieSession, Session};
-use actix_web::{middleware::Logger, web, App, HttpRequest, HttpServer, Result};
+use actix_web::{web, App, Error, HttpResponse, HttpServer};
 
-/// simple index handler with session
-fn index(session: Session, req: HttpRequest) -> Result<&'static str> {
-    println!("{:?}", req);
-
-    // RequestSession trait is used for session access
-    let mut counter = 1;
+pub fn index(session: Session) -> Result<HttpResponse, Error> {
+    // access session data
     if let Some(count) = session.get::<i32>("counter")? {
-        println!("SESSION value: {}", count);
-        counter = count + 1;
-        session.set("counter", counter)?;
+        session.set("counter", count + 1)?;
     } else {
-        session.set("counter", counter)?;
+        session.set("counter", 1)?;
     }
 
-    Ok("welcome!")
+    Ok(HttpResponse::Ok().body(format!(
+        "Count is {:?}!",
+        session.get::<i32>("counter")?.unwrap()
+    )))
 }
 
-pub fn main() -> std::io::Result<()> {
-    std::env::set_var("RUST_LOG", "actix_web=info");
-    env_logger::init();
-
+pub fn main() {
     HttpServer::new(|| {
         App::new()
-            // enable logger
-            .wrap(Logger::default())
-            // cookie session middleware
-            .wrap(CookieSession::signed(&[0; 32]).secure(false))
+            .wrap(
+                CookieSession::signed(&[0; 32]) // <- create cookie based session middleware
+                    .secure(false),
+            )
             .service(web::resource("/").to(index))
     })
-    .bind("127.0.0.1:8080")?
+    .bind("127.0.0.1:8088")
+    .unwrap()
     .run()
+    .unwrap();
 }
 // </user-session>
