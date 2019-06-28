@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpRequest, HttpServer, Result};
+use actix_web::{web, HttpRequest, Result};
 
 // <path-three>
 fn index(req: HttpRequest) -> Result<String> {
@@ -9,6 +9,8 @@ fn index(req: HttpRequest) -> Result<String> {
 }
 
 pub fn main() {
+    use actix_web::{App, HttpServer};
+
     HttpServer::new(|| {
         App::new().route(
             "/users/{userid}/{friend}", // <- define path parameters

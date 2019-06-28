@@ -83,7 +83,7 @@ against a URL path pattern. `path` represents the path portion of the URL that w
 The way that *actix-web* does this is very simple. When a request enters the system,
 for each resource configuration declaration present in the system, actix checks
 the request's path against the pattern declared. This checking happens in the order that
-the routes were declared via `App::resource()` method. If resource can not be found,
+the routes were declared via `App::service()` method. If resource can not be found,
 the *default resource* is used as the matched resource.
 
 When a route configuration is declared, it may contain route guard arguments. All route

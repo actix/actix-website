@@ -1,7 +1,5 @@
 // <guard>
-use actix_web::{
-    dev::RequestHead, guard::Guard, http, web, App, HttpResponse, HttpServer,
-};
+use actix_web::{dev::RequestHead, guard::Guard, http, HttpResponse};
 
 struct ContentTypeHeader;
 
@@ -12,6 +10,8 @@ impl Guard for ContentTypeHeader {
 }
 
 pub fn main() {
+    use actix_web::{web, App, HttpServer};
+
     HttpServer::new(|| {
         App::new().route(
             "/",

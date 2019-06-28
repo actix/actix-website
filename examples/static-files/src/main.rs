@@ -4,7 +4,7 @@ pub mod directory;
 
 // <individual-file>
 use actix_files::NamedFile;
-use actix_web::{web, App, HttpRequest, HttpServer, Result};
+use actix_web::{HttpRequest, Result};
 use std::path::PathBuf;
 
 fn index(req: HttpRequest) -> Result<NamedFile> {
@@ -13,6 +13,8 @@ fn index(req: HttpRequest) -> Result<NamedFile> {
 }
 
 fn main() {
+    use actix_web::{web, App, HttpServer};
+
     HttpServer::new(|| App::new().route("/{filename:.*}", web::get().to(index)))
         .bind("127.0.0.1:8088")
         .unwrap()

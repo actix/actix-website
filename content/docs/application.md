@@ -43,7 +43,7 @@ as the first application, it would match all incoming requests.
 ## State
 
 Application state is shared with all routes and resources within the same scope. State
-can be accessed with `web::Data<State>` as read-only, but interior mutability with
+can be accessed with the `web::Data<State>` extractor as read-only, but interior mutability with
 `Cell` can be used to achieve state mutability. State is also available for route
 matching guards and middlewares.
 

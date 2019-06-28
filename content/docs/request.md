@@ -49,9 +49,7 @@ is decompressed.
 
 # Multipart body
 
-Actix provides multipart stream support with an external crate, [`actix-multipart`][multipartcrate].
-
-The following demonstrates multipart stream handling for a simple form:
+Actix-web provides multipart stream support with an external crate, [`actix-multipart`][multipartcrate].
 
 > A full example is available in the [examples directory][multipartexample].
 

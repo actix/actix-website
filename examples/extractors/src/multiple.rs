@@ -1,5 +1,5 @@
 // <multi>
-use actix_web::{web, App, HttpServer};
+use actix_web::web;
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -15,6 +15,8 @@ fn index((path, query): (web::Path<(u32, String)>, web::Query<Info>)) -> String 
 }
 
 pub fn main() {
+    use actix_web::{App, HttpServer};
+
     HttpServer::new(|| {
         App::new().route(
             "/users/{userid}/{friend}", // <- define path parameters

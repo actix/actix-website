@@ -3,12 +3,10 @@ fn is_error() -> bool {
 }
 
 // <async-stream>
-use actix_web::{error, web, App, Error, HttpRequest, HttpResponse, HttpServer};
+use actix_web::{error, Error, HttpResponse};
 use futures::future::{result, Future};
 
-fn index(
-    _req: HttpRequest,
-) -> Result<Box<Future<Item = HttpResponse, Error = Error>>, Error> {
+fn index() -> Result<Box<Future<Item = HttpResponse, Error = Error>>, Error> {
     if is_error() {
         Err(error::ErrorBadRequest("bad request"))
     } else {
@@ -20,6 +18,8 @@ fn index(
 // </async-stream>
 
 pub fn main() {
+    use actix_web::{web, App, HttpServer};
+
     HttpServer::new(|| App::new().route("/", web::to_async(index)))
         .bind("127.0.0.1:8088")
         .unwrap()

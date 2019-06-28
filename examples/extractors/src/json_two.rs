@@ -1,5 +1,5 @@
 // <json-two>
-use actix_web::{error, web, App, FromRequest, HttpResponse, HttpServer, Responder};
+use actix_web::{error, web, FromRequest, HttpResponse, Responder};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -13,6 +13,8 @@ fn index(info: web::Json<Info>) -> impl Responder {
 }
 
 pub fn main() {
+    use actix_web::{App, HttpServer};
+
     HttpServer::new(|| {
         App::new().service(
             web::resource("/")

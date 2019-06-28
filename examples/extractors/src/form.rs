@@ -1,5 +1,5 @@
 // <form>
-use actix_web::{web, App, HttpServer, Result};
+use actix_web::{web, Result};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -16,6 +16,8 @@ fn index(form: web::Form<FormData>) -> Result<String> {
 // </form>
 
 pub fn main() {
+    use actix_web::{App, HttpServer};
+
     HttpServer::new(|| App::new().route("/", web::post().to(index)))
         .bind("127.0.0.1:8088")
         .unwrap()

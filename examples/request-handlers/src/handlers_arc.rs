@@ -1,5 +1,5 @@
 // <arc>
-use actix_web::{web, App, HttpServer, Responder};
+use actix_web::{web, Responder};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 
@@ -19,6 +19,8 @@ fn add_one(data: web::Data<AppState>) -> impl Responder {
 }
 
 pub fn main() {
+    use actix_web::{App, HttpServer};
+
     let data = AppState {
         count: Arc::new(AtomicUsize::new(0)),
     };

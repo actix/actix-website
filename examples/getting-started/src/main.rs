@@ -1,11 +1,11 @@
 // <setup>
-use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
+use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 
 fn index() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
 }
 
-fn index2(_req: HttpRequest) -> impl Responder {
+fn index2() -> impl Responder {
     HttpResponse::Ok().body("Hello world again!")
 }
 // </setup>

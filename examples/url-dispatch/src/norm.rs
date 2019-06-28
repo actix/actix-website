@@ -1,12 +1,12 @@
 // <norm>
-use actix_web::{middleware, web, App, HttpResponse};
+use actix_web::{middleware, HttpResponse};
 
 fn index() -> HttpResponse {
     HttpResponse::Ok().body("Hello")
 }
 
 pub fn main() {
-    use actix_web::HttpServer;
+    use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| {
         App::new()

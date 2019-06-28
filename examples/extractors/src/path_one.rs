@@ -1,5 +1,5 @@
 // <path-one>
-use actix_web::{web, App, HttpServer, Result};
+use actix_web::{web, Result};
 
 /// extract path info from "/users/{userid}/{friend}" url
 /// {userid} -  - deserializes to a u32
@@ -9,6 +9,8 @@ fn index(info: web::Path<(u32, String)>) -> Result<String> {
 }
 
 pub fn main() {
+    use actix_web::{App, HttpServer};
+
     HttpServer::new(|| {
         App::new().route(
             "/users/{userid}/{friend}", // <- define path parameters

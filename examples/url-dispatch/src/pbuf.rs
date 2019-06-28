@@ -1,5 +1,5 @@
 // <pbuf>
-use actix_web::{web, App, HttpRequest, Result};
+use actix_web::{HttpRequest, Result};
 use std::path::PathBuf;
 
 fn index(req: HttpRequest) -> Result<String> {
@@ -8,7 +8,7 @@ fn index(req: HttpRequest) -> Result<String> {
 }
 
 pub fn main() {
-    use actix_web::HttpServer;
+    use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| App::new().route(r"/a/{tail:.*}", web::get().to(index)))
         .bind("127.0.0.1:8088")

@@ -1,5 +1,5 @@
 // <query>
-use actix_web::{web, App, HttpServer};
+use actix_web::web;
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -14,6 +14,8 @@ fn index(info: web::Query<Info>) -> String {
 // </query>
 
 pub fn main() {
+    use actix_web::{App, HttpServer};
+
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
         .bind("127.0.0.1:8088")
         .unwrap()

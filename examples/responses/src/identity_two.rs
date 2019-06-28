@@ -1,7 +1,6 @@
 // <identity-two>
 use actix_web::{
-    http::ContentEncoding, middleware, middleware::BodyEncoding, HttpRequest,
-    HttpResponse,
+    http::ContentEncoding, middleware, middleware::BodyEncoding, HttpResponse,
 };
 
 static HELLO_WORLD: &[u8] = &[
@@ -10,7 +9,7 @@ static HELLO_WORLD: &[u8] = &[
     0x0c, 0x00, 0x00, 0x00,
 ];
 
-pub fn index(_req: HttpRequest) -> HttpResponse {
+pub fn index() -> HttpResponse {
     HttpResponse::Ok()
         .encoding(ContentEncoding::Identity)
         .header("content-encoding", "gzip")

@@ -1,5 +1,5 @@
 // <minfo>
-use actix_web::{web, App, HttpRequest, Result};
+use actix_web::{HttpRequest, HttpResponse, Result};
 
 fn index(req: HttpRequest) -> Result<String> {
     let v1: u8 = req.match_info().get("v1").unwrap().parse().unwrap();
@@ -9,12 +9,12 @@ fn index(req: HttpRequest) -> Result<String> {
 }
 
 pub fn main() {
-    use actix_web::HttpServer;
+    use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| {
         App::new()
             .route("/a/{v1}/{v2}/", web::get().to(index))
-            .route("", web::get().to(|| actix_web::HttpResponse::Ok()))
+            .route("", web::get().to(|| HttpResponse::Ok()))
     })
     .bind("127.0.0.1:8088")
     .unwrap()

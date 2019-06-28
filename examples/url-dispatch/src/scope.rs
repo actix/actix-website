@@ -5,8 +5,8 @@ fn show_users() -> HttpResponse {
     HttpResponse::Ok().body("Show users")
 }
 
-fn user_detail(_path: web::Path<(u32,)>) -> HttpResponse {
-    HttpResponse::Ok().body("User detail")
+fn user_detail(path: web::Path<(u32,)>) -> HttpResponse {
+    HttpResponse::Ok().body(format!("User detail: {}", path.0))
 }
 
 pub fn main() {

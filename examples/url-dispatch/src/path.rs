@@ -1,12 +1,12 @@
 // <path>
-use actix_web::{web, App, Result};
+use actix_web::{web, Result};
 
 fn index(info: web::Path<(String, u32)>) -> Result<String> {
     Ok(format!("Welcome {}! id: {}", info.0, info.1))
 }
 
 pub fn main() {
-    use actix_web::HttpServer;
+    use actix_web::{App, HttpServer};
 
     HttpServer::new(|| {
         App::new().route(

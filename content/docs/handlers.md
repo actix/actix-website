@@ -22,13 +22,13 @@ such as `&'static str`, `String`, etc.
 Examples of valid handlers:
 
 ```rust
-fn index(req: &HttpRequest) -> &'static str {
+fn index(_req: HttpRequest) -> &'static str {
     "Hello world!"
 }
 ```
 
 ```rust
-fn index(req: HttpRequest) -> String {
+fn index(_req: HttpRequest) -> String {
     "Hello world!".to_owned()
 }
 ```
@@ -37,7 +37,7 @@ You can also change the signature to return `impl Responder` which works well if
 complex types are involved.
 
 ```rust
-fn index(req: HttpRequest) -> impl Responder {
+fn index(_req: HttpRequest) -> impl Responder {
     Bytes::from_static("Hello world!")
 }
 ```

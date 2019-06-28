@@ -1,11 +1,11 @@
 // <either>
-use actix_web::{web, App, Either, Error, HttpRequest, HttpResponse};
+use actix_web::{Either, Error, HttpResponse};
 use futures::future::{ok, Future};
 
 type RegisterResult =
     Either<HttpResponse, Box<Future<Item = HttpResponse, Error = Error>>>;
 
-fn index(_req: HttpRequest) -> RegisterResult {
+fn index() -> RegisterResult {
     if is_a_variant() {
         // <- choose variant A
         Either::A(HttpResponse::BadRequest().body("Bad data"))
@@ -20,7 +20,13 @@ fn index(_req: HttpRequest) -> RegisterResult {
 }
 
 fn main() {
-    App::new().route("/", web::get().to(index));
+    use actix_web::{web, App, HttpServer};
+
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }
 // </either>
 

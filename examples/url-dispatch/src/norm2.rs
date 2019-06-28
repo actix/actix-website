@@ -1,3 +1,9 @@
+use actix_web::HttpResponse;
+
+fn index() -> HttpResponse {
+    HttpResponse::Ok().body("Hello")
+}
+
 // <norm>
 use actix_web::{http::Method, middleware, web, App, HttpServer};
 
@@ -14,9 +20,3 @@ pub fn main() {
     .unwrap();
 }
 // </norm>
-
-use actix_web::HttpResponse;
-
-fn index() -> HttpResponse {
-    HttpResponse::Ok().body("Hello")
-}

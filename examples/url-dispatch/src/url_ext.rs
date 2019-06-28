@@ -1,5 +1,5 @@
 // <ext>
-use actix_web::{web, App, HttpRequest, Responder};
+use actix_web::{HttpRequest, Responder};
 
 fn index(req: HttpRequest) -> impl Responder {
     let url = req.url_for("youtube", &["oHg5SJYRHA0"]).unwrap();
@@ -9,7 +9,7 @@ fn index(req: HttpRequest) -> impl Responder {
 }
 
 pub fn main() {
-    use actix_web::HttpServer;
+    use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| {
         App::new()

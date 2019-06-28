@@ -16,7 +16,7 @@ pub struct MyError {
 // Use default implementation for `error_response()` method
 impl error::ResponseError for MyError {}
 
-fn index(_req: HttpRequest) -> Result<&'static str, MyError> {
+fn index() -> Result<&'static str, MyError> {
     Err(MyError { name: "test" })
 }
 // </response-error>

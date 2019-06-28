@@ -1,5 +1,5 @@
 // <responder-trait>
-use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpServer, Responder};
+use actix_web::{Error, HttpRequest, HttpResponse, Responder};
 use serde::Serialize;
 
 #[derive(Serialize)]
@@ -28,6 +28,8 @@ fn index() -> impl Responder {
 // </responder-trait>
 
 fn main() {
+    use actix_web::{web, App, HttpServer};
+
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
         .bind("127.0.0.1:8088")
         .unwrap()

@@ -40,7 +40,7 @@ converted into an `HttpInternalServerError`:
 ```rust
 use std::io;
 
-fn index(req: &HttpRequest) -> io::Result<fs::NamedFile> {
+fn index(_req: HttpRequest) -> io::Result<fs::NamedFile> {
     Ok(fs::NamedFile::open("static/index.html")?)
 }
 ```

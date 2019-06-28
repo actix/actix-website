@@ -1,9 +1,9 @@
 // <stream>
-use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpServer};
+use actix_web::{Error, HttpResponse};
 use bytes::Bytes;
 use futures::stream::once;
 
-fn index(_req: HttpRequest) -> HttpResponse {
+fn index() -> HttpResponse {
     let body = once::<Bytes, Error>(Ok(Bytes::from_static(b"test")));
 
     HttpResponse::Ok()
@@ -12,6 +12,8 @@ fn index(_req: HttpRequest) -> HttpResponse {
 }
 
 pub fn main() {
+    use actix_web::{web, App, HttpServer};
+
     HttpServer::new(|| App::new().route("/async", web::to_async(index)))
         .bind("127.0.0.1:8088")
         .unwrap()

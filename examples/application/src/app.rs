@@ -1,7 +1,7 @@
 // <setup>
-use actix_web::{web, App, HttpRequest, Responder};
+use actix_web::{web, App, Responder};
 
-fn index(_req: HttpRequest) -> impl Responder {
+fn index() -> impl Responder {
     "Hello world!"
 }
 
