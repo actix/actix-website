@@ -128,6 +128,12 @@ By dividing errors into those which are user facing and those which are not, we
 can ensure that we don't accidentally expose users to errors thrown by
 application internals which they weren't meant to see.
 
+# Error Logging
+
+This is a basic example using `middleware::Logger`:
+
+{{< include-example example="errors" file="logging.rs" section="logging" >}}
+
 [actixerror]: https://docs.rs/actix-web/1.0.2/actix_web/error/struct.Error.html
 [errorhelpers]: https://docs.rs/actix-web/1.0.2/actix_web/trait.ResponseError.html
 [failure]: https://github.com/rust-lang-nursery/failure

@@ -1,5 +1,5 @@
 [package]
-name = "errors"
+name = "my_errors"
 version = "1.0.0"
 edition = "2018"
 
