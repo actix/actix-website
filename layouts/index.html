@@ -70,6 +70,7 @@ fn main() {
             to return consistent responses from your APIs.
           </p>
           {{ highlight `#[derive(Serialize)]
+#[derive(Serialize)]
 struct Measurement {
     temperature: f32,
 }
@@ -78,7 +79,7 @@ fn hello_world() -> impl Responder {
     "Hello World!"
 }
 
-fn current_temperature(_req: HttpRequest) -> impl Responder {
+fn current_temperature() -> impl Responder {
     web::Json(Measurement { temperature: 42.3 })
 }` "rust" "" }}
         </div>

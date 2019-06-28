@@ -11,7 +11,7 @@ fn hello_world() -> impl Responder {
     "Hello World!"
 }
 
-fn current_temperature(_req: HttpRequest) -> impl Responder {
+fn current_temperature() -> impl Responder {
     web::Json(Measurement { temperature: 42.3 })
 }
 
