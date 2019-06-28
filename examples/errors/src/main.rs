@@ -4,7 +4,7 @@ pub mod recommend_one;
 pub mod recommend_two;
 
 // <response-error>
-use actix_web::{error, HttpRequest, Result};
+use actix_web::{error, Result};
 use failure::Fail;
 
 #[derive(Fail, Debug)]
