@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["CookieIdentityPolicy","Use cookies for request identity storage."],["IdentityService","Request identity middleware"]],"trait":[["Identity","An identity"],["IdentityPolicy","Identity policy definition."],["RequestIdentity","The helper trait to obtain your identity from a request."]]});
