@@ -1,0 +1,7 @@
+[package]
+name = "og_databases"
+version = "0.7.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "0.7"

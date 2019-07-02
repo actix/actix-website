@@ -1,8 +1,10 @@
 // <workers>
-use actix_web::{server::HttpServer, App, HttpResponse};
+use actix_web::{web, App, HttpResponse, HttpServer};
 
-fn main() {
-    HttpServer::new(|| App::new().resource("/", |r| r.f(|_| HttpResponse::Ok())))
-        .workers(4); // <- Start 4 workers
+pub fn main() {
+    HttpServer::new(|| {
+        App::new().route("/", web::get().to(|| HttpResponse::Ok()))
+    })
+    .workers(4); // <- Start 4 workers
 }
 // </workers>

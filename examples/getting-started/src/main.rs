@@ -1,16 +1,25 @@
 // <setup>
-extern crate actix_web;
-use actix_web::{server, App, HttpRequest};
+use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 
-fn index(_req: &HttpRequest) -> &'static str {
-    "Hello world!"
+fn index() -> impl Responder {
+    HttpResponse::Ok().body("Hello world!")
+}
+
+fn index2() -> impl Responder {
+    HttpResponse::Ok().body("Hello world again!")
 }
 // </setup>
+
 // <main>
 fn main() {
-    server::new(|| App::new().resource("/", |r| r.f(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
-        .run();
+    HttpServer::new(|| {
+        App::new()
+            .route("/", web::get().to(index))
+            .route("/again", web::get().to(index2))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </main>

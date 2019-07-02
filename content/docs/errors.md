@@ -6,13 +6,13 @@ weight: 180
 
 # Errors
 
-Actix uses its own [`actix_web::error::Error`][actixerror] type and
+Actix-web uses its own [`actix_web::error::Error`][actixerror] type and
 [`actix_web::error::ResponseError`][responseerror] trait for error handling
 from web handlers.
 
 If a handler returns an `Error` (referring to the [general Rust trait
 `std::error::Error`][stderror]) in a `Result` that also implements the
-`ResponseError` trait, actix will render that error as an HTTP response.
+`ResponseError` trait, actix-web will render that error as an HTTP response.
 `ResponseError` has a single function called `error_response()` that returns
 `HttpResponse`:
 
@@ -30,7 +30,7 @@ A `Responder` coerces compatible `Result`s into HTTP responses:
 impl<T: Responder, E: Into<Error>> Responder for Result<T, E>
 ```
 
-`Error` in the code above is actix's error definition, and any errors that
+`Error` in the code above is actix-web's error definition, and any errors that
 implement `ResponseError` can be converted to one automatically.
 
 Actix-web provides `ResponseError` implementations for some common non-actix
@@ -40,34 +40,19 @@ converted into an `HttpInternalServerError`:
 ```rust
 use std::io;
 
-fn index(req: &HttpRequest) -> io::Result<fs::NamedFile> {
+fn index(_req: HttpRequest) -> io::Result<fs::NamedFile> {
     Ok(fs::NamedFile::open("static/index.html")?)
 }
 ```
 
-See [the actix-web API documentation][responseerrorimpls] for a full list of
-foreign implementations for `ResponseError`.
+See [the actix-web API documentation][responseerrorimpls] for a full list of foreign
+implementations for `ResponseError`.
 
 ## An example of a custom error response
 
 Here's an example implementation for `ResponseError`:
 
-```rust
-use actix_web::*;
-
-#[derive(Fail, Debug)]
-#[fail(display="my error")]
-struct MyError {
-   name: &'static str
-}
-
-// Use default implementation for `error_response()` method
-impl error::ResponseError for MyError {}
-
-fn index(req: &HttpRequest) -> Result<&'static str, MyError> {
-    Err(MyError{name: "test"})
-}
-```
+{{< include-example example="errors" file="main.rs" section="response-error" >}}
 
 `ResponseError` has a default implementation for `error_response()` that will
 render a *500* (internal server error), and that's what will happen when the
@@ -75,63 +60,19 @@ render a *500* (internal server error), and that's what will happen when the
 
 Override `error_response()` to produce more useful results:
 
-```rust
-#[macro_use] extern crate failure;
-use actix_web::{App, HttpRequest, HttpResponse, http, error};
-
-#[derive(Fail, Debug)]
-enum MyError {
-   #[fail(display="internal error")]
-   InternalError,
-   #[fail(display="bad request")]
-   BadClientData,
-   #[fail(display="timeout")]
-   Timeout,
-}
-
-impl error::ResponseError for MyError {
-    fn error_response(&self) -> HttpResponse {
-       match *self {
-          MyError::InternalError => HttpResponse::new(
-              http::StatusCode::INTERNAL_SERVER_ERROR),
-          MyError::BadClientData => HttpResponse::new(
-              http::StatusCode::BAD_REQUEST),
-          MyError::Timeout => HttpResponse::new(
-              http::StatusCode::GATEWAY_TIMEOUT),
-       }
-    }
-}
-
-fn index(req: &HttpRequest) -> Result<&'static str, MyError> {
-    Err(MyError::BadClientData)
-}
-```
+{{< include-example example="errors" file="override_error.rs" section="override" >}}
 
 # Error helpers
 
-Actix provides a set of error helper functions that are useful for generating
+Actix-web provides a set of error helper functions that are useful for generating
 specific HTTP error codes from other errors. Here we convert `MyError`, which
 doesn't implement the `ResponseError` trait, to a *400* (bad request) using
 `map_err`:
 
-```rust
-# extern crate actix_web;
-use actix_web::*;
+{{< include-example example="errors" file="helpers.rs" section="helpers" >}}
 
-#[derive(Debug)]
-struct MyError {
-   name: &'static str
-}
-
-fn index(req: &HttpRequest) -> Result<&'static str> {
-    let result: Result<&'static str, MyError> = Err(MyError{name: "test"});
-
-    Ok(result.map_err(|e| error::ErrorBadRequest(e.name))?)
-}
-```
-
-See the [API documentation for actix-web's `error` module][errorhelpers] for a
-full list of available error helpers.
+See the [API documentation for actix-web's `error` module][actixerror]
+for a full list of available error helpers.
 
 # Compatibility with failure
 
@@ -165,27 +106,7 @@ An example of the former is that I might use failure to specify a `UserError`
 enum which encapsulates a `ValidationError` to return whenever a user sends bad
 input:
 
-```rust
-#[macro_use] extern crate failure;
-use actix_web::{HttpResponse, http, error};
-
-#[derive(Fail, Debug)]
-enum UserError {
-   #[fail(display="Validation error on field: {}", field)]
-   ValidationError {
-       field: String,
-   }
-}
-
-impl error::ResponseError for UserError {
-    fn error_response(&self) -> HttpResponse {
-       match *self {
-          UserError::ValidationError { .. } => HttpResponse::new(
-              http::StatusCode::BAD_REQUEST),
-       }
-    }
-}
-```
+{{< include-example example="errors" file="recommend_one.rs" section="recommend-one" >}}
 
 This will behave exactly as intended because the error message defined with
 `display` is written with the explicit intent to be read by a user.
@@ -201,38 +122,21 @@ consumption.
 Here's an example that maps an internal error to a user-facing `InternalError`
 with a custom message:
 
-```rust
-#[macro_use] extern crate failure;
-use actix_web::{App, HttpRequest, HttpResponse, http, error, fs};
-
-#[derive(Fail, Debug)]
-enum UserError {
-   #[fail(display="An internal error occurred. Please try again later.")]
-   InternalError,
-}
-
-impl error::ResponseError for UserError {
-    fn error_response(&self) -> HttpResponse {
-       match *self {
-          UserError::InternalError => HttpResponse::new(
-              http::StatusCode::INTERNAL_SERVER_ERROR),
-       }
-    }
-}
-
-fn index(_: &HttpRequest) -> Result<&'static str, UserError> {
-    fs::NamedFile::open("static/index.html").map_err(|_e| UserError::InternalError)?;
-    Ok("success!")
-}
-```
+{{< include-example example="errors" file="recommend_two.rs" section="recommend-two" >}}
 
 By dividing errors into those which are user facing and those which are not, we
 can ensure that we don't accidentally expose users to errors thrown by
 application internals which they weren't meant to see.
 
-[actixerror]: ../../actix-web/actix_web/error/struct.Error.html
-[errorhelpers]: ../../actix-web/actix_web/error/index.html#functions
+# Error Logging
+
+This is a basic example using `middleware::Logger`:
+
+{{< include-example example="errors" file="logging.rs" section="logging" >}}
+
+[actixerror]: https://docs.rs/actix-web/1.0.2/actix_web/error/struct.Error.html
+[errorhelpers]: https://docs.rs/actix-web/1.0.2/actix_web/trait.ResponseError.html
 [failure]: https://github.com/rust-lang-nursery/failure
-[responseerror]: ../../actix-web/actix_web/error/trait.ResponseError.html
-[responseerrorimpls]: ../../actix-web/actix_web/error/trait.ResponseError.html#foreign-impls
+[responseerror]: https://docs.rs/actix-web/1.0.2/actix_web/error/trait.ResponseError.html
+[responseerrorimpls]: https://docs.rs/actix-web/1.0.2/actix_web/error/trait.ResponseError.html#foreign-impls
 [stderror]: https://doc.rust-lang.org/std/error/trait.Error.html

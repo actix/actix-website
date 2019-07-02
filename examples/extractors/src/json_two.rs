@@ -1,0 +1,42 @@
+// <json-two>
+use actix_web::{error, web, FromRequest, HttpResponse, Responder};
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Info {
+    username: String,
+}
+
+/// deserialize `Info` from request's body, max payload size is 4kb
+fn index(info: web::Json<Info>) -> impl Responder {
+    format!("Welcome {}!", info.username)
+}
+
+pub fn main() {
+    use actix_web::{App, HttpServer};
+
+    HttpServer::new(|| {
+        App::new().service(
+            web::resource("/")
+                .data(
+                    // change json extractor configuration
+                    web::Json::<Info>::configure(|cfg| {
+                        cfg.limit(4096).error_handler(|err, _req| {
+                            // <- create custom error response
+                            error::InternalError::from_response(
+                                err,
+                                HttpResponse::Conflict().finish(),
+                            )
+                            .into()
+                        })
+                    }),
+                )
+                .route(web::post().to(index)),
+        )
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
+}
+// </json-two>

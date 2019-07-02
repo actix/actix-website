@@ -1,28 +1,41 @@
-use actix;
+use actix_rt;
 use futures::Future;
 
 // <signals>
-use actix_web::{server, App, HttpResponse};
+use actix_web::{web, App, HttpResponse, HttpServer};
 use std::sync::mpsc;
 use std::thread;
 
-fn main() {
+pub fn main() {
     let (tx, rx) = mpsc::channel();
 
     thread::spawn(move || {
-        let sys = actix::System::new("http-server");
-        let addr = server::new(|| {
-            App::new()
-                .resource("/", |r| r.f(|_| HttpResponse::Ok()))
+        let sys = actix_rt::System::new("http-server");
+
+        let addr = HttpServer::new(|| {
+            App::new().route("/", web::get().to(|| HttpResponse::Ok()))
         })
-            .bind("127.0.0.1:0").expect("Can not bind to 127.0.0.1:0")
-            .shutdown_timeout(60)    // <- Set shutdown timeout to 60 seconds
-            .start();
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .shutdown_timeout(60) // <- Set shutdown timeout to 60 seconds
+        .start();
+
         let _ = tx.send(addr);
         let _ = sys.run();
     });
 
     let addr = rx.recv().unwrap();
-    let _ = addr.send(server::StopServer { graceful: true }).wait(); // <- Send `StopServer` message to server.
+    let _ = addr
+        .pause()
+        .wait()
+        .map(|_| println!("`actix_server::ServerCommand::Pause`"));
+    let _ = addr
+        .resume()
+        .wait()
+        .map(|_| println!("`actix_server::ServerCommand::Resume`"));
+    let _ = addr
+        .stop(true)
+        .wait()
+        .map(|_| println!("`actix_server::ServerCommand::Stop`"));
 }
 // </signals>

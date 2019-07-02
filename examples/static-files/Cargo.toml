@@ -1,0 +1,9 @@
+[package]
+name = "static-files"
+version = "1.0.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "1.0"
+actix-files = "0.1"
+mime = "*"

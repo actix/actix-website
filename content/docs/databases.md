@@ -16,117 +16,33 @@ Let's create a simple database api that can insert a new user row into a SQLite 
 We must define a sync actor and a connection that this actor will use. The same approach
 can be used for other databases.
 
-```rust
-use actix::prelude::*;
-
-struct DbExecutor(SqliteConnection);
-
-impl Actor for DbExecutor {
-    type Context = SyncContext<Self>;
-}
-```
+{{< include-example example="og_databases" file="main.rs" section="actor" >}}
 
 This is the definition of our actor. Now, we must define the *create user* message and response.
 
-```rust
-struct CreateUser {
-    name: String,
-}
-
-impl Message for CreateUser {
-    type Result = Result<User, Error>;
-}
-```
+{{< include-example example="og_databases" file="main.rs" section="message" >}}
 
 We can send a `CreateUser` message to the `DbExecutor` actor, and as a result, we will receive a
 `User` model instance. Next, we must define the handler implementation for this message.
 
-```rust
-impl Handler<CreateUser> for DbExecutor {
-    type Result = Result<User, Error>;
-
-    fn handle(&mut self, msg: CreateUser, _: &mut Self::Context) -> Self::Result
-    {
-        use self::schema::users::dsl::*;
-
-        // Create insertion model
-        let uuid = format!("{}", uuid::Uuid::new_v4());
-        let new_user = models::NewUser {
-            id: &uuid,
-            name: &msg.name,
-        };
-
-        // normal diesel operations
-        diesel::insert_into(users)
-            .values(&new_user)
-            .execute(&self.0)
-            .expect("Error inserting person");
-
-        let mut items = users
-            .filter(id.eq(&uuid))
-            .load::<models::User>(&self.0)
-            .expect("Error loading person");
-
-        Ok(items.pop().unwrap())
-    }
-}
-```
+{{< include-example example="og_databases" file="main.rs" section="handler" >}}
 
 That's it! Now, we can use the *DbExecutor* actor from any http handler or middleware.
 All we need is to start *DbExecutor* actors and store the address in a state where http handler
 can access it.
 
-```rust
-/// This is state where we will store *DbExecutor* address.
-struct State {
-    db: Addr<DbExecutor>,
-}
-
-fn main() {
-    let sys = actix::System::new("diesel-example");
-
-    // Start 3 parallel db executors
-    let addr = SyncArbiter::start(3, || {
-        DbExecutor(SqliteConnection::establish("test.db").unwrap())
-    });
-
-    // Start http server
-    HttpServer::new(move || {
-        App::with_state(State{db: addr.clone()})
-            .resource("/{name}", |r| r.method(Method::GET).a(index))})
-        .bind("127.0.0.1:8080").unwrap()
-        .start().unwrap();
-
-    println!("Started http server: 127.0.0.1:8080");
-    let _ = sys.run();
-}
-```
+{{< include-example example="og_databases" file="main.rs" section="main" >}}
 
 We will use the address in a request handler. The handle returns a future object;
 thus, we receive the message response asynchronously.
 `Route::a()` must be used for async handler registration.
 
+{{< include-example example="og_databases" file="main.rs" section="index" >}}
 
-```rust
-/// Async handler
-fn index(req: &HttpRequest<State>) -> Box<Future<Item=HttpResponse, Error=Error>> {
-    let name = &req.match_info()["name"];
-
-    // Send message to `DbExecutor` actor
-    req.state().db.send(CreateUser{name: name.to_owned()})
-        .from_err()
-        .and_then(|res| {
-            match res {
-                Ok(user) => Ok(HttpResponse::Ok().json(user)),
-                Err(_) => Ok(HttpResponse::InternalServerError().into())
-            }
-        })
-        .responder()
-}
-```
-
-> A full example is available in the
-> [examples directory](https://github.com/actix/examples/tree/master/diesel/).
+> A full example is available in the [examples directory][examples].
 
 > More information on sync actors can be found in the
-> [actix documentation](https://docs.rs/actix/0.7.0/actix/sync/index.html).
+> [actix documentation][actixdocs].
+
+[examples]: https://github.com/actix/examples/tree/master/diesel/
+[actixdocs]: https://docs.rs/actix/0.7.0/actix/sync/index.html
