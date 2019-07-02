@@ -6,6 +6,11 @@ weight: 1020
 
 # Sentry Crash Reporting
 
+{{% alert %}}
+NOTE: Sentry currently does not work with `actix-web` 1.0. Please checkout this
+[issue](https://github.com/getsentry/sentry-rust/issues/143) for more details.
+{{% /alert %}}
+
 [Sentry][sentrysite] is a crash reporting system that supports the failure crate which
 is the base of the actix error reporting.  With a middleware it's possible to
 automatically report server errors to Sentry.
