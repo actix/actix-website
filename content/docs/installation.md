@@ -38,7 +38,7 @@ actix-web = { git = "https://github.com/actix/actix-web" }
 # Diving In
 
 There are two paths you can take here.  You can follow the guide along or if you are very
-impatient you might want to have a look at our [extensive example repository][exmaples]
+impatient you might want to have a look at our [extensive example repository][examples]
 and run the included examples.  Here for instance is how you run the included `basics`
 example:
 
