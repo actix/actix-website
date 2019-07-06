@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-8">
       <div class="actix-content">
-        {{ highlight `use actix_web::{web, App, HttpRequest, HttpServer};
+        {{ highlight `use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 
 fn greet(req: HttpRequest) -> impl Responder {
     let name = req.match_info().get("name").unwrap_or("World");
