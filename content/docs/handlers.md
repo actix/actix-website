@@ -38,7 +38,7 @@ complex types are involved.
 
 ```rust
 fn index(_req: HttpRequest) -> impl Responder {
-    Bytes::from_static("Hello world!")
+    Bytes::from_static(b"Hello world!")
 }
 ```
 
