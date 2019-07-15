@@ -66,7 +66,7 @@ In the following example, we will write an application with mutable, shared stat
 
 {{< include-example example="application" file="state.rs" section="setup_mutable" >}}
 
-and initialize in in an App:
+and register the data in an App:
 
 {{< include-example example="application" file="state.rs" section="make_app_mutable" >}}
 
