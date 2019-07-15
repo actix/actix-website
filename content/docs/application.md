@@ -43,29 +43,32 @@ as the first application, it would match all incoming requests.
 ## State
 
 Application state is shared with all routes and resources within the same scope. State
-can be accessed with the `web::Data<State>` extractor as read-only, but interior mutability with
-`Cell` can be used to achieve state mutability. State is also available for route
-matching guards and middlewares.
+can be accessed with the `web::Data<State>` extractor. State is also available for route matching guards and middlewares.
 
-Let's write a simple application that uses shared state. We are going to store request count
-in the state:
+Let's write a simple application and store the application name in the state:
 
 {{< include-example example="application" file="state.rs" section="setup" >}}
 
-When the app is initialized it needs to be passed the initial state:
-
-{{< include-example example="application" file="state.rs" section="make_app" >}}
-
-> **Note**: `HttpServer` accepts an application factory rather than an application
-> instance. `HttpServer` constructs an application instance for each thread, thus
-> application state must be constructed multiple times. If you want to share state between
-> different threads, a shared object should be used, e.g. `Arc`. There is also an
-> [Example][stateexample] using `Arc` for this. Application state does not need to be
-> `Send` and `Sync`, but the application factory must be `Send` + `Sync`.
-
-To start the previous app, create it into a closure:
+and pass in the state when initializing the App, and start the application:
 
 {{< include-example example="application" file="state.rs" section="start_app" >}}
+
+## Shared Mutable State
+
+`HttpServer` accepts an application factory rather than an application instance. 
+Http server constructs an application instance for each thread, thus application data must be 
+constructed multiple times. If you want to share data between different threads, a shareable 
+object should be used, e.g. Send + Sync. 
+
+Internally, `web::Data` uses Arc. Thus, in order to avoid double Arc, we should create our Data before registering it using `register_data()`.
+
+In the following example, we will write an application with mutable, shared state. First, we define our state and create our handler:
+
+{{< include-example example="application" file="state.rs" section="setup_mutable" >}}
+
+and initialize in in an App:
+
+{{< include-example example="application" file="state.rs" section="make_app_mutable" >}}
 
 ## Combining applications with different state
 

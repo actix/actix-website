@@ -1,42 +1,53 @@
 // <setup>
 use actix_web::{web, App, HttpServer};
-use std::cell::Cell;
 
 // This struct represents state
 struct AppState {
-    counter: Cell<i32>,
+    app_name: String,
 }
 
 fn index(data: web::Data<AppState>) -> String {
-    let count = data.counter.get() + 1; // <- get count
-    data.counter.set(count); // <- store new count in state
+    let app_name = data.app_name; // <- get app_name
 
-    format!("Request number: {}", count) // <- response with count
+    format!("Hello {}!", app_name) // <- response with app_name
 }
 // </setup>
 
-// <make_app>
+// <setup_mutable>
+struct AppStateWithCounter {
+    counter: Mutex<i32>, // <- Mutex is necessary to mutate safely across threads
+}
+
+fn _index(data: web::Data<AppStateWithCounter>) -> String {
+    let mut counter = state.counter.lock().unwrap(); // <- get counter's MutexGuard
+    *counter += 1; // <- access counter inside MutexGuard
+
+    format!("Request number: {}", counter) // <- response with count
+}
+// </setup_mutable>
+
+// <make_app_mutable>
 fn _main() {
+    let counter = web::Data::new(AppStateWithCounter { counter : Mutex::new(0)});
+
     App::new()
-        .data(AppState {
-            counter: Cell::new(0),
-        })
+        .register_data(counter.clone()) // <- register the created data
         .route("/", web::get().to(index));
 }
-// </make_app>
+// </make_app_mutable>
 
 // <start_app>
 pub fn main() {
     HttpServer::new(|| {
         App::new()
             .data(AppState {
-                counter: Cell::new(0),
+                app_name: String::from("Actix-web")
             })
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
-    .run()
-    .unwrap();
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }
 // </start_app>
