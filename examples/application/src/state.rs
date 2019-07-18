@@ -1,5 +1,6 @@
 // <setup>
 use actix_web::{web, App, HttpServer};
+use std::sync::{Mutex};
 
 // This struct represents state
 struct AppState {
@@ -19,7 +20,7 @@ struct AppStateWithCounter {
 }
 
 fn _index(data: web::Data<AppStateWithCounter>) -> String {
-    let mut counter = state.counter.lock().unwrap(); // <- get counter's MutexGuard
+    let mut counter = data.counter.lock().unwrap(); // <- get counter's MutexGuard
     *counter += 1; // <- access counter inside MutexGuard
 
     format!("Request number: {}", counter) // <- response with count
