@@ -14,7 +14,7 @@ brew update && brew install hugo
 Then, get the website running locally:
 
 ```sh
-git clone https://github.com/mitsuhiko/actix-website
+git clone https://github.com/actix/actix-website.git
 cd actix-website
 hugo server
 ```

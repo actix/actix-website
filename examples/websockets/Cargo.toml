@@ -1,0 +1,9 @@
+[package]
+name = "websockets"
+version = "1.0.0"
+edition = "2018"
+
+[dependencies]
+actix = "0.8"
+actix-web = "1.0"
+actix-web-actors = "1.0"

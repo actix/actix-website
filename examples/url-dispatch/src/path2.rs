@@ -1,6 +1,6 @@
 // <path>
-extern crate serde_derive;
-use actix_web::{http::Method, App, Path, Result};
+use actix_web::{web, Result};
+use serde::Deserialize;
 
 #[derive(Deserialize)]
 struct Info {
@@ -8,14 +8,22 @@ struct Info {
 }
 
 // extract path info using serde
-fn index(info: Path<Info>) -> Result<String> {
+fn index(info: web::Path<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
 
-fn main() {
-    let app = App::new().resource(
-        "/{username}/index.html", // <- define path parameters
-        |r| r.method(Method::GET).with(index),
-    );
+pub fn main() {
+    use actix_web::{App, HttpServer};
+
+    HttpServer::new(|| {
+        App::new().route(
+            "/{username}/index.html", // <- define path parameters
+            web::get().to(index),
+        )
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </path>

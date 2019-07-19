@@ -1,12 +1,12 @@
 [package]
 name = "url-dispatch"
-version = "0.7.0"
+version = "1.0.0"
+edition = "2018"
 workspace = "../"
 
 [dependencies]
-actix = "0.7"
-actix-web = "0.7"
+actix = "0.8"
+actix-web = "1.0"
 futures = "0.1"
 openssl = "0.10"
 serde = "1.0"
-serde_derive = "1.0"

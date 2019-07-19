@@ -1,7 +1,8 @@
 [package]
 name = "getting-started"
-version = "0.7.0"
+version = "1.0.0"
+edition = "2018"
 workspace = "../"
 
 [dependencies]
-actix-web = "0.7"
+actix-web = "1.0"

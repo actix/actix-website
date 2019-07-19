@@ -1,71 +1,54 @@
 // <setup>
-use actix_web::{http, App, HttpRequest};
-use std::cell::Cell;
+use actix_web::{web, App, HttpServer};
+use std::sync::{Mutex};
 
 // This struct represents state
 struct AppState {
-    counter: Cell<usize>,
+    app_name: String,
 }
 
-fn index(req: &HttpRequest<AppState>) -> String {
-    let count = req.state().counter.get() + 1; // <- get count
-    req.state().counter.set(count); // <- store new count in state
+fn index(data: web::Data<AppState>) -> String {
+    let app_name = data.app_name; // <- get app_name
 
-    format!("Request number: {}", count) // <- response with count
+    format!("Hello {}!", app_name) // <- response with app_name
 }
 // </setup>
 
-fn make_app() {
-// <make_app>
-App::with_state(AppState { counter: Cell::new(0) })
-    .resource("/", |r| r.method(http::Method::GET).f(index))
-    .finish()
-// </make_app>
-;
+// <setup_mutable>
+struct AppStateWithCounter {
+    counter: Mutex<i32>, // <- Mutex is necessary to mutate safely across threads
 }
 
-fn start_app() {
+fn _index(data: web::Data<AppStateWithCounter>) -> String {
+    let mut counter = data.counter.lock().unwrap(); // <- get counter's MutexGuard
+    *counter += 1; // <- access counter inside MutexGuard
+
+    format!("Request number: {}", counter) // <- response with count
+}
+// </setup_mutable>
+
+// <make_app_mutable>
+fn _main() {
+    let counter = web::Data::new(AppStateWithCounter { counter : Mutex::new(0)});
+
+    App::new()
+        .register_data(counter.clone()) // <- register the created data
+        .route("/", web::get().to(index));
+}
+// </make_app_mutable>
+
 // <start_app>
-server::new(|| {
-    App::with_state(AppState { counter: Cell::new(0) })
-        .resource("/", |r| r.method(http::Method::GET).f(index))
-}).bind("127.0.0.1:8080")
+pub fn main() {
+    HttpServer::new(|| {
+        App::new()
+            .data(AppState {
+                app_name: String::from("Actix-web")
+            })
+            .route("/", web::get().to(index))
+    })
+    .bind("127.0.0.1:8088")
     .unwrap()
     .run()
+    .unwrap();
+}
 // </start_app>
-;
-}
-
-use actix_web::{server, HttpResponse};
-use std::thread;
-
-fn combine() {
-    thread::spawn(|| {
-// <combine>
-struct State1;
-struct State2;
-
-fn main() {
-    server::new(|| {
-        vec![
-            App::with_state(State1)
-                .prefix("/app1")
-                .resource("/", |r| r.f(|r| HttpResponse::Ok()))
-                .boxed(),
-            App::with_state(State2)
-                .prefix("/app2")
-                .resource("/", |r| r.f(|r| HttpResponse::Ok()))
-                .boxed(),
-                ]
-    }).bind("127.0.0.1:8080")
-        .unwrap()
-        .run()
-}
-// </combine>
-    });
-}
-
-pub fn test() {
-    make_app();
-    combine();
-}

@@ -1,38 +1,34 @@
-extern crate actix;
-extern crate actix_web;
-extern crate futures;
-extern crate openssl;
-#[macro_use]
-extern crate serde_derive;
-extern crate serde;
-
-mod cfg;
-mod dhandler;
-mod minfo;
-mod norm;
-mod norm2;
-mod path;
-mod path2;
-mod pbuf;
-mod pred;
-mod pred2;
-mod prefix;
-mod resource;
-mod scope;
-mod url_ext;
-mod urls;
+pub mod cfg;
+pub mod dhandler;
+pub mod guard;
+pub mod guard2;
+pub mod minfo;
+pub mod norm;
+pub mod norm2;
+pub mod path;
+pub mod path2;
+pub mod pbuf;
+pub mod resource;
+pub mod scope;
+pub mod url_ext;
+pub mod urls;
 
 // <main>
-use actix_web::{http::Method, App, HttpRequest, HttpResponse};
+use actix_web::{web, App, HttpResponse, HttpServer};
 
-fn index(req: HttpRequest) -> HttpResponse {
-    unimplemented!()
+fn index() -> HttpResponse {
+    HttpResponse::Ok().body("Hello")
 }
 
 fn main() {
-    App::new()
-        .route("/user/{name}", Method::GET, index)
-        .route("/user/{name}", Method::POST, index)
-        .finish();
+    HttpServer::new(|| {
+        App::new()
+            .route("/", web::get().to(index))
+            .route("/user", web::post().to(index))
+    })
+    .bind("127.0.0.1:8088")
+    .unwrap()
+    .run()
+    .unwrap();
 }
 // </main>

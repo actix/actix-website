@@ -1,7 +1,30 @@
 [workspace]
 members = [
   "application",
+  "easy-form-handling",
+  "flexible-responders",
   "getting-started",
+  "main-example",
+  "powerful-extractors",
+  "request-routing",
   "server",
   "url-dispatch",
+  "responder-trait",
+  "either",
+  "extractors",
+  "autoreload",
+  "errors",
+  "requests",
+  "responses",
+  "middleware",
+  "static-files",
+  "http2",
+  "testing",
+  "async-handlers",
+  "websockets",
+  "request-handlers",
+]
+exclude = [
+  "og_databases",
+  "sentry",
 ]

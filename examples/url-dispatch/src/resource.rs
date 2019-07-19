@@ -1,16 +1,19 @@
 // <resource>
-use actix_web::{http::Method, App, HttpRequest, HttpResponse};
+use actix_web::{guard, web, App, HttpResponse};
 
-fn index(req: &HttpRequest) -> HttpResponse {
-    unimplemented!()
+fn index() -> HttpResponse {
+    HttpResponse::Ok().body("Hello")
 }
 
-fn main() {
+pub fn main() {
     App::new()
-        .resource("/prefix", |r| r.f(index))
-        .resource("/user/{name}", |r| {
-            r.method(Method::GET).f(|req| HttpResponse::Ok())
-        })
-        .finish();
+        .service(web::resource("/prefix").to(index))
+        .service(
+            web::resource("/user/{name}")
+                .name("user_detail")
+                .guard(guard::Header("content-type", "application/json"))
+                .route(web::get().to(|| HttpResponse::Ok()))
+                .route(web::put().to(|| HttpResponse::Ok())),
+        );
 }
 // </resource>
