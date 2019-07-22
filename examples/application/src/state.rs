@@ -1,6 +1,6 @@
 // <setup>
 use actix_web::{web, App, HttpServer};
-use std::sync::{Mutex};
+use std::sync::Mutex;
 
 // This struct represents state
 struct AppState {
@@ -8,7 +8,7 @@ struct AppState {
 }
 
 fn index(data: web::Data<AppState>) -> String {
-    let app_name = data.app_name; // <- get app_name
+    let app_name = &data.app_name; // <- get app_name
 
     format!("Hello {}!", app_name) // <- response with app_name
 }
@@ -29,7 +29,9 @@ fn _index(data: web::Data<AppStateWithCounter>) -> String {
 
 // <make_app_mutable>
 fn _main() {
-    let counter = web::Data::new(AppStateWithCounter { counter : Mutex::new(0)});
+    let counter = web::Data::new(AppStateWithCounter {
+        counter: Mutex::new(0),
+    });
 
     App::new()
         .register_data(counter.clone()) // <- register the created data
@@ -42,7 +44,7 @@ pub fn main() {
     HttpServer::new(|| {
         App::new()
             .data(AppState {
-                app_name: String::from("Actix-web")
+                app_name: String::from("Actix-web"),
             })
             .route("/", web::get().to(index))
     })
