@@ -2,6 +2,7 @@ pub mod default_headers;
 pub mod errorhandler;
 pub mod logger;
 pub mod user_sessions;
+pub mod wrap_fn;
 
 // <simple>
 use actix_service::{Service, Transform};
