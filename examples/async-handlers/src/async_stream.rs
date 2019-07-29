@@ -6,7 +6,7 @@ fn is_error() -> bool {
 use actix_web::{error, Error, HttpResponse};
 use futures::future::{result, Future};
 
-fn index() -> Result<Box<Future<Item = HttpResponse, Error = Error>>, Error> {
+fn index() -> Result<Box<dyn Future<Item = HttpResponse, Error = Error>>, Error> {
     if is_error() {
         Err(error::ErrorBadRequest("bad request"))
     } else {

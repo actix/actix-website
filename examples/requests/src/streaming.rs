@@ -2,7 +2,7 @@
 use actix_web::{error, web, Error, HttpResponse};
 use futures::{future::result, Future, Stream};
 
-pub fn index(payload: web::Payload) -> Box<Future<Item = HttpResponse, Error = Error>> {
+pub fn index(payload: web::Payload) -> Box<dyn Future<Item = HttpResponse, Error = Error>> {
     Box::new(
         payload
             .from_err()
