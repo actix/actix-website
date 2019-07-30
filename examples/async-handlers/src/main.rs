@@ -4,13 +4,13 @@ pub mod stream;
 use actix_web::{Error, HttpResponse};
 use futures::future::{ok, Future};
 
-fn index() -> Box<Future<Item = HttpResponse, Error = Error>> {
+fn index() -> Box<dyn Future<Item = HttpResponse, Error = Error>> {
     Box::new(ok::<_, Error>(
         HttpResponse::Ok().content_type("text/html").body("Hello!"),
     ))
 }
 
-fn index2() -> Box<Future<Item = &'static str, Error = Error>> {
+fn index2() -> Box<dyn Future<Item = &'static str, Error = Error>> {
     Box::new(ok::<_, Error>("Welcome!"))
 }
 

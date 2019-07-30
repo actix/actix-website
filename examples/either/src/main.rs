@@ -3,7 +3,7 @@ use actix_web::{Either, Error, HttpResponse};
 use futures::future::{ok, Future};
 
 type RegisterResult =
-    Either<HttpResponse, Box<Future<Item = HttpResponse, Error = Error>>>;
+    Either<HttpResponse, Box<dyn Future<Item = HttpResponse, Error = Error>>>;
 
 fn index() -> RegisterResult {
     if is_a_variant() {
