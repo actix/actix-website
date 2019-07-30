@@ -29,6 +29,10 @@ The following demonstrates creating a simple middleware:
 
 {{< include-example example="middleware" file="main.rs" section="simple" >}}
 
+Alternatively, for simple use cases, you can use [*wrap_fn*][wrap_fn] to create small, ad-hoc middlewares:
+
+{{< include-example example="middleware" file="wrap_fn.rs" section="wrap-fn" >}}
+
 > Actix-web provides several useful middlewares, such as *logging*, *user sessions*,
 > *compress*, etc.
 
@@ -130,3 +134,4 @@ into a response.
 [envlogger]: https://docs.rs/env_logger/*/env_logger/
 [servicetrait]: https://docs.rs/actix-web/1.0.2/actix_web/dev/trait.Service.html
 [transformtrait]: https://docs.rs/actix-web/1.0.2/actix_web/dev/trait.Transform.html
+[wrap_fn]: https://docs.rs/actix-web/1.0.5/actix_web/struct.App.html#method.wrap_fn
