@@ -10,6 +10,15 @@ fn index2() -> impl Responder {
 }
 // </setup>
 
+// <alternative>
+use actix_web::get;
+
+#[get("/alternative")]
+fn index3() -> impl Responder {
+    HttpResponse::Ok().body("Sweet syntax!")
+}
+// </alternative>
+
 // <main>
 fn main() {
     HttpServer::new(|| {

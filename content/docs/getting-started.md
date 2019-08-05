@@ -43,6 +43,24 @@ accepts a function that should return an application factory.
 That's it! Now, compile and run the program with `cargo run`.
 Head over to ``http://localhost:8088/`` to see the results.
 
+### Alternative syntax
+
+You might prefer the alternative syntax provided by [actix-web-codegen] which
+allows you to specify the routes above your functions like so:
+
+{{< include-example example="getting-started" section="alternative">}}
+
+You can then declare this function using `service()`:
+
+```rust
+App::new()
+    .service(index3)
+```
+
+For consistency reasons, this documentation only uses the regular syntax shown at the
+beginning of this page. However, if you prefer this syntax you should feel free to
+use it any time you declare a route as it's only syntactic sugar.
+
 ### Auto-reloading
 
 If you want, you can have an automatically reloading server during development
@@ -50,4 +68,5 @@ that recompiles on demand. This isn't necessary, but it makes rapid prototyping
 more convenient as you can see changes instantly upon saving.
 To see how this can be accomplished, have a look at the [autoreload pattern][autoload].
 
+[actix-web-codegen]: https://docs.rs/actix-web-codegen/0.1.2/actix_web_codegen/
 [autoload]: ../autoreload/
