@@ -17,7 +17,7 @@ cargo new hello-world
 cd hello-world
 ```
 
-Now, add `actix-web` as dependencies of your project by ensuring your `Cargo.toml`
+Now, add `actix-web` as a dependency of your project by ensuring your `Cargo.toml`
 contains the following:
 
 ```ini
