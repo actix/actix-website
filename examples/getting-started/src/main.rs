@@ -10,14 +10,14 @@ fn index2() -> impl Responder {
 }
 // </setup>
 
-// <alternative>
+// <macro-attributes>
 use actix_web::get;
 
-#[get("/alternative")]
+#[get("/hello")]
 fn index3() -> impl Responder {
-    HttpResponse::Ok().body("Sweet syntax!")
+    HttpResponse::Ok().body("Hey there!")
 }
-// </alternative>
+// </macro-attributes>
 
 // <main>
 fn main() {

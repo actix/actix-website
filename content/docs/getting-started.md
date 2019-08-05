@@ -43,23 +43,25 @@ accepts a function that should return an application factory.
 That's it! Now, compile and run the program with `cargo run`.
 Head over to ``http://localhost:8088/`` to see the results.
 
-### Alternative syntax
+### Using Attribute Macros to Define Routes
 
-You might prefer the alternative syntax provided by [actix-web-codegen] which
+Alternatively, you can define routes using macro attributes which
 allows you to specify the routes above your functions like so:
 
-{{< include-example example="getting-started" section="alternative">}}
+{{< include-example example="getting-started" section="macro-attributes">}}
 
-You can then declare this function using `service()`:
+You can then register the route using `service()`:
 
 ```rust
 App::new()
     .service(index3)
 ```
 
-For consistency reasons, this documentation only uses the regular syntax shown at the
+For consistency reasons, this documentation only uses the explicit syntax shown at the
 beginning of this page. However, if you prefer this syntax you should feel free to
 use it any time you declare a route as it's only syntactic sugar.
+
+To learn more, see [actix-web-codegen].
 
 ### Auto-reloading
 
