@@ -10,6 +10,15 @@ fn index2() -> impl Responder {
 }
 // </setup>
 
+// <macro-attributes>
+use actix_web::get;
+
+#[get("/hello")]
+fn index3() -> impl Responder {
+    HttpResponse::Ok().body("Hey there!")
+}
+// </macro-attributes>
+
 // <main>
 fn main() {
     HttpServer::new(|| {
