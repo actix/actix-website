@@ -46,7 +46,7 @@ Head over to ``http://localhost:8088/`` to see the results.
 ### Using Attribute Macros to Define Routes
 
 Alternatively, you can define routes using macro attributes which
-allows you to specify the routes above your functions like so:
+allow you to specify the routes above your functions like so:
 
 {{< include-example example="getting-started" section="macro-attributes">}}
 
