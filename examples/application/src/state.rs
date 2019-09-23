@@ -33,9 +33,15 @@ fn _main() {
         counter: Mutex::new(0),
     });
 
-    App::new()
-        .register_data(counter.clone()) // <- register the created data
-        .route("/", web::get().to(index));
+    HttpServer::new(move || { // move counter into the closure
+        App::new()
+            .register_data(counter.clone()) // <- register the created data
+            .route("/", web::get().to(_index))
+    })
+        .bind("127.0.0.1:8088")
+        .unwrap()
+        .run()
+        .unwrap();
 }
 // </make_app_mutable>
 
