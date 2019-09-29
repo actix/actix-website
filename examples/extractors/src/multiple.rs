@@ -9,7 +9,7 @@ struct Info {
 
 fn index((path, query): (web::Path<(u32, String)>, web::Query<Info>)) -> String {
     format!(
-        "Welcome {}, friend {}, useri {}!",
+        "Welcome {}, friend {}, userid {}!",
         query.username, path.1, path.0
     )
 }
