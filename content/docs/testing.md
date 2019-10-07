@@ -26,7 +26,7 @@ to run the application with specific handlers in a real http server.
 `TestRequest::get()`, `TestRequest::post()`, and `TestRequest::client()`
 methods can be used to send requests to the test server.
 
-To create a `Service` for testing, use the `test::init_serivce` method which accepts a
+To create a `Service` for testing, use the `test::init_service` method which accepts a
 regular `App` builder.
 
 > Check the [api documentation][actixdocs] for more information.
