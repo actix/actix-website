@@ -33,6 +33,15 @@ regular `App` builder.
 
 {{< include-example example="testing" file="integration_one.rs" section="integration-one" >}}
 
+Note: If you get the error message "no Task is currently running" when running your
+test, you may need to wrap your service call in
+[test::run_on](https://docs.rs/actix-web/1/actix_web/test/fn.run_on.html):
+
+```rust
+let future = test::run_on(|| app.call(req));
+let resp = test::block_on(future).unwrap();
+```
+
 If you need more complex application configuration testing should be very similar to creating
 the normal application. For example, you may need to initialize application state. Create an
 `App` with a `data` method and attach state just like you would from a normal application.
