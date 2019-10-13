@@ -55,6 +55,7 @@ for `rust-tls` integration and `ssl` is for `openssl`.
 ```toml
 [dependencies]
 actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["ssl"] }
+openssl = { version="0.10" }
 ```
 
 {{< include-example example="server" file="ssl.rs" section="ssl" >}}
