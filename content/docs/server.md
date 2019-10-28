@@ -49,8 +49,8 @@ is not shared between threads. To share state, `Arc` could be used.
 
 ## SSL
 
-There are two features for ssl server: `rust-tls` and `ssl`. The `tls` feature is
-for `rust-tls` integration and `ssl` is for `openssl`.
+There are two features for the ssl server: `rust-tls` and `ssl`. The `rust-tls` feature is for
+`rustls` integration and `ssl` is for `openssl`.
 
 ```toml
 [dependencies]
