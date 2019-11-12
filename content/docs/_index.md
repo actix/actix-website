@@ -24,4 +24,4 @@ specific information you might want to read the [actix-web API docs][actixwebdoc
 [gettingstarted]: ./getting-started
 [actixwebdocs]: https://docs.rs/actix-web
 [actixdocs]: https://docs.rs/actix
-[tokio]: (https://tokio.rs/)
+[tokio]: https://tokio.rs
