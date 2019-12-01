@@ -58,10 +58,11 @@ Let's create a response for a custom type that serializes to an `application/jso
 
 ## Async handlers
 
-There are two different types of async handlers. Response objects can be generated asynchronously
-or more precisely, any type that implements the [*Responder*][respondertrait] trait.
+Async handlers return a Future, a Stream, or some combination of them.
+The future can resolve to a Response object
+or any type that implements the [*Responder*][respondertrait] trait.
 
-In this case, the handler must return a `Future` object that resolves to the *Responder* type, i.e:
+For example, the handler can return a `Future` object that resolves to the *Responder* type, i.e:
 
 {{< include-example example="async-handlers" file="main.rs" section="async-responder" >}}
 
