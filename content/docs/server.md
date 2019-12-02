@@ -86,7 +86,7 @@ Actix can wait for requests on a keep-alive connection.
 
 {{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
 
-If the first option is selected, then *keep alive* state is calculated based on the
+If the first option above is selected, then *keep alive* state is calculated based on the
 response's *connection-type*. By default `HttpResponse::connection_type` is not
 defined. In that case *keep alive* is defined by the request's http version.
 
