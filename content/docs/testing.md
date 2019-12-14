@@ -29,7 +29,7 @@ methods can be used to send requests to the test server.
 To create a `Service` for testing, use the `test::init_service` method which accepts a
 regular `App` builder.
 
-> Check the [api documentation][actixdocs] for more information.
+> Check the [api documentation][https://docs.rs/actix-web/1/actix_web/test/index.html] for more information.
 
 {{< include-example example="testing" file="integration_one.rs" section="integration-one" >}}
 
