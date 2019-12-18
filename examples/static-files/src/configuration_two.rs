@@ -5,7 +5,8 @@ use actix_web::{App, HttpServer};
 pub fn main() {
     HttpServer::new(|| {
         App::new().service(
-            fs::Files::new("/static", ".")
+            // fs::Files::new("/static", ".")
+            fs::Files::new("", "static")
                 .show_files_listing()
                 .use_last_modified(true),
         )
