@@ -57,6 +57,6 @@ For example of testing [*Server Sent Events*][serversentevents].
 {{< include-example example="testing" file="stream_response.rs" section="stream-response" >}}
 
 [serversentevents]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
-[clientresponse]: https://docs.rs/actix-web/1.0.2/actix_web/client/struct.ClientResponse.html
+[clientresponse]: https://docs.rs/actix-web/1/actix_web/client/struct.ClientResponse.html
 [actixdocs]: https://docs.rs/actix-web/1/actix_web/test/index.html
-[testrequest]: https://docs.rs/actix-web/1.0.2/actix_web/error/trait.ResponseError.html#foreign-impls
+[testrequest]: https://docs.rs/actix-web/1/actix_web/error/trait.ResponseError.html#foreign-impls
