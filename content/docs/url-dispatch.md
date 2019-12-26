@@ -235,13 +235,11 @@ foo/abc/def/a/b/c  -> Params{'bar':u'abc', 'tail': 'def/a/b/c'}
 Scoping helps you organize routes sharing common root paths.  You can nest
 scopes within scopes.
 
-Suppose that you want to organize paths to endpoints used to manage a "Project",
-consisting of "Tasks".  Such paths may include:
+Suppose that you want to organize paths to endpoints used to view "Users". Such paths may include:
 
-- /project
-- /project/{project_id}
-- /project/{project_id}/task
-- /project/{project_id}/task/{task_id}
+- /users
+- /users/show
+- /users/show/{id}
 
 
 A scoped layout of these paths would appear as follows
