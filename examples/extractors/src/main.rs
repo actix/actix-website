@@ -1,5 +1,4 @@
 use actix_web::{web, App, FromRequest, HttpRequest, HttpServer, Responder};
-use futures::future::Future;
 use serde::Deserialize;
 
 // pub mod custom_handler;
@@ -19,31 +18,34 @@ struct MyInfo {
 }
 
 // <option-one>
-fn index(path: web::Path<(String, String)>, json: web::Json<MyInfo>) -> impl Responder {
+async fn index(
+    path: web::Path<(String, String)>,
+    json: web::Json<MyInfo>,
+) -> impl Responder {
     format!("{} {} {} {}", path.0, path.1, json.id, json.username)
 }
 // </option-one>
 
 // <option-two>
-fn extract(req: HttpRequest) -> impl Responder {
-    let params = web::Path::<(String, String)>::extract(&req).unwrap();
+async fn extract(req: HttpRequest) -> impl Responder {
+    let params = web::Path::<(String, String)>::extract(&req).await.unwrap();
 
     let info = web::Json::<MyInfo>::extract(&req)
-        .wait()
+        .await
         .expect("Err with reading json.");
 
     format!("{} {} {} {}", params.0, params.1, info.username, info.id)
 }
 // </option-two>
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/{name}/{id}", web::post().to(index))
             .route("/{name}/{id}/extract", web::post().to(extract))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }

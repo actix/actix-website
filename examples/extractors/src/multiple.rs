@@ -7,14 +7,15 @@ struct Info {
     username: String,
 }
 
-fn index((path, query): (web::Path<(u32, String)>, web::Query<Info>)) -> String {
+async fn index((path, query): (web::Path<(u32, String)>, web::Query<Info>)) -> String {
     format!(
         "Welcome {}, friend {}, userid {}!",
         query.username, path.1, path.0
     )
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| {
@@ -23,9 +24,8 @@ pub fn main() {
             web::get().to(index),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </multi>
