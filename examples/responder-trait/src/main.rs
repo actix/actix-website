@@ -1,6 +1,7 @@
 // <responder-trait>
 use actix_web::{Error, HttpRequest, HttpResponse, Responder};
 use serde::Serialize;
+use futures::future::{ready, Ready};
 
 #[derive(Serialize)]
 struct MyObj {
@@ -10,29 +11,29 @@ struct MyObj {
 // Responder
 impl Responder for MyObj {
     type Error = Error;
-    type Future = Result<HttpResponse, Error>;
+    type Future = Ready<Result<HttpResponse, Error>>;
 
     fn respond_to(self, _req: &HttpRequest) -> Self::Future {
-        let body = serde_json::to_string(&self)?;
+        let body = serde_json::to_string(&self).unwrap();
 
         // Create response and set content type
-        Ok(HttpResponse::Ok()
+        ready(Ok(HttpResponse::Ok()
             .content_type("application/json")
-            .body(body))
+            .body(body)))
     }
 }
 
-fn index() -> impl Responder {
+async fn index() -> impl Responder {
     MyObj { name: "user" }
 }
 // </responder-trait>
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }
