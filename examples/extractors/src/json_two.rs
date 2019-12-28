@@ -8,11 +8,12 @@ struct Info {
 }
 
 /// deserialize `Info` from request's body, max payload size is 4kb
-fn index(info: web::Json<Info>) -> impl Responder {
+async fn index(info: web::Json<Info>) -> impl Responder {
     format!("Welcome {}!", info.username)
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| {
@@ -34,9 +35,8 @@ pub fn main() {
                 .route(web::post().to(index)),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </json-two>

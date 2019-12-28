@@ -10,24 +10,24 @@ use failure::Fail;
 
 #[derive(Fail, Debug)]
 #[fail(display = "my error")]
-pub struct MyError {
+struct MyError {
     name: &'static str,
 }
 
 // Use default implementation for `error_response()` method
 impl error::ResponseError for MyError {}
 
-fn index() -> Result<&'static str, MyError> {
+async fn index() -> Result<&'static str, MyError> {
     Err(MyError { name: "test" })
 }
 // </response-error>
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }

@@ -12,13 +12,14 @@ pub struct MyError {
 // Use default implementation for `error_response()` method
 impl error::ResponseError for MyError {}
 
-pub fn index() -> Result<&'static str, MyError> {
+async fn index() -> Result<&'static str, MyError> {
     let err = MyError { name: "test error" };
     debug!("{}", err);
     Err(err)
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{middleware::Logger, web, App, HttpServer};
 
     std::env::set_var("RUST_LOG", "my_errors=debug,actix_web=info");
@@ -30,9 +31,8 @@ pub fn main() {
             .wrap(Logger::default())
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </logging>

@@ -8,17 +8,17 @@ struct Info {
 }
 
 // this handler get called only if the request's query contains `username` field
-fn index(info: web::Query<Info>) -> String {
+async fn index(info: web::Query<Info>) -> String {
     format!("Welcome {}!", info.username)
 }
 // </query>
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }

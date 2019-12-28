@@ -1,6 +1,7 @@
 use actix_web::{web, App};
 // <override>
-use actix_web::{error, http, HttpResponse};
+use actix_http::ResponseBuilder;
+use actix_web::{error, http::header, http::StatusCode, HttpResponse};
 use failure::Fail;
 
 #[derive(Fail, Debug)]
@@ -15,30 +16,35 @@ enum MyError {
 
 impl error::ResponseError for MyError {
     fn error_response(&self) -> HttpResponse {
+        ResponseBuilder::new(self.status_code())
+            .set_header(header::CONTENT_TYPE, "text/html; charset=utf-8")
+            .body(self.to_string())
+    }
+
+    fn status_code(&self) -> StatusCode {
         match *self {
-            MyError::InternalError => {
-                HttpResponse::new(http::StatusCode::INTERNAL_SERVER_ERROR)
-            }
-            MyError::BadClientData => HttpResponse::new(http::StatusCode::BAD_REQUEST),
-            MyError::Timeout => HttpResponse::new(http::StatusCode::GATEWAY_TIMEOUT),
+            MyError::InternalError => StatusCode::INTERNAL_SERVER_ERROR,
+            MyError::BadClientData => StatusCode::BAD_REQUEST,
+            MyError::Timeout => StatusCode::GATEWAY_TIMEOUT,
         }
     }
 }
 
-fn index() -> Result<&'static str, MyError> {
+async fn index() -> Result<&'static str, MyError> {
     Err(MyError::BadClientData)
 }
 // </override>
 
-fn error2() -> Result<&'static str, MyError> {
+async fn error2() -> Result<&'static str, MyError> {
     Err(MyError::InternalError)
 }
 
-fn error3() -> Result<&'static str, MyError> {
+async fn error3() -> Result<&'static str, MyError> {
     Err(MyError::Timeout)
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::HttpServer;
 
     HttpServer::new(|| {
@@ -47,8 +53,7 @@ pub fn main() {
             .route("/e2", web::get().to(error2))
             .route("/e3", web::get().to(error3))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }

@@ -4,11 +4,12 @@ use actix_web::{web, Result};
 /// extract path info from "/users/{userid}/{friend}" url
 /// {userid} -  - deserializes to a u32
 /// {friend} - deserializes to a String
-fn index(info: web::Path<(u32, String)>) -> Result<String> {
+async fn index(info: web::Path<(u32, String)>) -> Result<String> {
     Ok(format!("Welcome {}, userid {}!", info.1, info.0))
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| {
@@ -17,9 +18,8 @@ pub fn main() {
             web::get().to(index),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </path-one>
