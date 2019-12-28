@@ -1,15 +1,16 @@
 use actix_web::{web, App, HttpResponse, HttpServer};
 
 // <scope>
-fn show_users() -> HttpResponse {
+async fn show_users() -> HttpResponse {
     HttpResponse::Ok().body("Show users")
 }
 
-fn user_detail(path: web::Path<(u32,)>) -> HttpResponse {
+async fn user_detail(path: web::Path<(u32,)>) -> HttpResponse {
     HttpResponse::Ok().body(format!("User detail: {}", path.0))
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().service(
             web::scope("/users")
@@ -17,9 +18,8 @@ pub fn main() {
                 .route("/show/{id}", web::get().to(user_detail)),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </scope>

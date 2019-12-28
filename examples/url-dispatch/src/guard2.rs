@@ -1,7 +1,8 @@
 // <guard2>
 use actix_web::{guard, web, App, HttpResponse, HttpServer};
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().route(
             "/",
@@ -10,9 +11,8 @@ pub fn main() {
                 .to(|| HttpResponse::MethodNotAllowed()),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </guard2>
