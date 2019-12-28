@@ -23,25 +23,26 @@ contains the following:
 ```ini
 [dependencies]
 actix-web = "{{< actix-version "actix-web" >}}"
+actix-rt = "{{< actix-rt-version "actix-rt" >}}"
 ```
 
 In order to implement a web server, we first need to create a request handler.
 
-A request handler is a function that accepts zero or more parameters that can be
+A request handler is an async function that accepts zero or more parameters that can be
 extracted from a request (ie, `impl FromRequest`) and returns a type that can be
 converted into an `HttpResponse` (ie, `impl Responder`):
 
 {{< include-example example="getting-started" section="setup" >}}
 
 Next, create an `App` instance and register the request handler with the application's
-`route` on a *path* and with a particular *HTTP method*. After that, the application
+`route` on a _path_ and with a particular _HTTP method_. After that, the application
 instance can be used with `HttpServer` to listen for incoming connections. The server
 accepts a function that should return an application factory.
 
 {{< include-example example="getting-started" section="main" >}}
 
 That's it! Now, compile and run the program with `cargo run`.
-Head over to ``http://localhost:8088/`` to see the results.
+Head over to `http://localhost:8088/` to see the results.
 
 ### Using Attribute Macros to Define Routes
 
