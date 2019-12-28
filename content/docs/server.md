@@ -12,7 +12,7 @@ The [**HttpServer**][httpserverstruct] type is responsible for serving http requ
 must have `Send` + `Sync` boundaries. More about that in the *multi-threading* section.
 
 To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be
-called multiple times. To bind ssl socket, [`bind_ssl()`][bindsslmethod] or
+called multiple times. To bind ssl socket, [`bind_openssl()`][bindopensslmethod] or
 [`bind_rustls()`][bindrusttls] should be used. To start the http server, use one of the
 start methods.
 
@@ -117,13 +117,13 @@ are available on unix systems.
 > It is possible to disable signal handling with
 [`HttpServer::disable_signals()`][disablesignals] method.
 
-[httpserverstruct]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html
-[bindmethod]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.bind
-[bindsslmethod]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.bind_ssl
-[bindrusttls]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.bind_rustls
-[startmethod]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.start
-[workers]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.workers
+[httpserverstruct]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html
+[bindmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind
+[bindopensslmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind_openssl
+[bindrusttls]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind_rustls
+[startmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.start
+[workers]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.workers
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [exampletls]: https://github.com/actix/examples/tree/master/tls
-[shutdowntimeout]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.shutdown_timeout
-[disablesignals]: https://docs.rs/actix-web/1.0.2/actix_web/struct.HttpServer.html#method.disable_signals
+[shutdowntimeout]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.shutdown_timeout
+[disablesignals]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.disable_signals
