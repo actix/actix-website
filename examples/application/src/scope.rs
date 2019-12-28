@@ -1,12 +1,13 @@
 use actix_web::{web, App, HttpRequest, Responder};
 
-fn show_users(_req: HttpRequest) -> impl Responder {
-    unimplemented!()
+async fn show_users(_req: HttpRequest) -> impl Responder {
+    "unimplemented!"
 }
 
 #[rustfmt::skip]
 // <scope>
-pub fn main() {
+#[actix_rt::main]
+async fn main() {
     App::new()
         .service(
             web::scope("/users")

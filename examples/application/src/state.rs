@@ -7,7 +7,7 @@ struct AppState {
     app_name: String,
 }
 
-fn index(data: web::Data<AppState>) -> String {
+async fn index(data: web::Data<AppState>) -> String {
     let app_name = &data.app_name; // <- get app_name
 
     format!("Hello {}!", app_name) // <- response with app_name
@@ -19,7 +19,7 @@ struct AppStateWithCounter {
     counter: Mutex<i32>, // <- Mutex is necessary to mutate safely across threads
 }
 
-fn _index(data: web::Data<AppStateWithCounter>) -> String {
+async fn _index(data: web::Data<AppStateWithCounter>) -> String {
     let mut counter = data.counter.lock().unwrap(); // <- get counter's MutexGuard
     *counter += 1; // <- access counter inside MutexGuard
 
@@ -28,25 +28,26 @@ fn _index(data: web::Data<AppStateWithCounter>) -> String {
 // </setup_mutable>
 
 // <make_app_mutable>
-fn _main() {
+#[actix_rt::main]
+async fn _main() -> std::io::Result<()> {
     let counter = web::Data::new(AppStateWithCounter {
         counter: Mutex::new(0),
     });
 
     HttpServer::new(move || { // move counter into the closure
         App::new()
-            .register_data(counter.clone()) // <- register the created data
+            .app_data(counter.clone()) // <- register the created data
             .route("/", web::get().to(_index))
     })
-        .bind("127.0.0.1:8088")
-        .unwrap()
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }
 // </make_app_mutable>
 
 // <start_app>
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .data(AppState {
@@ -54,9 +55,8 @@ pub fn main() {
             })
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </start_app>
