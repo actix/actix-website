@@ -2,11 +2,12 @@
 use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
-fn index(_req: HttpRequest) -> impl Responder {
+async fn index(_req: HttpRequest) -> impl Responder {
     "Hello."
 }
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     // load ssl keys
     // to create a self-signed temporary cert for testing:
     // `openssl req -x509 -newkey rsa:4096 -nodes -keyout key.pem -out cert.pem -days 365 -subj '/CN=localhost'`
@@ -17,9 +18,8 @@ fn main() {
     builder.set_certificate_chain_file("cert.pem").unwrap();
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind_ssl("127.0.0.1:8088", builder)
-        .unwrap()
+        .bind_openssl("127.0.0.1:8088", builder)?
         .run()
-        .unwrap();
+        .await
 }
 // </main>
