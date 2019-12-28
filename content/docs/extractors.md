@@ -127,13 +127,13 @@ number of requests processed per thread. A proper implementation would use `Arc`
 > request handling processes would block. If you need to share or update some state
 > from multiple threads, consider using the [actix][actix] actor system.
 
-[pathstruct]: (https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.Path.html
-[querystruct]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Query.html
-[jsonstruct]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Json.html
-[jsonconfig]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.JsonConfig.html
-[formconfig]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.FormConfig.html
-[datastruct]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Data.html
-[stringexample]: https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-2
-[bytesexample]: https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html#example-4
-[payloadexample]: https://docs.rs/actix-web/1.0.2/actix_web/web/struct.Payload.html
+[pathstruct]: https://docs.rs/actix-web/2/actix_web/dev/struct.Path.html
+[querystruct]: https://docs.rs/actix-web/2/actix_web/web/struct.Query.html
+[jsonstruct]: https://docs.rs/actix-web/2/actix_web/web/struct.Json.html
+[jsonconfig]: https://docs.rs/actix-web/2/actix_web/web/struct.JsonConfig.html
+[formconfig]: https://docs.rs/actix-web/2/actix_web/web/struct.FormConfig.html
+[datastruct]: https://docs.rs/actix-web/2/actix_web/web/struct.Data.html
+[stringexample]: https://docs.rs/actix-web/2/actix_web/trait.FromRequest.html#example-2
+[bytesexample]: https://docs.rs/actix-web/2/actix_web/trait.FromRequest.html#example-4
+[payloadexample]: https://docs.rs/actix-web/2/actix_web/web/struct.Payload.html
 [actix]: https://actix.github.io/actix/actix/
