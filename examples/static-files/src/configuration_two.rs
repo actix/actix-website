@@ -2,7 +2,8 @@
 use actix_files as fs;
 use actix_web::{App, HttpServer};
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().service(
             fs::Files::new("/static", ".")
@@ -10,9 +11,8 @@ pub fn main() {
                 .use_last_modified(true),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </config-two>
