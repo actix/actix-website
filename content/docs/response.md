@@ -82,5 +82,5 @@ is enabled automatically.
 
 {{< include-example example="responses" file="chunked.rs" section="chunked" >}}
 
-[responsebuilder]: https://docs.rs/actix-web/1.0.2/actix_web/dev/struct.HttpResponseBuilder.html
-[compressmidddleware]: https://docs.rs/actix-web/1.0.2/actix_web/middleware/struct.Compress.html
+[responsebuilder]: https://docs.rs/actix-web/2/actix_web/dev/struct.HttpResponseBuilder.html
+[compressmidddleware]: https://docs.rs/actix-web/2/actix_web/middleware/struct.Compress.html

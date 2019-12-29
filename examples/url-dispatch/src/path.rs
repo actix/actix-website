@@ -1,11 +1,12 @@
 // <path>
 use actix_web::{web, Result};
 
-fn index(info: web::Path<(String, u32)>) -> Result<String> {
+async fn index(info: web::Path<(String, u32)>) -> Result<String> {
     Ok(format!("Welcome {}! id: {}", info.0, info.1))
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| {
@@ -14,9 +15,8 @@ pub fn main() {
             web::get().to(index),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </path>

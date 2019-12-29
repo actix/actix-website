@@ -44,5 +44,5 @@ The Configuration can also be applied to directory service:
 
 {{< include-example example="static-files" file="configuration_two.rs" section="config-two" >}}
 
-[showfileslisting]: https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html
-[indexfile]: https://docs.rs/actix-files/0.1.2/actix_files/struct.Files.html#method.index_file
+[showfileslisting]: https://docs.rs/actix-files/0.2/actix_files/struct.Files.html
+[indexfile]: https://docs.rs/actix-files/0.2/actix_files/struct.Files.html#method.index_file

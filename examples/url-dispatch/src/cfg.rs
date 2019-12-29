@@ -1,7 +1,8 @@
 use actix_web::{guard, web, App, HttpResponse};
 
 #[rustfmt::skip]
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::HttpServer;
 
     HttpServer::new(|| {
@@ -16,8 +17,7 @@ App::new().service(
 )
 // </cfg>
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }

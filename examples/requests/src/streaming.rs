@@ -1,26 +1,24 @@
 // <streaming>
 use actix_web::{error, web, Error, HttpResponse};
-use futures::{future::result, Future, Stream};
+use futures::{Future, Stream, StreamExt};
 
-pub fn index(payload: web::Payload) -> Box<dyn Future<Item = HttpResponse, Error = Error>> {
-    Box::new(
-        payload
-            .from_err()
-            .fold((), |_, chunk| {
-                println!("Chunk: {:?}", chunk);
-                result::<_, error::PayloadError>(Ok(()))
-            })
-            .map(|_| HttpResponse::Ok().into()),
-    )
+async fn index(mut body: web::Payload) -> Result<HttpResponse, Error> {
+    let mut bytes = web::BytesMut::new();
+    while let Some(item) = body.next().await {
+        bytes.extend_from_slice(&item?);
+    }
+
+    println!("Chunk: {:?}", bytes);
+    Ok(HttpResponse::Ok().finish())
 }
 // </streaming>
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
-    HttpServer::new(|| App::new().route("/", web::post().to_async(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
+    HttpServer::new(|| App::new().route("/", web::post().to(index)))
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }

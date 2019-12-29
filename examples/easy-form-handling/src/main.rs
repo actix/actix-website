@@ -8,25 +8,25 @@ struct Register {
     country: String,
 }
 
-fn index() -> HttpResponse {
+async fn index() -> HttpResponse {
     HttpResponse::Ok()
         .content_type("text/html; charset=utf-8")
         .body(include_str!("../static/form.html"))
 }
 
-fn register(form: web::Form<Register>) -> impl Responder {
+async fn register(form: web::Form<Register>) -> impl Responder {
     format!("Hello {} from {}!", form.username, form.country)
 }
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
             .route("/register", web::post().to(register))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </easy-form-handling>

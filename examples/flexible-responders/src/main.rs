@@ -7,23 +7,23 @@ struct Measurement {
     temperature: f32,
 }
 
-fn hello_world() -> impl Responder {
+async fn hello_world() -> impl Responder {
     "Hello World!"
 }
 
-fn current_temperature() -> impl Responder {
+async fn current_temperature() -> impl Responder {
     web::Json(Measurement { temperature: 42.3 })
 }
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(web::resource("/").to(hello_world))
             .service(web::resource("/temp").to(current_temperature))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </flexible-responders>

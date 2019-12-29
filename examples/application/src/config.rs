@@ -19,16 +19,16 @@ fn config(cfg: &mut web::ServiceConfig) {
     );
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .configure(config)
             .service(web::scope("/api").configure(scoped_config))
             .route("/", web::get().to(|| HttpResponse::Ok().body("/")))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </config>

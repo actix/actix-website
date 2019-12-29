@@ -5,10 +5,13 @@ pub mod user_sessions;
 pub mod wrap_fn;
 
 // <simple>
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
 use actix_service::{Service, Transform};
 use actix_web::{dev::ServiceRequest, dev::ServiceResponse, Error};
-use futures::future::{ok, FutureResult};
-use futures::{Future, Poll};
+use futures::future::{ok, Ready};
+use futures::Future;
 
 // There are two steps in middleware processing.
 // 1. Middleware initialization, middleware factory gets called with
@@ -30,7 +33,7 @@ where
     type Error = Error;
     type InitError = ();
     type Transform = SayHiMiddleware<S>;
-    type Future = FutureResult<Self::Transform, Self::InitError>;
+    type Future = Ready<Result<Self::Transform, Self::InitError>>;
 
     fn new_transform(&self, service: S) -> Self::Future {
         ok(SayHiMiddleware { service })
@@ -50,34 +53,40 @@ where
     type Request = ServiceRequest;
     type Response = ServiceResponse<B>;
     type Error = Error;
-    type Future = Box<dyn Future<Item = Self::Response, Error = Self::Error>>;
+    type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>>>>;
 
-    fn poll_ready(&mut self) -> Poll<(), Self::Error> {
-        self.service.poll_ready()
+    fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+        self.service.poll_ready(cx)
     }
 
     fn call(&mut self, req: ServiceRequest) -> Self::Future {
         println!("Hi from start. You requested: {}", req.path());
 
-        Box::new(self.service.call(req).and_then(|res| {
+        let fut = self.service.call(req);
+
+        Box::pin(async move {
+            let res = fut.await?;
+
             println!("Hi from response");
             Ok(res)
-        }))
+        })
     }
 }
 // </simple>
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| {
         App::new().wrap(SayHi).service(
             web::resource("/")
-                .to(|| "Hello, middleware! Check the console where the server is run."),
+                .to(|| async {
+                    "Hello, middleware! Check the console where the server is run."
+                }),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }

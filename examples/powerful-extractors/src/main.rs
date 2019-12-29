@@ -20,25 +20,25 @@ fn store_in_db(timestamp: f64, kind: &str, tags: &[String]) -> Event {
     }
 }
 
-fn capture_event(evt: web::Json<Event>) -> impl Responder {
+async fn capture_event(evt: web::Json<Event>) -> impl Responder {
     let new_event = store_in_db(evt.timestamp, &evt.kind, &evt.tags);
     format!("got event {}", new_event.id.unwrap())
 }
 
-fn index() -> HttpResponse {
+async fn index() -> HttpResponse {
     HttpResponse::Ok()
         .content_type("text/html; charset=utf-8")
         .body(include_str!("../static/form.html"))
 }
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
             .route("/event", web::post().to(capture_event))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }

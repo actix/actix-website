@@ -9,7 +9,7 @@ pub mod json_resp;
 // <builder>
 use actix_web::HttpResponse;
 
-fn index() -> HttpResponse {
+async fn index() -> HttpResponse {
     HttpResponse::Ok()
         .content_type("plain/text")
         .header("X-Hdr", "sample")
@@ -17,12 +17,12 @@ fn index() -> HttpResponse {
 }
 // </builder>
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }

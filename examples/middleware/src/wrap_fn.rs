@@ -1,9 +1,10 @@
 // <wrap-fn>
 use actix_service::Service;
 use actix_web::{web, App};
-use futures::future::Future;
+use futures::future::FutureExt;
 
-fn main() {
+#[actix_rt::main]
+async fn main() {
     let app = App::new()
         .wrap_fn(|req, srv| {
             println!("Hi from start. You requested: {}", req.path());
@@ -14,7 +15,9 @@ fn main() {
         })
         .route(
             "/index.html",
-            web::get().to(|| "Hello, middleware!"),
+            web::get().to(|| async {
+                "Hello, middleware!"
+            }),
         );
 }
 // </wrap-fn>

@@ -1,7 +1,8 @@
 // <workers>
 use actix_web::{web, App, HttpResponse, HttpServer};
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() {
     HttpServer::new(|| {
         App::new().route("/", web::get().to(|| HttpResponse::Ok()))
     })
