@@ -4,7 +4,8 @@
   <div class="jumbotron">
     <div class="actix-jumbotron">
       <img src="/img/logo-large.png" class="align-middle actix-logo" alt="">
-      <p class="lead">rust's powerful actor system and most fun web framework</p>
+      <p class="lead">rust's powerful actor system and most fun web framework
+      </p>
     </div>
   </div>
 
@@ -30,32 +31,33 @@
           </h2>
           <p>Easily create your own libraries that any Actix application can use.</p>
 
-        <h2>
-          <i class="fa fa-fw fa-dashboard" aria-hidden="true"></i>
-          Blazingly Fast
-        </h2>
-        <p>Actix is blazingly fast. Don't take our word for it -- <a href="https://www.techempower.com/benchmarks/#section=data-r18">see for yourself!</a></p>
+          <h2>
+            <i class="fa fa-fw fa-dashboard" aria-hidden="true"></i>
+            Blazingly Fast
+          </h2>
+          <p>Actix is blazingly fast. Don't take our word for it -- <a
+              href="https://www.techempower.com/benchmarks/#section=data-r18">see for yourself!</a></p>
+        </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div class="actix-content">
-        {{ highlight `use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+      <div class="col-md-8">
+        <div class="actix-content">
+          {{ highlight `use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 
-fn greet(req: HttpRequest) -> impl Responder {
+async fn greet(req: HttpRequest) -> impl Responder {
     let name = req.match_info().get("name").unwrap_or("World");
     format!("Hello {}!", &name)
 }
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(greet))
             .route("/{name}", web::get().to(greet))
     })
-    .bind("127.0.0.1:8000")
-    .expect("Can not bind to port 8000")
+    .bind("127.0.0.1:8000")?
     .run()
-    .unwrap();
+    .await
 }` "rust" "" }}
         </div>
       </div>
@@ -66,7 +68,7 @@ fn main() {
           <h2>Flexible Responders</h2>
           <p>
             Handler functions in actix can return a wide range of objects that
-            implement the <code>Responder</code> trait.  This makes it a breeze
+            implement the <code>Responder</code> trait. This makes it a breeze
             to return consistent responses from your APIs.
           </p>
           {{ highlight `#[derive(Serialize)]
@@ -74,11 +76,11 @@ struct Measurement {
     temperature: f32,
 }
 
-fn hello_world() -> impl Responder {
+async fn hello_world() -> impl Responder {
     "Hello World!"
 }
 
-fn current_temperature() -> impl Responder {
+async fn current_temperature() -> impl Responder {
     web::Json(Measurement { temperature: 42.3 })
 }` "rust" "" }}
         </div>
@@ -99,7 +101,7 @@ struct Event {
     tags: Vec<String>,
 }
 
-fn capture_event(evt: web::Json<Event>) -> impl Responder {
+async fn capture_event(evt: web::Json<Event>) -> impl Responder {
     let new_event = store_in_db(evt.timestamp, &evt.kind, &evt.tags);
     format!("got event {}", new_event.id.unwrap())
 }` "rust" "" }}
@@ -107,7 +109,7 @@ fn capture_event(evt: web::Json<Event>) -> impl Responder {
         <div class="actix-feature" id="forms">
           <h2>Easy Form Handling</h2>
           <p>
-            Handling multipart/urlencoded form data is easy.  Just define
+            Handling multipart/urlencoded form data is easy. Just define
             a structure that can be deserialized and actix will handle
             the rest.
           </p>
@@ -117,7 +119,7 @@ struct Register {
     country: String,
 }
 
-fn register(form: web::Form<Register>) -> impl Responder {
+async fn register(form: web::Form<Register>) -> impl Responder {
     format!("Hello {} from {}!", form.username, form.country)
 }` "rust" "" }}
         </div>
@@ -125,22 +127,21 @@ fn register(form: web::Form<Register>) -> impl Responder {
           <h2>Request Routing</h2>
           <p>
             An actix app comes with a URL routing system that lets you match on
-            URLs and invoke individual handlers.  For extra flexibility, scopes
+            URLs and invoke individual handlers. For extra flexibility, scopes
             can be used.
           </p>
-          {{ highlight `fn index(_req: HttpRequest) -> impl Responder {
+          {{ highlight `async fn index(_req: HttpRequest) -> impl Responder {
     "Hello from the index page!"
 }
 
-fn hello(path: web::Path<String>) -> impl Responder {
+async fn hello(path: web::Path<String>) -> impl Responder {
     format!("Hello {}!", &path)
 }
 
-fn main() {
-    App::new()
+let app = App::new()
         .route("/", web::get().to(index))
         .route("/{name}", web::get().to(hello));
-}` "rust" "" }}
+` "rust" "" }}
         </div>
       </div>
       <div class="col-md-3 actix-feature-selectors">

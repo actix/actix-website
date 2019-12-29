@@ -17,5 +17,6 @@ baseURL = "https://actix.rs"
 [params]
 actixVersion = "0.9"
 actixWebVersion = "2.0"
+actixRtVersion = "1.0"
 actixWebMinRustVersion = "1.39"
 actixMinRustVersion = "1.39"

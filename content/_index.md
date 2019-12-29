@@ -1,3 +1,3 @@
 ---
-title: Actix - Actor System and Web Framework for Rust
+title: rust's powerful actor system and most fun web framework
 ---
