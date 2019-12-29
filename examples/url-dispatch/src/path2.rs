@@ -8,11 +8,12 @@ struct Info {
 }
 
 // extract path info using serde
-fn index(info: web::Path<Info>) -> Result<String> {
+async fn index(info: web::Path<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| {
@@ -21,9 +22,8 @@ pub fn main() {
             web::get().to(index),
         )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </path>

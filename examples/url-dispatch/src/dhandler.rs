@@ -1,11 +1,12 @@
 use actix_web::{guard, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
-fn index(_req: HttpRequest) -> impl Responder {
+async fn index(_req: HttpRequest) -> impl Responder {
     "Welcome!"
 }
 
 // <default>
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(web::resource("/").route(web::get().to(index)))
@@ -15,9 +16,8 @@ pub fn main() {
                     .to(|| HttpResponse::MethodNotAllowed()),
             )
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </default>

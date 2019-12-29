@@ -1,7 +1,8 @@
 // <keep-alive>
 use actix_web::{web, App, HttpResponse, HttpServer};
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     let one = HttpServer::new(|| {
         App::new().route("/", web::get().to(|| HttpResponse::Ok()))
     })
@@ -17,6 +18,6 @@ pub fn main() {
     })
     .keep_alive(None); // <- Disable keep-alive
 
-    one.bind("127.0.0.1:8088").unwrap().run().unwrap();
+    one.bind("127.0.0.1:8088")?.run().await
 }
 // </keep-alive>

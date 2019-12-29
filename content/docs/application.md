@@ -126,6 +126,6 @@ Each `ServiceConfig` can have it's own `data`, `routes`, and `services`
 
 [usingappprefix]: /docs/url-dispatch/index.html#using-an-application-prefix-to-compose-applications
 [stateexample]: https://github.com/actix/examples/blob/master/state/src/main.rs
-[guardtrait]: https://docs.rs/actix-web/1.0.2/actix_web/guard/trait.Guard.html
-[guardfuncs]: https://docs.rs/actix-web/1.0.2/actix_web/guard/index.html#functions
-[guardheader]: ((https://docs.rs/actix-web/1.0.2/actix_web/guard/fn.Header.html
+[guardtrait]: https://docs.rs/actix-web/2/actix_web/guard/trait.Guard.html
+[guardfuncs]: https://docs.rs/actix-web/2/actix_web/guard/index.html#functions
+[guardheader]: https://docs.rs/actix-web/2/actix_web/guard/fn.Header.html

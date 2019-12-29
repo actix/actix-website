@@ -8,18 +8,19 @@ struct AppState {
     count: Cell<i32>,
 }
 
-fn show_count(data: web::Data<AppState>) -> impl Responder {
+async fn show_count(data: web::Data<AppState>) -> impl Responder {
     format!("count: {}", data.count.get())
 }
 
-fn add_one(data: web::Data<AppState>) -> impl Responder {
+async fn add_one(data: web::Data<AppState>) -> impl Responder {
     let count = data.count.get();
     data.count.set(count + 1);
 
     format!("count: {}", data.count.get())
 }
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     let data = AppState {
@@ -32,9 +33,8 @@ fn main() {
             .route("/", web::to(show_count))
             .route("/add", web::to(add_one))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </data>

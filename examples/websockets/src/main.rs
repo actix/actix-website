@@ -11,29 +11,33 @@ impl Actor for MyWs {
 }
 
 /// Handler for ws::Message message
-impl StreamHandler<ws::Message, ws::ProtocolError> for MyWs {
-    fn handle(&mut self, msg: ws::Message, ctx: &mut Self::Context) {
+impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWs {
+    fn handle(
+        &mut self,
+        msg: Result<ws::Message, ws::ProtocolError>,
+        ctx: &mut Self::Context,
+    ) {
         match msg {
-            ws::Message::Ping(msg) => ctx.pong(&msg),
-            ws::Message::Text(text) => ctx.text(text),
-            ws::Message::Binary(bin) => ctx.binary(bin),
+            Ok(ws::Message::Ping(msg)) => ctx.pong(&msg),
+            Ok(ws::Message::Text(text)) => ctx.text(text),
+            Ok(ws::Message::Binary(bin)) => ctx.binary(bin),
             _ => (),
         }
     }
 }
 
-fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
+async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
     let resp = ws::start(MyWs {}, &req, stream);
     println!("{:?}", resp);
     resp
 }
 
-fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().route("/ws/", web::get().to(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }
 // </websockets>
 

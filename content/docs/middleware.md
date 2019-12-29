@@ -127,11 +127,11 @@ into a response.
 
 {{< include-example example="middleware" file="errorhandler.rs" section="error-handler" >}}
 
-[sessionobj]: https://docs.rs/actix-session/0.1.1/actix_session/struct.Session.html
-[requestsession]: https://docs.rs/actix-session/0.1.1/actix_session/struct.Session.html
-[cookiesession]: https://docs.rs/actix-session/0.1.1/actix_session/struct.CookieSession.html
-[actixsession]: https://docs.rs/actix-session/0.1.1/actix_session/
+[sessionobj]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
+[requestsession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
+[cookiesession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.CookieSession.html
+[actixsession]: https://docs.rs/actix-session/0.3.0/actix_session/
 [envlogger]: https://docs.rs/env_logger/*/env_logger/
-[servicetrait]: https://docs.rs/actix-web/1.0.2/actix_web/dev/trait.Service.html
-[transformtrait]: https://docs.rs/actix-web/1.0.2/actix_web/dev/trait.Transform.html
-[wrap_fn]: https://docs.rs/actix-web/1.0.5/actix_web/struct.App.html#method.wrap_fn
+[servicetrait]: https://docs.rs/actix-web/2/actix_web/dev/trait.Service.html
+[transformtrait]: https://docs.rs/actix-web/2/actix_web/dev/trait.Transform.html
+[wrap_fn]: https://docs.rs/actix-web/2/actix_web/struct.App.html#method.wrap_fn

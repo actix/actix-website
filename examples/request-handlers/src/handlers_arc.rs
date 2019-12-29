@@ -8,17 +8,18 @@ struct AppState {
     count: Arc<AtomicUsize>,
 }
 
-fn show_count(data: web::Data<AppState>) -> impl Responder {
+async fn show_count(data: web::Data<AppState>) -> impl Responder {
     format!("count: {}", data.count.load(Ordering::Relaxed))
 }
 
-fn add_one(data: web::Data<AppState>) -> impl Responder {
+async fn add_one(data: web::Data<AppState>) -> impl Responder {
     data.count.fetch_add(1, Ordering::Relaxed);
 
     format!("count: {}", data.count.load(Ordering::Relaxed))
 }
 
-pub fn main() {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     let data = AppState {
@@ -31,9 +32,8 @@ pub fn main() {
             .route("/", web::to(show_count))
             .route("/add", web::to(add_one))
     })
-    .bind("127.0.0.1:8088")
-    .unwrap()
+    .bind("127.0.0.1:8088")?
     .run()
-    .unwrap();
+    .await
 }
 // </arc>
