@@ -23,7 +23,7 @@ contains the following:
 ```ini
 [dependencies]
 actix-web = "{{< actix-version "actix-web" >}}"
-actix-rt = "{{< actix-rt-version "actix-rt" >}}"
+actix-rt = "{{< actix-version "actix-rt" >}}"
 ```
 
 In order to implement a web server, we first need to create a request handler.
