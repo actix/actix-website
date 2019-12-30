@@ -12,8 +12,6 @@ NOTE: The `actix-web` 1.0 version of this section is still
 this [example](https://github.com/actix/examples/tree/master/async_db) until then.
 {{% /alert %}}
 
-[being updated](https://github.com/cldershem/actix-website/tree/update1.0-db).
-
 At the moment, Diesel 1.0 does not support asynchronous operations,
 but it's possible to use the `actix` synchronous actor system as a database interface api.
 
