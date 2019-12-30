@@ -327,11 +327,10 @@ img {
  *
  */
 
-.actix-quick-install {
-  margin-bottom: 2rem;
-}
-.actix-quick-install .chroma {
-  margin-bottom: 0;
+.actix-jumbotron-install {
+  min-width: 120px;
+  margin-top: 2rem;
+  display: inline-block;
 }
 
 .actix-features h2 {
