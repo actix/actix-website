@@ -12,7 +12,9 @@
   <div class="container actix-home">
     <div class="actix-content actix-quick-install">
       <h4>Quick Install</h4>
-      {{ highlight `cargo add actix-web` "shell" "" }}
+      {{ highlight `# In your Cargo.toml
+[dependencies]
+actix-web = "2.0"` "toml" "" }}
       <small>
         View <a href="/docs/installation/">installation page</a>
         for advanced instructions.
