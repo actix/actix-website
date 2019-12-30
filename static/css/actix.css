@@ -327,6 +327,13 @@ img {
  *
  */
 
+.actix-quick-install {
+  margin-bottom: 2rem;
+}
+.actix-quick-install .chroma {
+  margin-bottom: 0;
+}
+
 .actix-features h2 {
   font-size: 1.5rem;
   margin-top: 2.25rem;
