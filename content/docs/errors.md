@@ -17,10 +17,9 @@ If a handler returns an `Error` (referring to the [general Rust trait
 `HttpResponse`:
 
 ```rust
-pub trait ResponseError: Fail {
-    fn error_response(&self) -> HttpResponse {
-        HttpResponse::new(StatusCode::INTERNAL_SERVER_ERROR)
-    }
+pub trait ResponseError {
+    fn error_response(&self) -> HttpResponse,
+    fn status_code(&self) -> StatusCode
 }
 ```
 
@@ -55,7 +54,7 @@ Here's an example implementation for `ResponseError`:
 {{< include-example example="errors" file="main.rs" section="response-error" >}}
 
 `ResponseError` has a default implementation for `error_response()` that will
-render a *500* (internal server error), and that's what will happen when the
+render a _500_ (internal server error), and that's what will happen when the
 `index` handler executes above.
 
 Override `error_response()` to produce more useful results:
@@ -66,7 +65,7 @@ Override `error_response()` to produce more useful results:
 
 Actix-web provides a set of error helper functions that are useful for generating
 specific HTTP error codes from other errors. Here we convert `MyError`, which
-doesn't implement the `ResponseError` trait, to a *400* (bad request) using
+doesn't implement the `ResponseError` trait, to a _400_ (bad request) using
 `map_err`:
 
 {{< include-example example="errors" file="helpers.rs" section="helpers" >}}
@@ -78,7 +77,7 @@ for a full list of available error helpers.
 
 Actix-web provides automatic compatibility with the [failure] library so that
 errors deriving `fail` will be converted automatically to an actix error. Keep
-in mind that those errors will render with the default *500* status code unless you
+in mind that those errors will render with the default _500_ status code unless you
 also provide your own `error_response()` implementation for them.
 
 # Error logging

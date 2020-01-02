@@ -19,19 +19,17 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().service(
             web::resource("/")
-                .data(
-                    // change json extractor configuration
-                    web::Json::<Info>::configure(|cfg| {
-                        cfg.limit(4096).error_handler(|err, _req| {
-                            // <- create custom error response
-                            error::InternalError::from_response(
-                                err,
-                                HttpResponse::Conflict().finish(),
-                            )
-                            .into()
-                        })
-                    }),
-                )
+                // change json extractor configuration
+                .app_data(web::Json::<Info>::configure(|cfg| {
+                    cfg.limit(4096).error_handler(|err, _req| {
+                        // create custom error response
+                        error::InternalError::from_response(
+                            err,
+                            HttpResponse::Conflict().finish(),
+                        )
+                        .into()
+                    })
+                }))
                 .route(web::post().to(index)),
         )
     })

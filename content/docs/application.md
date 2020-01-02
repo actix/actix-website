@@ -10,11 +10,11 @@ weight: 140
 It provides routing, middlewares, pre-processing of requests, post-processing of
 responses, etc.
 
-All `actix-web` servers are built around the `App` instance.  It is used for
+All `actix-web` servers are built around the [`App`][app] instance.  It is used for
 registering routes for resources and middlewares.  It also stores application
 state shared across all handlers within same scope.
 
-An application's `scope` acts as a namespace for all routes, i.e. all routes for a
+An application's [`scope`][scope] acts as a namespace for all routes, i.e. all routes for a
 specific application scope have the same url path prefix. The application prefix always
 contains a leading "/" slash.  If a supplied prefix does not contain leading slash,
 it is automatically inserted.  The prefix should consist of value path segments.
@@ -30,20 +30,11 @@ are created. This resource is available through the `/app/index.html` url.
 
 > For more information, check the [URL Dispatch][usingappprefix] section.
 
-Multiple application scopes can be served with one server:
-
-{{< include-example example="application" file="main.rs" section="multi" >}}
-
-All `/app1` requests route to the first application, `/app2` to the second, and all other to the third.
-**Applications get matched based on registration order**. If an application with a more generic
-prefix is registered before a less generic one, it would effectively block the less generic
-application matching. For example, if an `App` with the prefix `"/"` was registered
-as the first application, it would match all incoming requests.
-
 ## State
 
 Application state is shared with all routes and resources within the same scope. State
-can be accessed with the `web::Data<State>` extractor. State is also available for route matching guards and middlewares.
+can be accessed with the [`web::Data<T>`][data] extractor where `T` is type of state. State is
+also available for middlewares.
 
 Let's write a simple application and store the application name in the state:
 
@@ -53,14 +44,16 @@ and pass in the state when initializing the App, and start the application:
 
 {{< include-example example="application" file="state.rs" section="start_app" >}}
 
+Any number of state types could be registered within application.
+
 ## Shared Mutable State
 
-`HttpServer` accepts an application factory rather than an application instance. 
-Http server constructs an application instance for each thread, thus application data must be 
-constructed multiple times. If you want to share data between different threads, a shareable 
-object should be used, e.g. Send + Sync. 
+`HttpServer` accepts an application factory rather than an application instance.
+Http server constructs an application instance for each thread, thus application data must be
+constructed multiple times. If you want to share data between different threads, a shareable
+object should be used, e.g. Send + Sync.
 
-Internally, `web::Data` uses Arc. Thus, in order to avoid double Arc, we should create our Data before registering it using `register_data()`.
+Internally, [`web::Data`][data] uses Arc. Thus, in order to avoid double Arc, we should create our Data before registering it using [`App::app_data()`][appdata].
 
 In the following example, we will write an application with mutable, shared state. First, we define our state and create our handler:
 
@@ -70,15 +63,9 @@ and register the data in an App:
 
 {{< include-example example="application" file="state.rs" section="make_app_mutable" >}}
 
-## Combining applications with different state
-
-Combining multiple applications with different state is possible as well.
-
-{{< include-example example="application" file="combine.rs" section="combine" >}}
-
 ## Using an Application Scope to Compose Applications
 
-The `web::scope()` method allows to set a specific application prefix.  This scope represents
+The [`web::scope()`][webscope] method allows to set a specific application prefix.  This scope represents
 a resource prefix that will be prepended to all resource patterns added by the resource
 configuration. This can be used to help mount a set of routes at a different location
 than the included callable's author intended while still maintaining the same resource names.
@@ -90,7 +77,7 @@ For example:
 In the above example, the *show_users* route will have an effective route pattern of
 */users/show* instead of */show* because the application's scope argument will be prepended
 to the pattern. The route will then only match if the URL path is */users/show*,
-and when the `HttpRequest.url_for()` function is called with the route name show_users,
+and when the [`HttpRequest.url_for()`][urlfor] function is called with the route name show_users,
 it will generate a URL with that same path.
 
 ## Application guards and virtual hosting
@@ -107,7 +94,7 @@ filter based on request's header information.
 
 # Configure
 
-For simplicity and reusability both `App` and `web::scope` provide the `configure` method.
+For simplicity and reusability both [`App`][appconfig] and [`web::Scope`][webscopeconfig] provide the `configure` method.
 This function is useful for moving parts of configuration to a different module or even
 library. For example, some of the resource's configuration could be moved to different
 module.
@@ -121,11 +108,24 @@ The result of the above example would be:
 /app      -> "app"
 /api/test -> "test"
 ```
-
 Each `ServiceConfig` can have it's own `data`, `routes`, and `services`
+
+It is also possible to create application object in separate function.
+`App` type uses complex generics and result type have to use `impl Trait` feature.
+This could be useful for unit tests.
+
+{{< include-example example="application" file="config_app.rs" section="config" >}}
 
 [usingappprefix]: /docs/url-dispatch/index.html#using-an-application-prefix-to-compose-applications
 [stateexample]: https://github.com/actix/examples/blob/master/state/src/main.rs
 [guardtrait]: https://docs.rs/actix-web/2/actix_web/guard/trait.Guard.html
 [guardfuncs]: https://docs.rs/actix-web/2/actix_web/guard/index.html#functions
 [guardheader]: https://docs.rs/actix-web/2/actix_web/guard/fn.Header.html
+[data]: https://docs.rs/actix-web/2/actix_web/web/struct.Data.html
+[app]: https://docs.rs/actix-web/2/actix_web/struct.App.html
+[appconfig]: https://docs.rs/actix-web/2/actix_web/struct.App.html#method.configure
+[appdata]: https://docs.rs/actix-web/2/actix_web/struct.App.html#method.app_data
+[scope]: https://docs.rs/actix-web/2/actix_web/struct.Scope.html
+[webscopeconfig]: https://docs.rs/actix-web/2/actix_web/struct.Scope.html#method.configure
+[webscope]: https://docs.rs/actix-web/2/actix_web/web/fn.scope.html
+[urlfor]: https://docs.rs/actix-web/2/actix_web/struct.HttpRequest.html#method.url_for

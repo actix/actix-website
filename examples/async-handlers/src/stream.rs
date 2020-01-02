@@ -1,23 +1,22 @@
 // <stream>
-use actix_web::{Error, HttpResponse};
+use actix_web::{web, App, HttpServer, Error, HttpResponse};
 use bytes::Bytes;
 use futures::stream::once;
+use futures::future::ok;
 
-fn index() -> HttpResponse {
-    let body = once::<Bytes, Error>(Ok(Bytes::from_static(b"test")));
+async fn index() -> HttpResponse {
+    let body = once(ok::<_, Error>(Bytes::from_static(b"test")));
 
     HttpResponse::Ok()
         .content_type("application/json")
-        .streaming(Box::new(body))
+        .streaming(body)
 }
 
-pub fn main() {
-    use actix_web::{web, App, HttpServer};
-
-    HttpServer::new(|| App::new().route("/async", web::to_async(index)))
-        .bind("127.0.0.1:8088")
-        .unwrap()
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| App::new().route("/async", web::to(index)))
+        .bind("127.0.0.1:8088")?
         .run()
-        .unwrap();
+        .await
 }
 // </stream>

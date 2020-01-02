@@ -66,21 +66,10 @@ negotiation.
 # JSON Response
 
 The `Json` type allows to respond with well-formed JSON data: simply return a value of
-type Json<T> where `T` is the type of a structure to serialize into *JSON*.
+type `Json<T>` where `T` is the type of a structure to serialize into *JSON*.
 The type `T` must implement the `Serialize` trait from *serde*.
 
 {{< include-example example="responses" file="json_resp.rs" section="json-resp" >}}
-
-# Chunked transfer encoding
-
-Chunked encoding on a response can be enabled with `HttpResponseBuilder::chunked()`.
-This takes effect only for `Body::Streaming(BodyStream)` or `Body::StreamingContext` bodies.
-If the response payload compression is enabled and a streaming body is used, chunked encoding
-is enabled automatically.
-
-> Enabling chunked encoding for *HTTP/2.0* responses is forbidden.
-
-{{< include-example example="responses" file="chunked.rs" section="chunked" >}}
 
 [responsebuilder]: https://docs.rs/actix-web/2/actix_web/dev/struct.HttpResponseBuilder.html
 [compressmidddleware]: https://docs.rs/actix-web/2/actix_web/middleware/struct.Compress.html

@@ -1,9 +1,0 @@
-[package]
-name = "sentry"
-version = "0.7.0"
-edition = "2018"
-
-[dependencies]
-actix-web = "0.7"
-sentry-actix = "0.15"
-sentry = "0.15"
