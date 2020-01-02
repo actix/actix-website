@@ -1,23 +1,18 @@
 // <either>
 use actix_web::{Either, Error, HttpResponse};
-use futures::future::{ok, Future};
 
-type RegisterResult =
-    Either<HttpResponse, Box<dyn Future<Item = HttpResponse, Error = Error>>>;
+type RegisterResult = Either<HttpResponse, Result<&'static str, Error>>;
 
 fn index() -> RegisterResult {
     if is_a_variant() {
         // <- choose variant A
         Either::A(HttpResponse::BadRequest().body("Bad data"))
     } else {
-        Either::B(
-            // <- variant B
-            Box::new(ok(HttpResponse::Ok()
-                .content_type("text/html")
-                .body("Hello!".to_string()))),
-        )
+        // <- variant B
+        Either::B(Ok("Hello!"))
     }
 }
+// </either>
 
 fn main() {
     use actix_web::{web, App, HttpServer};
@@ -28,7 +23,6 @@ fn main() {
         .run()
         .unwrap();
 }
-// </either>
 
 fn is_a_variant() -> bool {
     true
