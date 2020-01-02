@@ -9,17 +9,10 @@ weight: 170
 Actix-web provides a facility for type-safe request information access called *extractors*
 (ie, `impl FromRequest`). By default, actix-web provides several extractor implementations.
 
-## Extractors Within Handler Functions
-
-An extractor can be accessed in a few different ways.
-
-Option 1 - passed as a parameter to a handler function:
+An extractor can be accessed as an arguments to a handler function. Actix-web supports
+up to 10 extractors per handler function. Argument position does not matter.
 
 {{< include-example example="extractors" file="main.rs" section="option-one" >}}
-
-Option 2 - accessed by calling `extract()` on the Extractor
-
-{{< include-example example="extractors" file="main.rs" section="option-two" >}}
 
 # Path
 
@@ -78,15 +71,6 @@ the *serde* crate.
 
 {{< include-example example="extractors" file="form.rs" section="form" >}}
 
-# Multiple extractors
-
-Actix-web provides extractor implementations for tuples (up to 10 elements) whose
-elements implement `FromRequest`.
-
-For example we can use a path extractor and a query extractor at the same time.
-
-{{< include-example example="extractors" file="multiple.rs" section="multi" >}}
-
 # Other
 
 Actix-web also provides several other extractors:
@@ -102,7 +86,7 @@ Actix-web also provides several other extractors:
 * *Payload* - You can access a request's payload.
   [*Example*][payloadexample]
 
-# Async Data Access
+# Application state extractor
 
 Application state is accessible from the handler with the `web::Data` extractor;
 however, state is accessible as a read-only reference. If you need mutable access to state,
@@ -125,7 +109,7 @@ number of requests processed per thread. A proper implementation would use `Arc`
 > Be careful with synchronization primitives like `Mutex` or `RwLock`. The `actix-web` framework
 > handles requests asynchronously. By blocking thread execution, all concurrent
 > request handling processes would block. If you need to share or update some state
-> from multiple threads, consider using the [actix][actix] actor system.
+> from multiple threads, consider using the tokio synchronization primitives.
 
 [pathstruct]: https://docs.rs/actix-web/2/actix_web/dev/struct.Path.html
 [querystruct]: https://docs.rs/actix-web/2/actix_web/web/struct.Query.html
