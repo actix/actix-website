@@ -1,6 +1,6 @@
+// <path-three>
 use actix_web::{web, HttpRequest, Result};
 
-// <path-three>
 async fn index(req: HttpRequest) -> Result<String> {
     let name: String = req.match_info().get("friend").unwrap().parse().unwrap();
     let userid: i32 = req.match_info().query("userid").parse().unwrap();

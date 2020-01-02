@@ -1,7 +1,6 @@
-use actix_web::{web, App, FromRequest, HttpRequest, HttpServer, Responder};
+use actix_web::App, HttpServer;
 use serde::Deserialize;
 
-// pub mod custom_handler;
 pub mod form;
 pub mod json_one;
 pub mod json_two;
@@ -18,6 +17,8 @@ struct MyInfo {
 }
 
 // <option-one>
+use actix_web::web;
+
 async fn index(
     path: web::Path<(String, String)>,
     json: web::Json<MyInfo>,
@@ -27,7 +28,10 @@ async fn index(
 // </option-one>
 
 // <option-two>
-async fn extract(req: HttpRequest) -> impl Responder {
+
+use actix_web::{web, FromRequest, HttpRequest, Responder};
+
+async fn  extract(req: HttpRequest) -> impl Responder {
     let params = web::Path::<(String, String)>::extract(&req).await.unwrap();
 
     let info = web::Json::<MyInfo>::extract(&req)
