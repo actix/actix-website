@@ -44,6 +44,10 @@ accepts a function that should return an application factory.
 That's it! Now, compile and run the program with `cargo run`.
 Head over to `http://localhost:8088/` to see the results.
 
+**Note**: You could notice `#[actix_rt::main]` attribute macro. This
+macro executes marked async function in actix runtime. Any async function
+could be marked and executed by this macro.
+
 ### Using Attribute Macros to Define Routes
 
 Alternatively, you can define routes using macro attributes which
@@ -71,5 +75,5 @@ that recompiles on demand. This isn't necessary, but it makes rapid prototyping
 more convenient as you can see changes instantly upon saving.
 To see how this can be accomplished, have a look at the [autoreload pattern][autoload].
 
-[actix-web-codegen]: https://docs.rs/actix-web-codegen/0.1.2/actix_web_codegen/
+[actix-web-codegen]: https://docs.rs/actix-web-codegen/
 [autoload]: ../autoreload/

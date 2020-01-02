@@ -34,14 +34,15 @@ async fn _main() -> std::io::Result<()> {
         counter: Mutex::new(0),
     });
 
-    HttpServer::new(move || { // move counter into the closure
+    HttpServer::new(move || {
+        // move counter into the closure
         App::new()
             .app_data(counter.clone()) // <- register the created data
             .route("/", web::get().to(_index))
     })
-        .bind("127.0.0.1:8088")?
-        .run()
-        .await
+    .bind("127.0.0.1:8088")?
+    .run()
+    .await
 }
 // </make_app_mutable>
 
