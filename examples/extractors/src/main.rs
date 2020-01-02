@@ -1,4 +1,4 @@
-use actix_web::App, HttpServer;
+use actix_web::{App, HttpServer};
 use serde::Deserialize;
 
 pub mod form;
@@ -21,17 +21,16 @@ use actix_web::web;
 
 async fn index(
     path: web::Path<(String, String)>,
-    json: web::Json<MyInfo>,
-) -> impl Responder {
+    json: web::Json<MyInfo>) -> impl Responder {
     format!("{} {} {} {}", path.0, path.1, json.id, json.username)
 }
 // </option-one>
 
 // <option-two>
 
-use actix_web::{web, FromRequest, HttpRequest, Responder};
+use actix_web::{FromRequest, HttpRequest, Responder};
 
-async fn  extract(req: HttpRequest) -> impl Responder {
+async fn extract(req: HttpRequest) -> impl Responder {
     let params = web::Path::<(String, String)>::extract(&req).await.unwrap();
 
     let info = web::Json::<MyInfo>::extract(&req)
