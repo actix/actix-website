@@ -13,24 +13,19 @@ must have `Send` + `Sync` boundaries. More about that in the *multi-threading* s
 
 To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be
 called multiple times. To bind ssl socket, [`bind_openssl()`][bindopensslmethod] or
-[`bind_rustls()`][bindrusttls] should be used. To start the http server, use one of the
-start methods.
-
-- use [`start()`] for a server
+[`bind_rustls()`][bindrusttls] should be used. To run the http server, use `HttpServer::run()`
+method.
 
 {{< include-example example="server" section="main" >}}
 
-> It is possible to start a server in a separate thread with the `run()` method. In that
-> case the server spawns a new thread and creates a new actix system in it. To stop
-> this server, send a `StopServer` message.
+`run()` method returns instance of [`Server`][server] type. Methods of server type
+could be used for managing http server
 
-`HttpServer` is implemented as an actix actor. It is possible to communicate with the server
-via a messaging system. Start method, e.g. `start()`, returns the address of the started
-http server. It accepts several messages:
+- `pause()` - Pause accepting incoming connections
+- `resume()` - Resume accepting incoming connections
+- `stop()` - Stop incoming connection processing, stop all workers and exit
 
-- `PauseServer` - Pause accepting incoming connections
-- `ResumeServer` - Resume accepting incoming connections
-- `StopServer` - Stop incoming connection processing, stop all workers and exit
+Following example shows how to start http server in separate thread.
 
 {{< include-example example="server" file="signals.rs" section="signals" >}}
 
@@ -45,16 +40,17 @@ equal to number of logical CPUs in the system. This number can be overridden wit
 The server creates a separate application instance for each created worker. Application state
 is not shared between threads. To share state, `Arc` could be used.
 
-> Application state does not need to be `Send` and `Sync`, but factories must be `Send` + `Sync`.
+> Application state does not need to be `Send` or `Sync`, but application
+factory must be `Send` + `Sync`.
 
 ## SSL
 
-There are two features for the ssl server: `rust-tls` and `ssl`. The `rust-tls` feature is for
-`rustls` integration and `ssl` is for `openssl`.
+There are two features for the ssl server: `rustls` and `openssl`. The `rustls` feature is for
+`rustls` integration and `openssl` is for `openssl`.
 
 ```toml
 [dependencies]
-actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["ssl"] }
+actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
 openssl = { version="0.10" }
 ```
 
@@ -117,6 +113,7 @@ are available on unix systems.
 > It is possible to disable signal handling with
 [`HttpServer::disable_signals()`][disablesignals] method.
 
+[server]: https://docs.rs/actix-web/2/actix_web/dev/struct.Server.html
 [httpserverstruct]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html
 [bindmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind
 [bindopensslmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind_openssl

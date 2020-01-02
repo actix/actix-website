@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpResponse};
+use actix_web::{web, App, HttpResponse, HttpServer};
 
 pub mod app;
 pub mod combine;
@@ -10,7 +10,7 @@ pub mod vh;
 
 // <multi>
 #[actix_rt::main]
-async fn main() {
+async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(
