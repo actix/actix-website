@@ -26,7 +26,7 @@ actix-web = "{{< actix-version "actix-web" >}}"
 ```
 
 If you want to use the `#[actix_rt::main]` macro, you have to add `actix-rt` to your dependency.
-Your `Cargo.toml` now should look like following:
+Now your `Cargo.toml` should look like following:
 
 ```ini
 [dependencies]
