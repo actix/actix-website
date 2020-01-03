@@ -15,7 +15,7 @@ cache:
     - $TRAVIS_BUILD_DIR/examples/target
 
 install:
-  - curl -L https://github.com/gohugoio/hugo/releases/download/v0.40.3/hugo_0.40.3_Linux-64bit.tar.gz | tar xzvf -
+  - curl -L https://github.com/gohugoio/hugo/releases/download/v0.62.1/hugo_0.62.1_Linux-64bit.tar.gz | tar xzvf -
 
 matrix:
   include:
