@@ -52,27 +52,15 @@ mod tests {
 
         // first chunk
         let (bytes, mut resp) = resp.take_body().into_future().await;
-        assert!(
-            bytes.unwrap().unwrap() == Bytes::from_static(
-                b"data: 5\n\n"
-            )
-        );
+        assert_eq!(bytes.unwrap().unwrap(), Bytes::from_static(b"data: 5\n\n"));
 
         // second chunk
         let (bytes, mut resp) = resp.take_body().into_future().await;
-        assert!(
-            bytes.unwrap().unwrap() == Bytes::from_static(
-                b"data: 4\n\n"
-            )
-        );
+        assert_eq!(bytes.unwrap().unwrap(), Bytes::from_static(b"data: 4\n\n"));
 
         // remaining part
         let bytes = test::load_stream(resp.take_body().into_stream()).await;
-        assert!(
-            bytes.unwrap() == Bytes::from_static(
-                b"data: 3\n\ndata: 2\n\ndata: 1\n\n"
-            )
-        );
+        assert_eq!(bytes.unwrap(), Bytes::from_static(b"data: 3\n\ndata: 2\n\ndata: 1\n\n"));
     }
 }
 // </stream-response>
