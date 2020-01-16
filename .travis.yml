@@ -25,7 +25,7 @@ matrix:
     - env:
       - TASK=check
       language: rust
-      script: cd examples; cargo check
+      script: cd examples; cargo check; cargo test
 
 deploy:
   provider: script
