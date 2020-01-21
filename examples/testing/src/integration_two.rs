@@ -7,7 +7,7 @@ struct AppState {
 }
 
 #[allow(dead_code)]
-fn index(data: web::Data<AppState>) -> impl Responder {
+async fn index(data: web::Data<AppState>) -> impl Responder {
     HttpResponse::Ok().json(data.get_ref())
 }
 
@@ -17,17 +17,17 @@ mod tests {
     use super::*;
     use actix_web::{test, web, App};
 
-    #[test]
-    fn test_index_get() {
+    #[actix_rt::test]
+    async fn test_index_get() {
         let mut app = test::init_service(
             App::new()
                 .data(AppState { count: 4 })
                 .route("/", web::get().to(index)),
-        );
+        ).await;
         let req = test::TestRequest::get().uri("/").to_request();
-        let resp: AppState = test::read_response_json(&mut app, req);
+        let resp: AppState = test::read_response_json(&mut app, req).await;
 
-        assert!(resp.count == 4);
+        assert_eq!(resp.count, 4);
     }
 }
 // </integration-two>
