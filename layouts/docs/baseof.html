@@ -75,6 +75,17 @@
             </ul>
           </div>
 
+          <h5>Diagrams</h5>
+          <div>
+            <ul class="nav">
+              {{ range .Site.Menus.docs_architecture }}
+              <li{{ if eq $currentURL .URL }} class="active"{{ end }}>
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+
           <h5>API Documentation</h5>
           <div>
             <ul class="nav">
