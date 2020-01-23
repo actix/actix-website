@@ -24,6 +24,7 @@ matrix:
       script: ./hugo
     - env:
       - TASK=check
+      - RUSTFLAGS="-A dead-code -A unused-variables"
       language: rust
       script: cd examples; cargo check; cargo test
 

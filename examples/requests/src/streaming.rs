@@ -1,6 +1,6 @@
 // <streaming>
-use actix_web::{error, web, Error, HttpResponse};
-use futures::{Future, Stream, StreamExt};
+use actix_web::{web, Error, HttpResponse};
+use futures::StreamExt;
 
 async fn index(mut body: web::Payload) -> Result<HttpResponse, Error> {
     let mut bytes = web::BytesMut::new();

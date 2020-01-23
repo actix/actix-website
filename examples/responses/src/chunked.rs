@@ -1,5 +1,5 @@
 // <chunked>
-use actix_web::{web, HttpRequest, HttpResponse, Error};
+use actix_web::{HttpRequest, HttpResponse, Error};
 use bytes::Bytes;
 use futures::future::ok;
 use futures::stream::once;
