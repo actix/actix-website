@@ -1,0 +1,34 @@
+sequenceDiagram
+
+participant ServerBuilder
+participant Accept
+participant WorkerClient
+participant Worker
+participant Dispatcher
+
+ServerBuilder->>Accept: start(socks, workers)
+
+Note over Accept: accept Connections
+loop poll connections on sockets
+	activate Accept
+	Accept-->>Accept: poll() --> Conn
+	Note over Accept: backpressure logic
+	Accept->>WorkerClient: send(Conn)
+end
+deactivate Accept
+
+Note over Worker: process Connections
+loop Worker as Future::poll
+	activate Worker
+	Worker->>WorkerClient: rx.poll_next()
+	Note over Worker: Service factories
+	Worker-->>Dispatcher: new(stream)
+end
+deactivate Worker
+
+Note over Dispatcher: process Requests
+loop Dispatcher::poll
+	activate Dispatcher
+	Dispatcher-->>Dispatcher: Dispatch requests
+end
+deactivate Dispatcher

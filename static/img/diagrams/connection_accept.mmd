@@ -1,0 +1,28 @@
+sequenceDiagram
+
+participant ServerBuilder
+participant mio
+participant Accept
+participant WorkerClient
+
+
+ServerBuilder->>Accept: start(socks, workers)
+loop Continuous: poll
+	Accept->>mio: mio::Poll::poll()
+	alt poll() -> TIMER | CMD
+		Accept-->>Accept: process_*
+	else poll() -> NOTIFY
+		Accept->>Accept: backpressure
+	else poll() -> OTHER(token)
+		Accept-->>Accept: accept_one(Conn)
+		loop while exist WorkerClient
+			Accept->>WorkerClient: send(Conn)
+			alt send(Conn) -> Ok(_)
+				Note over Accept: break loop
+			else send(Conn) -> Err(_)
+				Accept->>ServerBuilder: worker_faulted(idx)
+				Accept->>Accept: remove worker, get next worker				
+			end
+		end
+	end
+end
