@@ -19,7 +19,7 @@ will then use `listenfd` to pick up the socket that `systemfd` opened.
 ## Binaries Necessary
 
 For an automatic reloading experience you need to install `cargo-watch` and
-`systemfd`.  Both are written in rust and can be installed with `cargo install`:
+`systemfd`.  Both are written in Rust and can be installed with `cargo install`:
 
 ```
 cargo install systemfd cargo-watch
