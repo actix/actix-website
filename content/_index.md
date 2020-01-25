@@ -1,3 +1,3 @@
 ---
-title: rust's powerful actor system and most fun web framework
+title: Rust's powerful actor system and most fun web framework
 ---
