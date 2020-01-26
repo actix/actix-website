@@ -31,17 +31,47 @@ Following example shows how to start http server in separate thread.
 
 ## Multi-threading
 
-`HttpServer` automatically starts a number of http workers, by default this number is
+`HttpServer` automatically starts a number of http *workers*, by default this number is
 equal to number of logical CPUs in the system. This number can be overridden with the
 [`HttpServer::workers()`][workers] method.
 
 {{< include-example example="server" file="workers.rs" section="workers" >}}
 
-The server creates a separate application instance for each created worker. Application state
-is not shared between threads. To share state, `Arc` could be used.
+Once the workers are created, they each receive a separate *application* instance to handle
+requests. Application state is not shared between the threads, and handlers are free to manipulate
+their data with no concurrency concerns.
 
 > Application state does not need to be `Send` or `Sync`, but application
 factory must be `Send` + `Sync`.
+
+If one wishes to share state between worker threads, `Arc` can be used. Special attention should be
+given once such sharing is introduced, because in many cases performance costs might be
+inadvertently introduced as a result of locking the shared state for modifications.
+
+Since each worker thread processes its requests sequentially, handlers which block the current
+thread will cause the current worker to stop processing new requests:
+
+```rust
+fn my_handler() -> impl Responder {
+    std::thread::sleep(Duration::from_secs(5)); // <-- Bad practice! Will cause the current worker thread to hang!
+    "response"
+}
+```
+For this reason, any long, non-cpu-bound operation (e.g. I/O, database operations, etc.) should be
+expressed as futures or asynchronous functions. Async handlers get executed concurrently by worker
+threads and thus don't block execution:
+
+```rust
+async fn my_handler() -> impl Responder {
+    tokio::time::delay_for(Duration::from_secs(5)).await; // <-- Ok. Worker thread will handle other requests here
+    "response"
+}
+```
+
+The same limitation applies to extractors as well. When a handler function receives an argument
+which implements `FromRequest`, and that implementation blocks the current thread, the worker thread
+will block when running the handler. Special attention must be given when implementing extractors
+for this very reason, and they should also be implemented asynchronously where needed.
 
 ## SSL
 
