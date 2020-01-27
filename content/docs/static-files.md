@@ -33,7 +33,7 @@ index file. Use the [*Files::index_file()*][indexfile] method to configure this 
 
 - `set_content_dispostion` - function to be used for mapping file's mime to corresponding `Content-Disposition` type
 - `use_etag` - specifies whether `ETag` shall be calculated and included in headers.
-- `use_last_modifier` - specifies whether file modified timestamp should be used and added to `Last-Modified` header.
+- `use_last_modified` - specifies whether file modified timestamp should be used and added to `Last-Modified` header.
 
 All of the above methods are optional and provided with the best defaults, But it is
 possible to customize any of them.
