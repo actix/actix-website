@@ -1,5 +1,5 @@
 ---
-title: Http Server initialization
+title: Http Server Initialization
 menu: docs_architecture
 weight: 10
 ---

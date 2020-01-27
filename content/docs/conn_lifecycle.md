@@ -1,5 +1,5 @@
 ---
-title: Connection lifecycle
+title: Connection Lifecycle
 menu: docs_architecture
 weight: 20
 ---
