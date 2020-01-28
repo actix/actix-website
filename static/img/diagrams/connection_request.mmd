@@ -1,0 +1,29 @@
+sequenceDiagram
+
+participant HttpServer
+participant HttpServiceHandler
+participant HSHR
+participant State
+participant Dispatcher
+participant Tokio
+
+Note over HSHR, State: HttpServiceHandlerResponse
+
+HttpServer-->>HttpServiceHandler: eventually build...
+alt Protocol::HTTP1
+HttpServiceHandler->>Dispatcher: H1::Dispatcher::new()
+HttpServiceHandler->>State: State::H1(Dispatcher)
+else Protocol::HTTP2
+HttpServiceHandler->>State: State::H2Handshake
+end
+HttpServiceHandler->>HSHR: HttpServiceHandlerResponse::new(State)
+HttpServiceHandler-->>Tokio: StreamService->Tokio::spawn(HttpServiceHandlerResponse as Future)
+
+Tokio->>HSHR: poll()
+alt State::H2Handshake
+HSHR->>Dispatcher: H2::Dispatcher::new(stream,services)
+HSHR->>HSHR: poll()
+else 
+HSHR->>Dispatcher: poll()
+end
+Note over Dispatcher: requests loop

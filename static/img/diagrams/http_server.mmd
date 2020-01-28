@@ -1,0 +1,32 @@
+sequenceDiagram
+
+participant HttpServer
+participant ServerBuilder
+participant Worker
+participant StreamNewService
+participant HttpService
+participant HttpServiceResponse
+participant Tokio
+
+
+HttpServer-->>HttpService: build...
+HttpServer->>ServerBuilder: listen(addr,Fn->HttpService)
+ServerBuilder->>StreamNewService: create(addr,Fn->HttpService)
+HttpServer->>ServerBuilder: start()
+ServerBuilder->>Worker: start(StreamNewService)
+
+Worker->>StreamNewService: InternalServiceFactory::create()
+StreamNewService->>HttpService: new_service()
+HttpService->>HttpServiceResponse: HttpServiceResponse::new()
+HttpService->>StreamNewService: HttpServiceResponse as Future
+StreamNewService->>Worker: StreamService(HttpServiceResponse) as Future
+Worker-->>Tokio: spawn(StreamService(HttpServiceResponse)).map(Worker))
+Tokio-->>HttpServiceResponse: poll()
+HttpServiceResponse-->>Tokio: Ready(Worker(HttpServiceHandler))
+
+loop Worker process messages
+	Tokio-->>Worker: poll->Pending...
+	activate Worker
+	Note over Worker: pull messages
+	deactivate Worker
+end
