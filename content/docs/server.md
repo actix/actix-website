@@ -45,7 +45,7 @@ their copy of the state with no concurrency concerns.
 factory must be `Send` + `Sync`.
 
 To share state between worker threads, use an `Arc`. Special care should be taken once sharing and
-synchronization is introduced. In many cases, performance costs are inadvertently introduced as a
+synchronization are introduced. In many cases, performance costs are inadvertently introduced as a
 result of locking the shared state for modifications.
 
 In some cases these costs can be alleviated using more efficient locking strategies, for example
