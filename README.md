@@ -26,7 +26,7 @@ Then visit [http://localhost:1313](http://localhost:1313).
 Diagrams are located under [/static/css/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI](https://github.com/mermaidjs/mermaid.cli).
 
 For instance to edit `connection_overview` diagram:
-```
+```sh
 cd static/css/img/diagrams
 vi connection_overview.mmd
 # Compile diagrams:
