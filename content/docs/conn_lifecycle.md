@@ -1,13 +1,13 @@
 ---
 title: Connection Lifecycle
 menu: docs_architecture
-weight: 20
+weight: 1030
 ---
 
 
 # Architecture overview
 
-After Server has started listening to all sockets, [`Accept`][Accept] and [`Worker`][Worker] are two main loops responsible for processing incoming client connections. 
+After Server has started listening to all sockets, [`Accept`][Accept] and [`Worker`][Worker] are two main loops responsible for processing incoming client connections.
 
 Once connection accepted Application level protocol processing happens in a protocol specific [`Dispatcher`][Dispatcher] loop spawned from [`Worker`][Worker].
 
@@ -19,19 +19,19 @@ Once connection accepted Application level protocol processing happens in a prot
 
 ![](/img/diagrams/connection_accept.svg)
 
-Most of code implementation resides in [`actix-server`][server] crate for struct [`Accept`][Accept]. 
+Most of code implementation resides in [`actix-server`][server] crate for struct [`Accept`][Accept].
 
 ## Worker loop in more detail
 
 ![](/img/diagrams/connection_worker.svg)
 
-Most of code implementation resides in [`actix-server`][server] crate for struct [`Worker`][Worker]. 
+Most of code implementation resides in [`actix-server`][server] crate for struct [`Worker`][Worker].
 
 ## Request loop roughly
 
 ![](/img/diagrams/connection_request.svg)
 
-Most of code implementation for request loop resides in [`actix-web`][web] and [`actix-http`][http] crates. 
+Most of code implementation for request loop resides in [`actix-web`][web] and [`actix-http`][http] crates.
 
 
 [server]: https://crates.io/crates/actix-server

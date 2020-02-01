@@ -1,7 +1,7 @@
 ---
 title: Http Server Initialization
 menu: docs_architecture
-weight: 10
+weight: 1020
 ---
 
 ## Architecture overview
