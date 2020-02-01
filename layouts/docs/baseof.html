@@ -103,10 +103,18 @@
         <div class="github-edit">
             <a class="fa fa-github" href="https://github.com/actix/actix-website/tree/master/content/{{ .File.Path }}"> Edit on GitHub</a>
         </div>
-        <!-- Yes, we have to use *Prev* to get the next content, because the
-        weights are sorted inversely to how they are actually displayed... -->
-        {{ with .PrevInSection }}<div class="actix-next"><b>Next up</b>: <a href = {{ .URL }}>{{ end }}
-        {{ with .PrevInSection }} {{ .Title }}</a></div>{{ end }}
+
+        {{ if eq (len .Pages) 0 }}
+            {{ .Scratch.Set "Docs" .Parent.Pages.ByWeight }}
+        {{ else }}
+            {{ .Scratch.Set "Docs" .Pages.ByWeight }}
+        {{ end }}
+
+        {{ .Scratch.Set "CurrentWeight" .Weight }}
+
+        {{ range first 1 (where (.Scratch.Get "Docs") ".Weight" ">" (.Scratch.Get "CurrentWeight")) }}
+            <div class="actix-next"><b>Next up</b>: <a href = {{ .URL }}>{{ .Title }}</a></div>
+        {{ end }}
       </div>
     </div>
   </div>
