@@ -8,7 +8,7 @@ weight: 160
 
 A request handler is an async function that accepts zero or more parameters that can be extracted
 from a request (ie, [*impl FromRequest*][implfromrequest]) and returns a type that can
-be converted into an HttpResponse (ie, [*impl Responder*][implresponder]).
+be converted into an HttpResponse (ie, [*impl Responder*][respondertrait]).
 
 Request handling happens in two stages. First the handler object is called, returning any
 object that implements the [*Responder*][respondertrait] trait. Then, `respond_to()` is
@@ -73,8 +73,7 @@ different responder types into a single type.
 
 {{< include-example example="either" file="main.rs" section="either" >}}
 
-[implfromrequest]: https://docs.rs/actix-web/1.0.2/actix_web/trait.FromRequest.html
-[implresponder]: https://docs.rs/actix-web/1.0.2/actix_web/trait.Responder.html
-[respondertrait]: https://docs.rs/actix-web/1.0.2/actix_web/trait.Responder.html
-[responderimpls]: https://docs.rs/actix-web/1.0.2/actix_web/trait.Responder.html#foreign-impls
-[either]: https://docs.rs/actix-web/1.0.2/actix_web/enum.Either.html
+[implfromrequest]: https://docs.rs/actix-web/2.0.0/actix_web/trait.FromRequest.html
+[respondertrait]: https://docs.rs/actix-web/2.0.0/actix_web/trait.Responder.html
+[responderimpls]: https://docs.rs/actix-web/2.0.0/actix_web/trait.Responder.html#foreign-impls
+[either]: https://docs.rs/actix-web/2.0.0/actix_web/enum.Either.html
