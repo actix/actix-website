@@ -93,7 +93,7 @@ openssl = { version="0.10" }
 
 > **Note**: the *HTTP/2.0* protocol requires [tls alpn][tlsalpn].
 > At the moment, only `openssl` has `alpn` support.
-> For a full example, check out [examples/tls][exampletls].
+> For a full example, check out [examples/openssl][exampleopenssl].
 
 To create the key.pem and cert.pem use the command. **Fill in your own subject**
 ```bash
@@ -156,6 +156,6 @@ are available on unix systems.
 [startmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.start
 [workers]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.workers
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
-[exampletls]: https://github.com/actix/examples/tree/master/tls
+[exampleopenssl]: https://github.com/actix/examples/blob/master/openssl
 [shutdowntimeout]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.shutdown_timeout
 [disablesignals]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.disable_signals
