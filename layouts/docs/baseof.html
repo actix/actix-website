@@ -1,5 +1,5 @@
 {{ partial "header" . }}
-{{ $currentURL := .URL }}
+{{ $currentURL := .RelPermalink }}
 
 <div class="actix-pageheader">
   <div class="container">
@@ -113,7 +113,7 @@
         {{ .Scratch.Set "CurrentWeight" .Weight }}
 
         {{ range first 1 (where (.Scratch.Get "Docs") ".Weight" ">" (.Scratch.Get "CurrentWeight")) }}
-            <div class="actix-next"><b>Next up</b>: <a href = {{ .URL }}>{{ .Title }}</a></div>
+            <div class="actix-next"><b>Next up</b>: <a href = {{ .RelPermalink }}>{{ .Title }}</a></div>
         {{ end }}
       </div>
     </div>
