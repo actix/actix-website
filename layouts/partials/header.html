@@ -42,15 +42,17 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ "/code/" | absLangURL }}">{{ T "code" }}</a>
             </li>
-            <li class="nav-item language-selector">
-              <i class="fa fa-fw fa-globe" aria-hidden="false"></i>
-              <ul class="subitem">
-              {{ range $.Site.Home.AllTranslations }}
-                <li class="submenu-item"><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
-              {{ end }}
-              <li ><a href="https://dev.kriry.com/langs/rust/crate/actix/">中文</a></li>
-              </ul>
-            </li>
+
+            {{ if gt 0 (len $.Site.Home.AllTranslations) }}
+              <li class="nav-item language-selector">
+                <i class="fa fa-fw fa-globe" aria-hidden="false"></i>
+                <ul class="subitem">
+                {{ range $.Site.Home.AllTranslations }}
+                  <li class="submenu-item"><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
+                {{ end }}
+                </ul>
+              </li>
+            {{ end }}
           </ul>
         </div>
       </nav>
