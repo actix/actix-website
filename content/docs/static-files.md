@@ -31,7 +31,7 @@ index file. Use the [*Files::index_file()*][indexfile] method to configure this 
 
 `NamedFiles` can specify various options for serving files:
 
-- `set_content_dispostion` - function to be used for mapping file's mime to corresponding `Content-Disposition` type
+- `set_content_disposition` - function to be used for mapping file's mime to corresponding `Content-Disposition` type
 - `use_etag` - specifies whether `ETag` shall be calculated and included in headers.
 - `use_last_modified` - specifies whether file modified timestamp should be used and added to `Last-Modified` header.
 
