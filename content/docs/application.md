@@ -108,13 +108,7 @@ The result of the above example would be:
 /app      -> "app"
 /api/test -> "test"
 ```
-Each `ServiceConfig` can have it's own `data`, `routes`, and `services`
-
-It is also possible to create application object in separate function.
-`App` type uses complex generics and result type have to use `impl Trait` feature.
-This could be useful for unit tests.
-
-{{< include-example example="application" file="config_app.rs" section="config" >}}
+Each [`ServiceConfig`][serviceconfig] can have it's own `data`, `routes`, and `services`.
 
 [usingappprefix]: /docs/url-dispatch/index.html#using-an-application-prefix-to-compose-applications
 [stateexample]: https://github.com/actix/examples/blob/master/state/src/main.rs
@@ -129,3 +123,4 @@ This could be useful for unit tests.
 [webscopeconfig]: https://docs.rs/actix-web/2/actix_web/struct.Scope.html#method.configure
 [webscope]: https://docs.rs/actix-web/2/actix_web/web/fn.scope.html
 [urlfor]: https://docs.rs/actix-web/2/actix_web/struct.HttpRequest.html#method.url_for
+[serviceconfig]: https://docs.rs/actix-web/2/actix_web/web/struct.ServiceConfig.html
