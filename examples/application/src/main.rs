@@ -3,7 +3,6 @@ use actix_web::{web, App, HttpResponse, HttpServer};
 pub mod app;
 pub mod combine;
 pub mod config;
-pub mod config_app;
 pub mod scope;
 pub mod state;
 pub mod vh;
