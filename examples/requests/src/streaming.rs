@@ -5,10 +5,11 @@ use futures::StreamExt;
 async fn index(mut body: web::Payload) -> Result<HttpResponse, Error> {
     let mut bytes = web::BytesMut::new();
     while let Some(item) = body.next().await {
-        bytes.extend_from_slice(&item?);
+        let item = item?;
+        println!("Chunk: {:?}", &item);
+        bytes.extend_from_slice(&item);
     }
 
-    println!("Chunk: {:?}", bytes);
     Ok(HttpResponse::Ok().finish())
 }
 // </streaming>
