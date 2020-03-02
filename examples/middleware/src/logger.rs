@@ -1,6 +1,5 @@
 // <logger>
 use actix_web::middleware::Logger;
-use env_logger;
 use env_logger::Env;
 
 #[actix_rt::main]
