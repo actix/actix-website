@@ -62,6 +62,7 @@ fn my_handler() -> impl Responder {
     "response"
 }
 ```
+
 For this reason, any long, non-cpu-bound operation (e.g. I/O, database operations, etc.) should be
 expressed as futures or asynchronous functions. Async handlers get executed concurrently by worker
 threads and thus don't block execution:
