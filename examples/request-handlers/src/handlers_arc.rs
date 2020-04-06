@@ -28,7 +28,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(move || {
         App::new()
-            .app_data(data.clone())
+            .data(data.clone())
             .route("/", web::to(show_count))
             .route("/add", web::to(add_one))
     })
