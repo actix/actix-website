@@ -19,6 +19,7 @@ weight: 250
 [dependencies]
 actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
 openssl = { version = "0.10", features = ["v110"] }
+actix-rt = "1.0.0"
 ```
 {{< include-example example="http2" file="main.rs" section="main" >}}
 
