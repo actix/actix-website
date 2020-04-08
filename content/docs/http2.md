@@ -18,6 +18,7 @@ weight: 250
 ```toml
 [dependencies]
 actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
+actix-rt = "1.0.0"
 openssl = { version = "0.10", features = ["v110"] }
 ```
 {{< include-example example="http2" file="main.rs" section="main" >}}
