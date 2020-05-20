@@ -49,4 +49,4 @@ For example of testing [*Server Sent Events*][serversentevents].
 [serversentevents]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [responsebody]: https://docs.rs/actix-web/2/actix_web/body/enum.ResponseBody.html
 [actixdocs]: https://docs.rs/actix-web/2/actix_web/test/index.html
-[testrequest]: https://docs.rs/actix-web/2/actix_web/error/trait.ResponseError.html#foreign-impls
+[testrequest]: https://docs.rs/actix-web/2/actix_web/test/struct.TestRequest.html
