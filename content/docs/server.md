@@ -13,26 +13,26 @@ must have `Send` + `Sync` boundaries. More about that in the *multi-threading* s
 
 To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be
 called multiple times. To bind ssl socket, [`bind_openssl()`][bindopensslmethod] or
-[`bind_rustls()`][bindrusttls] should be used. To run the http server, use `HttpServer::run()`
+[`bind_rustls()`][bindrusttls] should be used. To run the http server, use the `HttpServer::run()`
 method.
 
 {{< include-example example="server" section="main" >}}
 
-`run()` method returns instance of [`Server`][server] type. Methods of server type
-could be used for managing http server
+The `run()` method returns an instance of the [`Server`][server] type. Methods of server type
+could be used for managing the http server
 
 - `pause()` - Pause accepting incoming connections
 - `resume()` - Resume accepting incoming connections
 - `stop()` - Stop incoming connection processing, stop all workers and exit
 
-Following example shows how to start http server in separate thread.
+The following example shows how to start the http server in a separate thread.
 
 {{< include-example example="server" file="signals.rs" section="signals" >}}
 
 ## Multi-threading
 
 `HttpServer` automatically starts a number of http *workers*, by default this number is
-equal to number of logical CPUs in the system. This number can be overridden with the
+equal to the number of logical CPUs in the system. This number can be overridden with the
 [`HttpServer::workers()`][workers] method.
 
 {{< include-example example="server" file="workers.rs" section="workers" >}}
@@ -137,7 +137,7 @@ can change this parameter with the [`HttpServer::shutdown_timeout()`][shutdownti
 method.
 
 You can send a stop message to the server with the server address and specify if you want
-graceful shutdown or not. The [`start()`][startmethod] method returns address of the server.
+graceful shutdown or not. The [`start()`][startmethod] method returns the address of the server.
 
 `HttpServer` handles several OS signals. *CTRL-C* is available on all OSs, other signals
 are available on unix systems.
