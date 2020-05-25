@@ -9,7 +9,7 @@ weight: 170
 Actix-web provides a facility for type-safe request information access called *extractors*
 (ie, `impl FromRequest`). By default, actix-web provides several extractor implementations.
 
-An extractor can be accessed as an arguments to a handler function. Actix-web supports
+An extractor can be accessed as an argument to a handler function. Actix-web supports
 up to 10 extractors per handler function. Argument position does not matter.
 
 {{< include-example example="extractors" file="main.rs" section="option-one" >}}
@@ -19,7 +19,7 @@ up to 10 extractors per handler function. Argument position does not matter.
 [*Path*][pathstruct] provides information that can be extracted from the Request's
 path. You can deserialize any variable segment from the path.
 
-For instance, for resource that registered for the `/users/{userid}/{friend}` path
+For instance, for resource that registered for the `/users/{userid}/{friend}` path,
 two segments could be deserialized, `userid` and `friend`. These segments could be
 extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure that implements
 the `Deserialize` trait from the *serde* crate.
@@ -45,14 +45,14 @@ query parameters. Underneath it uses *serde_urlencoded* crate.
 
 # Json
 
-[*Json*][jsonstruct] allows to deserialize a request body into a struct. To extract
+[*Json*][jsonstruct] allows deserialization of a request body into a struct. To extract
 typed information from a request's body, the type `T` must implement the `Deserialize`
 trait from *serde*.
 
 {{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
 
 Some extractors provide a way to configure the extraction process. Json extractor
-[*JsonConfig*][jsonconfig] type for configuration. To configure an extractor, pass it's
+[*JsonConfig*][jsonconfig] type for configuration. To configure an extractor, pass its
 configuration object to the resource's `.data()` method. In case of a *Json* extractor
 it returns a *JsonConfig*. You can configure the maximum size of the json payload as
 well as a custom error handler function.
@@ -63,7 +63,7 @@ The following example limits the size of the payload to 4kb and uses a custom er
 
 # Form
 
-At the moment only url-encoded forms are supported. The url-encoded body could be
+At the moment, only url-encoded forms are supported. The url-encoded body could be
 extracted to a specific type. This type must implement the `Deserialize` trait from
 the *serde* crate.
 
@@ -92,10 +92,8 @@ Application state is accessible from the handler with the `web::Data` extractor;
 however, state is accessible as a read-only reference. If you need mutable access to state,
 it must be implemented.
 
-> **Beware**, actix creates multiple copies of the application state and the handlers,
-> unique for each thread. If you run your application in several threads, actix will
-> create the same amount as number of threads of application state objects and handler
-> objects.
+> **Beware**, actix creates multiple copies of the application state and the handlers. It creates
+> one copy for each thread.
 
 Here is an example of a handler that stores the number of processed requests:
 
