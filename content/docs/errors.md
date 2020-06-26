@@ -36,9 +36,10 @@ converted into an `HttpInternalServerError`:
 
 ```rust
 use std::io;
+use actix_files::NamedFile;
 
-fn index(_req: HttpRequest) -> io::Result<fs::NamedFile> {
-    Ok(fs::NamedFile::open("static/index.html")?)
+fn index(_req: HttpRequest) -> io::Result<NamedFile> {
+    Ok(NamedFile::open("static/index.html")?)
 }
 ```
 
