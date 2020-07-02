@@ -16,7 +16,7 @@ If a handler returns an `Error` (referring to the [general Rust trait
 
 ```rust
 pub trait ResponseError {
-    fn error_response(&self) -> HttpResponse;
+    fn error_response(&self) -> Response<Body>;
     fn status_code(&self) -> StatusCode;
 }
 ```
