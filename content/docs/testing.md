@@ -19,7 +19,7 @@ For unit testing, actix-web provides a request builder type.
 
 # Integration tests
 
-There a few methods for testing your application. Actix-web can be used
+There are a few methods for testing your application. Actix-web can be used
 to run the application with specific handlers in a real http server.
 
 `TestRequest::get()`, `TestRequest::post()` and other
@@ -32,7 +32,7 @@ regular `App` builder.
 
 {{< include-example example="testing" file="integration_one.rs" section="integration-one" >}}
 
-If you need more complex application configuration testing should be very similar to creating
+If you need more complex application configuration, testing should be very similar to creating
 the normal application. For example, you may need to initialize application state. Create an
 `App` with a `data` method and attach state just like you would from a normal application.
 
@@ -40,9 +40,9 @@ the normal application. For example, you may need to initialize application stat
 
 # Stream response tests
 
-If you need to test stream it would be enough to call `take_body()` and convert a resulting [*ResponseBody*][responsebody]
-to future and execute it.
-For example of testing [*Server Sent Events*][serversentevents].
+If you need to test stream generation, it would be enough to call `take_body()` and convert a
+resulting [*ResponseBody*][responsebody] into a future and execute it, for example when testing
+[*Server Sent Events*][serversentevents].
 
 {{< include-example example="testing" file="stream_response.rs" section="stream-response" >}}
 
