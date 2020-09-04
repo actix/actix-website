@@ -52,7 +52,7 @@ accepts a function that should return an application factory.
 That's it! Now, compile and run the program with `cargo run`.
 Head over to `http://localhost:8088/` to see the results.
 
-**Note**: You may have noticed `#[actix_rt::main]` attribute macro. This
+**Note**: You may have noticed the `#[actix_rt::main]` attribute macro. This
 macro executes the associated async function within the actix runtime.
 Any async function could be marked and executed by this macro.
 
