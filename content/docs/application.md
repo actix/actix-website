@@ -87,7 +87,7 @@ and returns *true* or *false*. Formally, a guard is any object that implements t
 [`Guard`][guardtrait] trait. Actix-web provides several guards. You can check the
 [functions section][guardfuncs] of the API docs.
 
-One of the provided guards is [`Header`][guardheader]. It can be used as an application's
+One of the provided guards is [`Header`][guardheader]. It can be used as a
 filter based on request header information.
 
 {{< include-example example="application" file="vh.rs" section="vh" >}}
