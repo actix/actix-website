@@ -65,7 +65,7 @@ and register the data in an `App`:
 
 ## Using an Application Scope to Compose Applications
 
-The [`web::scope()`][webscope] method allows setting a specific application prefix.  This scope represents
+The [`web::scope()`][webscope] method allows setting a resource group prefix. This scope represents
 a resource prefix that will be prepended to all resource patterns added by the resource
 configuration. This can be used to help mount a set of routes at a different location
 than the original author intended while still maintaining the same resource names.
