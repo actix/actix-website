@@ -37,6 +37,7 @@ async fn _main() -> std::io::Result<()> {
     HttpServer::new(move || {
         // move counter into the closure
         App::new()
+            // Note: using app_data instead of data
             .app_data(counter.clone()) // <- register the created data
             .route("/", web::get().to(_index))
     })
