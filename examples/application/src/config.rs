@@ -1,7 +1,7 @@
 // <config>
 use actix_web::{web, App, HttpResponse, HttpServer};
 
-// this function could be located in different module
+// this function could be located in a different module
 fn scoped_config(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::resource("/test")
@@ -10,7 +10,7 @@ fn scoped_config(cfg: &mut web::ServiceConfig) {
     );
 }
 
-// this function could be located in different module
+// this function could be located in a different module
 fn config(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::resource("/app")
