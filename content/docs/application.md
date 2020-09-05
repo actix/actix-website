@@ -57,11 +57,11 @@ Internally, [`web::Data`][data] uses `Arc`. Thus, in order to avoid creating two
 
 In the following example, we will write an application with mutable, shared state. First, we define our state and create our handler:
 
-{{< include-example example="application" file="state.rs" section="setup_mutable" >}}
+{{< include-example example="application" file="mutable_state.rs" section="setup_mutable" >}}
 
 and register the data in an `App`:
 
-{{< include-example example="application" file="state.rs" section="make_app_mutable" >}}
+{{< include-example example="application" file="mutable_state.rs" section="make_app_mutable" >}}
 
 ## Using an Application Scope to Compose Applications
 
