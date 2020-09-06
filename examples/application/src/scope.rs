@@ -1,16 +1,14 @@
-use actix_web::{web, App, HttpRequest, Responder};
+use actix_web::{get, web, App, HttpRequest, Responder};
 
+#[get("/show")]
 async fn show_users(_req: HttpRequest) -> impl Responder {
     "unimplemented!"
 }
 
-#[rustfmt::skip]
 // <scope>
 #[actix_rt::main]
 async fn main() {
-    App::new()
-        .service(
-            web::scope("/users")
-                .route("/show", web::get().to(show_users)));
+    let scope = web::scope("/users").service(show_users);
+    App::new().service(scope);
 }
 // </scope>

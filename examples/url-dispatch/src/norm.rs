@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // <norm>
 use actix_web::{middleware, HttpResponse};
 

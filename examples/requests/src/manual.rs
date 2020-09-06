@@ -1,5 +1,5 @@
 // <json-manual>
-use actix_web::{error, web, App, Error, HttpResponse};
+use actix_web::{error, post, web, App, Error, HttpResponse};
 use bytes::BytesMut;
 use futures::StreamExt;
 use serde::{Deserialize, Serialize};
@@ -13,6 +13,7 @@ struct MyObj {
 
 const MAX_SIZE: usize = 262_144; // max payload size is 256k
 
+#[post("/")]
 async fn index_manual(mut payload: web::Payload) -> Result<HttpResponse, Error> {
     // payload is a stream of Bytes objects
     let mut body = BytesMut::new();
@@ -35,7 +36,7 @@ async fn index_manual(mut payload: web::Payload) -> Result<HttpResponse, Error> 
 async fn main() -> std::io::Result<()> {
     use actix_web::HttpServer;
 
-    HttpServer::new(|| App::new().route("/", web::post().to(index_manual)))
+    HttpServer::new(|| App::new().service(index_manual))
         .bind("127.0.0.1:8000")?
         .run()
         .await

@@ -1,6 +1,7 @@
 // <path>
-use actix_web::{web, Result};
+use actix_web::{get, web, App, HttpServer, Result};
 
+#[get("/{username}/{id}/index.html")] // <- define path parameters
 async fn index(info: web::Path<(String, u32)>) -> Result<String> {
     let info = info.into_inner();
     Ok(format!("Welcome {}! id: {}", info.0, info.1))
@@ -8,16 +9,9 @@ async fn index(info: web::Path<(String, u32)>) -> Result<String> {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{App, HttpServer};
-
-    HttpServer::new(|| {
-        App::new().route(
-            "/{username}/{id}/index.html", // <- define path parameters
-            web::get().to(index),
-        )
-    })
-    .bind("127.0.0.1:8000")?
-    .run()
-    .await
+    HttpServer::new(|| App::new().service(index))
+        .bind("127.0.0.1:8000")?
+        .run()
+        .await
 }
 // </path>

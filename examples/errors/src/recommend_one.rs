@@ -1,6 +1,6 @@
 // <recommend-one>
 use actix_http::ResponseBuilder;
-use actix_web::{error, http::header, http::StatusCode, HttpResponse};
+use actix_web::{error, get, http::header, http::StatusCode, App, HttpResponse, HttpServer};
 use failure::Fail;
 
 #[derive(Fail, Debug)]
@@ -22,6 +22,8 @@ impl error::ResponseError for UserError {
     }
 }
 // </recommend-one>
+
+#[get("/")]
 async fn index() -> Result<&'static str, UserError> {
     Err(UserError::ValidationError {
         field: "bad stuff".to_string(),
@@ -30,9 +32,7 @@ async fn index() -> Result<&'static str, UserError> {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{web, App, HttpServer};
-
-    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+    HttpServer::new(|| App::new().service(index))
         .bind("127.0.0.1:8000")?
         .run()
         .await

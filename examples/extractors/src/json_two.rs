@@ -1,5 +1,7 @@
+#![allow(dead_code)]
+
 // <json-two>
-use actix_web::{error, web, FromRequest, HttpResponse, Responder};
+use actix_web::{error, web, App, FromRequest, HttpResponse, HttpServer, Responder};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -14,22 +16,18 @@ async fn index(info: web::Json<Info>) -> impl Responder {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{App, HttpServer};
-
     HttpServer::new(|| {
+        let json_config = web::Json::<Info>::configure(|cfg| {
+            cfg.limit(4096).error_handler(|err, _req| {
+                // create custom error response
+                error::InternalError::from_response(err, HttpResponse::Conflict().finish()).into()
+            })
+        });
+
         App::new().service(
             web::resource("/")
                 // change json extractor configuration
-                .app_data(web::Json::<Info>::configure(|cfg| {
-                    cfg.limit(4096).error_handler(|err, _req| {
-                        // create custom error response
-                        error::InternalError::from_response(
-                            err,
-                            HttpResponse::Conflict().finish(),
-                        )
-                        .into()
-                    })
-                }))
+                .app_data(json_config)
                 .route(web::post().to(index)),
         )
     })

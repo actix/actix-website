@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // <error-handler>
 use actix_web::middleware::errhandlers::{ErrorHandlerResponse, ErrorHandlers};
 use actix_web::{dev, http, HttpResponse, Result};

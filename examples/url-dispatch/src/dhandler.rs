@@ -1,5 +1,6 @@
 use actix_web::{guard, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
+#[allow(dead_code)]
 async fn index(_req: HttpRequest) -> impl Responder {
     "Welcome!"
 }

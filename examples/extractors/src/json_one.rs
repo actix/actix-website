@@ -1,5 +1,5 @@
 // <json-one>
-use actix_web::{web, Result};
+use actix_web::{get, web, App, HttpServer, Result};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -8,6 +8,7 @@ struct Info {
 }
 
 /// deserialize `Info` from request's body
+#[get("/")]
 async fn index(info: web::Json<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
@@ -15,9 +16,7 @@ async fn index(info: web::Json<Info>) -> Result<String> {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{App, HttpServer};
-
-    HttpServer::new(|| App::new().route("/", web::post().to(index)))
+    HttpServer::new(|| App::new().service(index))
         .bind("127.0.0.1:8000")?
         .run()
         .await

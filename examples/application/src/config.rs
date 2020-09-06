@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // <config>
 use actix_web::{web, App, HttpResponse, HttpServer};
 

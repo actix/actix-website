@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // <user-session>
 use actix_session::{CookieSession, Session};
 use actix_web::{web, App, Error, HttpResponse, HttpServer};

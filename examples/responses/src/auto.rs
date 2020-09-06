@@ -1,18 +1,17 @@
 // <auto>
-use actix_web::{http::ContentEncoding, middleware, HttpResponse};
+use actix_web::{get, http::ContentEncoding, middleware, App, HttpResponse, HttpServer};
 
+#[get("/")]
 async fn index() -> HttpResponse {
     HttpResponse::Ok().body("data")
 }
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{web, App, HttpServer};
-
     HttpServer::new(|| {
         App::new()
             .wrap(middleware::Compress::new(ContentEncoding::Br))
-            .route("/", web::get().to(index))
+            .service(index)
     })
     .bind("127.0.0.1:8000")?
     .run()

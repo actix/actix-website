@@ -1,5 +1,5 @@
 // <logging>
-use actix_web::{error, Result};
+use actix_web::{error, get, middleware::Logger, App, HttpServer, Result};
 use failure::Fail;
 use log::debug;
 
@@ -12,6 +12,7 @@ pub struct MyError {
 // Use default implementation for `error_response()` method
 impl error::ResponseError for MyError {}
 
+#[get("/")]
 async fn index() -> Result<&'static str, MyError> {
     let err = MyError { name: "test error" };
     debug!("{}", err);
@@ -20,19 +21,13 @@ async fn index() -> Result<&'static str, MyError> {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{middleware::Logger, web, App, HttpServer};
-
     std::env::set_var("RUST_LOG", "my_errors=debug,actix_web=info");
     std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
-    HttpServer::new(|| {
-        App::new()
-            .wrap(Logger::default())
-            .route("/", web::get().to(index))
-    })
-    .bind("127.0.0.1:8000")?
-    .run()
-    .await
+    HttpServer::new(|| App::new().wrap(Logger::default()).service(index))
+        .bind("127.0.0.1:8000")?
+        .run()
+        .await
 }
 // </logging>
