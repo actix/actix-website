@@ -15,7 +15,7 @@ async fn main() -> std::io::Result<()> {
             .route("/resource/", web::get().to(index))
             .default_service(web::route().method(Method::GET))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8000")?
     .run()
     .await
 }

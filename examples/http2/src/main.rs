@@ -18,7 +18,7 @@ async fn main() -> std::io::Result<()> {
     builder.set_certificate_chain_file("cert.pem").unwrap();
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind_openssl("127.0.0.1:8088", builder)?
+        .bind_openssl("127.0.0.1:8000", builder)?
         .run()
         .await
 }

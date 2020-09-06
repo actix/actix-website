@@ -14,7 +14,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Compress::new(ContentEncoding::Br))
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8000")?
     .run()
     .await
 }

@@ -32,7 +32,7 @@ async fn main() -> std::io::Result<()> {
             .route("/", web::to(show_count))
             .route("/add", web::to(add_one))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8000")?
     .run()
     .await
 }

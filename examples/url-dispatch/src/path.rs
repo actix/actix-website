@@ -2,6 +2,7 @@
 use actix_web::{web, Result};
 
 async fn index(info: web::Path<(String, u32)>) -> Result<String> {
+    let info = info.into_inner();
     Ok(format!("Welcome {}! id: {}", info.0, info.1))
 }
 
@@ -15,7 +16,7 @@ async fn main() -> std::io::Result<()> {
             web::get().to(index),
         )
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8000")?
     .run()
     .await
 }

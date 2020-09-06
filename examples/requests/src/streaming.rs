@@ -19,7 +19,7 @@ async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| App::new().route("/", web::post().to(index)))
-        .bind("127.0.0.1:8088")?
+        .bind("127.0.0.1:8000")?
         .run()
         .await
 }

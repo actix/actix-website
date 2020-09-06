@@ -4,6 +4,6 @@ version = "1.0.0"
 edition = "2018"
 
 [dependencies]
-actix-web = "2.0"
-actix-rt = "1.0"
+actix-web = "3.0.0-beta.3"
+actix-rt = "1"
 serde = "1.0"

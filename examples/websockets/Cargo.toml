@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2018"
 
 [dependencies]
-actix = "0.9"
-actix-rt = "1.0"
-actix-web = "2.0"
-actix-web-actors = "2.0"
+actix = "0.10.0-alpha.3"
+actix-rt = "1"
+actix-web = "3.0.0-beta.3"
+actix-web-actors = "3.0.0-beta.1"

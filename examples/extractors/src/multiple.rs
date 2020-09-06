@@ -8,11 +8,12 @@ struct Info {
 }
 
 async fn index(
-    (path, query): (web::Path<(u32, String)>, web::Query<Info>),
+    web::Path((user_id, friend)): web::Path<(u32, String)>,
+    query: web::Query<Info>,
 ) -> String {
     format!(
-        "Welcome {}, friend {}, userid {}!",
-        query.username, path.1, path.0
+        "Welcome {}, friend {}, user_id {}!",
+        query.username, friend, user_id
     )
 }
 
@@ -22,11 +23,11 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new().route(
-            "/users/{userid}/{friend}", // <- define path parameters
+            "/users/{user_id}/{friend}", // <- define path parameters
             web::get().to(index),
         )
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8000")?
     .run()
     .await
 }

@@ -15,7 +15,7 @@ async fn index() -> HttpResponse {
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().route("/async", web::to(index)))
-        .bind("127.0.0.1:8088")?
+        .bind("127.0.0.1:8000")?
         .run()
         .await
 }

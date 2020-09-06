@@ -86,7 +86,7 @@ async fn main() -> std::io::Result<()> {
                 }),
         )
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8000")?
     .run()
     .await
 }

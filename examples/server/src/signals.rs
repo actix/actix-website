@@ -14,7 +14,7 @@ async fn main() {
         let srv = HttpServer::new(|| {
             App::new().route("/", web::get().to(|| HttpResponse::Ok()))
         })
-        .bind("127.0.0.1:8088")?
+        .bind("127.0.0.1:8000")?
         .shutdown_timeout(60) // <- Set shutdown timeout to 60 seconds
         .run();
 
