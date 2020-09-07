@@ -24,7 +24,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Compress::default())
             .service(index)
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

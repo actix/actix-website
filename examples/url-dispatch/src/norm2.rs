@@ -16,7 +16,7 @@ async fn main() -> std::io::Result<()> {
             .service(index)
             .default_service(web::route().method(Method::GET))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

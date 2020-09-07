@@ -20,7 +20,7 @@ async fn main() -> std::io::Result<()> {
                 .service(user_detail),
         )
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

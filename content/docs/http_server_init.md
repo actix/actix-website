@@ -1,5 +1,5 @@
 ---
-title: Http Server Initialization
+title: HTTP Server Initialization
 menu: docs_architecture
 weight: 1020
 ---
@@ -14,7 +14,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .route("/", web::to(|| HttpResponse::Ok()))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

@@ -29,7 +29,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::scope("/api").configure(scoped_config))
             .route("/", web::get().to(|| HttpResponse::Ok().body("/")))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

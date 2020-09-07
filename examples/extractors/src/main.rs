@@ -46,7 +46,7 @@ async fn main() -> std::io::Result<()> {
             .route("/{name}/{id}", web::post().to(index))
             .route("/{name}/{id}/extract", web::post().to(extract))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

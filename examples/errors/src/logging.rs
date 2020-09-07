@@ -26,7 +26,7 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     HttpServer::new(|| App::new().wrap(Logger::default()).service(index))
-        .bind("127.0.0.1:8000")?
+        .bind("127.0.0.1:8080")?
         .run()
         .await
 }

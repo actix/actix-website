@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/").to(hello_world))
             .service(web::resource("/temp").to(current_temperature))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

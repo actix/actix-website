@@ -13,7 +13,7 @@ async fn index(_req: HttpRequest) -> HttpResponse {
 #[actix_web::main]
 async fn main() {
     HttpServer::new(|| App::new().service(index))
-        .bind("127.0.0.1:8000")
+        .bind("127.0.0.1:8080")
         .unwrap()
         .run();
 }

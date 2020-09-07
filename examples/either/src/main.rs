@@ -18,7 +18,7 @@ fn main() {
     use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8000")
+        .bind("127.0.0.1:8080")
         .unwrap()
         .run()
         .unwrap();

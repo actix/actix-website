@@ -28,7 +28,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(counter.clone()) // <- register the created data
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }
