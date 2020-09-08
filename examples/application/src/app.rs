@@ -1,6 +1,5 @@
 #![allow(dead_code)]
 
-#![rustfmt::skip]
 // <setup>
 use actix_web::{web, App, HttpServer, Responder};
 
@@ -12,8 +11,10 @@ async fn index() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().service(
+            // prefixes all resources and routes attached to it...
             web::scope("/app")
-                .route("/index.html", web::get().to(index))
+                // ...so this handles requests for `GET /app/index.html`
+                .route("/index.html", web::get().to(index)),
         )
     })
     .bind("127.0.0.1:8080")?

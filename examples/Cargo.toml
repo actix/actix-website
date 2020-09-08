@@ -12,7 +12,6 @@ members = [
   "responder-trait",
   "either",
   "extractors",
-  "autoreload",
   "errors",
   "requests",
   "responses",
@@ -24,7 +23,4 @@ members = [
   "websockets",
   "request-handlers",
 ]
-exclude = [
-  "og_databases",
-  "sentry",
-]
+exclude = ["og_databases", "sentry"]
