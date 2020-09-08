@@ -19,8 +19,8 @@ up to 10 extractors per handler function. Argument position does not matter.
 [*Path*][pathstruct] provides information that can be extracted from the Request's
 path. You can deserialize any variable segment from the path.
 
-For instance, for resource that registered for the `/users/{userid}/{friend}` path,
-two segments could be deserialized, `userid` and `friend`. These segments could be
+For instance, for resource that registered for the `/users/{user_id}/{friend}` path,
+two segments could be deserialized, `user_id` and `friend`. These segments could be
 extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure that implements
 the `Deserialize` trait from the *serde* crate.
 

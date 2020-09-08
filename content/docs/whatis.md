@@ -23,3 +23,10 @@ distribution.
 
 Most importantly: `actix-web` runs on Rust {{< rust-version "actix-web" >}} or later and it works
 with stable releases.
+
+<!-- TODO -->
+<!-- which is built upon the fantastic [Tokio][tokio] asynchronous I/O system -->
+
+<!-- LINKS -->
+
+[tokio]: https://tokio.rs

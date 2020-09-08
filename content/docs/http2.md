@@ -1,6 +1,6 @@
 ---
 title: HTTP/2
-menu: docs_proto
+menu: docs_protocols
 weight: 250
 ---
 

@@ -6,9 +6,10 @@ weight: 1020
 
 ## Architecture overview
 
-Below is a diagram of HttpServer initalization, which happens on the following code
+Below is a diagram of HttpServer initialization, which happens on the following code
+
 ```rust
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

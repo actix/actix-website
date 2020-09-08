@@ -197,7 +197,7 @@ When matching the following URL:
 http://example.com/foo/La%20Pe%C3%B1a
 ```
 
-The matchdict will look like so (the value is URL-decoded):
+The match dictionary will look like so (the value is URL-decoded):
 
 ```
 Params{'bar': 'La Pe\xf1a'}
@@ -247,7 +247,7 @@ A scoped layout of these paths would appear as follows
 {{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
 
 A *scoped* path can contain variable path segments as resources. Consistent with 
-unscoped paths.
+un-scoped paths.
 
 You can get variable path segments from `HttpRequest::match_info()`.
 [`Path` extractor][pathextractor] also is able to extract scope level variable segments.
@@ -283,7 +283,7 @@ safe to interpolate within, or use as a suffix of, a path without additional che
 
 Actix provides functionality for type safe path information extraction.  [*Path*][pathstruct]
 extracts information, destination type could be defined in several different forms. Simplest
-approach is to use `tuple` type. Each element in tuple must correpond to one element from
+approach is to use `tuple` type. Each element in tuple must correspond to one element from
 path pattern. i.e. you can match path pattern `/{id}/{username}/` against
 `Path<(u32, String)>` type, but `Path<(String, String, String)>` type will always fail.
 

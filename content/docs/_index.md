@@ -1,6 +1,6 @@
 ---
 title: Documentation
-description: Guiding you through building apps with actix
+description: Guiding you through building web apps with Actix
 menu:
   docs_intro:
     name: Welcome
@@ -9,19 +9,16 @@ weight: 10
 
 # Welcome to Actix
 
-Actix is your door to developing web services with Rust and this documentation
-is going to guide you.
+Actix Web lets you quickly and confidently develop web services in Rust and this guide get you going
+in no time.
 
-This documentation currently covers mostly the `actix-web` part which is the high level
-web framework previously built on top of the `actix` actor framework and the [Tokio][tokio]
-async IO system.  This is the part that is from an API stability point of view the most stable.
+The documentation on this website focusses primarily on the Actix Web framework. For information
+about the actor framework called Actix, check out the [Actix book][actix-book] (or the lower level
+[actix API docs][actix-docs]). Otherwise, head on to the [getting started guide][getting-started].
+If you already know your ways around and you need specific information you might want to read the
+[actix-web API docs][actix-web-docs].
 
-If you haven't used `actix-web` yet it's best to start with the [getting started
-guide][gettingstarted].  If you already know your ways around and you need
-specific information you might want to read the [actix-web API docs][actixwebdocs]
-(or the lower level [actix API docs][actixdocs]).
-
-[gettingstarted]: ./getting-started
-[actixwebdocs]: https://docs.rs/actix-web
-[actixdocs]: https://docs.rs/actix
-[tokio]: https://tokio.rs
+[getting-started]: ./getting-started
+[actix-web-docs]: https://docs.rs/actix-web
+[actix-docs]: https://docs.rs/actix
+[actix-book]: https://actix.rs/book/actix

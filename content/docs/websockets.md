@@ -1,6 +1,6 @@
 ---
 title: Websockets
-menu: docs_proto
+menu: docs_protocols
 weight: 240
 ---
 
