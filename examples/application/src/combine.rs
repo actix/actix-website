@@ -6,7 +6,7 @@ use actix_web::{web, App, HttpResponse, HttpServer};
 struct State1;
 struct State2;
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

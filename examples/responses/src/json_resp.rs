@@ -14,7 +14,7 @@ async fn index(obj: web::Path<MyObj>) -> Result<HttpResponse> {
     }))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 

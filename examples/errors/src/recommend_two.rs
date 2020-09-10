@@ -1,17 +1,19 @@
 // <recommend-two>
-use actix_http::ResponseBuilder;
-use actix_web::{error, get, http::header, http::StatusCode, App, HttpResponse, HttpServer};
-use failure::Fail;
+use actix_web::{
+    dev::HttpResponseBuilder, error, get, http::header, http::StatusCode, App, HttpResponse,
+    HttpServer,
+};
+use derive_more::{Display, Error};
 
-#[derive(Fail, Debug)]
+#[derive(Debug, Display, Error)]
 enum UserError {
-    #[fail(display = "An internal error occurred. Please try again later.")]
+    #[display(fmt = "An internal error occurred. Please try again later.")]
     InternalError,
 }
 
 impl error::ResponseError for UserError {
     fn error_response(&self) -> HttpResponse {
-        ResponseBuilder::new(self.status_code())
+        HttpResponseBuilder::new(self.status_code())
             .set_header(header::CONTENT_TYPE, "text/html; charset=utf-8")
             .body(self.to_string())
     }
@@ -33,7 +35,7 @@ fn do_thing_that_fails() -> Result<(), std::io::Error> {
     Err(std::io::Error::new(std::io::ErrorKind::Other, "some error"))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().service(index))
         .bind("127.0.0.1:8080")?

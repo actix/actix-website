@@ -39,7 +39,7 @@ async fn extract(req: HttpRequest) -> impl Responder {
 }
 // </option-two>
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

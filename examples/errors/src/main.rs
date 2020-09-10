@@ -6,10 +6,10 @@ pub mod recommend_two;
 
 // <response-error>
 use actix_web::{error, Result};
-use failure::Fail;
+use derive_more::{Display, Error};
 
-#[derive(Fail, Debug)]
-#[fail(display = "my error")]
+#[derive(Debug, Display, Error)]
+#[display(fmt = "my error: {}", name)]
 struct MyError {
     name: &'static str,
 }
@@ -22,7 +22,7 @@ async fn index() -> Result<&'static str, MyError> {
 }
 // </response-error>
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 

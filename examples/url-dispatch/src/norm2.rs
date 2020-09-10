@@ -8,11 +8,11 @@ fn index() -> HttpResponse {
 // <norm>
 use actix_web::{get, http::Method, middleware, web, App, HttpServer};
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .wrap(middleware::NormalizePath)
+            .wrap(middleware::NormalizePath::default())
             .service(index)
             .default_service(web::route().method(Method::GET))
     })

@@ -6,7 +6,7 @@ async fn show_users(_req: HttpRequest) -> impl Responder {
 }
 
 // <scope>
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() {
     let scope = web::scope("/users").service(show_users);
     App::new().service(scope);

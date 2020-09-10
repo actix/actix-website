@@ -13,7 +13,7 @@ async fn index(form: web::Form<FormData>) -> HttpResponse {
 }
 // </urlencoded>
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 

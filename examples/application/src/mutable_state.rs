@@ -15,7 +15,7 @@ async fn index(data: web::Data<AppStateWithCounter>) -> String {
 // </setup_mutable>
 
 // <make_app_mutable>
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let counter = web::Data::new(AppStateWithCounter {
         counter: Mutex::new(0),

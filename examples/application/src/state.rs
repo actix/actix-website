@@ -15,7 +15,7 @@ async fn index(data: web::Data<AppState>) -> String {
 // </setup>
 
 // <start_app>
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

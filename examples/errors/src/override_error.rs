@@ -1,23 +1,24 @@
 // <override>
-use actix_http::ResponseBuilder;
-use actix_web::{error, get, http::header, http::StatusCode, App, HttpResponse};
-use failure::Fail;
+use actix_web::{
+    dev::HttpResponseBuilder, error, get, http::header, http::StatusCode, App, HttpResponse,
+};
+use derive_more::{Display, Error};
 
-#[derive(Fail, Debug)]
+#[derive(Debug, Display, Error)]
 enum MyError {
-    #[fail(display = "internal error")]
+    #[display(fmt = "internal error")]
     InternalError,
 
-    #[fail(display = "bad request")]
+    #[display(fmt = "bad request")]
     BadClientData,
 
-    #[fail(display = "timeout")]
+    #[display(fmt = "timeout")]
     Timeout,
 }
 
 impl error::ResponseError for MyError {
     fn error_response(&self) -> HttpResponse {
-        ResponseBuilder::new(self.status_code())
+        HttpResponseBuilder::new(self.status_code())
             .set_header(header::CONTENT_TYPE, "text/html; charset=utf-8")
             .body(self.to_string())
     }
@@ -47,7 +48,7 @@ async fn error3() -> Result<&'static str, MyError> {
     Err(MyError::Timeout)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::HttpServer;
 

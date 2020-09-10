@@ -9,7 +9,7 @@ async fn index(req: HttpRequest) -> Result<String> {
     Ok(format!("Values {} {} {} {}", v1, v2, v3, v4))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().service(index))
         .bind("127.0.0.1:8080")?

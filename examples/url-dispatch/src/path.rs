@@ -7,7 +7,7 @@ async fn index(info: web::Path<(String, u32)>) -> Result<String> {
     Ok(format!("Welcome {}! id: {}", info.0, info.1))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().service(index))
         .bind("127.0.0.1:8080")?

@@ -32,7 +32,7 @@ async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, E
     resp
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().route("/ws/", web::get().to(index)))
         .bind("127.0.0.1:8080")?

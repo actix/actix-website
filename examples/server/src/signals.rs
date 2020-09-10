@@ -1,10 +1,9 @@
 // <signals>
-use actix_rt::System;
-use actix_web::{web, App, HttpResponse, HttpServer};
+use actix_web::{web, App, HttpResponse, HttpServer, rt::System};
 use std::sync::mpsc;
 use std::thread;
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() {
     let (tx, rx) = mpsc::channel();
 

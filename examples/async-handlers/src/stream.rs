@@ -13,7 +13,7 @@ async fn stream() -> HttpResponse {
         .streaming(body)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().service(stream))
         .bind("127.0.0.1:8080")?

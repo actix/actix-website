@@ -32,7 +32,7 @@ async fn index_manual(mut payload: web::Payload) -> Result<HttpResponse, Error> 
 }
 // </json-manual>
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::HttpServer;
 

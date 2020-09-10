@@ -10,7 +10,7 @@ async fn index_br() -> HttpResponse {
         .body("data")
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

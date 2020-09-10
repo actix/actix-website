@@ -12,7 +12,7 @@ async fn index(req: HttpRequest) -> Result<NamedFile> {
     Ok(NamedFile::open(path)?)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 

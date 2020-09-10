@@ -18,7 +18,7 @@ async fn register(form: web::Form<Register>) -> impl Responder {
     format!("Hello {} from {}!", form.username, form.country)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

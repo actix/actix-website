@@ -17,7 +17,7 @@ async fn index(info: web::Path<Info>) -> Result<String> {
     ))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 

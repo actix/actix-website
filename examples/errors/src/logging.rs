@@ -1,10 +1,10 @@
 // <logging>
 use actix_web::{error, get, middleware::Logger, App, HttpServer, Result};
-use failure::Fail;
 use log::debug;
+use derive_more::{Display, Error};
 
-#[derive(Fail, Debug)]
-#[fail(display = "my error")]
+#[derive(Debug, Display, Error)]
+#[display(fmt = "my error: {}", name)]
 pub struct MyError {
     name: &'static str,
 }
@@ -19,7 +19,7 @@ async fn index() -> Result<&'static str, MyError> {
     Err(err)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "my_errors=debug,actix_web=info");
     std::env::set_var("RUST_BACKTRACE", "1");

@@ -19,7 +19,7 @@ async fn add_one(data: web::Data<AppState>) -> impl Responder {
     format!("count: {}", data.count.get())
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 

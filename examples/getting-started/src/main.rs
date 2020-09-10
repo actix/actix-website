@@ -17,7 +17,7 @@ async fn manual_hello() -> impl Responder {
 // </handlers>
 
 // <main>
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

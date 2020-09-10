@@ -31,7 +31,7 @@ async fn index() -> HttpResponse {
         .body(include_str!("../static/form.html"))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()

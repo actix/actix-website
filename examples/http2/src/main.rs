@@ -6,7 +6,7 @@ async fn index(_req: HttpRequest) -> impl Responder {
     "Hello."
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     // load ssl keys
     // to create a self-signed temporary cert for testing:

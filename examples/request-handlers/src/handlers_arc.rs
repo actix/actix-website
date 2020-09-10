@@ -20,7 +20,7 @@ async fn add_one(data: web::Data<AppState>) -> impl Responder {
     format!("count: {}", data.count.load(Ordering::Relaxed))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let data = AppState {
         count: Arc::new(AtomicUsize::new(0)),

@@ -14,7 +14,7 @@ async fn index(info: web::Json<Info>) -> impl Responder {
     format!("Welcome {}!", info.username)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         let json_config = web::Json::<Info>::configure(|cfg| {

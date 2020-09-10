@@ -5,11 +5,11 @@ body {
 }
 
 a {
-  color: #156060;
+  color: #306ebf;
 }
 
 a:hover {
-  color: #003b3b;
+  color: #071540;
 }
 
 table,
@@ -231,11 +231,11 @@ img {
 .leftnav li.active {
   margin: -0.5rem -1rem -0.5rem -1rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
-  background: #dceaea;
+  background-color: #dfe6ee;
 }
 
 .leftnav li.active a {
-  color: #156060;
+  color: #163e8c;
 }
 
 .leftnav h5 {
@@ -274,7 +274,7 @@ img {
 .jumbotron {
   background-image: url(/img/jumbotron.jpg);
   background-size: cover;
-  background-color: #156060;
+  background-color: #071540;
   color: #fff;
 }
 
@@ -348,7 +348,7 @@ img {
 
 .actix-features .fa {
   margin-right: 0.4rem;
-  color: #156060;
+  color: #163e8c;
 }
 
 .actix-features p {
@@ -364,7 +364,7 @@ img {
   margin-top: 2rem;
   margin-bottom: 2rem;
   padding: 2rem 1rem 0 1rem;
-  background: #dceaea;
+  background-color: #dfe6ee;
 }
 
 .actix-showcase ul {
@@ -389,7 +389,7 @@ img {
 .actix-showcase label {
   display: block;
   font-weight: bold;
-  color: #156060;
+  color: #163e8c;
   cursor: pointer;
 }
 
@@ -408,7 +408,7 @@ img {
 }
 
 .actix-feature-selector.active {
-  background: white;
+  background-color: white;
 }
 
 .actix-feature-selector.active a {
@@ -460,7 +460,7 @@ p.uplink {
  */
 
 code {
-  color: #006a70;
+  color: #163e8c;
 }
 
 pre,
@@ -473,7 +473,7 @@ pre {
   overflow-x: auto;
   margin: 2rem 0rem;
   padding: 1rem;
-  background: #f7f7f7;
+  background-color: #f7f7f7;
   font-size: 90%;
   line-height: 1.4rem;
 }
@@ -658,7 +658,7 @@ h5:hover a {
 #act-cn-tabs {
   padding: 2rem 2rem 1rem 2rem;
   margin: 2rem auto;
-  background: #dceaea;
+  background-color: #dfe6ee;
 }
 .act-menu li {
   text-align: center;
@@ -668,7 +668,7 @@ h5:hover a {
 }
 .act-menu li.off {
   padding: 0 1.5rem;
-  background: #ffffff;
+  background-color: #ffffff;
   color: #589c9e;
   font-weight: bold;
 }

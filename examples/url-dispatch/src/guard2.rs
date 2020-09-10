@@ -1,7 +1,7 @@
 // <guard2>
 use actix_web::{guard, web, App, HttpResponse, HttpServer};
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().route(

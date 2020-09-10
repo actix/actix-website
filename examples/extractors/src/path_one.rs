@@ -9,7 +9,7 @@ async fn index(web::Path((user_id, friend)): web::Path<(u32, String)>) -> Result
     Ok(format!("Welcome {}, user_id {}!", friend, user_id))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
