@@ -135,7 +135,8 @@ async fn register(form: web::Form<Register>) -> impl Responder {
             URLs and invoke individual handlers. For extra flexibility, scopes
             can be used.
           </p>
-          {{ highlight `async fn index(_req: HttpRequest) -> impl Responder {
+          {{ highlight `#[get("/")]
+async fn index(_req: HttpRequest) -> impl Responder {
     "Hello from the index page!"
 }
 
@@ -144,8 +145,8 @@ async fn hello(path: web::Path<String>) -> impl Responder {
 }
 
 let app = App::new()
-        .route("/", web::get().to(index))
-        .route("/{name}", web::get().to(hello));
+    .service(index)
+    .route("/{name}", web::get().to(hello));
 ` "rust" "" }}
         </div>
       </div>
