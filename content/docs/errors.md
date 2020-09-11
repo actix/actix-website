@@ -132,10 +132,10 @@ This is a basic example using `middleware::Logger`:
 
 {{< include-example example="errors" file="logging.rs" section="logging" >}}
 
-[actixerror]: https://docs.rs/actix-web/2/actix_web/error/struct.Error.html
-[errorhelpers]: https://docs.rs/actix-web/2/actix_web/trait.ResponseError.html
+[actixerror]: https://docs.rs/actix-web/3/actix_web/error/struct.Error.html
+[errorhelpers]: https://docs.rs/actix-web/3/actix_web/trait.ResponseError.html
 [failure]: https://github.com/rust-lang-nursery/failure
-[responseerror]: https://docs.rs/actix-web/2/actix_web/error/trait.ResponseError.html
-[responseerrorimpls]: https://docs.rs/actix-web/2/actix_web/error/trait.ResponseError.html#foreign-impls
+[responseerror]: https://docs.rs/actix-web/3/actix_web/error/trait.ResponseError.html
+[responseerrorimpls]: https://docs.rs/actix-web/3/actix_web/error/trait.ResponseError.html#foreign-impls
 [stderror]: https://doc.rust-lang.org/std/error/trait.Error.html
-[status_code]: https://docs.rs/actix-web/2.0.0/actix_web/http/struct.StatusCode.html
+[status_code]: https://docs.rs/actix-web/3.0.0/actix_web/http/struct.StatusCode.html

@@ -6,32 +6,32 @@ weight: 150
 
 # The HTTP Server
 
-The [**HttpServer**][httpserverstruct] type is responsible for serving http requests.
+The [**HttpServer**][httpserverstruct] type is responsible for serving HTTP requests.
 
 `HttpServer` accepts an application factory as a parameter, and the application factory
 must have `Send` + `Sync` boundaries. More about that in the *multi-threading* section.
 
 To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be
 called multiple times. To bind ssl socket, [`bind_openssl()`][bindopensslmethod] or
-[`bind_rustls()`][bindrusttls] should be used. To run the http server, use the `HttpServer::run()`
+[`bind_rustls()`][bindrusttls] should be used. To run the HTTP server, use the `HttpServer::run()`
 method.
 
 {{< include-example example="server" section="main" >}}
 
 The `run()` method returns an instance of the [`Server`][server] type. Methods of server type
-could be used for managing the http server
+could be used for managing the HTTP server
 
 - `pause()` - Pause accepting incoming connections
 - `resume()` - Resume accepting incoming connections
 - `stop()` - Stop incoming connection processing, stop all workers and exit
 
-The following example shows how to start the http server in a separate thread.
+The following example shows how to start the HTTP server in a separate thread.
 
 {{< include-example example="server" file="signals.rs" section="signals" >}}
 
 ## Multi-threading
 
-`HttpServer` automatically starts a number of http *workers*, by default this number is
+`HttpServer` automatically starts a number of HTTP *workers*, by default this number is
 equal to the number of logical CPUs in the system. This number can be overridden with the
 [`HttpServer::workers()`][workers] method.
 
@@ -120,7 +120,7 @@ Actix can wait for requests on a keep-alive connection.
 
 If the first option above is selected, then *keep alive* state is calculated based on the
 response's *connection-type*. By default `HttpResponse::connection_type` is not
-defined. In that case *keep alive* is defined by the request's http version.
+defined. In that case *keep alive* is defined by the request's HTTP version.
 
 > *keep alive* is **off** for *HTTP/1.0* and is **on** for *HTTP/1.1* and *HTTP/2.0*.
 
@@ -149,14 +149,14 @@ are available on unix systems.
 > It is possible to disable signal handling with
 [`HttpServer::disable_signals()`][disablesignals] method.
 
-[server]: https://docs.rs/actix-web/2/actix_web/dev/struct.Server.html
-[httpserverstruct]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html
-[bindmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind
-[bindopensslmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind_openssl
-[bindrusttls]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.bind_rustls
-[startmethod]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.start
-[workers]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.workers
+[server]: https://docs.rs/actix-web/3/actix_web/dev/struct.Server.html
+[httpserverstruct]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html
+[bindmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind
+[bindopensslmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_openssl
+[bindrusttls]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_rustls
+[startmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.start
+[workers]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.workers
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [exampleopenssl]: https://github.com/actix/examples/blob/master/openssl
-[shutdowntimeout]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.shutdown_timeout
-[disablesignals]: https://docs.rs/actix-web/2/actix_web/struct.HttpServer.html#method.disable_signals
+[shutdowntimeout]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.shutdown_timeout
+[disablesignals]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.disable_signals

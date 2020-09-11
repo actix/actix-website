@@ -71,5 +71,5 @@ The type `T` must implement the `Serialize` trait from *serde*.
 
 {{< include-example example="responses" file="json_resp.rs" section="json-resp" >}}
 
-[responsebuilder]: https://docs.rs/actix-web/2/actix_web/dev/struct.HttpResponseBuilder.html
-[compressmidddleware]: https://docs.rs/actix-web/2/actix_web/middleware/struct.Compress.html
+[responsebuilder]: https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html
+[compressmidddleware]: https://docs.rs/actix-web/3/actix_web/middleware/struct.Compress.html

@@ -10,10 +10,10 @@ The Actix ecosystem is fully open source on our GitHub organization [@actix](htt
 Here are the most important projects and the link to their github repositories
 and related resources:
 
-- [actix-web](https://github.com/actix/actix-web), ([api docs](https://docs.rs/actix-web))
+- [actix-web](https://github.com/actix/actix-web), ([API docs](https://docs.rs/actix-web))
 - [actix-extras crates](https://github.com/actix/actix-extras)
 - [actix-net crates](https://github.com/actix/actix-net)
-- [actix](https://github.com/actix/actix), ([api docs](https://docs.rs/actix))
+- [actix](https://github.com/actix/actix), ([API docs](https://docs.rs/actix))
 - [examples repo](https://github.com/actix/examples)
 - [this website](https://github.com/actix/actix-website)
 

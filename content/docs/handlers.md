@@ -68,12 +68,12 @@ the stream trait `Stream<Item=Bytes, Error=Error>`, i.e:
 Sometimes, you need to return different types of responses. For example, you can error
 check and return errors, return async responses, or any result that requires two different types.
 
-For this case, the [*Either*][either] type can be used.  `Either` allows combining two
+For this case, the [Either][either] type can be used.  `Either` allows combining two
 different responder types into a single type.
 
 {{< include-example example="either" file="main.rs" section="either" >}}
 
-[implfromrequest]: https://docs.rs/actix-web/2/actix_web/trait.FromRequest.html
-[respondertrait]: https://docs.rs/actix-web/2/actix_web/trait.Responder.html
-[responderimpls]: https://docs.rs/actix-web/2/actix_web/trait.Responder.html#foreign-impls
-[either]: https://docs.rs/actix-web/2/actix_web/enum.Either.html
+[implfromrequest]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html
+[respondertrait]: https://docs.rs/actix-web/3/actix_web/trait.Responder.html
+[responderimpls]: https://docs.rs/actix-web/3/actix_web/trait.Responder.html#foreign-impls
+[either]: https://docs.rs/actix-web/3/actix_web/enum.Either.html

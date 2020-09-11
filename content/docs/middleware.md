@@ -131,6 +131,6 @@ into a response.
 [cookiesession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.CookieSession.html
 [actixsession]: https://docs.rs/actix-session/0.3.0/actix_session/
 [envlogger]: https://docs.rs/env_logger/*/env_logger/
-[servicetrait]: https://docs.rs/actix-web/2/actix_web/dev/trait.Service.html
-[transformtrait]: https://docs.rs/actix-web/2/actix_web/dev/trait.Transform.html
-[wrap_fn]: https://docs.rs/actix-web/2/actix_web/struct.App.html#method.wrap_fn
+[servicetrait]: https://docs.rs/actix-web/3/actix_web/dev/trait.Service.html
+[transformtrait]: https://docs.rs/actix-web/3/actix_web/dev/trait.Transform.html
+[wrap_fn]: https://docs.rs/actix-web/3/actix_web/struct.App.html#method.wrap_fn

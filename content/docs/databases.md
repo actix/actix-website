@@ -4,51 +4,43 @@ menu: docs_patterns
 weight: 1010
 ---
 
+# Async Options
+
+We have several example projects showing use of async database adapters:
+
+- SQLx: https://github.com/actix/examples/tree/master/sqlx_todo
+- Postgres: https://github.com/actix/examples/tree/master/async_pg
+- SQLite: https://github.com/actix/examples/tree/master/async_db
+
 # Diesel
 
-{{% alert %}}
-NOTE: The `actix-web` 1.0 version of this section is still
-[being updated](https://github.com/cldershem/actix-website/tree/update1.0-db). Checkout
-this [example](https://github.com/actix/examples/tree/master/async_db) until then.
-{{% /alert %}}
+The current version of Diesel (v1) does not support asynchronous operations, so it is important to
+use the [`web::block`][web-block] function to offload your database operations to the Actix runtime
+thread-pool.
 
-At the moment, Diesel 1.0 does not support asynchronous operations,
-but it's possible to use the `actix` synchronous actor system as a database interface api.
+You can create action functions that correspond to all the operations your app will perform on the
+database.
 
-Technically, sync actors are worker style actors. Multiple sync actors
-can be run in parallel and process messages from same queue. Sync actors work in mpsc mode.
+{{< include-example example="databases" file="main.rs" section="handler" >}}
 
-Let's create a simple database api that can insert a new user row into a SQLite table.
-We must define a sync actor and a connection that this actor will use. The same approach
-can be used for other databases.
+Now you should set up the database pool using a crate such as `r2d2`, which makes many DB
+connections available to your app. This means that multiple handlers can manipulate the DB at the
+same time, and still accept new connections. Simply, the pool in your app state. (In this case, it's
+beneficial not to use a state wrapper struct because the pool handles shared access for you.)
 
-{{< include-example example="og_databases" file="main.rs" section="actor" >}}
+{{< include-example example="databases" file="main.rs" section="main" >}}
 
-This is the definition of our actor. Now, we must define the *create user* message and response.
+Now, in a request handler, use the `Data<T>` extractor to get the pool from app state and get a
+connection from it. This provides an owned database connection that can be passed into a
+[`web::block`][web-block] closure. Then just call the action function with the necessary arguments
+and `.await` the result.
 
-{{< include-example example="og_databases" file="main.rs" section="message" >}}
+This example also maps the error to an `HttpResponse` before using the `?` operator but this is not
+necessary if your return error type implements [`ResponseError`][response-error].
 
-We can send a `CreateUser` message to the `DbExecutor` actor, and as a result, we will receive a
-`User` model instance. Next, we must define the handler implementation for this message.
+{{< include-example example="databases" file="main.rs" section="index" >}}
 
-{{< include-example example="og_databases" file="main.rs" section="handler" >}}
+That's it! See the full example here: https://github.com/actix/examples/tree/master/diesel
 
-That's it! Now, we can use the *DbExecutor* actor from any http handler or middleware.
-All we need is to start *DbExecutor* actors and store the address in a state where http handler
-can access it.
-
-{{< include-example example="og_databases" file="main.rs" section="main" >}}
-
-We will use the address in a request handler. The handle returns a future object;
-thus, we receive the message response asynchronously.
-`Route::a()` must be used for async handler registration.
-
-{{< include-example example="og_databases" file="main.rs" section="index" >}}
-
-> A full example is available in the [examples directory][examples].
-
-> More information on sync actors can be found in the
-> [actix documentation][actixdocs].
-
-[examples]: https://github.com/actix/examples/tree/master/diesel/
-[actixdocs]: https://docs.rs/actix/0.7.0/actix/sync/index.html
+[web-block]: https://docs.rs/actix-web/3/actix_web/web/fn.block.html
+[response-error]: https://docs.rs/actix-web/3/actix_web/trait.ResponseError.html
