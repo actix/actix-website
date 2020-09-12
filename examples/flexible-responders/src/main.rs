@@ -15,14 +15,14 @@ async fn current_temperature() -> impl Responder {
     web::Json(Measurement { temperature: 42.3 })
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(web::resource("/").to(hello_world))
             .service(web::resource("/temp").to(current_temperature))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

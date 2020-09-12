@@ -15,7 +15,7 @@ async fn index(data: web::Data<AppStateWithCounter>) -> String {
 // </setup_mutable>
 
 // <make_app_mutable>
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let counter = web::Data::new(AppStateWithCounter {
         counter: Mutex::new(0),
@@ -28,7 +28,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(counter.clone()) // <- register the created data
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

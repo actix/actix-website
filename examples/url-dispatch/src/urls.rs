@@ -1,6 +1,7 @@
 // <url>
-use actix_web::{guard, http::header, HttpRequest, HttpResponse, Result};
+use actix_web::{get, guard, http::header, HttpRequest, HttpResponse, Result};
 
+#[get("/test/")]
 async fn index(req: HttpRequest) -> Result<HttpResponse> {
     let url = req.url_for("foo", &["1", "2", "3"])?; // <- generate url for "foo" resource
 
@@ -9,7 +10,7 @@ async fn index(req: HttpRequest) -> Result<HttpResponse> {
         .finish())
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
@@ -21,9 +22,9 @@ async fn main() -> std::io::Result<()> {
                     .guard(guard::Get())
                     .to(|| HttpResponse::Ok()),
             )
-            .route("/test/", web::get().to(index))
+            .service(index)
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

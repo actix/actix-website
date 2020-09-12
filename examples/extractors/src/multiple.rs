@@ -1,5 +1,5 @@
 // <multi>
-use actix_web::web;
+use actix_web::{get, web};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -7,27 +7,24 @@ struct Info {
     username: String,
 }
 
+#[get("/users/{user_id}/{friend}")] // <- define path parameters
 async fn index(
-    (path, query): (web::Path<(u32, String)>, web::Query<Info>),
+    web::Path((user_id, friend)): web::Path<(u32, String)>,
+    query: web::Query<Info>,
 ) -> String {
     format!(
-        "Welcome {}, friend {}, userid {}!",
-        query.username, path.1, path.0
+        "Welcome {}, friend {}, user_id {}!",
+        query.username, friend, user_id
     )
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
-    HttpServer::new(|| {
-        App::new().route(
-            "/users/{userid}/{friend}", // <- define path parameters
-            web::get().to(index),
-        )
-    })
-    .bind("127.0.0.1:8088")?
-    .run()
-    .await
+    HttpServer::new(|| App::new().service(index))
+        .bind("127.0.0.1:8080")?
+        .run()
+        .await
 }
 // </multi>

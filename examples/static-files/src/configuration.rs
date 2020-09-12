@@ -1,8 +1,9 @@
 // <config-one>
 use actix_files as fs;
 use actix_web::http::header::{ContentDisposition, DispositionType};
-use actix_web::{web, App, Error, HttpRequest, HttpServer};
+use actix_web::{get, App, Error, HttpRequest, HttpServer};
 
+#[get("/{filename:.*}")]
 async fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
     let path: std::path::PathBuf = req.match_info().query("filename").parse().unwrap();
     let file = fs::NamedFile::open(path)?;
@@ -14,10 +15,10 @@ async fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
         }))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().route("/{filename:.*}", web::get().to(index)))
-        .bind("127.0.0.1:8088")?
+    HttpServer::new(|| App::new().service(index))
+        .bind("127.0.0.1:8080")?
         .run()
         .await
 }

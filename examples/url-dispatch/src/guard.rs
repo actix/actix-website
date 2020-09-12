@@ -9,7 +9,7 @@ impl Guard for ContentTypeHeader {
     }
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
@@ -21,7 +21,7 @@ async fn main() -> std::io::Result<()> {
                 .to(|| HttpResponse::Ok()),
         )
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

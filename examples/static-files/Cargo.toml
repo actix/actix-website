@@ -4,7 +4,6 @@ version = "1.0.0"
 edition = "2018"
 
 [dependencies]
-actix-web = "2.0"
-actix-rt = "1.0"
-actix-files = "0.2"
-mime = "*"
+actix-web = "3"
+actix-files = "0.3"
+mime = "0.3"

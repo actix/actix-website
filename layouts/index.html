@@ -5,7 +5,7 @@
     <div class="actix-jumbotron">
       <img src="/img/logo-large.png" class="align-middle actix-logo" alt="">
       <p class="lead">
-        Rust's powerful actor system and most fun web framework
+        A powerful, pragmatic, and extremely fast web framework for Rust
       </p>
       <a href="/docs/installation/"
          class="btn btn-secondary actix-jumbotron-install">
@@ -41,7 +41,7 @@
             Blazingly Fast
           </h2>
           <p>Actix is blazingly fast. Don't take our word for it -- <a
-              href="https://www.techempower.com/benchmarks/#section=data-r18">see for yourself!</a></p>
+              href="https://www.techempower.com/benchmarks/#section=data-r19">see for yourself!</a></p>
         </div>
       </div>
       <div class="col-md-8">
@@ -53,14 +53,14 @@ async fn greet(req: HttpRequest) -> impl Responder {
     format!("Hello {}!", &name)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(greet))
             .route("/{name}", web::get().to(greet))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }` "rust" "" }}
@@ -135,7 +135,8 @@ async fn register(form: web::Form<Register>) -> impl Responder {
             URLs and invoke individual handlers. For extra flexibility, scopes
             can be used.
           </p>
-          {{ highlight `async fn index(_req: HttpRequest) -> impl Responder {
+          {{ highlight `#[get("/")]
+async fn index(_req: HttpRequest) -> impl Responder {
     "Hello from the index page!"
 }
 
@@ -144,8 +145,8 @@ async fn hello(path: web::Path<String>) -> impl Responder {
 }
 
 let app = App::new()
-        .route("/", web::get().to(index))
-        .route("/{name}", web::get().to(hello));
+    .service(index)
+    .route("/{name}", web::get().to(hello));
 ` "rust" "" }}
         </div>
       </div>

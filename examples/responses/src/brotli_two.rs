@@ -5,7 +5,7 @@ async fn index_br() -> HttpResponse {
     HttpResponse::Ok().body("data")
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{middleware, web, App, HttpServer};
 
@@ -14,7 +14,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Compress::new(ContentEncoding::Br))
             .route("/", web::get().to(index_br))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // <error-handler>
 use actix_web::middleware::errhandlers::{ErrorHandlerResponse, ErrorHandlers};
 use actix_web::{dev, http, HttpResponse, Result};
@@ -10,7 +12,7 @@ fn render_500<B>(mut res: dev::ServiceResponse<B>) -> Result<ErrorHandlerRespons
     Ok(ErrorHandlerResponse::Response(res))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
@@ -26,7 +28,7 @@ async fn main() -> std::io::Result<()> {
                     .route(web::head().to(|| HttpResponse::MethodNotAllowed())),
             )
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

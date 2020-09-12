@@ -4,5 +4,4 @@ version = "1.0.0"
 edition = "2018"
 
 [dependencies]
-actix-web = "1.0"
-futures = "0.1"
+actix-web = "3"

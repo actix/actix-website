@@ -31,14 +31,14 @@ async fn index() -> HttpResponse {
         .body(include_str!("../static/form.html"))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
             .route("/event", web::post().to(capture_event))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

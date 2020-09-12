@@ -1,12 +1,12 @@
 // <setup>
-use actix_web::{web, App, HttpServer};
-use std::sync::Mutex;
+use actix_web::{get, web, App, HttpServer};
 
 // This struct represents state
 struct AppState {
     app_name: String,
 }
 
+#[get("/")]
 async fn index(data: web::Data<AppState>) -> String {
     let app_name = &data.app_name; // <- get app_name
 
@@ -15,16 +15,16 @@ async fn index(data: web::Data<AppState>) -> String {
 // </setup>
 
 // <start_app>
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .data(AppState {
                 app_name: String::from("Actix-web"),
             })
-            .route("/", web::get().to(index))
+            .service(index)
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

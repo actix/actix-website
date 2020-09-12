@@ -4,9 +4,14 @@ menu: docs_basics
 weight: 130
 ---
 
-# Getting Started
+## Installing Rust
 
-Let’s write our first `actix-web` application!
+If you don't have Rust yet, we recommend you use `rustup` to manage your Rust installation. The
+[official rust guide][rustguide] has a wonderful section on getting started.
+
+Actix Web currently has a minimum supported Rust version (MSRV) of {{< rust-version "actix-web" >}}.
+Running `rustup update` will ensure you have the latest and greatest Rust version available. As
+such, this guide assumes you are running Rust {{< rust-version "actix-web" >}} or later.
 
 ## Hello, world!
 
@@ -17,71 +22,35 @@ cargo new hello-world
 cd hello-world
 ```
 
-Now, add `actix-web` as a dependency of your project by ensuring your `Cargo.toml`
-contains the following:
+Add `actix-web` as a dependency of your project by adding the following to your `Cargo.toml` file.
 
-```ini
+```toml
 [dependencies]
 actix-web = "{{< actix-version "actix-web" >}}"
 ```
 
-If you want to use the `#[actix_rt::main]` macro, you have to add `actix-rt` to your dependency.
-Now your `Cargo.toml` should look like following:
+Request handlers use an async functions that accept zero or more parameters. These parameters can be
+extracted from a request (see `FromRequest` trait) and returns a type that can be converted into an
+`HttpResponse` (see `Responder` trait):
 
-```ini
-[dependencies]
-actix-web = "{{< actix-version "actix-web" >}}"
-actix-rt = "{{< actix-version "actix-rt" >}}"
-```
+{{< include-example example="getting-started" section="handlers" >}}
 
-In order to implement a web server, we first need to create a request handler.
+Notice that some of these handlers have routing information attached directly using the built-in
+macros. These allow you to specify the method and path that the handler should respond to. You will
+see below how to register the other route that does not use a routing macro.
 
-A request handler is an async function that accepts zero or more parameters that can be
-extracted from a request (ie, `impl FromRequest`) and returns a type that can be
-converted into an `HttpResponse` (ie, `impl Responder`):
-
-{{< include-example example="getting-started" section="setup" >}}
-
-Next, create an `App` instance and register the request handler with the application's
-`route` on a _path_ and with a particular _HTTP method_. After that, the application
-instance can be used with `HttpServer` to listen for incoming connections. The server
-accepts a function that should return an application factory.
+Next, create an `App` instance and register the request handlers. Use `App::service` for the
+handlers using routing macros and `App::route` for manually routed handlers, declaring the a path
+and method. Finally, the app is started inside an `HttpServer` which will serve incoming requests
+using your `App` as an "application factory".
 
 {{< include-example example="getting-started" section="main" >}}
 
-That's it! Now, compile and run the program with `cargo run`.
-Head over to `http://localhost:8088/` to see the results.
+That's it! Compile and run the program with `cargo run`. The `#[actix_web::main]` macro executes the
+async main function within the actix runtime. Now you can go to `http://localhost:8080/` or any of
+the other routes you defined to see the results.
 
-**Note**: You may have noticed the `#[actix_rt::main]` attribute macro. This
-macro executes the associated async function within the actix runtime.
-Any async function could be marked and executed by this macro.
+<!-- LINKS -->
 
-### Using Attribute Macros to Define Routes
-
-Alternatively, you can define routes using macro attributes which
-allow you to specify the routes above your functions like so:
-
-{{< include-example example="getting-started" section="macro-attributes">}}
-
-You can then register the route using `service()`:
-
-```rust
-App::new()
-    .service(index3)
-```
-
-For consistency reasons, this documentation only uses the explicit syntax shown at the
-beginning of this page. However, if you prefer this syntax you should feel free to
-use it any time you declare a route as it's only syntactic sugar.
-
-To learn more, see [actix-web-codegen].
-
-### Auto-reloading
-
-If you want, you can have an automatically reloading server during development
-that recompiles on demand. This isn't necessary, but it makes rapid prototyping
-more convenient as you can see changes instantly upon saving.
-To see how this can be accomplished, have a look at the [autoreload pattern][autoload].
-
+[rustguide]: https://doc.rust-lang.org/book/ch01-01-installation.html
 [actix-web-codegen]: https://docs.rs/actix-web-codegen/
-[autoload]: ../autoreload/

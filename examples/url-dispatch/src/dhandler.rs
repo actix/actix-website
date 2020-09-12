@@ -1,11 +1,12 @@
 use actix_web::{guard, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
+#[allow(dead_code)]
 async fn index(_req: HttpRequest) -> impl Responder {
     "Welcome!"
 }
 
 // <default>
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
@@ -16,7 +17,7 @@ async fn main() -> std::io::Result<()> {
                     .to(|| HttpResponse::MethodNotAllowed()),
             )
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

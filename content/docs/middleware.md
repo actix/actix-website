@@ -1,5 +1,5 @@
 ---
-title: Middlewares
+title: Middleware
 menu: docs_advanced
 weight: 220
 ---
@@ -29,11 +29,11 @@ The following demonstrates creating a simple middleware:
 
 {{< include-example example="middleware" file="main.rs" section="simple" >}}
 
-Alternatively, for simple use cases, you can use [*wrap_fn*][wrap_fn] to create small, ad-hoc middlewares:
+Alternatively, for simple use cases, you can use [*wrap_fn*][wrap_fn] to create small, ad-hoc middleware:
 
 {{< include-example example="middleware" file="wrap_fn.rs" section="wrap-fn" >}}
 
-> Actix-web provides several useful middlewares, such as *logging*, *user sessions*,
+> Actix-web provides several useful middleware, such as *logging*, *user sessions*,
 > *compress*, etc.
 
 # Logging
@@ -89,8 +89,7 @@ a specified header.
 ## User sessions
 
 Actix-web provides a general solution for session management. The
-[**actix-session**][actixsession] middleware can be used with different backend types
-to store session data in different backends.
+[**actix-session**][actixsession] middleware can use multiple backend types to store session data.
 
 > By default, only cookie session backend is implemented. Other backend implementations
 > can be added.
@@ -132,6 +131,6 @@ into a response.
 [cookiesession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.CookieSession.html
 [actixsession]: https://docs.rs/actix-session/0.3.0/actix_session/
 [envlogger]: https://docs.rs/env_logger/*/env_logger/
-[servicetrait]: https://docs.rs/actix-web/2/actix_web/dev/trait.Service.html
-[transformtrait]: https://docs.rs/actix-web/2/actix_web/dev/trait.Transform.html
-[wrap_fn]: https://docs.rs/actix-web/2/actix_web/struct.App.html#method.wrap_fn
+[servicetrait]: https://docs.rs/actix-web/3/actix_web/dev/trait.Service.html
+[transformtrait]: https://docs.rs/actix-web/3/actix_web/dev/trait.Transform.html
+[wrap_fn]: https://docs.rs/actix-web/3/actix_web/struct.App.html#method.wrap_fn

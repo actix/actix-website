@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // <user-session>
 use actix_session::{CookieSession, Session};
 use actix_web::{web, App, Error, HttpResponse, HttpServer};
@@ -16,7 +18,7 @@ async fn index(session: Session) -> Result<HttpResponse, Error> {
     )))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
@@ -26,7 +28,7 @@ async fn main() -> std::io::Result<()> {
             )
             .service(web::resource("/").to(index))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

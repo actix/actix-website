@@ -3,7 +3,7 @@ use actix::{Actor, StreamHandler};
 use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpServer};
 use actix_web_actors::ws;
 
-/// Define http actor
+/// Define HTTP actor
 struct MyWs;
 
 impl Actor for MyWs {
@@ -32,10 +32,10 @@ async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, E
     resp
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().route("/ws/", web::get().to(index)))
-        .bind("127.0.0.1:8088")?
+        .bind("127.0.0.1:8080")?
         .run()
         .await
 }

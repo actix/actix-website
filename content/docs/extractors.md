@@ -19,8 +19,8 @@ up to 10 extractors per handler function. Argument position does not matter.
 [*Path*][pathstruct] provides information that can be extracted from the Request's
 path. You can deserialize any variable segment from the path.
 
-For instance, for resource that registered for the `/users/{userid}/{friend}` path,
-two segments could be deserialized, `userid` and `friend`. These segments could be
+For instance, for resource that registered for the `/users/{user_id}/{friend}` path,
+two segments could be deserialized, `user_id` and `friend`. These segments could be
 extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure that implements
 the `Deserialize` trait from the *serde* crate.
 
@@ -109,13 +109,13 @@ number of requests processed per thread. A proper implementation would use `Arc`
 > request handling processes would block. If you need to share or update some state
 > from multiple threads, consider using the tokio synchronization primitives.
 
-[pathstruct]: https://docs.rs/actix-web/2/actix_web/dev/struct.Path.html
-[querystruct]: https://docs.rs/actix-web/2/actix_web/web/struct.Query.html
-[jsonstruct]: https://docs.rs/actix-web/2/actix_web/web/struct.Json.html
-[jsonconfig]: https://docs.rs/actix-web/2/actix_web/web/struct.JsonConfig.html
-[formconfig]: https://docs.rs/actix-web/2/actix_web/web/struct.FormConfig.html
-[datastruct]: https://docs.rs/actix-web/2/actix_web/web/struct.Data.html
-[stringexample]: https://docs.rs/actix-web/2/actix_web/trait.FromRequest.html#example-2
-[bytesexample]: https://docs.rs/actix-web/2/actix_web/trait.FromRequest.html#example-4
-[payloadexample]: https://docs.rs/actix-web/2/actix_web/web/struct.Payload.html
+[pathstruct]: https://docs.rs/actix-web/3/actix_web/dev/struct.Path.html
+[querystruct]: https://docs.rs/actix-web/3/actix_web/web/struct.Query.html
+[jsonstruct]: https://docs.rs/actix-web/3/actix_web/web/struct.Json.html
+[jsonconfig]: https://docs.rs/actix-web/3/actix_web/web/struct.JsonConfig.html
+[formconfig]: https://docs.rs/actix-web/3/actix_web/web/struct.FormConfig.html
+[datastruct]: https://docs.rs/actix-web/3/actix_web/web/struct.Data.html
+[stringexample]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html#example-2
+[bytesexample]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html#example-4
+[payloadexample]: https://docs.rs/actix-web/3/actix_web/web/struct.Payload.html
 [actix]: https://actix.github.io/actix/actix/

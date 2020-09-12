@@ -2,7 +2,7 @@
 use actix_files as fs;
 use actix_web::{App, HttpServer};
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().service(
@@ -11,7 +11,7 @@ async fn main() -> std::io::Result<()> {
                 .use_last_modified(true),
         )
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

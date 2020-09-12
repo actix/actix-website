@@ -1,10 +1,11 @@
 // <stream>
-use actix_web::{web, App, HttpServer, Error, HttpResponse};
+use actix_web::{get, App, Error, HttpResponse, HttpServer};
 use bytes::Bytes;
-use futures::stream::once;
 use futures::future::ok;
+use futures::stream::once;
 
-async fn index() -> HttpResponse {
+#[get("/stream")]
+async fn stream() -> HttpResponse {
     let body = once(ok::<_, Error>(Bytes::from_static(b"test")));
 
     HttpResponse::Ok()
@@ -12,10 +13,10 @@ async fn index() -> HttpResponse {
         .streaming(body)
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().route("/async", web::to(index)))
-        .bind("127.0.0.1:8088")?
+    HttpServer::new(|| App::new().service(stream))
+        .bind("127.0.0.1:8080")?
         .run()
         .await
 }

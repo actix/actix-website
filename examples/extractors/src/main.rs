@@ -18,17 +18,18 @@ struct MyInfo {
 }
 
 // <option-one>
-async fn index(
-    path: web::Path<(String, String)>,
-    json: web::Json<MyInfo>,
-) -> impl Responder {
+async fn index(path: web::Path<(String, String)>, json: web::Json<MyInfo>) -> impl Responder {
+    let path = path.into_inner();
     format!("{} {} {} {}", path.0, path.1, json.id, json.username)
 }
 // </option-one>
 
 // <option-two>
 async fn extract(req: HttpRequest) -> impl Responder {
-    let params = web::Path::<(String, String)>::extract(&req).await.unwrap();
+    let params = web::Path::<(String, String)>::extract(&req)
+        .await
+        .unwrap()
+        .into_inner();
 
     let info = web::Json::<MyInfo>::extract(&req)
         .await
@@ -38,14 +39,14 @@ async fn extract(req: HttpRequest) -> impl Responder {
 }
 // </option-two>
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/{name}/{id}", web::post().to(index))
             .route("/{name}/{id}/extract", web::post().to(extract))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

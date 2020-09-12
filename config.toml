@@ -10,13 +10,13 @@ DefaultContentLanguage = "en"
 baseURL = "https://actix.rs"
 
 [languages.en]
-  languageCode = "en-US"
-  languageName = "English"
-  weight = 1
+languageCode = "en-US"
+languageName = "English"
+weight = 1
 
 [params]
-actixVersion = "0.9"
-actixWebVersion = "2.0"
-actixRtVersion = "1.0"
-actixWebMinRustVersion = "1.39"
-actixMinRustVersion = "1.39"
+actixVersion = "0.10"
+actixWebVersion = "3"
+actixRtVersion = "1.1"
+actixWebMinRustVersion = "1.42"
+actixMinRustVersion = "1.42"

@@ -27,7 +27,7 @@ in *http://localhost:8080/foo/bar?q=value*).
 
 The [*App::route()*][approute] method provides simple way of registering routes. This
 method adds a single route to application routing table. This method accepts a *path pattern*,
-*http method* and a handler function. `route()` method could be called multiple times
+*HTTP method* and a handler function. `route()` method could be called multiple times
 for the same path, in that case, multiple routes register for the same resource path.
 
 {{< include-example example="url-dispatch" section="main" >}}
@@ -40,7 +40,7 @@ adds a single [resource][webresource] to application routing table. This method 
 {{< include-example example="url-dispatch" file="resource.rs" section="resource" >}}
 
 If a resource does not contain any route or does not have any matching routes, it
-returns *NOT FOUND* http response.
+returns *NOT FOUND* HTTP response.
 
 ## Configuring a Route
 
@@ -197,7 +197,7 @@ When matching the following URL:
 http://example.com/foo/La%20Pe%C3%B1a
 ```
 
-The matchdict will look like so (the value is URL-decoded):
+The match dictionary will look like so (the value is URL-decoded):
 
 ```
 Params{'bar': 'La Pe\xf1a'}
@@ -247,7 +247,7 @@ A scoped layout of these paths would appear as follows
 {{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
 
 A *scoped* path can contain variable path segments as resources. Consistent with 
-unscoped paths.
+un-scoped paths.
 
 You can get variable path segments from `HttpRequest::match_info()`.
 [`Path` extractor][pathextractor] also is able to extract scope level variable segments.
@@ -283,7 +283,7 @@ safe to interpolate within, or use as a suffix of, a path without additional che
 
 Actix provides functionality for type safe path information extraction.  [*Path*][pathstruct]
 extracts information, destination type could be defined in several different forms. Simplest
-approach is to use `tuple` type. Each element in tuple must correpond to one element from
+approach is to use `tuple` type. Each element in tuple must correspond to one element from
 path pattern. i.e. you can match path pattern `/{id}/{username}/` against
 `Path<(u32, String)>` type, but `Path<(String, String, String)>` type will always fail.
 
@@ -363,7 +363,7 @@ it will generate a URL with that same path.
 You can think of a guard as a simple function that accepts a *request* object reference
 and returns *true* or *false*. Formally, a guard is any object that implements the
 [`Guard`][guardtrait] trait. Actix provides several predicates, you can check
-[functions section][guardfuncs] of api docs.
+[functions section][guardfuncs] of API docs.
 
 Here is a simple guard that check that a request contains a specific *header*:
 
@@ -407,24 +407,24 @@ with `App::service()` method.
 {{< include-example example="url-dispatch" file="dhandler.rs" section="default" >}}
 
 [handlersection]: ../handlers/
-[approute]: https://docs.rs/actix-web/2/actix_web/struct.App.html#method.route
-[appservice]: https://docs.rs/actix-web/2/actix_web/struct.App.html?search=#method.service
-[webresource]: https://docs.rs/actix-web/2/actix_web/struct.Resource.html
-[resourcehandler]: https://docs.rs/actix-web/2/actix_web/struct.Resource.html#method.route
-[route]: https://docs.rs/actix-web/2/actix_web/struct.Route.html
-[routeguard]: https://docs.rs/actix-web/2/actix_web/struct.Route.html#method.guard
-[routemethod]: https://docs.rs/actix-web/2/actix_web/struct.Route.html#method.method
-[routeto]: https://docs.rs/actix-web/2/actix_web/struct.Route.html#method.to
-[routetoasync]: https://docs.rs/actix-web/2/actix_web/struct.Route.html#method.to_async
-[matchinfo]: https://docs.rs/actix-web/2/actix_web/struct.HttpRequest.html#method.match_info
-[pathget]: https://docs.rs/actix-web/2/actix_web/dev/struct.Path.html#method.get
-[pathstruct]: https://docs.rs/actix-web/2/actix_web/dev/struct.Path.html
-[query]: https://docs.rs/actix-web/2/actix_web/web/struct.Query.html
-[urlfor]: https://docs.rs/actix-web/2/actix_web/struct.HttpRequest.html#method.url_for
+[approute]: https://docs.rs/actix-web/3/actix_web/struct.App.html#method.route
+[appservice]: https://docs.rs/actix-web/3/actix_web/struct.App.html?search=#method.service
+[webresource]: https://docs.rs/actix-web/3/actix_web/struct.Resource.html
+[resourcehandler]: https://docs.rs/actix-web/3/actix_web/struct.Resource.html#method.route
+[route]: https://docs.rs/actix-web/3/actix_web/struct.Route.html
+[routeguard]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.guard
+[routemethod]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.method
+[routeto]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.to
+[routetoasync]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.to_async
+[matchinfo]: https://docs.rs/actix-web/3/actix_web/struct.HttpRequest.html#method.match_info
+[pathget]: https://docs.rs/actix-web/3/actix_web/dev/struct.Path.html#method.get
+[pathstruct]: https://docs.rs/actix-web/3/actix_web/dev/struct.Path.html
+[query]: https://docs.rs/actix-web/3/actix_web/web/struct.Query.html
+[urlfor]: https://docs.rs/actix-web/3/actix_web/struct.HttpRequest.html#method.url_for
 [urlobj]: https://docs.rs/url/1.7.2/url/struct.Url.html
-[guardtrait]: https://docs.rs/actix-web/2/actix_web/guard/trait.Guard.html
-[guardfuncs]: https://docs.rs/actix-web/2/actix_web/guard/index.html#functions
-[requestextensions]: https://docs.rs/actix-web/2/actix_web/struct.HttpRequest.html#method.extensions
-[implfromrequest]: https://docs.rs/actix-web/2/actix_web/trait.FromRequest.html
-[implresponder]: https://docs.rs/actix-web/2/actix_web/trait.Responder.html
+[guardtrait]: https://docs.rs/actix-web/3/actix_web/guard/trait.Guard.html
+[guardfuncs]: https://docs.rs/actix-web/3/actix_web/guard/index.html#functions
+[requestextensions]: https://docs.rs/actix-web/3/actix_web/struct.HttpRequest.html#method.extensions
+[implfromrequest]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html
+[implresponder]: https://docs.rs/actix-web/3/actix_web/trait.Responder.html
 [pathextractor]: ../extractors

@@ -20,7 +20,7 @@ For unit testing, actix-web provides a request builder type.
 # Integration tests
 
 There are a few methods for testing your application. Actix-web can be used
-to run the application with specific handlers in a real http server.
+to run the application with specific handlers in a real HTTP server.
 
 `TestRequest::get()`, `TestRequest::post()` and other
 methods can be used to send requests to the test server.
@@ -28,7 +28,7 @@ methods can be used to send requests to the test server.
 To create a `Service` for testing, use the `test::init_service` method which accepts a
 regular `App` builder.
 
-> Check the [api documentation][actixdocs] for more information.
+> Check the [API documentation][actixdocs] for more information.
 
 {{< include-example example="testing" file="integration_one.rs" section="integration-one" >}}
 
@@ -47,6 +47,6 @@ resulting [*ResponseBody*][responsebody] into a future and execute it, for examp
 {{< include-example example="testing" file="stream_response.rs" section="stream-response" >}}
 
 [serversentevents]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
-[responsebody]: https://docs.rs/actix-web/2/actix_web/body/enum.ResponseBody.html
-[actixdocs]: https://docs.rs/actix-web/2/actix_web/test/index.html
-[testrequest]: https://docs.rs/actix-web/2/actix_web/test/struct.TestRequest.html
+[responsebody]: https://docs.rs/actix-web/3/actix_web/body/enum.ResponseBody.html
+[actixdocs]: https://docs.rs/actix-web/3/actix_web/test/index.html
+[testrequest]: https://docs.rs/actix-web/3/actix_web/test/struct.TestRequest.html

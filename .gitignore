@@ -4,3 +4,4 @@ _site
 Cargo.lock
 build/
 target/
+.DS_Store

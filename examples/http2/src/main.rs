@@ -6,7 +6,7 @@ async fn index(_req: HttpRequest) -> impl Responder {
     "Hello."
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     // load ssl keys
     // to create a self-signed temporary cert for testing:
@@ -18,7 +18,7 @@ async fn main() -> std::io::Result<()> {
     builder.set_certificate_chain_file("cert.pem").unwrap();
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind_openssl("127.0.0.1:8088", builder)?
+        .bind_openssl("127.0.0.1:8080", builder)?
         .run()
         .await
 }

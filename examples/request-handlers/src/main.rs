@@ -19,7 +19,7 @@ async fn add_one(data: web::Data<AppState>) -> impl Responder {
     format!("count: {}", data.count.get())
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
@@ -33,7 +33,7 @@ async fn main() -> std::io::Result<()> {
             .route("/", web::to(show_count))
             .route("/add", web::to(add_one))
     })
-    .bind("127.0.0.1:8088")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

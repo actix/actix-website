@@ -1,12 +1,12 @@
-use actix_web::{web, App};
 // <helpers>
-use actix_web::{error, Result};
+use actix_web::{error, get, App, HttpServer, Result};
 
 #[derive(Debug)]
 struct MyError {
     name: &'static str,
 }
 
+#[get("/")]
 async fn index() -> Result<&'static str> {
     let result: Result<&'static str, MyError> = Err(MyError { name: "test error" });
 
@@ -14,12 +14,10 @@ async fn index() -> Result<&'static str> {
 }
 // </helpers>
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::HttpServer;
-
-    HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8088")?
+    HttpServer::new(|| App::new().service(index))
+        .bind("127.0.0.1:8080")?
         .run()
         .await
 }

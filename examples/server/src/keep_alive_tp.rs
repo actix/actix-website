@@ -8,6 +8,7 @@ async fn index(req: HttpRequest) -> HttpResponse {
         .finish()
 }
 // </example>
+
 // ConnectionType::Close
 // ConnectionType::KeepAlive
 // ConnectionType::Upgrade

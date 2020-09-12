@@ -56,7 +56,7 @@
           <h5>Protocols</h5>
           <div>
             <ul class="nav">
-              {{ range .Site.Menus.docs_proto }}
+              {{ range .Site.Menus.docs_protocols }}
               <li{{ if eq $currentURL .URL }} class="active"{{ end }}>
                 <a href="{{ .URL }}">{{ .Name }}</a>
               </li>
