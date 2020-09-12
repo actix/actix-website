@@ -17,12 +17,12 @@ async fn index(info: web::Json<Info>) -> impl Responder {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
-        let json_config = web::Json::<Info>::configure(|cfg| {
-            cfg.limit(4096).error_handler(|err, _req| {
+        let json_config = web::JsonConfig::default()
+            .limit(4096)
+            .error_handler(|err, _req| {
                 // create custom error response
                 error::InternalError::from_response(err, HttpResponse::Conflict().finish()).into()
-            })
-        });
+            });
 
         App::new().service(
             web::resource("/")
