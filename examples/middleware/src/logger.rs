@@ -2,7 +2,7 @@
 use actix_web::middleware::Logger;
 use env_logger::Env;
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 

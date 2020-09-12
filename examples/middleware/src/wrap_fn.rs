@@ -5,7 +5,7 @@ use actix_service::Service;
 use actix_web::{web, App};
 use futures::future::FutureExt;
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() {
     let app = App::new()
         .wrap_fn(|req, srv| {

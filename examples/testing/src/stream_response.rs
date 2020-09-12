@@ -35,7 +35,6 @@ pub fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use actix_rt;
 
     use futures_util::stream::StreamExt;
     use futures_util::stream::TryStreamExt;

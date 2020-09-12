@@ -1,6 +1,5 @@
 // <json-manual>
 use actix_web::{error, post, web, App, Error, HttpResponse};
-use bytes::BytesMut;
 use futures::StreamExt;
 use serde::{Deserialize, Serialize};
 use serde_json;
@@ -16,7 +15,7 @@ const MAX_SIZE: usize = 262_144; // max payload size is 256k
 #[post("/")]
 async fn index_manual(mut payload: web::Payload) -> Result<HttpResponse, Error> {
     // payload is a stream of Bytes objects
-    let mut body = BytesMut::new();
+    let mut body = web::BytesMut::new();
     while let Some(chunk) = payload.next().await {
         let chunk = chunk?;
         // limit max size of in-memory payload
