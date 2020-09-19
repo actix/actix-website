@@ -20,7 +20,7 @@ instance multiple times, the builder will panic.
 
 # Content encoding
 
-Actix-web can automatically *compresses* payloads with the [*Compress middleware*][compressmidddleware].
+Actix-web can automatically *compress* payloads with the [*Compress middleware*][compressmidddleware].
 The following codecs are supported:
 
 * Brotli
