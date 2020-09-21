@@ -70,10 +70,8 @@ can be configured with a builder-like pattern. Following configuration methods a
   registered for each route.
 * [*Route::method()*][routemethod] registers a method guard. Any number of guards can be
   registered for each route.
-* [*Route::to()*][routeto] registers handler function for this route. Only one handler
-  can be registered.  Usually handler registration is the last config operation.
-* [*Route::to_async()*][routetoasync] registers an async handler function for this route.
-  Only one handler can be registered.  Handler registration is the last config operation.
+* [*Route::to()*][routeto] registers an async handler function for this route.
+  Only one handler can be registered.  Usually handler registration is the last config operation.
 
 # Route matching
 
@@ -415,7 +413,6 @@ with `App::service()` method.
 [routeguard]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.guard
 [routemethod]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.method
 [routeto]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.to
-[routetoasync]: https://docs.rs/actix-web/3/actix_web/struct.Route.html#method.to_async
 [matchinfo]: https://docs.rs/actix-web/3/actix_web/struct.HttpRequest.html#method.match_info
 [pathget]: https://docs.rs/actix-web/3/actix_web/dev/struct.Path.html#method.get
 [pathstruct]: https://docs.rs/actix-web/3/actix_web/dev/struct.Path.html
