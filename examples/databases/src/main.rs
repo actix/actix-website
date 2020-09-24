@@ -46,7 +46,7 @@ async fn main() -> io::Result<()> {
 // </main>
 
 // <index>
-async fn index(req: web::Data<DbPool>, name: web::Path<(String)>) -> impl Responder {
+async fn index(pool: web::Data<DbPool>, name: web::Path<(String)>) -> impl Responder {
     let name = name.into_inner();
 
     let conn = pool.get().expect("couldn't get db connection from pool");
