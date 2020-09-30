@@ -1,0 +1,19 @@
+name: Build and Ping FeaturePeek
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.74.2'
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Ping FeaturePeek
+        run: bash <(curl -s https://peek.run/ci)
