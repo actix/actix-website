@@ -2,12 +2,12 @@
 
 ## Getting Started
 
-Building the website depends on [Hugo]. So, first make sure
+Building the website depends on [Hugo]. So, first, make sure
 that you have it installed. If on macOS and using [Homebrew], run the following:
 
 ```sh
 brew update
-brew install hugo
+brew install Hugo
 ```
 
 Then, get the website running locally:
@@ -16,7 +16,7 @@ Then, get the website running locally:
 git clone https://github.com/actix/actix-website.git
 cd actix-website
 
-hugo server
+Hugo server
 ```
 
 Then visit http://localhost:1313.
