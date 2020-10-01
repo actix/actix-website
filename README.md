@@ -1,7 +1,5 @@
 # Actix Website
 
-The work in progress website for the actix project based on tokio's website.
-
 ## Getting Started
 
 Building the website depends on [Hugo]. So, first make sure
