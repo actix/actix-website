@@ -40,7 +40,7 @@ macros. These allow you to specify the method and path that the handler should r
 see below how to register the other route that does not use a routing macro.
 
 Next, create an `App` instance and register the request handlers. Use `App::service` for the
-handlers using routing macros and `App::route` for manually routed handlers, declaring the a path
+handlers using routing macros and `App::route` for manually routed handlers, declaring the path
 and method. Finally, the app is started inside an `HttpServer` which will serve incoming requests
 using your `App` as an "application factory".
 
