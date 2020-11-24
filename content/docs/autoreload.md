@@ -1,13 +1,13 @@
 ---
-title: Autoreloading
+title: Auto-Reloading
 menu: docs_patterns
 weight: 1000
 ---
 
 # Auto-Reloading Development Server
 
-During development it can be very handy to have cargo automatically recompile the code on change.
-This can be accomplished very easily by using [cargo-watch][cargowatch].
+During development it can be very handy to have cargo automatically recompile the code on changes.
+This can be accomplished very easily by using [`cargo-watch`].
 
 ```sh
 cargo watch -x 'run --bin app'
