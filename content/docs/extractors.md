@@ -80,7 +80,7 @@ Actix-web also provides several other extractors:
   need access to the request.
 * *String* - You can convert a request's payload to a *String*.  [*Example*][stringexample]
   is available in doc strings.
-* *bytes::Bytes* - You can convert a request's payload into *Bytes*.
+* *actix_web::web::Bytes* - You can convert a request's payload into *Bytes*.
   [*Example*][bytesexample]
   is available in doc strings.
 * *Payload* - You can access a request's payload.

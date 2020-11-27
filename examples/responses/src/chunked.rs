@@ -1,12 +1,11 @@
 // <chunked>
-use actix_web::{get, App, Error, HttpRequest, HttpResponse, HttpServer};
-use bytes::Bytes;
+use actix_web::{get, web, App, Error, HttpRequest, HttpResponse, HttpServer};
 use futures::future::ok;
 use futures::stream::once;
 
 #[get("/")]
 async fn index(_req: HttpRequest) -> HttpResponse {
-    HttpResponse::Ok().streaming(once(ok::<_, Error>(Bytes::from_static(b"data"))))
+    HttpResponse::Ok().streaming(once(ok::<_, Error>(web::Bytes::from_static(b"data"))))
 }
 // </chunked>
 

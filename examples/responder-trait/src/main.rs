@@ -1,7 +1,7 @@
 // <responder-trait>
 use actix_web::{Error, HttpRequest, HttpResponse, Responder};
-use serde::Serialize;
 use futures::future::{ready, Ready};
+use serde::Serialize;
 
 #[derive(Serialize)]
 struct MyObj {

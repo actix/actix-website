@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 
 // <json-two>
-use actix_web::{error, web, App, FromRequest, HttpResponse, HttpServer, Responder};
+use actix_web::{error, web, App, HttpResponse, HttpServer, Responder};
 use serde::Deserialize;
 
 #[derive(Deserialize)]

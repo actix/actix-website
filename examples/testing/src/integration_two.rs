@@ -23,7 +23,8 @@ mod tests {
             App::new()
                 .data(AppState { count: 4 })
                 .route("/", web::get().to(index)),
-        ).await;
+        )
+        .await;
         let req = test::TestRequest::get().uri("/").to_request();
         let resp: AppState = test::read_response_json(&mut app, req).await;
 

@@ -38,7 +38,7 @@ complex types are involved.
 
 ```rust
 async fn index(_req: HttpRequest) -> impl Responder {
-    Bytes::from_static(b"Hello world!")
+    web::Bytes::from_static(b"Hello world!")
 }
 ```
 

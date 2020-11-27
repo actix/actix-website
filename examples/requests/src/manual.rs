@@ -2,7 +2,6 @@
 use actix_web::{error, post, web, App, Error, HttpResponse};
 use futures::StreamExt;
 use serde::{Deserialize, Serialize};
-use serde_json;
 
 #[derive(Serialize, Deserialize)]
 struct MyObj {

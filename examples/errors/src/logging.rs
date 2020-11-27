@@ -1,7 +1,7 @@
 // <logging>
 use actix_web::{error, get, middleware::Logger, App, HttpServer, Result};
-use log::debug;
 use derive_more::{Display, Error};
+use log::debug;
 
 #[derive(Debug, Display, Error)]
 #[display(fmt = "my error: {}", name)]

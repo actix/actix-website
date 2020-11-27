@@ -1,22 +1,21 @@
 // <stream-response>
-use std::task::Poll;
-use bytes::Bytes;
 use futures::stream::poll_fn;
+use std::task::Poll;
 
 use actix_web::http::{ContentEncoding, StatusCode};
-use actix_web::{web, http, App, Error, HttpRequest, HttpResponse};
+use actix_web::{http, web, App, Error, HttpRequest, HttpResponse};
 
 async fn sse(_req: HttpRequest) -> HttpResponse {
     let mut counter: usize = 5;
 
     // yields `data: N` where N in [5; 1]
-    let server_events = poll_fn(move |_cx| -> Poll<Option<Result<Bytes, Error>>> {
+    let server_events = poll_fn(move |_cx| -> Poll<Option<Result<web::Bytes, Error>>> {
         if counter == 0 {
             return Poll::Ready(None);
         }
         let payload = format!("data: {}\n\n", counter);
         counter -= 1;
-        Poll::Ready(Some(Ok(Bytes::from(payload))))
+        Poll::Ready(Some(Ok(web::Bytes::from(payload))))
     });
 
     HttpResponse::build(StatusCode::OK)
@@ -51,15 +50,24 @@ mod tests {
 
         // first chunk
         let (bytes, mut resp) = resp.take_body().into_future().await;
-        assert_eq!(bytes.unwrap().unwrap(), Bytes::from_static(b"data: 5\n\n"));
+        assert_eq!(
+            bytes.unwrap().unwrap(),
+            web::Bytes::from_static(b"data: 5\n\n")
+        );
 
         // second chunk
         let (bytes, mut resp) = resp.take_body().into_future().await;
-        assert_eq!(bytes.unwrap().unwrap(), Bytes::from_static(b"data: 4\n\n"));
+        assert_eq!(
+            bytes.unwrap().unwrap(),
+            web::Bytes::from_static(b"data: 4\n\n")
+        );
 
         // remaining part
         let bytes = test::load_stream(resp.take_body().into_stream()).await;
-        assert_eq!(bytes.unwrap(), Bytes::from_static(b"data: 3\n\ndata: 2\n\ndata: 1\n\n"));
+        assert_eq!(
+            bytes.unwrap(),
+            web::Bytes::from_static(b"data: 3\n\ndata: 2\n\ndata: 1\n\n")
+        );
     }
 }
 // </stream-response>

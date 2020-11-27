@@ -1,12 +1,10 @@
 // <stream>
-use actix_web::{get, App, Error, HttpResponse, HttpServer};
-use bytes::Bytes;
-use futures::future::ok;
-use futures::stream::once;
+use actix_web::{get, web, App, Error, HttpResponse, HttpServer};
+use futures::{future::ok, stream::once};
 
 #[get("/stream")]
 async fn stream() -> HttpResponse {
-    let body = once(ok::<_, Error>(Bytes::from_static(b"test")));
+    let body = once(ok::<_, Error>(web::Bytes::from_static(b"test")));
 
     HttpResponse::Ok()
         .content_type("application/json")

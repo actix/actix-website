@@ -1,5 +1,5 @@
 // <signals>
-use actix_web::{web, App, HttpResponse, HttpServer, rt::System};
+use actix_web::{rt::System, web, App, HttpResponse, HttpServer};
 use std::sync::mpsc;
 use std::thread;
 
