@@ -47,7 +47,7 @@ using your `App` as an "application factory".
 {{< include-example example="getting-started" section="main" >}}
 
 That's it! Compile and run the program with `cargo run`. The `#[actix_web::main]` macro executes the
-async main function within the actix runtime. Now you can go to `http://localhost:8080/` or any of
+async main function within the actix runtime. Now you can go to `http://127.0.0.1:8080/` or any of
 the other routes you defined to see the results.
 
 <!-- LINKS -->
