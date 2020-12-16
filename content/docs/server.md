@@ -137,7 +137,7 @@ can change this parameter with the [`HttpServer::shutdown_timeout()`][shutdownti
 method.
 
 You can send a stop message to the server with the server address and specify if you want
-graceful shutdown or not.
+graceful shutdown or not. The [`run()`][runmethod] method returns the address of the server.
 
 `HttpServer` handles several OS signals. *CTRL-C* is available on all OSs, other signals
 are available on unix systems.
@@ -154,6 +154,7 @@ are available on unix systems.
 [bindmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind
 [bindopensslmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_openssl
 [bindrusttls]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_rustls
+[runmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.run
 [workers]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.workers
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [exampleopenssl]: https://github.com/actix/examples/blob/master/openssl
