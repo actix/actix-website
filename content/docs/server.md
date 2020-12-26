@@ -87,7 +87,7 @@ There are two features for the ssl server: `rustls` and `openssl`. The `rustls` 
 ```toml
 [dependencies]
 actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
-openssl = { version="0.10" }
+openssl = { version = "0.10" }
 ```
 
 {{< include-example example="server" file="ssl.rs" section="ssl" >}}
