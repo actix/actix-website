@@ -7,7 +7,8 @@ struct Info {
     username: String,
 }
 
-// this handler get called only if the request's query contains `username` field
+// this handler gets called if the query deserializes into `Info` successfully
+// otherwise a 400 Bad Request error response is returned
 #[get("/")]
 async fn index(info: web::Query<Info>) -> String {
     format!("Welcome {}!", info.username)
