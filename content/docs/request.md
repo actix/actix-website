@@ -77,10 +77,10 @@ In the following example, we read and print the request payload chunk by chunk:
 
 {{< include-example example="requests" file="streaming.rs" section="streaming" >}}
 
-[examples]: https://github.com/actix/examples/tree/master/json/
+[examples]: https://github.com/actix/examples/tree/master/json/json
 [multipartstruct]: https://docs.rs/actix-multipart/0.2/actix_multipart/struct.Multipart.html
 [fieldstruct]: https://docs.rs/actix-multipart/0.2/actix_multipart/struct.Field.html
-[multipartexample]: https://github.com/actix/examples/tree/master/multipart/
+[multipartexample]: https://github.com/actix/examples/tree/master/forms/multipart
 [urlencoded]: https://docs.rs/actix-web/3/actix_web/dev/struct.UrlEncoded.html
 [payloadextractor]: https://docs.rs/actix-web/3/actix_web/web/struct.Payload.html
 [multipartcrate]: https://crates.io/crates/actix-multipart

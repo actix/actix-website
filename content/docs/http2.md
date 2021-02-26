@@ -33,4 +33,4 @@ connection and tls connection. [rfc section 3.4][rfcsection34].
 [rfcsection34]: https://http2.github.io/http2-spec/#rfc.section.3.4
 [bindopenssl]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_openssl
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
-[examples]: https://github.com/actix/examples/tree/master/rustls
+[examples]: https://github.com/actix/examples/tree/master/security/rustls

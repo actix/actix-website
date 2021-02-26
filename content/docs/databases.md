@@ -8,9 +8,9 @@ weight: 1010
 
 We have several example projects showing use of async database adapters:
 
-- SQLx: https://github.com/actix/examples/tree/master/sqlx_todo
-- Postgres: https://github.com/actix/examples/tree/master/async_pg
-- SQLite: https://github.com/actix/examples/tree/master/async_db
+- SQLx: https://github.com/actix/examples/tree/master/database_interactions/sqlx_todo
+- Postgres: https://github.com/actix/examples/tree/master/database_interactions/pg
+- SQLite: https://github.com/actix/examples/tree/master/database_interactions/basic
 
 # Diesel
 
@@ -40,7 +40,8 @@ necessary if your return error type implements [`ResponseError`][response-error]
 
 {{< include-example example="databases" file="main.rs" section="index" >}}
 
-That's it! See the full example here: https://github.com/actix/examples/tree/master/diesel
+That's it! See the full example here:
+https://github.com/actix/examples/tree/master/database_interactions/diesel
 
 [web-block]: https://docs.rs/actix-web/3/actix_web/web/fn.block.html
 [response-error]: https://docs.rs/actix-web/3/actix_web/trait.ResponseError.html
