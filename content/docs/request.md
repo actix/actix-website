@@ -29,6 +29,16 @@ that accepts `Json<T>` as a parameter, then, you use the `.to()` method for regi
 this handler. It is also possible to accept arbitrary valid json object by
 using `serde_json::Value` as a type `T`.
 
+Example of `JSON Request` depends on `serde` or `serde_json`:
+```toml
+[dependencies]
+serde = "1"
+
+[dependencies]
+serde_json = "1"
+```
+If you want to add default value for a field, you could refer to `serde`'s [document](https://serde.rs/attr-default.html)
+
 {{< include-example example="requests" file="main.rs" section="json-request" >}}
 
 You may also manually load the payload into memory and then deserialize it.
