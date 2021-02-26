@@ -8,7 +8,7 @@ weight: 100
 
 Long ago, `actix-web` was built on top of `actix`, a powerful and fast actor system.
 Now, `actix-web` is largely unrelated to the actor framework and is built using a different system.
-Though `actix` is still maintained, it's usefulness as a general tool is diminishing as the
+Though `actix` is still maintained, its usefulness as a general tool is diminishing as the
 futures and async/await ecosystem matures. At this time, the use of `actix` it is only required for
 WebSocket endpoints.
 
