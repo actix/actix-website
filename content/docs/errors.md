@@ -114,7 +114,12 @@ to see.
 
 # Error Logging
 
-This is a basic example using `middleware::Logger`:
+This is a basic example using `middleware::Logger` ,this example need depends on `env_logger` and `log`:
+```toml
+[dependencies]
+env_logger ="0.8"
+log = "0.4"
+```
 
 {{< include-example example="errors" file="logging.rs" section="logging" >}}
 
