@@ -114,10 +114,10 @@ to see.
 
 # Error Logging
 
-This is a basic example using `middleware::Logger` ,this example need depends on `env_logger` and `log`:
+This is a basic example using `middleware::Logger` which depends on `env_logger` and `log`:
 ```toml
 [dependencies]
-env_logger ="0.8"
+env_logger = "0.8"
 log = "0.4"
 ```
 
