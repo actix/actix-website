@@ -153,6 +153,6 @@ are available on unix systems.
 [bindrusttls]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_rustls
 [workers]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.workers
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
-[exampleopenssl]: https://github.com/actix/examples/blob/master/openssl
+[exampleopenssl]: https://github.com/actix/examples/tree/master/security/openssl
 [shutdowntimeout]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.shutdown_timeout
 [disablesignals]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.disable_signals
