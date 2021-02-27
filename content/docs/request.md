@@ -37,7 +37,7 @@ serde = "1"
 [dependencies]
 serde_json = "1"
 ```
-If you want to add default value for a field, you could refer to `serde`'s [document](https://serde.rs/attr-default.html)
+If you want to add default value for a field, refer to `serde`'s [documentation](https://serde.rs/attr-default.html).
 
 {{< include-example example="requests" file="main.rs" section="json-request" >}}
 
