@@ -87,7 +87,7 @@ occurred (rather than the origin of the error).
 # Recommended practices in error handling
 
 It might be useful to think about dividing the errors an application produces into two broad groups:
-those which are intended to be be user-facing, and those which are not.
+those which are intended to be user-facing, and those which are not.
 
 An example of the former is that I might use failure to specify a `UserError` enum which
 encapsulates a `ValidationError` to return whenever a user sends bad input:
