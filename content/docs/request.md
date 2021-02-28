@@ -29,12 +29,15 @@ that accepts `Json<T>` as a parameter, then, you use the `.to()` method for regi
 this handler. It is also possible to accept arbitrary valid json object by
 using `serde_json::Value` as a type `T`.
 
-Example of `JSON Request` depends on `serde` or `serde_json`:
+First example of json of `JSON Request` depends on `serde`:
 ```toml
 [dependencies]
 serde = "1"
-
+````
+Second example of `JSON Request` depends on `serde` and  `serde_json`:
+```toml
 [dependencies]
+serde = "1"
 serde_json = "1"
 ```
 If you want to add default value for a field, refer to `serde`'s [documentation](https://serde.rs/attr-default.html).
