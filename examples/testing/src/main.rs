@@ -20,7 +20,7 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use actix_web::test;
+    use actix_web::{http, test};
 
     #[actix_rt::test]
     async fn test_index_ok() {
