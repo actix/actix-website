@@ -19,15 +19,22 @@ async fn index() -> Result<&'static str, MyError> {
     Err(err)
 }
 
+#[rustfmt::skip]
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "my_errors=debug,actix_web=info");
     std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
-    HttpServer::new(|| App::new().wrap(Logger::default()).service(index))
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+    HttpServer::new(|| {
+        let logger = Logger::default();
+
+        App::new()
+            .wrap(logger)
+            .service(index)
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
 }
 // </logging>
