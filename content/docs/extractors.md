@@ -100,7 +100,7 @@ Here is an example of a handler that stores the number of processed requests:
 {{< include-example example="request-handlers" file="main.rs" section="data" >}}
 
 Although this handler will work, `self.0` will be different depending on the number of threads and
-number of requests processed per thread. A proper implementation would use `Arc` and `AtomicUsize`.
+number of requests processed per thread. A proper implementation would use `web::Data` and `AtomicUsize`.
 
 {{< include-example example="request-handlers" file="handlers_arc.rs" section="arc" >}}
 
