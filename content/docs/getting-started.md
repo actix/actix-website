@@ -37,7 +37,7 @@ extracted from a request (see `FromRequest` trait) and returns a type that can b
 
 Notice that some of these handlers have routing information attached directly using the built-in
 macros. These allow you to specify the method and path that the handler should respond to. You will
-see below how to register the other route that does not use a routing macro.
+see below how to register routes that do not use a routing macro.
 
 Next, create an `App` instance and register the request handlers. Use `App::service` for the
 handlers using routing macros and `App::route` for manually routed handlers, declaring the path

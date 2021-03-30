@@ -11,8 +11,8 @@ matching language. If one of the patterns matches the path information associate
 a particular handler object is invoked.
 
 > A request handler is a function that accepts zero or more parameters that can be extracted
-> from a request (ie, [*impl FromRequest*][implfromrequest]) and returns a type that can
-> be converted into an HttpResponse (ie, [*impl Responder*][implresponder]).  More information
+> from a request (i.e., [*impl FromRequest*][implfromrequest]) and returns a type that can
+> be converted into an HttpResponse (i.e., [*impl Responder*][implresponder]).  More information
 > is available in the [handler section][handlersection].
 
 # Resource configuration

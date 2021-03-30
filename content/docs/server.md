@@ -42,7 +42,7 @@ requests. Application state is not shared between the threads, and handlers are 
 their copy of the state with no concurrency concerns.
 
 > Application state does not need to be `Send` or `Sync`, but application
-factory must be `Send` + `Sync`.
+factories must be `Send` + `Sync`.
 
 To share state between worker threads, use an `Arc`. Special care should be taken once sharing and
 synchronization are introduced. In many cases, performance costs are inadvertently introduced as a
