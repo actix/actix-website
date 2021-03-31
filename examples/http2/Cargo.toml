@@ -1,8 +1,0 @@
-[package]
-name = "http2"
-version = "1.0.0"
-edition = "2018"
-
-[dependencies]
-actix-web = { version = "3", features = ["openssl"] }
-openssl = { version = "0.10", features = ["v110"] }

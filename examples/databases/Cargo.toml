@@ -1,7 +1,0 @@
-[package]
-name = "databases"
-version = "1.0.0"
-edition = "2018"
-
-[dependencies]
-actix-web = "3"
