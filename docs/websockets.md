@@ -11,7 +11,8 @@ websocket communications with an http actor.
 
 The following is an example of a simple websocket echo server:
 
-{{< include-example example="websockets" file="main.rs" section="websockets" >}}
+import CodeBlock from "../src/components/code_block.js";
+<CodeBlock example="websockets" file="main.rs" section="websockets" />
 
 > A simple websocket echo server example is available in the [examples directory][examples].
 

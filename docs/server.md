@@ -4,6 +4,8 @@ menu: docs_basics
 weight: 150
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # The HTTP Server
 
 The [**HttpServer**][httpserverstruct] type is responsible for serving HTTP requests.
@@ -16,7 +18,7 @@ called multiple times. To bind ssl socket, [`bind_openssl()`][bindopensslmethod]
 [`bind_rustls()`][bindrusttls] should be used. To run the HTTP server, use the `HttpServer::run()`
 method.
 
-{{< include-example example="server" section="main" >}}
+<CodeBlock example="server" section="main" />
 
 The `run()` method returns an instance of the [`Server`][server] type. Methods of server type
 could be used for managing the HTTP server
@@ -27,7 +29,7 @@ could be used for managing the HTTP server
 
 The following example shows how to start the HTTP server in a separate thread.
 
-{{< include-example example="server" file="signals.rs" section="signals" >}}
+<CodeBlock example="server" file="signals.rs" section="signals" />
 
 ## Multi-threading
 
@@ -35,7 +37,7 @@ The following example shows how to start the HTTP server in a separate thread.
 equal to the number of logical CPUs in the system. This number can be overridden with the
 [`HttpServer::workers()`][workers] method.
 
-{{< include-example example="server" file="workers.rs" section="workers" >}}
+<CodeBlock example="server" file="workers.rs" section="workers" />
 
 Once the workers are created, they each receive a separate *application* instance to handle
 requests. Application state is not shared between the threads, and handlers are free to manipulate
@@ -84,13 +86,15 @@ for this very reason, and they should also be implemented asynchronously where n
 There are two features for the ssl server: `rustls` and `openssl`. The `rustls` feature is for
 `rustls` integration and `openssl` is for `openssl`.
 
+<!-- DEPENDENCY -->
+
 ```toml
 [dependencies]
-actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
+actix-web = { version = "3", features = ["openssl"] }
 openssl = { version = "0.10" }
 ```
 
-{{< include-example example="server" file="ssl.rs" section="ssl" >}}
+<CodeBlock example="server" file="ssl.rs" section="ssl" />
 
 > **Note**: the *HTTP/2.0* protocol requires [tls alpn][tlsalpn].
 > At the moment, only `openssl` has `alpn` support.
@@ -116,7 +120,7 @@ Actix can wait for requests on a keep-alive connection.
 - `None` or `KeepAlive::Disabled` - disable *keep alive*.
 - `KeepAlive::Tcp(75)` - use `SO_KEEPALIVE` socket option.
 
-{{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
+<CodeBlock example="server" file="keep_alive.rs" section="keep-alive" />
 
 If the first option above is selected, then *keep alive* state is calculated based on the
 response's *connection-type*. By default `HttpResponse::connection_type` is not
@@ -126,7 +130,7 @@ defined. In that case *keep alive* is defined by the request's HTTP version.
 
 *Connection type* can be changed with `HttpResponseBuilder::connection_type()` method.
 
-{{< include-example example="server" file="keep_alive_tp.rs" section="example" >}}
+<CodeBlock example="server" file="keep_alive_tp.rs" section="example" />
 
 ## Graceful shutdown
 

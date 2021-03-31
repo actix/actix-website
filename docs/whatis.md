@@ -4,6 +4,8 @@ menu: docs_intro
 weight: 100
 ---
 
+import { rustVersion } from "@site/vars";
+
 # Actix is an Ecosystem of Crates
 
 Long ago, `actix-web` was built on top of `actix`, a powerful and fast actor system.
@@ -26,8 +28,7 @@ in the complete absence of another HTTP server `actix-web` is powerful enough to
 HTTP/2 support as well as TLS (HTTPS). This makes it useful for building small services ready for
 production.
 
-Most importantly: `actix-web` runs on Rust {{< rust-version "actix-web" >}} or later and it works
-with stable releases.
+<>Most importantly: <code>actix-web</code> runs on Rust { rustVersion } or later and it works with stable releases.</>
 
 <!-- TODO -->
 <!-- which is built upon the fantastic [Tokio][tokio] asynchronous I/O system -->

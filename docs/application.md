@@ -4,6 +4,8 @@ menu: docs_basics
 weight: 140
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Writing an Application
 
 `actix-web` provides various primitives to build web servers and applications with Rust. It provides
@@ -21,7 +23,7 @@ prefix should consist of value path segments.
 > For an application with scope `/app`, any request with the paths `/app`, `/app/`, or `/app/test`
 > would match; however, the path `/application` would not match.
 
-{{< include-example example="application" file="app.rs" section="setup" >}}
+<CodeBlock example="application" file="app.rs" section="setup" />
 
 In this example, an application with the `/app` prefix and a `index.html` resource are created. This
 resource is available through the `/app/index.html` url.
@@ -36,11 +38,11 @@ accessible for middleware.
 
 Let's write a simple application and store the application name in the state:
 
-{{< include-example example="application" file="state.rs" section="setup" >}}
+<CodeBlock example="application" file="state.rs" section="setup" />
 
 and pass in the state when initializing the App, and start the application:
 
-{{< include-example example="application" file="state.rs" section="start_app" >}}
+<CodeBlock example="application" file="state.rs" section="start_app" />
 
 Any number of state types could be registered within the application.
 
@@ -57,11 +59,11 @@ create our Data before registering it using [`App::app_data()`][appdata].
 In the following example, we will write an application with mutable, shared state. First, we define
 our state and create our handler:
 
-{{< include-example example="application" file="mutable_state.rs" section="setup_mutable" >}}
+<CodeBlock example="application" file="mutable_state.rs" section="setup_mutable" />
 
 and register the data in an `App`:
 
-{{< include-example example="application" file="mutable_state.rs" section="make_app_mutable" >}}
+<CodeBlock example="application" file="mutable_state.rs" section="make_app_mutable" />
 
 ## Using an Application Scope to Compose Applications
 
@@ -72,7 +74,7 @@ original author intended while still maintaining the same resource names.
 
 For example:
 
-{{< include-example example="application" file="scope.rs" section="scope" >}}
+<CodeBlock example="application" file="scope.rs" section="scope" />
 
 In the above example, the `show_users` route will have an effective route pattern of `/users/show`
 instead of `/show` because the application's scope argument will be prepended to the pattern. The
@@ -90,7 +92,7 @@ docs.
 One of the provided guards is [`Header`][guardheader]. It can be used as a filter based on request
 header information.
 
-{{< include-example example="application" file="vh.rs" section="vh" >}}
+<CodeBlock example="application" file="vh.rs" section="vh" />
 
 # Configure
 
@@ -99,7 +101,7 @@ the `configure` method. This function is useful for moving parts of the configur
 module or even library. For example, some of the resource's configuration could be moved to a
 different module.
 
-{{< include-example example="application" file="config.rs" section="config" >}}
+<CodeBlock example="application" file="config.rs" section="config" />
 
 The result of the above example would be:
 

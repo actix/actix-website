@@ -4,6 +4,8 @@ menu: docs_advanced
 weight: 180
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Errors
 
 Actix-web uses its own [`actix_web::error::Error`][actixerror] type and
@@ -50,14 +52,14 @@ for `ResponseError`.
 Here's an example implementation for `ResponseError`, using the [derive_more] crate
 for declarative error enums.
 
-{{< include-example example="errors" file="main.rs" section="response-error" >}}
+<CodeBlock example="errors" file="main.rs" section="response-error" />
 
 `ResponseError` has a default implementation for `error_response()` that will render a _500_
 (internal server error), and that's what will happen when the `index` handler executes above.
 
 Override `error_response()` to produce more useful results:
 
-{{< include-example example="errors" file="override_error.rs" section="override" >}}
+<CodeBlock example="errors" file="override_error.rs" section="override" />
 
 # Error helpers
 
@@ -65,7 +67,7 @@ Actix-web provides a set of error helper functions that are useful for generatin
 error codes from other errors. Here we convert `MyError`, which doesn't implement the
 `ResponseError` trait, to a _400_ (bad request) using `map_err`:
 
-{{< include-example example="errors" file="helpers.rs" section="helpers" >}}
+<CodeBlock example="errors" file="helpers.rs" section="helpers" />
 
 See the [API documentation for actix-web's `error` module][actixerror] for a full list of available
 error helpers.
@@ -92,7 +94,7 @@ those which are intended to be user-facing, and those which are not.
 An example of the former is that I might use failure to specify a `UserError` enum which
 encapsulates a `ValidationError` to return whenever a user sends bad input:
 
-{{< include-example example="errors" file="recommend_one.rs" section="recommend-one" >}}
+<CodeBlock example="errors" file="recommend_one.rs" section="recommend-one" />
 
 This will behave exactly as intended because the error message defined with `display` is written
 with the explicit intent to be read by a user.
@@ -106,7 +108,7 @@ might be preferable to map the errors to a generic error suitable for user consu
 Here's an example that maps an internal error to a user-facing `InternalError` with a custom
 message:
 
-{{< include-example example="errors" file="recommend_two.rs" section="recommend-two" >}}
+<CodeBlock example="errors" file="recommend_two.rs" section="recommend-two" />
 
 By dividing errors into those which are user facing and those which are not, we can ensure that we
 don't accidentally expose users to errors thrown by application internals which they weren't meant
@@ -121,7 +123,7 @@ env_logger = "0.8"
 log = "0.4"
 ```
 
-{{< include-example example="errors" file="logging.rs" section="logging" >}}
+<CodeBlock example="errors" file="logging.rs" section="logging" />
 
 [actixerror]: https://docs.rs/actix-web/3/actix_web/error/struct.Error.html
 [errorhelpers]: https://docs.rs/actix-web/3/actix_web/trait.ResponseError.html

@@ -1,0 +1,10 @@
+[package]
+name = "server"
+version = "1.0.0"
+workspace = "../"
+edition = "2018"
+
+[dependencies]
+actix-web = { version = "3", features = ["openssl"] }
+futures = "0.3"
+openssl = "0.10"

@@ -1,4 +1,5 @@
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
+const path = require('path');
+
 module.exports = {
   title: 'Actix',
   tagline: 'A powerful, pragmatic, and extremely fast web framework for Rust',

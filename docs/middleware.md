@@ -4,6 +4,8 @@ menu: docs_advanced
 weight: 220
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Middleware
 
 Actix-web's middleware system allows us to add additional behavior to request/response
@@ -27,11 +29,11 @@ or a *future* object.
 
 The following demonstrates creating a simple middleware:
 
-{{< include-example example="middleware" file="main.rs" section="simple" >}}
+<CodeBlock example="middleware" file="main.rs" section="simple" />
 
 Alternatively, for simple use cases, you can use [*wrap_fn*][wrap_fn] to create small, ad-hoc middleware:
 
-{{< include-example example="middleware" file="wrap_fn.rs" section="wrap-fn" >}}
+<CodeBlock example="middleware" file="wrap_fn.rs" section="wrap-fn" />
 
 > Actix-web provides several useful middleware, such as *logging*, *user sessions*,
 > *compress*, etc.
@@ -54,7 +56,7 @@ with `default` method, it uses the default format:
   %a %t "%r" %s %b "%{Referer}i" "%{User-Agent}i" %T
 ```
 
-{{< include-example example="middleware" file="logger.rs" section="logger" >}}
+<CodeBlock example="middleware" file="logger.rs" section="logger" />
 
 The following is an example of the default logging format:
 
@@ -84,7 +86,7 @@ To set default response headers, the `DefaultHeaders` middleware can be used. Th
 *DefaultHeaders* middleware does not set the header if response headers already contain
 a specified header.
 
-{{< include-example example="middleware" file="default_headers.rs" section="default-headers" >}}
+<CodeBlock example="middleware" file="default_headers.rs" section="default-headers" />
 
 ## User sessions
 
@@ -113,7 +115,7 @@ backend implementation, such as a `CookieSession`. To access session data the
 [`Session`][requestsession] extractor must be used. This method returns a
 [*Session*][sessionobj] object, which allows us to get or set session data.
 
-{{< include-example example="middleware" file="user_sessions.rs" section="user-session" >}}
+<CodeBlock example="middleware" file="user_sessions.rs" section="user-session" />
 
 # Error handlers
 
@@ -124,7 +126,7 @@ for a specific status code. You can modify an existing response or create a comp
 one. The error handler can return a response immediately or return a future that resolves
 into a response.
 
-{{< include-example example="middleware" file="errorhandler.rs" section="error-handler" >}}
+<CodeBlock example="middleware" file="errorhandler.rs" section="error-handler" />
 
 [sessionobj]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
 [requestsession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html

@@ -4,6 +4,8 @@ menu: docs_basics
 weight: 160
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Request Handlers
 
 A request handler is an async function that accepts zero or more parameters that can be extracted
@@ -54,14 +56,14 @@ To return a custom type directly from a handler function, the type needs to impl
 
 Let's create a response for a custom type that serializes to an `application/json` response:
 
-{{< include-example example="responder-trait" file="main.rs" section="responder-trait" >}}
+<CodeBlock example="responder-trait" file="main.rs" section="responder-trait" />
 
 ## Streaming response body
 
 Response body can be generated asynchronously. In this case, body must implement
 the stream trait `Stream<Item=Bytes, Error=Error>`, i.e:
 
-{{< include-example example="async-handlers" file="stream.rs" section="stream" >}}
+<CodeBlock example="async-handlers" file="stream.rs" section="stream" />
 
 ## Different return types (Either)
 
@@ -71,7 +73,7 @@ check and return errors, return async responses, or any result that requires two
 For this case, the [Either][either] type can be used.  `Either` allows combining two
 different responder types into a single type.
 
-{{< include-example example="either" file="main.rs" section="either" >}}
+<CodeBlock example="either" file="main.rs" section="either" />
 
 [implfromrequest]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html
 [respondertrait]: https://docs.rs/actix-web/3/actix_web/trait.Responder.html

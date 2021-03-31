@@ -4,6 +4,8 @@ menu: docs_basics
 weight: 170
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Type-safe information extraction
 
 Actix-web provides a facility for type-safe request information access called *extractors*
@@ -12,7 +14,7 @@ Actix-web provides a facility for type-safe request information access called *e
 An extractor can be accessed as an argument to a handler function. Actix-web supports
 up to 12 extractors per handler function. Argument position does not matter.
 
-{{< include-example example="extractors" file="main.rs" section="option-one" >}}
+<CodeBlock example="extractors" file="main.rs" section="option-one" />
 
 # Path
 
@@ -24,24 +26,24 @@ two segments could be deserialized, `user_id` and `friend`. These segments could
 extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure that implements
 the `Deserialize` trait from the *serde* crate.
 
-{{< include-example example="extractors" file="path_one.rs" section="path-one" >}}
+<CodeBlock example="extractors" file="path_one.rs" section="path-one" />
 
 It is also possible to extract path information to a specific type that implements the
 `Deserialize` trait from *serde*. Here is an equivalent example that uses *serde*
 instead of a *tuple* type.
 
-{{< include-example example="extractors" file="path_two.rs" section="path-two" >}}
+<CodeBlock example="extractors" file="path_two.rs" section="path-two" />
 
 It is also possible to `get` or `query` the request for path parameters by name:
 
-{{< include-example example="extractors" file="path_three.rs" section="path-three" >}}
+<CodeBlock example="extractors" file="path_three.rs" section="path-three" />
 
 # Query
 
 The [*Query*][querystruct] type provides extraction functionality for the request's
 query parameters. Underneath it uses *serde_urlencoded* crate.
 
-{{< include-example example="extractors" file="query.rs" section="query" >}}
+<CodeBlock example="extractors" file="query.rs" section="query" />
 
 # Json
 
@@ -49,7 +51,7 @@ query parameters. Underneath it uses *serde_urlencoded* crate.
 typed information from a request's body, the type `T` must implement the `Deserialize`
 trait from *serde*.
 
-{{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
+<CodeBlock example="extractors" file="json_one.rs" section="json-one" />
 
 Some extractors provide a way to configure the extraction process. Json extractor
 [*JsonConfig*][jsonconfig] type for configuration. To configure an extractor, pass its
@@ -59,7 +61,7 @@ well as a custom error handler function.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
 
-{{< include-example example="extractors" file="json_two.rs" section="json-two" >}}
+<CodeBlock example="extractors" file="json_two.rs" section="json-two" />
 
 # Form
 
@@ -69,7 +71,7 @@ the *serde* crate.
 
 [*FormConfig*][formconfig] allows configuring the extraction process.
 
-{{< include-example example="extractors" file="form.rs" section="form" >}}
+<CodeBlock example="extractors" file="form.rs" section="form" />
 
 # Other
 
@@ -97,12 +99,12 @@ it must be implemented.
 
 Here is an example of a handler that stores the number of processed requests:
 
-{{< include-example example="request-handlers" file="main.rs" section="data" >}}
+<CodeBlock example="request-handlers" file="main.rs" section="data" />
 
 Although this handler will work, `self.0` will be different depending on the number of threads and
 number of requests processed per thread. A proper implementation would use `Arc` and `AtomicUsize`.
 
-{{< include-example example="request-handlers" file="handlers_arc.rs" section="arc" >}}
+<CodeBlock example="request-handlers" file="handlers_arc.rs" section="arc" />
 
 > Be careful with synchronization primitives like `Mutex` or `RwLock`. The `actix-web` framework
 > handles requests asynchronously. By blocking thread execution, all concurrent

@@ -1,0 +1,8 @@
+[package]
+name = "powerful-extractors"
+version = "1.0.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "3"
+serde = "1.0"

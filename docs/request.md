@@ -4,6 +4,8 @@ menu: docs_advanced
 weight: 200
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Content Encoding
 
 Actix-web automatically *decompresses* payloads. The following codecs are supported:
@@ -42,14 +44,14 @@ serde_json = "1"
 ```
 If you want to add default value for a field, refer to `serde`'s [documentation](https://serde.rs/attr-default.html).
 
-{{< include-example example="requests" file="main.rs" section="json-request" >}}
+<CodeBlock example="requests" file="main.rs" section="json-request" />
 
 You may also manually load the payload into memory and then deserialize it.
 
 In the following example, we will deserialize a *MyObj* struct. We need to load the request
 body first and then deserialize the json into an object.
 
-{{< include-example example="requests" file="manual.rs" section="json-manual" >}}
+<CodeBlock example="requests" file="manual.rs" section="json-manual" />
 
 > A complete example for both options is available in [examples directory][examples].
 
@@ -79,7 +81,7 @@ The *UrlEncoded* future can resolve into an error in several cases:
 * content-length is greater than 256k
 * payload terminates with error.
 
-{{< include-example example="requests" file="urlencoded.rs" section="urlencoded" >}}
+<CodeBlock example="requests" file="urlencoded.rs" section="urlencoded" />
 
 # Streaming request
 
@@ -88,7 +90,7 @@ body payload.
 
 In the following example, we read and print the request payload chunk by chunk:
 
-{{< include-example example="requests" file="streaming.rs" section="streaming" >}}
+<CodeBlock example="requests" file="streaming.rs" section="streaming" />
 
 [examples]: https://github.com/actix/examples/tree/master/json/json
 [multipartstruct]: https://docs.rs/actix-multipart/0.2/actix_multipart/struct.Multipart.html

@@ -4,6 +4,8 @@ menu: docs_protocols
 weight: 250
 ---
 
+import CodeBlock from '../src/components/code_block.js';
+
 `actix-web` automatically upgrades connections to *HTTP/2* if possible.
 
 # Negotiation
@@ -16,12 +18,15 @@ weight: 250
 `alpn` negotiation requires enabling the feature. When enabled, `HttpServer` provides the
 [bind_openssl][bindopenssl] method.
 
+<!-- DEPENDENCY -->
+
 ```toml
 [dependencies]
-actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
+actix-web = { version = "3", features = ["openssl"] }
 openssl = { version = "0.10", features = ["v110"] }
 ```
-{{< include-example example="http2" file="main.rs" section="main" >}}
+
+<CodeBlock example="http2" file="main.rs" section="main" />
 
 Upgrades to *HTTP/2.0* schema described in [rfc section 3.2][rfcsection32] is not
 supported.  Starting *HTTP/2* with prior knowledge is supported for both clear text
