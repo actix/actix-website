@@ -1,33 +1,40 @@
-# Website
+# Actix Website
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+## Getting Started
 
-## Installation
+Building the website depends on [Docusaurus], so you must have yarn/npm installed. You can run the site locally with:
 
-```console
-yarn install
+```sh
+git clone https://github.com/actix/actix-website.git
+cd actix-website
+
+yarn start OR npm run start
 ```
 
-## Local Development
+Then visit http://localhost:1313.
 
-```console
-yarn start
+## Updating diagrams
+
+Diagrams are located under [/static/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI].
+
+For instance to edit `connection_overview` diagram:
+
+```sh
+cd static/img/diagrams
+vi connection_overview.mmd
+# Compile diagrams:
+mmdc -i connection_overview.mmd -o connection_overview.svg
 ```
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
+# License
 
-## Build
+This site is licensed under either of
 
-```console
-yarn build
-```
+* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+  [http://www.apache.org/licenses/LICENSE-2.0])
+* MIT license ([LICENSE-MIT](LICENSE-MIT) or
+  [http://opensource.org/licenses/MIT])
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+<!-- LINKS -->
 
-## Deployment
-
-```console
-GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+[Hugo]: https://docusaurus.io/
