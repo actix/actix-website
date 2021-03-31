@@ -10,7 +10,7 @@ Actix-web provides a facility for type-safe request information access called *e
 (ie, `impl FromRequest`). By default, actix-web provides several extractor implementations.
 
 An extractor can be accessed as an argument to a handler function. Actix-web supports
-up to 10 extractors per handler function. Argument position does not matter.
+up to 12 extractors per handler function. Argument position does not matter.
 
 {{< include-example example="extractors" file="main.rs" section="option-one" >}}
 
