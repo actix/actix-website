@@ -4,6 +4,8 @@ menu: docs_advanced
 weight: 220
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Middleware
 
 Actix Web's middleware system allows us to add additional behavior to request/response processing. Middleware can hook into an incoming request process, enabling us to modify requests as well as halt request processing to return a response early.
@@ -21,11 +23,11 @@ Middleware is registered for each `App`, `scope`, or `Resource` and executed in 
 
 The following demonstrates creating a simple middleware:
 
-{{< include-example example="middleware" file="main.rs" section="simple" >}}
+<CodeBlock example="middleware" file="main.rs" section="simple" />
 
 Alternatively, for simple use cases, you can use [_wrap_fn_][wrap_fn] to create small, ad-hoc middleware:
 
-{{< include-example example="middleware" file="wrap_fn.rs" section="wrap-fn" >}}
+<CodeBlock example="middleware" file="wrap_fn.rs" section="wrap-fn" />
 
 > Actix Web provides several useful middleware, such as _logging_, _user sessions_, _compress_, etc.
 
@@ -45,7 +47,7 @@ Create `Logger` middleware with the specified `format`. Default `Logger` can be 
   %a %t "%r" %s %b "%{Referer}i" "%{User-Agent}i" %T
 ```
 
-{{< include-example example="middleware" file="logger.rs" section="logger" >}}
+<CodeBlock example="middleware" file="logger.rs" section="logger" />
 
 The following is an example of the default logging format:
 
@@ -73,7 +75,7 @@ INFO:actix_web::middleware::logger: 127.0.0.1:59947 [02/Dec/2017:00:22:40 -0800]
 
 To set default response headers, the `DefaultHeaders` middleware can be used. The _DefaultHeaders_ middleware does not set the header if response headers already contain a specified header.
 
-{{< include-example example="middleware" file="default_headers.rs" section="default-headers" >}}
+<CodeBlock example="middleware" file="default_headers.rs" section="default-headers" />
 
 ## User sessions
 
@@ -91,7 +93,7 @@ The constructors take a key as an argument. This is the private key for cookie s
 
 In general, you create a `SessionStorage` middleware and initialize it with specific backend implementation, such as a `CookieSession`. To access session data the [`Session`][requestsession] extractor must be used. This method returns a [_Session_][sessionobj] object, which allows us to get or set session data.
 
-{{< include-example example="middleware" file="user_sessions.rs" section="user-session" >}}
+<CodeBlock example="middleware" file="user_sessions.rs" section="user-session" />
 
 # Error handlers
 
@@ -99,7 +101,7 @@ In general, you create a `SessionStorage` middleware and initialize it with spec
 
 You can use the `ErrorHandlers::handler()` method to register a custom error handler for a specific status code. You can modify an existing response or create a completly new one. The error handler can return a response immediately or return a future that resolves into a response.
 
-{{< include-example example="middleware" file="errorhandler.rs" section="error-handler" >}}
+<CodeBlock example="middleware" file="errorhandler.rs" section="error-handler" />
 
 [sessionobj]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
 [requestsession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html

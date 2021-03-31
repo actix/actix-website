@@ -4,6 +4,8 @@ menu: docs_basics
 weight: 150
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # The HTTP Server
 
 The [**HttpServer**][httpserverstruct] type is responsible for serving HTTP requests.
@@ -14,13 +16,13 @@ To start the web server it must first be bound to a network socket. Use [`HttpSe
 
 After the `bind` is successful, use [`HttpServer::run()`][httpserver_run] to return a [`Server`][server] instance. The `Server` must be `await`ed or `spawn`ed to start processing requests and will run until it receives a shutdown signal (such as, by default, a `ctrl-c`; [read more here](#graceful-shutdown)).
 
-{{< include-example example="server" section="main" >}}
+<CodeBlock example="server" section="main" />
 
 ## Multi-Threading
 
 `HttpServer` automatically starts a number of HTTP _workers_, by default this number is equal to the number of logical CPUs in the system. This number can be overridden with the [`HttpServer::workers()`][workers] method.
 
-{{< include-example example="server" file="workers.rs" section="workers" >}}
+<CodeBlock example="server" file="workers.rs" section="workers" />
 
 Once the workers are created, they each receive a separate _application_ instance to handle requests. Application state is not shared between the threads, and handlers are free to manipulate their copy of the state with no concurrency concerns.
 
@@ -56,13 +58,15 @@ Actix Web supports two TLS implementations out-of-the-box: `rustls` and `openssl
 
 The `rustls` crate feature is for `rustls` integration and `openssl` is for `openssl` integration.
 
+<!-- DEPENDENCY -->
+
 ```toml
 [dependencies]
-actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
+actix-web = { version = "3", features = ["openssl"] }
 openssl = { version = "0.10" }
 ```
 
-{{< include-example example="server" file="ssl.rs" section="ssl" >}}
+<CodeBlock example="server" file="ssl.rs" section="ssl" />
 
 To create the key.pem and cert.pem use the command. **Fill in your own subject**
 
@@ -87,11 +91,12 @@ Actix Web keeps connections open to wait for subsequent requests.
 - `KeepAlive::Os`: uses OS keep-alive.
 - `None` or `KeepAlive::Disabled`: disables keep-alive.
 
-{{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
+<CodeBlock example="server" file="keep_alive.rs" section="keep-alive" />
 
 If the first option above is selected, then keep-alive is enabled for HTTP/1.1 requests if the response does not explicitly disallow it by, for example, setting the [connection type][httpconnectiontype] to `Close` or `Upgrade`. Force closing a connection can be done with [the `force_close()` method on `HttpResponseBuilder`](https://docs.rs/actix-web/4/actix_web/dev/struct.HttpResponseBuilder.html#method.force_close)
 
 > Keep-alive is **off** for HTTP/1.0 and is **on** for HTTP/1.1 and HTTP/2.0.
+<CodeBlock example="server" file="keep_alive_tp.rs" section="example" />
 
 ## Graceful shutdown
 

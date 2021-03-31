@@ -8,7 +8,8 @@ Actix Web supports WebSockets with the `actix-web-actors` crate. It is possible 
 
 The following is an example of a simple websocket echo server:
 
-{{< include-example example="websockets" file="main.rs" section="websockets" >}}
+import CodeBlock from "../src/components/code_block.js";
+<CodeBlock example="websockets" file="main.rs" section="websockets" />
 
 > A simple websocket echo server example is available in the [examples directory][examples].
 

@@ -4,6 +4,8 @@ menu: docs_basics
 weight: 140
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Writing an Application
 
 `actix-web` provides various primitives to build web servers and applications with Rust. It provides routing, middleware, pre-processing of requests, post-processing of responses, etc.
@@ -14,7 +16,7 @@ An application's [`scope`][scope] acts as a namespace for all routes, i.e. all r
 
 > For an application with scope `/app`, any request with the paths `/app`, `/app/`, or `/app/test` would match; however, the path `/application` would not match.
 
-{{< include-example example="application" file="app.rs" section="setup" >}}
+<CodeBlock example="application" file="app.rs" section="setup" />
 
 In this example, an application with the `/app` prefix and an `index.html` resource is created. This resource is available through the `/app/index.html` url.
 
@@ -26,11 +28,11 @@ Application state is shared with all routes and resources within the same scope.
 
 Let's write a simple application and store the application name in the state:
 
-{{< include-example example="application" file="state.rs" section="setup" >}}
+<CodeBlock example="application" file="state.rs" section="setup" />
 
 Next, pass in the state when initializing the App and start the application:
 
-{{< include-example example="application" file="state.rs" section="start_app" >}}
+<CodeBlock example="application" file="state.rs" section="start_app" />
 
 Any number of state types could be registered within the application.
 
@@ -42,11 +44,11 @@ Internally, [`web::Data`][data] uses `Arc`. So in order to avoid creating two `A
 
 In the following example, we will write an application with mutable, shared state. First, we define our state and create our handler:
 
-{{< include-example example="application" file="mutable_state.rs" section="setup_mutable" >}}
+<CodeBlock example="application" file="mutable_state.rs" section="setup_mutable" />
 
 and register the data in an `App`:
 
-{{< include-example example="application" file="mutable_state.rs" section="make_app_mutable" >}}
+<CodeBlock example="application" file="mutable_state.rs" section="make_app_mutable" />
 
 Key takeaways:
 - State initialized _inside_ the closure passed to `HttpServer::new` is local to the worker thread and may become de-synced if modified.
@@ -58,7 +60,7 @@ The [`web::scope()`][webscope] method allows setting a resource group prefix. Th
 
 For example:
 
-{{< include-example example="application" file="scope.rs" section="scope" >}}
+<CodeBlock example="application" file="scope.rs" section="scope" />
 
 In the above example, the `show_users` route will have an effective route pattern of `/users/show` instead of `/show` because the application's scope argument will be prepended to the pattern. The route will then only match if the URL path is `/users/show`, and when the [`HttpRequest.url_for()`][urlfor] function is called with the route name `show_users`, it will generate a URL with that same path.
 
@@ -68,13 +70,13 @@ You can think of a guard as a simple function that accepts a _request_ object re
 
 One of the provided guards is [`Header`][guardheader]. It can be used as a filter based on request header information.
 
-{{< include-example example="application" file="vh.rs" section="vh" >}}
+<CodeBlock example="application" file="vh.rs" section="vh" />
 
 # Configure
 
 For simplicity and reusability both [`App`][appconfig] and [`web::Scope`][webscopeconfig] provide the `configure` method. This function is useful for moving parts of the configuration to a different module or even library. For example, some of the resource's configuration could be moved to a different module.
 
-{{< include-example example="application" file="config.rs" section="config" >}}
+<CodeBlock example="application" file="config.rs" section="config" />
 
 The result of the above example would be:
 

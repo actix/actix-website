@@ -4,6 +4,8 @@ menu: docs_advanced
 weight: 190
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # URL Dispatch
 
 URL dispatch provides a simple way for mapping URLs to handler code using a simple pattern matching language. If one of the patterns matches the path information associated with a request, a particular handler object is invoked.
@@ -16,11 +18,11 @@ Resource configuration is the act of adding a new resources to an application. A
 
 The [_App::route()_][approute] method provides simple way of registering routes. This method adds a single route to application routing table. This method accepts a _path pattern_, _HTTP method_ and a handler function. `route()` method could be called multiple times for the same path, in that case, multiple routes register for the same resource path.
 
-{{< include-example example="url-dispatch" section="main" >}}
+<CodeBlock example="url-dispatch" section="main" />
 
 While _App::route()_ provides simple way of registering routes, to access complete resource configuration, a different method has to be used. The [_App::service()_][appservice] method adds a single [resource][webresource] to application routing table. This method accepts a _path pattern_, guards, and one or more routes.
 
-{{< include-example example="url-dispatch" file="resource.rs" section="resource" >}}
+<CodeBlock example="url-dispatch" file="resource.rs" section="resource" />
 
 If a resource does not contain any route or does not have any matching routes, it returns _NOT FOUND_ HTTP response.
 
@@ -32,7 +34,7 @@ The application routes incoming requests based on route criteria which are defin
 
 > A _Route_ can contain any number of _guards_ but only one handler.
 
-{{< include-example example="url-dispatch" file="cfg.rs" section="cfg" >}}
+<CodeBlock example="url-dispatch" file="cfg.rs" section="cfg" />
 
 In this example, `HttpResponse::Ok()` is returned for _GET_ requests if the request contains `Content-Type` header, the value of this header is _text/plain_, and path equals to `/path`.
 
@@ -174,7 +176,7 @@ Suppose that you want to organize paths to endpoints used to view "Users". Such 
 
 A scoped layout of these paths would appear as follows
 
-{{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
+<CodeBlock example="url-dispatch" file="scope.rs" section="scope" />
 
 A _scoped_ path can contain variable path segments as resources. Consistent with un-scoped paths.
 
@@ -184,7 +186,7 @@ You can get variable path segments from `HttpRequest::match_info()`. [`Path` ext
 
 All values representing matched path segments are available in [`HttpRequest::match_info`][matchinfo]. Specific values can be retrieved with [`Path::get()`][pathget].
 
-{{< include-example example="url-dispatch" file="minfo.rs" section="minfo" >}}
+<CodeBlock example="url-dispatch" file="minfo.rs" section="minfo" />
 
 For this example for path '/a/1/2/', values v1 and v2 will resolve to "1" and "2".
 
@@ -192,11 +194,11 @@ For this example for path '/a/1/2/', values v1 and v2 will resolve to "1" and "2
 
 Actix provides functionality for type safe path information extraction. [_Path_][pathstruct] extracts information, destination type could be defined in several different forms. Simplest approach is to use `tuple` type. Each element in tuple must correspond to one element from path pattern. i.e. you can match path pattern `/{id}/{username}/` against `Path<(u32, String)>` type, but `Path<(String, String, String)>` type will always fail.
 
-{{< include-example example="url-dispatch" file="path.rs" section="path" >}}
+<CodeBlock example="url-dispatch" file="path.rs" section="path" />
 
 It also possible to extract path pattern information to a struct. In this case, this struct must implement _serde's_ `Deserialize` trait.
 
-{{< include-example example="url-dispatch" file="path2.rs" section="path" >}}
+<CodeBlock example="url-dispatch" file="path2.rs" section="path" />
 
 [_Query_][query] provides similar functionality for request query parameters.
 
@@ -204,7 +206,7 @@ It also possible to extract path pattern information to a struct. In this case, 
 
 Use the [_HttpRequest.url_for()_][urlfor] method to generate URLs based on resource patterns. For example, if you've configured a resource with the name "foo" and the pattern "{a}/{b}/{c}", you might do this:
 
-{{< include-example example="url-dispatch" file="urls.rs" section="url" >}}
+<CodeBlock example="url-dispatch" file="urls.rs" section="url" />
 
 This would return something like the string *http://example.com/test/1/2/3* (at least if the current protocol and hostname implied http://example.com). `url_for()` method returns [_Url object_][urlobj] so you can modify this url (add query parameters, anchor, etc). `url_for()` could be called only for _named_ resources otherwise error get returned.
 
@@ -212,7 +214,7 @@ This would return something like the string *http://example.com/test/1/2/3* (at 
 
 Resources that are valid URLs, can be registered as external resources. They are useful for URL generation purposes only and are never considered for matching at request time.
 
-{{< include-example example="url-dispatch" file="url_ext.rs" section="ext" >}}
+<CodeBlock example="url-dispatch" file="url_ext.rs" section="ext" />
 
 # Path normalization and redirecting to slash-appended routes
 
@@ -223,7 +225,7 @@ By normalizing it means:
 
 The handler returns as soon as it finds a path that resolves correctly. The order of normalization conditions, if all are enabled, is 1) merge, 2) both merge and append and 3) append. If the path resolves with at least one of those conditions, it will redirect to the new path.
 
-{{< include-example example="url-dispatch" file="norm.rs" section="norm" >}}
+<CodeBlock example="url-dispatch" file="norm.rs" section="norm" />
 
 In this example `//resource///` will be redirected to `/resource/`.
 
@@ -231,7 +233,7 @@ In this example, the path normalization handler is registered for all methods, b
 
 It is possible to register path normalization only for _GET_ requests only:
 
-{{< include-example example="url-dispatch" file="norm2.rs" section="norm" >}}
+<CodeBlock example="url-dispatch" file="norm2.rs" section="norm" />
 
 ## Using an Application Prefix to Compose Applications
 
@@ -239,7 +241,7 @@ The `web::scope()` method allows to set a specific application scope. This scope
 
 For example:
 
-{{< include-example example="url-dispatch" file="scope.rs" section="scope" >}}
+<CodeBlock example="url-dispatch" file="scope.rs" section="scope" />
 
 In the above example, the _show_users_ route will have an effective route pattern of _/users/show_ instead of _/show_ because the application's scope will be prepended to the pattern. The route will then only match if the URL path is _/users/show_, and when the `HttpRequest.url_for()` function is called with the route name show_users, it will generate a URL with that same path.
 
@@ -249,7 +251,7 @@ You can think of a guard as a simple function that accepts a _request_ object re
 
 Here is a simple guard that check that a request contains a specific _header_:
 
-{{< include-example example="url-dispatch" file="guard.rs" section="guard" >}}
+<CodeBlock example="url-dispatch" file="guard.rs" section="guard" />
 
 In this example, _index_ handler will be called only if request contains _CONTENT-TYPE_ header.
 
@@ -259,7 +261,7 @@ Guards can not access or modify the request object, but it is possible to store 
 
 You can invert the meaning of any predicate value by wrapping it in a `Not` predicate. For example, if you want to return "METHOD NOT ALLOWED" response for all methods except "GET":
 
-{{< include-example example="url-dispatch" file="guard2.rs" section="guard2" >}}
+<CodeBlock example="url-dispatch" file="guard2.rs" section="guard2" />
 
 The `Any` guard accepts a list of guards and matches if any of the supplied guards match. i.e:
 
@@ -277,7 +279,7 @@ guard::All(guard::Get()).and(guard::Header("content-type", "plain/text"))
 
 If the path pattern can not be found in the routing table or a resource can not find matching route, the default resource is used. The default response is _NOT FOUND_. It is possible to override the _NOT FOUND_ response with `App::default_service()`. This method accepts a _configuration function_ same as normal resource configuration with `App::service()` method.
 
-{{< include-example example="url-dispatch" file="dhandler.rs" section="default" >}}
+<CodeBlock example="url-dispatch" file="dhandler.rs" section="default" />
 
 [handlersection]: ../handlers/
 [approute]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.route

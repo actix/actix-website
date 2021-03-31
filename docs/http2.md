@@ -4,7 +4,9 @@ menu: docs_protocols
 weight: 250
 ---
 
-Actix Web will prefer HTTP/2 connections if the client signals support for it via [TLS ALPN][tlsalpn].
+import CodeBlock from '../src/components/code_block.js';
+
+`actix-web` automatically upgrades connections to *HTTP/2* if possible.
 
 # Negotiation
 
@@ -12,13 +14,15 @@ Actix Web will prefer HTTP/2 connections if the client signals support for it vi
 
 When either of the `rustls` or `openssl` features are enabled, `HttpServer` provides the [bind_rustls][bindrustls] method and [bind_openssl][bindopenssl] methods, respectively.
 
+<!-- DEPENDENCY -->
+
 ```toml
 [dependencies]
-actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
+actix-web = { version = "3", features = ["openssl"] }
 openssl = { version = "0.10", features = ["v110"] }
 ```
 
-{{< include-example example="http2" file="main.rs" section="main" >}}
+<CodeBlock example="http2" file="main.rs" section="main" />
 
 Upgrades to HTTP/2 described in [RFC 7540 §3.2][rfcsection32] are not supported. Starting HTTP/2 with prior knowledge is supported for both cleartext and TLS connections ([RFC 7540 §3.4][rfcsection34]) (when using the lower level `actix-http` service builders).
 

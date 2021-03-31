@@ -4,6 +4,8 @@ menu: docs_advanced
 weight: 215
 ---
 
+import CodeBlock from "../src/components/code_block.js";
+
 # Testing
 
 Every application should be well tested. Actix Web provides tools to perform unit and integration tests.
@@ -12,7 +14,7 @@ Every application should be well tested. Actix Web provides tools to perform uni
 
 For unit testing, actix-web provides a request builder type. [_TestRequest_][testrequest] implements a builder-like pattern. You can generate a `HttpRequest` instance with `to_http_request()` and call your handler with it.
 
-{{< include-example example="testing" file="main.rs" section="unit-tests" >}}
+<CodeBlock example="testing" file="main.rs" section="unit-tests" />
 
 # Integration tests
 
@@ -24,17 +26,17 @@ To create a `Service` for testing, use the `test::init_service` method which acc
 
 > Check the [API documentation][actixdocs] for more information.
 
-{{< include-example example="testing" file="integration_one.rs" section="integration-one" >}}
+<CodeBlock example="testing" file="integration_one.rs" section="integration-one" />
 
 If you need more complex application configuration, testing should be very similar to creating the normal application. For example, you may need to initialize application state. Create an `App` with a `data` method and attach state just like you would from a normal application.
 
-{{< include-example example="testing" file="integration_two.rs" section="integration-two" >}}
+<CodeBlock example="testing" file="integration_two.rs" section="integration-two" />
 
 # Stream response tests
 
 If you need to test stream generation, it would be enough to call `take_body()` and convert a resulting [_ResponseBody_][responsebody] into a future and execute it, for example when testing [_Server Sent Events_][serversentevents].
 
-{{< include-example example="testing" file="stream_response.rs" section="stream-response" >}}
+<CodeBlock example="testing" file="stream_response.rs" section="stream-response" />
 
 [serversentevents]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [responsebody]: https://docs.rs/actix-web/4/actix_web/body/enum.ResponseBody.html
