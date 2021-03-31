@@ -7,7 +7,7 @@ weight: 170
 # Type-safe information extraction
 
 Actix-web provides a facility for type-safe request information access called *extractors*
-(ie, `impl FromRequest`). By default, actix-web provides several extractor implementations.
+(i.e., `impl FromRequest`). By default, actix-web provides several extractor implementations.
 
 An extractor can be accessed as an argument to a handler function. Actix-web supports
 up to 12 extractors per handler function. Argument position does not matter.
@@ -51,10 +51,10 @@ trait from *serde*.
 
 {{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
 
-Some extractors provide a way to configure the extraction process. Json extractor
-[*JsonConfig*][jsonconfig] type for configuration. To configure an extractor, pass its
-configuration object to the resource's `.data()` method. In case of a *Json* extractor
-it returns a *JsonConfig*. You can configure the maximum size of the json payload as
+Some extractors provide a way to configure the extraction process. To configure
+an extractor, pass its configuration object to the resource's `.data()` method.
+In the case of *Json* extractor it returns a [*JsonConfig*][jsonconfig].
+You can configure the maximum size of the JSON payload as
 well as a custom error handler function.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
@@ -100,7 +100,7 @@ Here is an example of a handler that stores the number of processed requests:
 {{< include-example example="request-handlers" file="main.rs" section="data" >}}
 
 Although this handler will work, `self.0` will be different depending on the number of threads and
-number of requests processed per thread. A proper implementation would use `Arc` and `AtomicUsize`.
+number of requests processed per thread. A proper implementation would use `web::Data` and `AtomicUsize`.
 
 {{< include-example example="request-handlers" file="handlers_arc.rs" section="arc" >}}
 

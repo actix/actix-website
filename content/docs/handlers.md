@@ -7,8 +7,8 @@ weight: 160
 # Request Handlers
 
 A request handler is an async function that accepts zero or more parameters that can be extracted
-from a request (ie, [*impl FromRequest*][implfromrequest]) and returns a type that can
-be converted into an HttpResponse (ie, [*impl Responder*][respondertrait]).
+from a request (i.e., [*impl FromRequest*][implfromrequest]) and returns a type that can
+be converted into an HttpResponse (i.e., [*impl Responder*][respondertrait]).
 
 Request handling happens in two stages. First the handler object is called, returning any
 object that implements the [*Responder*][respondertrait] trait. Then, `respond_to()` is
@@ -17,7 +17,7 @@ called on the returned object, converting itself to a `HttpResponse` or `Error`.
 By default actix-web provides `Responder` implementations for some standard types,
 such as `&'static str`, `String`, etc.
 
-> For a complete list of implementations, check [*Responder documentation*][responderimpls].
+> For a complete list of implementations, check the [*Responder documentation*][responderimpls].
 
 Examples of valid handlers:
 
@@ -59,7 +59,7 @@ Let's create a response for a custom type that serializes to an `application/jso
 ## Streaming response body
 
 Response body can be generated asynchronously. In this case, body must implement
-the stream trait `Stream<Item=Bytes, Error=Error>`, i.e:
+the stream trait `Stream<Item=Bytes, Error=Error>`, i.e.:
 
 {{< include-example example="async-handlers" file="stream.rs" section="stream" >}}
 

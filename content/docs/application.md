@@ -23,7 +23,7 @@ prefix should consist of value path segments.
 
 {{< include-example example="application" file="app.rs" section="setup" >}}
 
-In this example, an application with the `/app` prefix and a `index.html` resource are created. This
+In this example, an application with the `/app` prefix and an `index.html` resource is created. This
 resource is available through the `/app/index.html` url.
 
 > For more information, check the [URL Dispatch][usingappprefix] section.
@@ -38,7 +38,7 @@ Let's write a simple application and store the application name in the state:
 
 {{< include-example example="application" file="state.rs" section="setup" >}}
 
-and pass in the state when initializing the App, and start the application:
+Next, pass in the state when initializing the App and start the application:
 
 {{< include-example example="application" file="state.rs" section="start_app" >}}
 
