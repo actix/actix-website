@@ -14,6 +14,7 @@ async fn hello_world() -> impl Responder {
 async fn current_temperature() -> impl Responder {
     web::Json(Measurement { temperature: 42.3 })
 }
+// </flexible-responders>
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -26,4 +27,3 @@ async fn main() -> std::io::Result<()> {
     .run()
     .await
 }
-// </flexible-responders>

@@ -1,6 +1,7 @@
-// <request-routing>
-use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+use actix_web::{web, App, HttpRequest, Responder, get};
 
+// <request-routing>
+#[get("/")]
 async fn index(_req: HttpRequest) -> impl Responder {
     "Hello from the index page."
 }
@@ -10,14 +11,9 @@ async fn hello(path: web::Path<String>) -> impl Responder {
 }
 
 #[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(web::resource("/").to(index))
-            .service(web::resource("/{name}").to(hello))
-    })
-    .bind("127.0.0.1:8080")?
-    .run()
-    .await
+async fn main() {
+    let app = App::new()
+        .service(index)
+        .route("/{name}", web::get().to(hello));
 }
 // </request-routing>
