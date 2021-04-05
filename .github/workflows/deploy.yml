@@ -24,10 +24,9 @@ jobs:
         run: hugo --minify
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: master
-          FOLDER: public
-          REPOSITORY_NAME: actix/actix.github.io
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: master
+          folder: public
+          repository-name: actix/actix.github.io
