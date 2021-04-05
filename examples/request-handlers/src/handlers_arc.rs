@@ -1,29 +1,43 @@
 // <arc>
 use actix_web::{get, web, App, HttpServer, Responder};
+use std::cell::Cell;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 
 #[derive(Clone)]
 struct AppState {
-    count: Arc<AtomicUsize>,
+    local_count: Cell<usize>,
+    global_count: Arc<AtomicUsize>,
 }
 
 #[get("/")]
 async fn show_count(data: web::Data<AppState>) -> impl Responder {
-    format!("count: {}", data.count.load(Ordering::Relaxed))
+    format!(
+        "global_count: {}\nlocal_count: {}",
+        data.global_count.load(Ordering::Relaxed),
+        data.local_count.get()
+    )
 }
 
 #[get("/add")]
 async fn add_one(data: web::Data<AppState>) -> impl Responder {
-    data.count.fetch_add(1, Ordering::Relaxed);
+    data.global_count.fetch_add(1, Ordering::Relaxed);
 
-    format!("count: {}", data.count.load(Ordering::Relaxed))
+    let local_count = data.local_count.get();
+    data.local_count.set(local_count + 1);
+
+    format!(
+        "global_count: {}\nlocal_count: {}",
+        data.global_count.load(Ordering::Relaxed),
+        data.local_count.get()
+    )
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let data = AppState {
-        count: Arc::new(AtomicUsize::new(0)),
+        local_count: Cell::new(0),
+        global_count: Arc::new(AtomicUsize::new(0)),
     };
 
     HttpServer::new(move || {

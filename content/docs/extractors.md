@@ -99,10 +99,14 @@ Here is an example of a handler that stores the number of processed requests:
 
 {{< include-example example="request-handlers" file="main.rs" section="data" >}}
 
-Although this handler will work, `self.0` will be different depending on the number of threads and
-number of requests processed per thread. A proper implementation would use `web::Data` and `AtomicUsize`.
+Although this handler will work, `data.count` will only count the number of requests
+handled *by each thread*. To count the number of total requests across all threads,
+one should use `Arc` and [atomics][atomics].
 
 {{< include-example example="request-handlers" file="handlers_arc.rs" section="arc" >}}
+
+> **Note**, if you want the *entire* state to be shared across all threads, use
+> `web::Data` and `app_data` as described in [Shared Mutable State][shared_mutable_state].
 
 > Be careful with synchronization primitives like `Mutex` or `RwLock`. The `actix-web` framework
 > handles requests asynchronously. By blocking thread execution, all concurrent
@@ -119,3 +123,5 @@ number of requests processed per thread. A proper implementation would use `web:
 [bytesexample]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html#example-4
 [payloadexample]: https://docs.rs/actix-web/3/actix_web/web/struct.Payload.html
 [actix]: https://actix.github.io/actix/actix/
+[atomics]: https://doc.rust-lang.org/std/sync/atomic/
+[shared_mutable_state]: ../application#shared-mutable-state

@@ -5,7 +5,7 @@ use std::cell::Cell;
 
 #[derive(Clone)]
 struct AppState {
-    count: Cell<i32>,
+    count: Cell<usize>,
 }
 
 async fn show_count(data: web::Data<AppState>) -> impl Responder {
