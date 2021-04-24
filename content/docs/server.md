@@ -69,7 +69,7 @@ threads and thus don't block execution:
 
 ```rust
 async fn my_handler() -> impl Responder {
-    tokio::time::delay_for(Duration::from_secs(5)).await; // <-- Ok. Worker thread will handle other requests here
+    tokio::time::sleep(Duration::from_secs(5)).await; // <-- Ok. Worker thread will handle other requests here
     "response"
 }
 ```
