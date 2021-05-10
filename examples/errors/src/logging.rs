@@ -1,7 +1,7 @@
 // <logging>
 use actix_web::{error, get, middleware::Logger, App, HttpServer, Result};
 use derive_more::{Display, Error};
-use log::debug;
+use log::info;
 
 #[derive(Debug, Display, Error)]
 #[display(fmt = "my error: {}", name)]
@@ -15,14 +15,14 @@ impl error::ResponseError for MyError {}
 #[get("/")]
 async fn index() -> Result<&'static str, MyError> {
     let err = MyError { name: "test error" };
-    debug!(target:"my_errors", "{}", err);
+    info!("{}", err);
     Err(err)
 }
 
 #[rustfmt::skip]
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    std::env::set_var("RUST_LOG", "my_errors=debug,actix_web=info");
+    std::env::set_var("RUST_LOG", "info");
     std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
