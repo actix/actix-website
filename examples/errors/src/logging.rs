@@ -15,7 +15,7 @@ impl error::ResponseError for MyError {}
 #[get("/")]
 async fn index() -> Result<&'static str, MyError> {
     let err = MyError { name: "test error" };
-    debug!("{}", err);
+    debug!(target:"my_errors", "{}", err);
     Err(err)
 }
 
