@@ -259,24 +259,6 @@ Specific values can be retrieved with [`Path::get()`][pathget].
 
 For this example for path '/a/1/2/', values v1 and v2 will resolve to "1" and "2".
 
-It is possible to create a `PathBuf` from a tail path parameter. The returned `PathBuf` is
-percent-decoded. If a segment is equal to "..", the previous segment (if
-any) is skipped.
-
-For security purposes, if a segment meets any of the following conditions,
-an `Err` is returned indicating the condition met:
-
-* Decoded segment starts with any of: `.` (except `..`), `*`
-* Decoded segment ends with any of: `:`, `>`, `<`
-* Decoded segment contains any of: `/`
-* On Windows, decoded segment contains any of: '\'
-* Percent-encoding results in invalid UTF8.
-
-As a result of these conditions, a `PathBuf` parsed from request path parameter is
-safe to interpolate within, or use as a suffix of, a path without additional checks.
-
-{{< include-example example="url-dispatch" file="pbuf.rs" section="pbuf" >}}
-
 ## Path information extractor
 
 Actix provides functionality for type safe path information extraction.  [*Path*][pathstruct]
