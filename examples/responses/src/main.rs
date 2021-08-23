@@ -11,7 +11,7 @@ use actix_web::HttpResponse;
 
 async fn index() -> HttpResponse {
     HttpResponse::Ok()
-        .content_type("plain/text")
+        .content_type("text/plain")
         .header("X-Hdr", "sample")
         .body("data")
 }
