@@ -36,7 +36,7 @@ async fn main() -> io::Result<()> {
 
     // Start HTTP server
     HttpServer::new(move || {
-        App::new::data(pool.clone())
+        App::new().data(pool.clone())
             .resource("/{name}", web::get().to(index))
     })
     .bind("127.0.0.1:8080")?
