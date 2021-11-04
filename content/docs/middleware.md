@@ -36,6 +36,8 @@ Alternatively, for simple use cases, you can use [*wrap_fn*][wrap_fn] to create 
 > Actix-web provides several useful middleware, such as *logging*, *user sessions*,
 > *compress*, etc.
 
+**Warning: if you use `wrap()` or `wrap_fn()` multiple times, the last occurrence will be executed first.**
+
 # Logging
 
 Logging is implemented as a middleware.  It is common to register a logging middleware
