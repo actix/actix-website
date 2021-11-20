@@ -1,7 +1,7 @@
 #![allow(dead_code, unused_variables)]
 
 // <wrap-fn>
-use actix_service::Service;
+use actix_web::dev::Service;
 use actix_web::{web, App};
 use futures::future::FutureExt;
 
