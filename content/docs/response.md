@@ -18,6 +18,24 @@ instance multiple times, the builder will panic.
 
 {{< include-example example="responses" file="main.rs" section="builder" >}}
 
+# JSON Response
+
+The `Json` type allows to respond with well-formed JSON data: simply return a value of
+type `Json<T>` where `T` is the type of a structure to serialize into *JSON*.
+The type `T` must implement the `Serialize` trait from *serde*.
+
+For the following example to work, you need to add `serde` to your dependencies in `Cargo.toml`:
+
+```toml
+[dependencies]
+serde = "1"
+```
+
+{{< include-example example="responses" file="json_resp.rs" section="json-resp" >}}
+
+Using the `Json` type this way instead of calling the `.json` method on a `HttpResponse` makes it
+immediately clear that the function returns JSON and not any other type of response.
+
 # Content encoding
 
 Actix-web can automatically *compress* payloads with the [*Compress middleware*][compressmidddleware].
@@ -62,14 +80,6 @@ default `ContentEncoding::Auto` is used, which implies automatic content compres
 negotiation.
 
 {{< include-example example="responses" file="auto.rs" section="auto" >}}
-
-# JSON Response
-
-The `Json` type allows to respond with well-formed JSON data: simply return a value of
-type `Json<T>` where `T` is the type of a structure to serialize into *JSON*.
-The type `T` must implement the `Serialize` trait from *serde*.
-
-{{< include-example example="responses" file="json_resp.rs" section="json-resp" >}}
 
 [responsebuilder]: https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html
 [compressmidddleware]: https://docs.rs/actix-web/3/actix_web/middleware/struct.Compress.html
