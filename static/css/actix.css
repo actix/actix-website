@@ -689,3 +689,71 @@ h5:hover a {
   margin-right: auto;
   margin-top: 1rem;
 }
+
+
+
+
+@media (prefers-color-scheme: dark) {
+  html body {
+  background: #111;
+  color:white;
+}
+
+div.actix-showcase {
+  background-color: #333;
+}
+
+a.nav-link,li.active * {
+  color:cornflowerblue !important;
+}
+a:hover{
+    color: cornflowerblue;
+    opacity: 0.8;
+
+}
+pre,p code {
+  background: #222;
+  color:white;
+}
+
+a.navbar-brand img {
+  filter:invert(1) brightness(2)
+}
+
+
+
+li.active  {
+  background: #222 !important;
+}
+
+/* 
+you can strip out these by just choosing another code theme that is dark mode compatible
+*/
+span.s {
+  color: green !important;
+}
+
+span.k,span.kd {
+  color:violet !important;
+} 
+
+span.sd,span.cp {
+  color: #888 !important;
+}
+
+span.kt,span.mi {
+  color:red !important;
+}
+
+span.nf{
+  color:dodgerblue !important;
+}
+
+span.nc,span.nb {
+  color:gold !important;
+}
+
+
+}
+
+
