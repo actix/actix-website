@@ -4,22 +4,6 @@ menu: docs_advanced
 weight: 200
 ---
 
-# Content Encoding
-
-Actix-web automatically *decompresses* payloads. The following codecs are supported:
-
-* Brotli
-* Chunked
-* Compress
-* Gzip
-* Deflate
-* Identity
-* Trailers
-* EncodingExt
-
-If request headers contain a `Content-Encoding` header, the request payload is decompressed
-according to the header value. Multiple codecs are not supported, i.e: `Content-Encoding: br, gzip`.
-
 # JSON Request
 
 There are several options for json body deserialization.
@@ -52,6 +36,18 @@ body first and then deserialize the json into an object.
 {{< include-example example="requests" file="manual.rs" section="json-manual" >}}
 
 > A complete example for both options is available in [examples directory][examples].
+
+# Content Encoding
+
+Actix-web automatically *decompresses* payloads. The following codecs are supported:
+
+* Brotli
+* Gzip
+* Deflate
+* Zstd
+
+If request headers contain a `Content-Encoding` header, the request payload is decompressed
+according to the header value. Multiple codecs are not supported, i.e: `Content-Encoding: br, gzip`.
 
 # Chunked transfer encoding
 
