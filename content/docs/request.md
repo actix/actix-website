@@ -42,13 +42,9 @@ body first and then deserialize the json into an object.
 Actix-web automatically *decompresses* payloads. The following codecs are supported:
 
 * Brotli
-* Chunked
-* Compress
 * Gzip
 * Deflate
-* Identity
-* Trailers
-* EncodingExt
+* Zstd
 
 If request headers contain a `Content-Encoding` header, the request payload is decompressed
 according to the header value. Multiple codecs are not supported, i.e: `Content-Encoding: br, gzip`.
