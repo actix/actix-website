@@ -1,5 +1,5 @@
 // <json-resp>
-use actix_web::{get, web, Result};
+use actix_web::{get, web, Responder, Result};
 use serde::Serialize;
 
 #[derive(Serialize)]
@@ -8,7 +8,7 @@ struct MyObj {
 }
 
 #[get("/a/{name}")]
-async fn index(name: web::Path<String>) -> Result<web::Json<MyObj>> {
+async fn index(name: web::Path<String>) -> Result<impl Responder> {
     let obj = MyObj {
         name: name.to_string(),
     };
