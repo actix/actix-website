@@ -753,6 +753,9 @@ span.nc,span.nb {
   color:gold !important;
 }
 
+.navbar-toggler-icon {
+  filter: invert(100%);
+}
 
 }
 
