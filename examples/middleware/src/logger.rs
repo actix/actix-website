@@ -6,7 +6,7 @@ use env_logger::Env;
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
-    env_logger::from_env(Env::default().default_filter_or("info")).init();
+    env_logger::init_from_env(Env::default().default_filter_or("info"));
 
     HttpServer::new(|| {
         App::new()
