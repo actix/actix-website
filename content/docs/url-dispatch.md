@@ -270,7 +270,7 @@ path pattern. i.e. you can match path pattern `/{id}/{username}/` against
 {{< include-example example="url-dispatch" file="path.rs" section="path" >}}
 
 It also possible to extract path pattern information to a struct. In this case,
-this struct must implement *serde's *`Deserialize` trait.
+this struct must implement *serde's* `Deserialize` trait.
 
 {{< include-example example="url-dispatch" file="path2.rs" section="path" >}}
 
