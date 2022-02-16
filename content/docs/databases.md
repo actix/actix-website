@@ -8,9 +8,9 @@ weight: 1010
 
 We have several example projects showing use of async database adapters:
 
-- SQLx: https://github.com/actix/examples/tree/master/database_interactions/sqlx_todo
 - Postgres: https://github.com/actix/examples/tree/master/database_interactions/pg
 - SQLite: https://github.com/actix/examples/tree/master/database_interactions/basic
+- MongoDB: https://github.com/actix/examples/tree/master/database_interactions/mongodb
 
 # Diesel
 
