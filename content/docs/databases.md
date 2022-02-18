@@ -41,7 +41,7 @@ necessary if your return error type implements [`ResponseError`][response-error]
 {{< include-example example="databases" file="main.rs" section="index" >}}
 
 That's it! See the full example here:
-https://github.com/actix/examples/tree/master/database_interactions/diesel
+https://github.com/actix/examples/tree/master/databases/diesel
 
 [web-block]: https://docs.rs/actix-web/3/actix_web/web/fn.block.html
 [response-error]: https://docs.rs/actix-web/3/actix_web/trait.ResponseError.html
