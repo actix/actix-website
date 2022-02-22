@@ -21,7 +21,8 @@ async fn main() -> std::io::Result<()> {
             .limit(4096)
             .error_handler(|err, _req| {
                 // create custom error response
-                error::InternalError::from_response(err, HttpResponse::Conflict().finish()).into()
+                error::InternalError::from_response(err, HttpResponse::Conflict().finish())
+                    .into()
             });
 
         App::new().service(
@@ -31,7 +32,7 @@ async fn main() -> std::io::Result<()> {
                 .route(web::post().to(index)),
         )
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

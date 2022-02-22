@@ -29,11 +29,11 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(move || {
         App::new()
-            .data(data.clone())
+            .app_data(web::Data::new(data.clone()))
             .route("/", web::to(show_count))
             .route("/add", web::to(add_one))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

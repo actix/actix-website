@@ -1,3 +1,2 @@
-max_width = 79
+max_width = 96
 reorder_imports = true
-fn_args_density = "Compressed"

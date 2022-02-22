@@ -16,7 +16,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::NormalizePath::default())
             .route("/resource/", web::to(index))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

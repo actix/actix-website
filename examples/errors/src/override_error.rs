@@ -1,6 +1,8 @@
 // <override>
 use actix_web::{
-    dev::HttpResponseBuilder, error, get, http::header, http::StatusCode, App, HttpResponse,
+    error, get,
+    http::{header::ContentType, StatusCode},
+    App, HttpResponse,
 };
 use derive_more::{Display, Error};
 
@@ -18,8 +20,8 @@ enum MyError {
 
 impl error::ResponseError for MyError {
     fn error_response(&self) -> HttpResponse {
-        HttpResponseBuilder::new(self.status_code())
-            .set_header(header::CONTENT_TYPE, "text/html; charset=utf-8")
+        HttpResponse::build(self.status_code())
+            .insert_header(ContentType::html())
             .body(self.to_string())
     }
 
@@ -53,7 +55,7 @@ async fn main() -> std::io::Result<()> {
     use actix_web::HttpServer;
 
     HttpServer::new(|| App::new().service(index).service(error2).service(error3))
-        .bind("127.0.0.1:8080")?
+        .bind(("127.0.0.1", 8080))?
         .run()
         .await
 }

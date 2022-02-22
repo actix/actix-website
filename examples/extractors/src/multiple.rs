@@ -8,10 +8,8 @@ struct Info {
 }
 
 #[get("/users/{user_id}/{friend}")] // <- define path parameters
-async fn index(
-    web::Path((user_id, friend)): web::Path<(u32, String)>,
-    query: web::Query<Info>,
-) -> String {
+async fn index(path: web::Path<(u32, String)>, query: web::Query<Info>) -> String {
+    let (user_id, friend) = path.into_inner();
     format!(
         "Welcome {}, friend {}, user_id {}!",
         query.username, friend, user_id
@@ -23,7 +21,7 @@ async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer};
 
     HttpServer::new(|| App::new().service(index))
-        .bind("127.0.0.1:8080")?
+        .bind(("127.0.0.1", 8080))?
         .run()
         .await
 }

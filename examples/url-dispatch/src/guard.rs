@@ -1,11 +1,16 @@
 // <guard>
-use actix_web::{dev::RequestHead, guard::Guard, http, HttpResponse};
+use actix_web::{
+    guard::{Guard, GuardContext},
+    http, HttpResponse,
+};
 
 struct ContentTypeHeader;
 
 impl Guard for ContentTypeHeader {
-    fn check(&self, req: &RequestHead) -> bool {
-        req.headers().contains_key(http::header::CONTENT_TYPE)
+    fn check(&self, req: &GuardContext) -> bool {
+        req.head()
+            .headers()
+            .contains_key(http::header::CONTENT_TYPE)
     }
 }
 
@@ -16,12 +21,10 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().route(
             "/",
-            web::route()
-                .guard(ContentTypeHeader)
-                .to(|| HttpResponse::Ok()),
+            web::route().guard(ContentTypeHeader).to(HttpResponse::Ok),
         )
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

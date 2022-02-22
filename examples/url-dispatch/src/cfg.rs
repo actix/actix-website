@@ -12,12 +12,12 @@ App::new().service(
         web::route()
             .guard(guard::Get())
             .guard(guard::Header("content-type", "text/plain"))
-            .to(|| HttpResponse::Ok()),
+            .to(HttpResponse::Ok),
     ),
 )
 // </cfg>
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

@@ -1,13 +1,13 @@
 // <identity>
 use actix_web::{
-    dev::BodyEncoding, get, http::ContentEncoding, middleware, App, HttpResponse, HttpServer,
+    get, http::header::ContentEncoding, middleware, App, HttpResponse, HttpServer,
 };
 
 #[get("/")]
 async fn index() -> HttpResponse {
     HttpResponse::Ok()
         // v- disable compression
-        .encoding(ContentEncoding::Identity)
+        .insert_header(ContentEncoding::Identity)
         .body("data")
 }
 
@@ -18,7 +18,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Compress::default())
             .service(index)
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

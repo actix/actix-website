@@ -19,12 +19,12 @@ async fn index(data: web::Data<AppState>) -> String {
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .data(AppState {
+            .app_data(web::Data::new(AppState {
                 app_name: String::from("Actix-web"),
-            })
+            }))
             .service(index)
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

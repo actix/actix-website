@@ -39,7 +39,7 @@ async fn main() -> io::Result<()> {
         App::new().data(pool.clone())
             .resource("/{name}", web::get().to(index))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

@@ -7,9 +7,9 @@ use actix_web::{web, App, Error, HttpResponse, HttpServer};
 async fn index(session: Session) -> Result<HttpResponse, Error> {
     // access session data
     if let Some(count) = session.get::<i32>("counter")? {
-        session.set("counter", count + 1)?;
+        session.insert("counter", count + 1)?;
     } else {
-        session.set("counter", 1)?;
+        session.insert("counter", 1)?;
     }
 
     Ok(HttpResponse::Ok().body(format!(
@@ -28,7 +28,7 @@ async fn main() -> std::io::Result<()> {
             )
             .service(web::resource("/").to(index))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

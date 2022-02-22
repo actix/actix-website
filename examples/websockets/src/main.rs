@@ -12,11 +12,7 @@ impl Actor for MyWs {
 
 /// Handler for ws::Message message
 impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWs {
-    fn handle(
-        &mut self,
-        msg: Result<ws::Message, ws::ProtocolError>,
-        ctx: &mut Self::Context,
-    ) {
+    fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
         match msg {
             Ok(ws::Message::Ping(msg)) => ctx.pong(&msg),
             Ok(ws::Message::Text(text)) => ctx.text(text),
@@ -35,7 +31,7 @@ async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, E
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().route("/ws/", web::get().to(index)))
-        .bind("127.0.0.1:8080")?
+        .bind(("127.0.0.1", 8080))?
         .run()
         .await
 }
