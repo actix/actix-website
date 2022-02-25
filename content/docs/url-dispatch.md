@@ -130,8 +130,8 @@ foo/{baz}/{bar}
 The above pattern will match these URLs, generating the following match information:
 
 ```
-foo/1/2        -> Params {'baz':'1', 'bar':'2'}
-foo/abc/def    -> Params {'baz':'abc', 'bar':'def'}
+foo/1/2        -> Params {'baz': '1', 'bar': '2'}
+foo/abc/def    -> Params {'baz': 'abc', 'bar': 'def'}
 ```
 
 It will not match the following patterns however:
@@ -150,7 +150,7 @@ foo/{name}.html
 ```
 
 The literal path */foo/biz.html* will match the above route pattern, and the match result
-will be `Params{'name': 'biz'}`. However, the literal path */foo/biz* will not match,
+will be `Params {'name': 'biz'}`. However, the literal path */foo/biz* will not match,
 because it does not contain a literal *.html* at the end of the segment represented
 by *{name}.html* (it only contains biz, not biz.html).
 
@@ -161,7 +161,7 @@ foo/{name}.{ext}
 ```
 
 The literal path */foo/biz.html* will match the above route pattern, and the match
-result will be *Params{'name': 'biz', 'ext': 'html'}*. This occurs because there is a
+result will be *Params {'name': 'biz', 'ext': 'html'}*. This occurs because there is a
 literal part of *.* (period) between the two replacement markers *{name}* and *{ext}*.
 
 Replacement markers can optionally specify a regular expression which will be used to decide
@@ -198,7 +198,7 @@ http://example.com/foo/La%20Pe%C3%B1a
 The match dictionary will look like so (the value is URL-decoded):
 
 ```
-Params{'bar': 'La Pe\xf1a'}
+Params {'bar': 'La Pe\xf1a'}
 ```
 
 Literal strings in the path segment should represent the decoded value of the
@@ -224,8 +224,8 @@ foo/{bar}/{tail:.*}
 The above pattern will match these URLs, generating the following match information:
 
 ```
-foo/1/2/           -> Params{'bar':'1', 'tail': '2/'}
-foo/abc/def/a/b/c  -> Params{'bar':u'abc', 'tail': 'def/a/b/c'}
+foo/1/2/           -> Params {'bar': '1', 'tail': '2/'}
+foo/abc/def/a/b/c  -> Params {'bar': 'abc', 'tail': 'def/a/b/c'}
 ```
 
 # Scoping Routes
