@@ -5,3 +5,4 @@ Cargo.lock
 build/
 target/
 .DS_Store
+/.hugo_build.lock

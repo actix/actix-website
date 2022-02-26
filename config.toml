@@ -1,6 +1,6 @@
 title = "actix"
 canonifyURLs = true
-googleAnalytics = "UA-110322332-1"
+googleAnalytics = ""
 pygmentsUseClasses = true
 pygmentsCodeFences = true
 defaultContentLanguageInSubdir = false
@@ -16,7 +16,7 @@ weight = 1
 
 [params]
 actixVersion = "0.10"
-actixWebVersion = "3"
-actixRtVersion = "1.1"
-actixWebMinRustVersion = "1.42"
-actixMinRustVersion = "1.42"
+actixWebVersion = "4"
+actixRtVersion = "2"
+actixWebMinRustVersion = "1.54"
+actixMinRustVersion = "1.54"
