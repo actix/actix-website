@@ -10,21 +10,17 @@ The [**HttpServer**][httpserverstruct] type is responsible for serving HTTP requ
 
 `HttpServer` accepts an application factory as a parameter, and the application factory must have `Send` + `Sync` boundaries. More about that in the _multi-threading_ section.
 
-To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be called multiple times. To bind ssl socket, [`bind_openssl()`][bindopensslmethod] or [`bind_rustls()`][bindrusttls] should be used. To run the HTTP server, use the `HttpServer::run()` method.
+To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be called multiple times. To bind ssl socket, [`bind_rustls()`][bindrusttls] or [`bind_openssl()`][bindopensslmethod] should be used. To run the HTTP server, use the `HttpServer::run()` method.
 
 {{< include-example example="server" section="main" >}}
 
-The `run()` method returns an instance of the [`Server`][server] type. Methods of server type could be used for managing the HTTP server
-
-- `pause()` - Pause accepting incoming connections
-- `resume()` - Resume accepting incoming connections
-- `stop()` - Stop incoming connection processing, stop all workers and exit
+The `run()` method returns an instance of the [`Server`][server] type. A `Server` must be `await`ed or `spawn`ed to start processing requests. It will complete when it receives a shutdown signal; Actix Web listens for system process signals by default.
 
 The following example shows how to start the HTTP server in a separate thread.
 
 {{< include-example example="server" file="signals.rs" section="signals" >}}
 
-## Multi-threading
+## Multi-Threading
 
 `HttpServer` automatically starts a number of HTTP _workers_, by default this number is equal to the number of logical CPUs in the system. This number can be overridden with the [`HttpServer::workers()`][workers] method.
 
