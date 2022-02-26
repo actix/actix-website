@@ -1,19 +1,37 @@
+use actix_web::{
+    body::MessageBody,
+    dev::{ServiceFactory, ServiceRequest, ServiceResponse},
+    App, Error,
+};
+
+#[allow(dead_code)]
+fn app() -> App<
+    impl ServiceFactory<
+        ServiceRequest,
+        Response = ServiceResponse<impl MessageBody>,
+        Config = (),
+        InitError = (),
+        Error = Error,
+    >,
+> {
+    App::new()
+}
+
 // <keep-alive>
-use actix_web::{web, App, HttpResponse, HttpServer};
+use actix_web::{http::KeepAlive, HttpServer};
+use std::time::Duration;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let one = HttpServer::new(|| App::new().route("/", web::get().to(HttpResponse::Ok)))
-        .keep_alive(75); // <- Set keep-alive to 75 seconds
+    // Set keep-alive to 75 seconds
+    let _one = HttpServer::new(app).keep_alive(Duration::from_secs(75));
 
-    // let _two = HttpServer::new(|| {
-    //     App::new().route("/", web::get().to(|| HttpResponse::Ok()))
-    // })
-    // .keep_alive(); // <- Use `SO_KEEPALIVE` socket option.
+    // Use OS's keep-alive (usually quite long)
+    let _two = HttpServer::new(app).keep_alive(KeepAlive::Os);
 
-    let _three = HttpServer::new(|| App::new().route("/", web::get().to(HttpResponse::Ok)))
-        .keep_alive(None); // <- Disable keep-alive
+    // Disable keep-alive
+    let _three = HttpServer::new(app).keep_alive(None);
 
-    one.bind(("127.0.0.1", 8080))?.run().await
+    Ok(())
 }
 // </keep-alive>

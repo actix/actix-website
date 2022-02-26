@@ -16,7 +16,7 @@ To bind to a specific socket address, [`bind()`][bindmethod] must be used, and i
 
 The `run()` method returns an instance of the [`Server`][server] type. A `Server` must be `await`ed or `spawn`ed to start processing requests. It will complete when it receives a shutdown signal; Actix Web listens for system process signals by default.
 
-The following example shows how to start the HTTP server in a separate thread.
+The following example shows how to start the HTTP server in a Tokio task with manual commands and shutdown using a server handle.
 
 {{< include-example example="server" file="signals.rs" section="signals" >}}
 
@@ -54,7 +54,7 @@ async fn my_handler() -> impl Responder {
 
 The same limitation applies to extractors as well. When a handler function receives an argument which implements `FromRequest`, and that implementation blocks the current thread, the worker thread will block when running the handler. Special attention must be given when implementing extractors for this very reason, and they should also be implemented asynchronously where needed.
 
-## SSL
+## TLS / HTTPS
 
 There are two features for the ssl server: `rustls` and `openssl`. The `rustls` feature is for `rustls` integration and `openssl` is for `openssl`.
 
@@ -65,8 +65,6 @@ openssl = { version = "0.10" }
 ```
 
 {{< include-example example="server" file="ssl.rs" section="ssl" >}}
-
-> **Note**: the _HTTP/2.0_ protocol requires [tls alpn][tlsalpn]. At the moment, only `openssl` has `alpn` support. For a full example, check out [examples/openssl][exampleopenssl].
 
 To create the key.pem and cert.pem use the command. **Fill in your own subject**
 
@@ -83,19 +81,19 @@ $ openssl rsa -in key.pem -out nopass.pem
 
 ## Keep-Alive
 
-Actix can wait for requests on a keep-alive connection.
+Actix Web keeps connections open to wait for subsequent requests.
 
 > _keep alive_ connection behavior is defined by server settings.
 
-- `75`, `Some(75)`, `KeepAlive::Timeout(75)` - enable 75 second _keep alive_ timer.
-- `None` or `KeepAlive::Disabled` - disable _keep alive_.
-- `KeepAlive::Tcp(75)` - use `SO_KEEPALIVE` socket option.
+- `Duration::from_secs(75)` or `KeepAlive::Timeout(75)`: enables 75 second keep-alive timer.
+- `KeepAlive::Os`: uses OS keep-alive.
+- `None` or `KeepAlive::Disabled`: disables keep-alive.
 
 {{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
 
-If the first option above is selected, then _keep alive_ state is calculated based on the response's _connection-type_. By default `HttpResponse::connection_type` is not defined. In that case _keep alive_ is defined by the request's HTTP version.
+If the first option above is selected, then _keep alive_ state is calculated based on the response's _connection-type_. By default `HttpResponse::connection_type` is not defined. In that case -keep-alive is defined by the request's HTTP version.
 
-> _keep alive_ is **off** for _HTTP/1.0_ and is **on** for _HTTP/1.1_ and _HTTP/2.0_.
+> Keep-alive is **off** for HTTP/1.0 and is **on** for HTTP/1.1 and HTTP/2.0.
 
 _Connection type_ can be changed with `HttpResponseBuilder::connection_type()` method.
 
@@ -105,7 +103,7 @@ _Connection type_ can be changed with `HttpResponseBuilder::connection_type()` m
 
 `HttpServer` supports graceful shutdown. After receiving a stop signal, workers have a specific amount of time to finish serving requests. Any workers still alive after the timeout are force-dropped. By default the shutdown timeout is set to 30 seconds. You can change this parameter with the [`HttpServer::shutdown_timeout()`][shutdowntimeout] method.
 
-`HttpServer` handles several OS signals. _CTRL-C_ is available on all OSs, other signals are available on unix systems.
+`HttpServer` handles several OS signals. _CTRL-C_ is available on all OSes, other signals are available on unix systems.
 
 - _SIGINT_ - Force shutdown workers
 - _SIGTERM_ - Graceful shutdown workers

@@ -1,31 +1,34 @@
 // <signals>
-use actix_web::{rt::System, web, App, HttpResponse, HttpServer};
-use std::sync::mpsc;
-use std::thread;
+use actix_web::{web, App, HttpResponse, HttpServer};
+use std::io;
 
-#[actix_web::main]
-async fn main() {
-    let (tx, rx) = mpsc::channel();
+#[tokio::main]
+async fn main() -> io::Result<()> {
+    let srv = HttpServer::new(|| App::new().route("/", web::get().to(HttpResponse::Ok)))
+        .bind(("127.0.0.1", 8080))?
+        .shutdown_timeout(60) // <- Set shutdown timeout to 60 seconds
+        .run();
 
-    thread::spawn(move || {
-        let sys = System::new("http-server");
+    // obtain handle to server
+    let srv_handle = srv.handle();
 
-        let srv = HttpServer::new(|| App::new().route("/", web::get().to(HttpResponse::Ok)))
-            .bind(("127.0.0.1", 8080))?
-            .shutdown_timeout(60) // <- Set shutdown timeout to 60 seconds
-            .run();
-
-        let _ = tx.send(srv);
-        sys.run()
-    });
-
-    let srv = rx.recv().unwrap();
+    // spawn server as Tokio task to start processing connections
+    tokio::spawn(srv);
 
     // pause accepting new connections
-    srv.pause().await;
+    srv_handle.pause().await;
+
     // resume accepting new connections
-    srv.resume().await;
-    // stop server
-    srv.stop(true).await;
+    srv_handle.resume().await;
+
+    // stop server gracefully
+    srv_handle.stop(true).await;
+
+    Ok(())
 }
 // </signals>
+
+#[allow(dead_code)]
+fn run_main() {
+    let _ = main();
+}
