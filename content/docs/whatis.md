@@ -1,10 +1,10 @@
 ---
-title: What is Actix
+title: What is Actix Web
 menu: docs_intro
 weight: 100
 ---
 
-# Actix is an Ecosystem of Crates
+# Actix Web is part of an Ecosystem of Crates
 
 Long ago, Actix Web was built on top of the `actix` actor framework. Now, Actix Web is largely unrelated to the actor framework and is built using a different system. Though `actix` is still maintained, its usefulness as a general tool is diminishing as the futures and async/await ecosystem matures. At this time, the use of `actix` is only required for WebSocket endpoints.
 
