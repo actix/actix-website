@@ -5,5 +5,4 @@ edition = "2018"
 workspace = "../"
 
 [dependencies]
-actix-web = "4.0.0-rc.3"
-actix-service = "1"
+actix-web = "4"

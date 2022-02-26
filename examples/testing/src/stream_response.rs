@@ -35,11 +35,7 @@ pub fn main() {
 mod tests {
     use super::*;
 
-    use actix_web::{
-        body::{self, MessageBody as _},
-        rt::pin,
-        test, web, App,
-    };
+    use actix_web::{body::MessageBody as _, rt::pin, test, web, App};
     use futures::future;
 
     #[actix_web::test]
