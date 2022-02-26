@@ -7,12 +7,12 @@ pub mod identity_two;
 pub mod json_resp;
 
 // <builder>
-use actix_web::HttpResponse;
+use actix_web::{http::header::ContentType, HttpResponse};
 
 async fn index() -> HttpResponse {
     HttpResponse::Ok()
-        .content_type("text/plain")
-        .header("X-Hdr", "sample")
+        .content_type(ContentType::plaintext())
+        .insert_header(("X-Hdr", "sample"))
         .body("data")
 }
 // </builder>
@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8080")?
+        .bind(("127.0.0.1", 8080))?
         .run()
         .await
 }

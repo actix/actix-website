@@ -20,7 +20,7 @@ async fn index(info: web::Json<Info>) -> Result<String> {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().route("/", web::post().to(index)))
-        .bind("127.0.0.1:8080")?
+        .bind(("127.0.0.1", 8080))?
         .run()
         .await
 }

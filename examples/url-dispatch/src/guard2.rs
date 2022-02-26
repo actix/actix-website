@@ -8,10 +8,10 @@ async fn main() -> std::io::Result<()> {
             "/",
             web::route()
                 .guard(guard::Not(guard::Get()))
-                .to(|| HttpResponse::MethodNotAllowed()),
+                .to(HttpResponse::MethodNotAllowed),
         )
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

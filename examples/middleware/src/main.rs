@@ -5,13 +5,13 @@ pub mod user_sessions;
 pub mod wrap_fn;
 
 // <simple>
-use std::pin::Pin;
-use std::task::{Context, Poll};
+use std::future::{ready, Ready};
 
-use actix_service::{Service, Transform};
-use actix_web::{dev::ServiceRequest, dev::ServiceResponse, Error};
-use futures::future::{ok, Ready};
-use futures::Future;
+use actix_web::{
+    dev::{forward_ready, Service, ServiceRequest, ServiceResponse, Transform},
+    Error,
+};
+use futures_util::future::LocalBoxFuture;
 
 // There are two steps in middleware processing.
 // 1. Middleware initialization, middleware factory gets called with
@@ -19,16 +19,15 @@ use futures::Future;
 // 2. Middleware's call method gets called with normal request.
 pub struct SayHi;
 
-// Middleware factory is `Transform` trait from actix-service crate
+// Middleware factory is `Transform` trait
 // `S` - type of the next service
 // `B` - type of response's body
-impl<S, B> Transform<S> for SayHi
+impl<S, B> Transform<S, ServiceRequest> for SayHi
 where
-    S: Service<Request = ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
+    S: Service<ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
     S::Future: 'static,
     B: 'static,
 {
-    type Request = ServiceRequest;
     type Response = ServiceResponse<B>;
     type Error = Error;
     type InitError = ();
@@ -36,7 +35,7 @@ where
     type Future = Ready<Result<Self::Transform, Self::InitError>>;
 
     fn new_transform(&self, service: S) -> Self::Future {
-        ok(SayHiMiddleware { service })
+        ready(Ok(SayHiMiddleware { service }))
     }
 }
 
@@ -44,22 +43,19 @@ pub struct SayHiMiddleware<S> {
     service: S,
 }
 
-impl<S, B> Service for SayHiMiddleware<S>
+impl<S, B> Service<ServiceRequest> for SayHiMiddleware<S>
 where
-    S: Service<Request = ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
+    S: Service<ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
     S::Future: 'static,
     B: 'static,
 {
-    type Request = ServiceRequest;
     type Response = ServiceResponse<B>;
     type Error = Error;
-    type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>>>>;
+    type Future = LocalBoxFuture<'static, Result<Self::Response, Self::Error>>;
 
-    fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
-        self.service.poll_ready(cx)
-    }
+    forward_ready!(service);
 
-    fn call(&mut self, req: ServiceRequest) -> Self::Future {
+    fn call(&self, req: ServiceRequest) -> Self::Future {
         println!("Hi from start. You requested: {}", req.path());
 
         let fut = self.service.call(req);
@@ -80,13 +76,12 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new().wrap(SayHi).service(
-            web::resource("/")
-                .to(|| async {
-                    "Hello, middleware! Check the console where the server is run."
-                }),
+            web::resource("/").to(|| async {
+                "Hello, middleware! Check the console where the server is run."
+            }),
         )
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

@@ -8,16 +8,16 @@ async fn main() -> std::io::Result<()> {
             .service(
                 web::scope("/")
                     .guard(guard::Header("Host", "www.rust-lang.org"))
-                    .route("", web::to(|| HttpResponse::Ok().body("www"))),
+                    .route("", web::to(|| async { HttpResponse::Ok().body("www") })),
             )
             .service(
                 web::scope("/")
                     .guard(guard::Header("Host", "users.rust-lang.org"))
-                    .route("", web::to(|| HttpResponse::Ok().body("user"))),
+                    .route("", web::to(|| async { HttpResponse::Ok().body("user") })),
             )
-            .route("/", web::to(|| HttpResponse::Ok()))
+            .route("/", web::to(HttpResponse::Ok))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

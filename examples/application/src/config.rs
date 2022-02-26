@@ -7,8 +7,8 @@ use actix_web::{web, App, HttpResponse, HttpServer};
 fn scoped_config(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::resource("/test")
-            .route(web::get().to(|| HttpResponse::Ok().body("test")))
-            .route(web::head().to(|| HttpResponse::MethodNotAllowed())),
+            .route(web::get().to(|| async { HttpResponse::Ok().body("test") }))
+            .route(web::head().to(HttpResponse::MethodNotAllowed)),
     );
 }
 
@@ -16,8 +16,8 @@ fn scoped_config(cfg: &mut web::ServiceConfig) {
 fn config(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::resource("/app")
-            .route(web::get().to(|| HttpResponse::Ok().body("app")))
-            .route(web::head().to(|| HttpResponse::MethodNotAllowed())),
+            .route(web::get().to(|| async { HttpResponse::Ok().body("app") }))
+            .route(web::head().to(HttpResponse::MethodNotAllowed)),
     );
 }
 
@@ -27,9 +27,12 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .configure(config)
             .service(web::scope("/api").configure(scoped_config))
-            .route("/", web::get().to(|| HttpResponse::Ok().body("/")))
+            .route(
+                "/",
+                web::get().to(|| async { HttpResponse::Ok().body("/") }),
+            )
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

@@ -17,16 +17,16 @@ mod tests {
     use super::*;
     use actix_web::{test, web, App};
 
-    #[actix_rt::test]
+    #[actix_web::test]
     async fn test_index_get() {
-        let mut app = test::init_service(
+        let app = test::init_service(
             App::new()
-                .data(AppState { count: 4 })
+                .app_data(web::Data::new(AppState { count: 4 }))
                 .route("/", web::get().to(index)),
         )
         .await;
         let req = test::TestRequest::get().uri("/").to_request();
-        let resp: AppState = test::read_response_json(&mut app, req).await;
+        let resp: AppState = test::call_and_read_body_json(&app, req).await;
 
         assert_eq!(resp.count, 4);
     }

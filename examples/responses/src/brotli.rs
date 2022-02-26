@@ -1,13 +1,9 @@
 // <brotli>
-use actix_web::{
-    dev::BodyEncoding, get, http::ContentEncoding, middleware, App, HttpResponse, HttpServer,
-};
+use actix_web::{get, middleware, App, HttpResponse, HttpServer};
 
 #[get("/")]
 async fn index_br() -> HttpResponse {
-    HttpResponse::Ok()
-        .encoding(ContentEncoding::Br)
-        .body("data")
+    HttpResponse::Ok().body("data")
 }
 
 #[actix_web::main]
@@ -17,7 +13,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Compress::default())
             .service(index_br)
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

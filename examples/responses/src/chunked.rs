@@ -1,3 +1,5 @@
+use std::io;
+
 // <chunked>
 use actix_web::{get, web, App, Error, HttpRequest, HttpResponse, HttpServer};
 use futures::future::ok;
@@ -10,9 +12,10 @@ async fn index(_req: HttpRequest) -> HttpResponse {
 // </chunked>
 
 #[actix_web::main]
-async fn main() {
+async fn main() -> io::Result<()> {
     HttpServer::new(|| App::new().service(index))
-        .bind("127.0.0.1:8080")
+        .bind(("127.0.0.1", 8080))
         .unwrap()
-        .run();
+        .run()
+        .await
 }

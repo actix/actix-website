@@ -1,9 +1,8 @@
 #![allow(dead_code, unused_variables)]
 
 // <wrap-fn>
-use actix_web::dev::Service;
-use actix_web::{web, App};
-use futures::future::FutureExt;
+use actix_web::{dev::Service as _, web, App};
+use futures_util::future::FutureExt;
 
 #[actix_web::main]
 async fn main() {
@@ -17,9 +16,7 @@ async fn main() {
         })
         .route(
             "/index.html",
-            web::get().to(|| async {
-                "Hello, middleware!"
-            }),
+            web::get().to(|| async { "Hello, middleware!" }),
         );
 }
 // </wrap-fn>

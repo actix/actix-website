@@ -1,7 +1,8 @@
 // <recommend-two>
 use actix_web::{
-    dev::HttpResponseBuilder, error, get, http::header, http::StatusCode, App, HttpResponse,
-    HttpServer,
+    error, get,
+    http::{header::ContentType, StatusCode},
+    App, HttpResponse, HttpServer,
 };
 use derive_more::{Display, Error};
 
@@ -13,10 +14,11 @@ enum UserError {
 
 impl error::ResponseError for UserError {
     fn error_response(&self) -> HttpResponse {
-        HttpResponseBuilder::new(self.status_code())
-            .set_header(header::CONTENT_TYPE, "text/html; charset=utf-8")
+        HttpResponse::build(self.status_code())
+            .insert_header(ContentType::html())
             .body(self.to_string())
     }
+
     fn status_code(&self) -> StatusCode {
         match *self {
             UserError::InternalError => StatusCode::INTERNAL_SERVER_ERROR,
@@ -38,7 +40,7 @@ fn do_thing_that_fails() -> Result<(), std::io::Error> {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().service(index))
-        .bind("127.0.0.1:8080")?
+        .bind(("127.0.0.1", 8080))?
         .run()
         .await
 }

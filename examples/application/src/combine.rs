@@ -12,16 +12,16 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .service(
                 web::scope("/app1")
-                    .data(State1)
-                    .route("/", web::to(|| HttpResponse::Ok())),
+                    .app_data(web::Data::new(State1))
+                    .route("/", web::to(HttpResponse::Ok)),
             )
             .service(
                 web::scope("/app2")
-                    .data(State2)
-                    .route("/", web::to(|| HttpResponse::Ok())),
+                    .app_data(web::Data::new(State2))
+                    .route("/", web::to(HttpResponse::Ok)),
             )
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

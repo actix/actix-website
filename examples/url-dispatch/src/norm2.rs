@@ -1,7 +1,7 @@
 use actix_web::HttpResponse;
 
 #[get("/resource/")]
-fn index() -> HttpResponse {
+async fn index() -> HttpResponse {
     HttpResponse::Ok().body("Hello")
 }
 
@@ -16,7 +16,7 @@ async fn main() -> std::io::Result<()> {
             .service(index)
             .default_service(web::route().method(Method::GET))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }
