@@ -2,8 +2,7 @@
 
 ## Getting Started
 
-Building the website depends on [Hugo]. So, first make sure
-that you have it installed. If on macOS and using [Homebrew], run the following:
+Building the website depends on [Hugo]. So, first make sure that you have it installed. If on macOS and using [Homebrew], run the following:
 
 ```sh
 brew update
@@ -36,11 +35,10 @@ mmdc -i connection_overview.mmd -o connection_overview.svg
 
 # License
 
-Pretty murky. Right now a massive clone of the tokio website. Will get this
-figured out as we go along.
+Pretty murky. Right now a massive clone of the tokio website. Will get this figured out as we go along.
 
 <!-- LINKS -->
 
-[Hugo]: https://gohugo.io
-[Homebrew]: https://brew.sh
-[Mermaid CLI]: https://github.com/mermaidjs/mermaid.cli
+[hugo]: https://gohugo.io
+[homebrew]: https://brew.sh
+[mermaid cli]: https://github.com/mermaidjs/mermaid.cli

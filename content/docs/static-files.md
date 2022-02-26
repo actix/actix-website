@@ -6,26 +6,19 @@ weight: 230
 
 # Individual file
 
-It is possible to serve static files with a custom path pattern and `NamedFile`. To
-match a path tail, we can use a `[.*]` regex.
+It is possible to serve static files with a custom path pattern and `NamedFile`. To match a path tail, we can use a `[.*]` regex.
 
 {{< include-example example="static-files" file="main.rs" section="individual-file" >}}
 
 # Directory
 
-To serve files from specific directories and sub-directories, `Files` can be used.
-`Files` must be registered with an `App::service()` method, otherwise
-it will be unable to serve sub-paths.
+To serve files from specific directories and sub-directories, `Files` can be used. `Files` must be registered with an `App::service()` method, otherwise it will be unable to serve sub-paths.
 
 {{< include-example example="static-files" file="directory.rs" section="directory" >}}
 
-By default files listing for sub-directories is disabled. Attempt to load directory
-listing will return *404 Not Found* response.  To enable files listing, use
-[*Files::show_files_listing()*][showfileslisting]
-method.
+By default files listing for sub-directories is disabled. Attempt to load directory listing will return _404 Not Found_ response. To enable files listing, use [_Files::show_files_listing()_][showfileslisting] method.
 
-Instead of showing files listing for directory, it is possible to redirect to a specific
-index file. Use the [*Files::index_file()*][indexfile] method to configure this redirect.
+Instead of showing files listing for directory, it is possible to redirect to a specific index file. Use the [_Files::index_file()_][indexfile] method to configure this redirect.
 
 # Configuration
 
@@ -35,8 +28,7 @@ index file. Use the [*Files::index_file()*][indexfile] method to configure this 
 - `use_etag` - specifies whether `ETag` shall be calculated and included in headers.
 - `use_last_modified` - specifies whether file modified timestamp should be used and added to `Last-Modified` header.
 
-All of the above methods are optional and provided with the best defaults, But it is
-possible to customize any of them.
+All of the above methods are optional and provided with the best defaults, But it is possible to customize any of them.
 
 {{< include-example example="static-files" file="configuration.rs" section="config-one" >}}
 

@@ -8,30 +8,30 @@ weight: 200
 
 There are several options for json body deserialization.
 
-The first option is to use *Json* extractor. First, you define a handler function
-that accepts `Json<T>` as a parameter, then, you use the `.to()` method for registering
-this handler. It is also possible to accept arbitrary valid json object by
-using `serde_json::Value` as a type `T`.
+The first option is to use _Json_ extractor. First, you define a handler function that accepts `Json<T>` as a parameter, then, you use the `.to()` method for registering this handler. It is also possible to accept arbitrary valid json object by using `serde_json::Value` as a type `T`.
 
 First example of json of `JSON Request` depends on `serde`:
+
 ```toml
 [dependencies]
 serde = "1"
-````
-Second example of `JSON Request` depends on `serde` and  `serde_json`:
+```
+
+Second example of `JSON Request` depends on `serde` and `serde_json`:
+
 ```toml
 [dependencies]
 serde = "1"
 serde_json = "1"
 ```
+
 If you want to add default value for a field, refer to `serde`'s [documentation](https://serde.rs/attr-default.html).
 
 {{< include-example example="requests" file="main.rs" section="json-request" >}}
 
 You may also manually load the payload into memory and then deserialize it.
 
-In the following example, we will deserialize a *MyObj* struct. We need to load the request
-body first and then deserialize the json into an object.
+In the following example, we will deserialize a _MyObj_ struct. We need to load the request body first and then deserialize the json into an object.
 
 {{< include-example example="requests" file="manual.rs" section="json-manual" >}}
 
@@ -39,22 +39,18 @@ body first and then deserialize the json into an object.
 
 # Content Encoding
 
-Actix-web automatically *decompresses* payloads. The following codecs are supported:
+Actix-web automatically _decompresses_ payloads. The following codecs are supported:
 
-* Brotli
-* Gzip
-* Deflate
-* Zstd
+- Brotli
+- Gzip
+- Deflate
+- Zstd
 
-If request headers contain a `Content-Encoding` header, the request payload is decompressed
-according to the header value. Multiple codecs are not supported, i.e: `Content-Encoding: br, gzip`.
+If request headers contain a `Content-Encoding` header, the request payload is decompressed according to the header value. Multiple codecs are not supported, i.e: `Content-Encoding: br, gzip`.
 
 # Chunked transfer encoding
 
-Actix automatically decodes *chunked* encoding. The [`web::Payload`][payloadextractor]
-extractor already contains the decoded byte stream. If the request payload is compressed
-with one of the supported compression codecs (br, gzip, deflate), then the byte stream
-is decompressed.
+Actix automatically decodes _chunked_ encoding. The [`web::Payload`][payloadextractor] extractor already contains the decoded byte stream. If the request payload is compressed with one of the supported compression codecs (br, gzip, deflate), then the byte stream is decompressed.
 
 # Multipart body
 
@@ -64,23 +60,20 @@ Actix-web provides multipart stream support with an external crate, [`actix-mult
 
 # Urlencoded body
 
-Actix-web provides support for *application/x-www-form-urlencoded* encoded bodies with
-the [`web::Form`][formencoded] extractor which resolves to the deserialized instance. The
-type of the instance must implement the `Deserialize` trait from *serde*.
+Actix-web provides support for _application/x-www-form-urlencoded_ encoded bodies with the [`web::Form`][formencoded] extractor which resolves to the deserialized instance. The type of the instance must implement the `Deserialize` trait from _serde_.
 
-The *UrlEncoded* future can resolve into an error in several cases:
+The _UrlEncoded_ future can resolve into an error in several cases:
 
-* content type is not `application/x-www-form-urlencoded`
-* transfer encoding is `chunked`.
-* content-length is greater than 256k
-* payload terminates with error.
+- content type is not `application/x-www-form-urlencoded`
+- transfer encoding is `chunked`.
+- content-length is greater than 256k
+- payload terminates with error.
 
 {{< include-example example="requests" file="urlencoded.rs" section="urlencoded" >}}
 
 # Streaming request
 
-*HttpRequest* is a stream of `Bytes` objects. It can be used to read the request
-body payload.
+_HttpRequest_ is a stream of `Bytes` objects. It can be used to read the request body payload.
 
 In the following example, we read and print the request payload chunk by chunk:
 

@@ -6,18 +6,13 @@ weight: 160
 
 # Request Handlers
 
-A request handler is an async function that accepts zero or more parameters that can be extracted
-from a request (i.e., [*impl FromRequest*][implfromrequest]) and returns a type that can
-be converted into an HttpResponse (i.e., [*impl Responder*][respondertrait]).
+A request handler is an async function that accepts zero or more parameters that can be extracted from a request (i.e., [_impl FromRequest_][implfromrequest]) and returns a type that can be converted into an HttpResponse (i.e., [_impl Responder_][respondertrait]).
 
-Request handling happens in two stages. First the handler object is called, returning any
-object that implements the [*Responder*][respondertrait] trait. Then, `respond_to()` is
-called on the returned object, converting itself to a `HttpResponse` or `Error`.
+Request handling happens in two stages. First the handler object is called, returning any object that implements the [_Responder_][respondertrait] trait. Then, `respond_to()` is called on the returned object, converting itself to a `HttpResponse` or `Error`.
 
-By default actix-web provides `Responder` implementations for some standard types,
-such as `&'static str`, `String`, etc.
+By default actix-web provides `Responder` implementations for some standard types, such as `&'static str`, `String`, etc.
 
-> For a complete list of implementations, check the [*Responder documentation*][responderimpls].
+> For a complete list of implementations, check the [_Responder documentation_][responderimpls].
 
 Examples of valid handlers:
 
@@ -33,8 +28,7 @@ async fn index(_req: HttpRequest) -> String {
 }
 ```
 
-You can also change the signature to return `impl Responder` which works well if more
-complex types are involved.
+You can also change the signature to return `impl Responder` which works well if more complex types are involved.
 
 ```rust
 async fn index(_req: HttpRequest) -> impl Responder {
@@ -58,18 +52,15 @@ Let's create a response for a custom type that serializes to an `application/jso
 
 ## Streaming response body
 
-Response body can be generated asynchronously. In this case, body must implement
-the stream trait `Stream<Item=Bytes, Error=Error>`, i.e.:
+Response body can be generated asynchronously. In this case, body must implement the stream trait `Stream<Item=Bytes, Error=Error>`, i.e.:
 
 {{< include-example example="async-handlers" file="stream.rs" section="stream" >}}
 
 ## Different return types (Either)
 
-Sometimes, you need to return different types of responses. For example, you can error
-check and return errors, return async responses, or any result that requires two different types.
+Sometimes, you need to return different types of responses. For example, you can error check and return errors, return async responses, or any result that requires two different types.
 
-For this case, the [Either][either] type can be used.  `Either` allows combining two
-different responder types into a single type.
+For this case, the [Either][either] type can be used. `Either` allows combining two different responder types into a single type.
 
 {{< include-example example="either" file="main.rs" section="either" >}}
 

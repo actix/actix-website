@@ -4,28 +4,27 @@ menu: docs_protocols
 weight: 250
 ---
 
-`actix-web` automatically upgrades connections to *HTTP/2* if possible.
+`actix-web` automatically upgrades connections to _HTTP/2_ if possible.
 
 # Negotiation
 
-*HTTP/2* protocol over TLS without prior knowledge requires [TLS ALPN][tlsalpn].
+_HTTP/2_ protocol over TLS without prior knowledge requires [TLS ALPN][tlsalpn].
 
 <!-- TODO: use rustls example -->
+
 > Currently, only `rust-openssl` has support.
 
-`alpn` negotiation requires enabling the feature. When enabled, `HttpServer` provides the
-[bind_openssl][bindopenssl] method.
+`alpn` negotiation requires enabling the feature. When enabled, `HttpServer` provides the [bind_openssl][bindopenssl] method.
 
 ```toml
 [dependencies]
 actix-web = { version = "{{< actix-version "actix-web" >}}", features = ["openssl"] }
 openssl = { version = "0.10", features = ["v110"] }
 ```
+
 {{< include-example example="http2" file="main.rs" section="main" >}}
 
-Upgrades to *HTTP/2.0* schema described in [rfc section 3.2][rfcsection32] is not
-supported.  Starting *HTTP/2* with prior knowledge is supported for both clear text
-connection and tls connection. [rfc section 3.4][rfcsection34].
+Upgrades to _HTTP/2.0_ schema described in [rfc section 3.2][rfcsection32] is not supported. Starting _HTTP/2_ with prior knowledge is supported for both clear text connection and tls connection. [rfc section 3.4][rfcsection34].
 
 > Check out [examples/tls][examples] for a concrete example.
 
