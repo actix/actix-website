@@ -16,5 +16,5 @@ The following is an example of a simple websocket echo server:
 
 [message]: https://docs.rs/actix-web-actors/2/actix_web_actors/ws/enum.Message.html
 [payload]: https://docs.rs/actix-web/3/actix_web/web/struct.Payload.html
-[examples]: https://github.com/actix/examples/tree/master/websockets/websocket
+[examples]: https://github.com/actix/examples/tree/master/websockets
 [chat]: https://github.com/actix/examples/tree/master/websockets/chat
