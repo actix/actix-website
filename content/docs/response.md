@@ -64,5 +64,5 @@ Also it is possible to set default content encoding on application level, by def
 
 {{< include-example example="responses" file="auto.rs" section="auto" >}}
 
-[responsebuilder]: https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html
-[compressmidddleware]: https://docs.rs/actix-web/3/actix_web/middleware/struct.Compress.html
+[responsebuilder]: https://docs.rs/actix-web/4/actix_web/dev/struct.HttpResponseBuilder.html
+[compressmidddleware]: https://docs.rs/actix-web/4/actix_web/middleware/struct.Compress.html

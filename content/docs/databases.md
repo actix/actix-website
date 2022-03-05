@@ -32,5 +32,5 @@ This example also maps the error to an `HttpResponse` before using the `?` opera
 
 That's it! See the full example here: https://github.com/actix/examples/tree/master/databases/diesel
 
-[web-block]: https://docs.rs/actix-web/3/actix_web/web/fn.block.html
-[response-error]: https://docs.rs/actix-web/3/actix_web/trait.ResponseError.html
+[web-block]: https://docs.rs/actix-web/4/actix_web/web/fn.block.html
+[response-error]: https://docs.rs/actix-web/4/actix_web/trait.ResponseError.html

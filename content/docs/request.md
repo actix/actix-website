@@ -83,7 +83,7 @@ In the following example, we read and print the request payload chunk by chunk:
 [multipartstruct]: https://docs.rs/actix-multipart/0.2/actix_multipart/struct.Multipart.html
 [fieldstruct]: https://docs.rs/actix-multipart/0.2/actix_multipart/struct.Field.html
 [multipartexample]: https://github.com/actix/examples/tree/master/forms/multipart
-[urlencoded]: https://docs.rs/actix-web/3/actix_web/dev/struct.UrlEncoded.html
-[payloadextractor]: https://docs.rs/actix-web/3/actix_web/web/struct.Payload.html
+[urlencoded]: https://docs.rs/actix-web/4/actix_web/dev/struct.UrlEncoded.html
+[payloadextractor]: https://docs.rs/actix-web/4/actix_web/web/struct.Payload.html
 [multipartcrate]: https://crates.io/crates/actix-multipart
-[formencoded]: https://docs.rs/actix-web/3/actix_web/web/struct.Form.html
+[formencoded]: https://docs.rs/actix-web/4/actix_web/web/struct.Form.html

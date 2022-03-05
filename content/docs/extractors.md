@@ -82,15 +82,15 @@ Although this handler will work, `data.count` will only count the number of requ
 
 > Be careful with synchronization primitives like `Mutex` or `RwLock`. The `actix-web` framework handles requests asynchronously. By blocking thread execution, all concurrent request handling processes would block. If you need to share or update some state from multiple threads, consider using the tokio synchronization primitives.
 
-[pathstruct]: https://docs.rs/actix-web/3/actix_web/dev/struct.Path.html
-[querystruct]: https://docs.rs/actix-web/3/actix_web/web/struct.Query.html
-[jsonstruct]: https://docs.rs/actix-web/3/actix_web/web/struct.Json.html
-[jsonconfig]: https://docs.rs/actix-web/3/actix_web/web/struct.JsonConfig.html
-[formconfig]: https://docs.rs/actix-web/3/actix_web/web/struct.FormConfig.html
-[datastruct]: https://docs.rs/actix-web/3/actix_web/web/struct.Data.html
-[stringexample]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html#example-2
-[bytesexample]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html#example-4
-[payloadexample]: https://docs.rs/actix-web/3/actix_web/web/struct.Payload.html
+[pathstruct]: https://docs.rs/actix-web/4/actix_web/dev/struct.Path.html
+[querystruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Query.html
+[jsonstruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Json.html
+[jsonconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.JsonConfig.html
+[formconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.FormConfig.html
+[datastruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Data.html
+[stringexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#example-2
+[bytesexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#example-4
+[payloadexample]: https://docs.rs/actix-web/4/actix_web/web/struct.Payload.html
 [actix]: https://actix.github.io/actix/actix/
 [atomics]: https://doc.rust-lang.org/std/sync/atomic/
 [shared_mutable_state]: ../application#shared-mutable-state

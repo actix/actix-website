@@ -64,7 +64,7 @@ For this case, the [Either][either] type can be used. `Either` allows combining 
 
 {{< include-example example="either" file="main.rs" section="either" >}}
 
-[implfromrequest]: https://docs.rs/actix-web/3/actix_web/trait.FromRequest.html
-[respondertrait]: https://docs.rs/actix-web/3/actix_web/trait.Responder.html
-[responderimpls]: https://docs.rs/actix-web/3/actix_web/trait.Responder.html#foreign-impls
-[either]: https://docs.rs/actix-web/3/actix_web/enum.Either.html
+[implfromrequest]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html
+[respondertrait]: https://docs.rs/actix-web/4/actix_web/trait.Responder.html
+[responderimpls]: https://docs.rs/actix-web/4/actix_web/trait.Responder.html#foreign-impls
+[either]: https://docs.rs/actix-web/4/actix_web/enum.Either.html

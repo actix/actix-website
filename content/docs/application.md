@@ -86,15 +86,15 @@ Each [`ServiceConfig`][serviceconfig] can have its own `data`, `routes`, and `se
 
 [usingappprefix]: /docs/url-dispatch/index.html#using-an-application-prefix-to-compose-applications
 [stateexample]: https://github.com/actix/examples/blob/master/basics/state/src/main.rs
-[guardtrait]: https://docs.rs/actix-web/3/actix_web/guard/trait.Guard.html
-[guardfuncs]: https://docs.rs/actix-web/3/actix_web/guard/index.html#functions
-[guardheader]: https://docs.rs/actix-web/3/actix_web/guard/fn.Header.html
-[data]: https://docs.rs/actix-web/3/actix_web/web/struct.Data.html
-[app]: https://docs.rs/actix-web/3/actix_web/struct.App.html
-[appconfig]: https://docs.rs/actix-web/3/actix_web/struct.App.html#method.configure
-[appdata]: https://docs.rs/actix-web/3/actix_web/struct.App.html#method.app_data
-[scope]: https://docs.rs/actix-web/3/actix_web/struct.Scope.html
-[webscopeconfig]: https://docs.rs/actix-web/3/actix_web/struct.Scope.html#method.configure
-[webscope]: https://docs.rs/actix-web/3/actix_web/web/fn.scope.html
-[urlfor]: https://docs.rs/actix-web/3/actix_web/struct.HttpRequest.html#method.url_for
-[serviceconfig]: https://docs.rs/actix-web/3/actix_web/web/struct.ServiceConfig.html
+[guardtrait]: https://docs.rs/actix-web/4/actix_web/guard/trait.Guard.html
+[guardfuncs]: https://docs.rs/actix-web/4/actix_web/guard/index.html#functions
+[guardheader]: https://docs.rs/actix-web/4/actix_web/guard/fn.Header.html
+[data]: https://docs.rs/actix-web/4/actix_web/web/struct.Data.html
+[app]: https://docs.rs/actix-web/4/actix_web/struct.App.html
+[appconfig]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.configure
+[appdata]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.app_data
+[scope]: https://docs.rs/actix-web/4/actix_web/struct.Scope.html
+[webscopeconfig]: https://docs.rs/actix-web/4/actix_web/struct.Scope.html#method.configure
+[webscope]: https://docs.rs/actix-web/4/actix_web/web/fn.scope.html
+[urlfor]: https://docs.rs/actix-web/4/actix_web/struct.HttpRequest.html#method.url_for
+[serviceconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.ServiceConfig.html

@@ -30,6 +30,6 @@ Upgrades to _HTTP/2.0_ schema described in [rfc section 3.2][rfcsection32] is no
 
 [rfcsection32]: https://http2.github.io/http2-spec/#rfc.section.3.2
 [rfcsection34]: https://http2.github.io/http2-spec/#rfc.section.3.4
-[bindopenssl]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_openssl
+[bindopenssl]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_openssl
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [examples]: https://github.com/actix/examples/tree/master/https-tls/rustls
