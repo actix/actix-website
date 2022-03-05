@@ -91,13 +91,9 @@ Actix Web keeps connections open to wait for subsequent requests.
 
 {{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
 
-If the first option above is selected, then _keep alive_ state is calculated based on the response's _connection-type_. By default `HttpResponse::connection_type` is not defined. In that case -keep-alive is defined by the request's HTTP version.
+If the first option above is selected, then keep-alive is enabled for HTTP/1.1 requests if the response does not explicitly disallow it by, for example, setting the [connection type][httpconnectiontype] to `Close` or `Upgrade`. Force closing a connection can be done with [the `force_close()` method on `HttpResponseBuilder`](https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html#method.force_close)
 
 > Keep-alive is **off** for HTTP/1.0 and is **on** for HTTP/1.1 and HTTP/2.0.
-
-_Connection type_ can be changed with `HttpResponseBuilder::connection_type()` method.
-
-{{< include-example example="server" file="keep_alive_tp.rs" section="example" >}}
 
 ## Graceful shutdown
 
@@ -121,3 +117,4 @@ _Connection type_ can be changed with `HttpResponseBuilder::connection_type()` m
 [exampleopenssl]: https://github.com/actix/examples/tree/master/security/openssl
 [shutdowntimeout]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.shutdown_timeout
 [disablesignals]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.disable_signals
+[httpconnectiontype]: https://docs.rs/actix-web/3/actix_web/http/enum.ConnectionType.html
