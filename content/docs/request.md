@@ -14,7 +14,7 @@ First example of json of `JSON Request` depends on `serde`:
 
 ```toml
 [dependencies]
-serde = "1"
+serde = { version = "1.0", features = ["derive"] }
 ```
 
 Second example of `JSON Request` depends on `serde` and `serde_json`:
