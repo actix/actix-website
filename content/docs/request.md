@@ -17,12 +17,13 @@ First example of json of `JSON Request` depends on `serde`:
 serde = { version = "1.0", features = ["derive"] }
 ```
 
-Second example of `JSON Request` depends on `serde` and `serde_json`:
+Second example of `JSON Request` depends on `serde` and `serde_json` and `futures`:
 
 ```toml
 [dependencies]
-serde = "1"
+serde = { version = "1.0", features = ["derive"] }
 serde_json = "1"
+futures = "0.3"
 ```
 
 If you want to add default value for a field, refer to `serde`'s [documentation](https://serde.rs/attr-default.html).
