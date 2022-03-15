@@ -22,7 +22,7 @@ For the following example to work, you need to add `serde` to your dependencies 
 
 ```toml
 [dependencies]
-serde = "1"
+serde = { version = "1.0", features = ["derive"] }
 ```
 
 {{< include-example example="responses" file="json_resp.rs" section="json-resp" >}}
