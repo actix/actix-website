@@ -2,16 +2,16 @@
 
 ## Getting Started
 
-Building the website depends on [Docusaurus], so you must have yarn/npm installed. You can run the site locally with:
+Building the website depends on [Docusaurus], you must have `npm` or `yarn` installed. You can run the site locally with:
 
 ```sh
 git clone https://github.com/actix/actix-website.git
 cd actix-website
-
-yarn start OR npm run start
+npm install  # or yarn install
+npm start  # or yarn start
 ```
 
-Then visit http://localhost:1313.
+Then visit http://localhost:3000.
 
 ## Updating diagrams
 
@@ -37,4 +37,4 @@ This site is licensed under either of
 
 <!-- LINKS -->
 
-[Hugo]: https://docusaurus.io/
+[Docusaurus]: https://docusaurus.io/
