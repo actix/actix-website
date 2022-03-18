@@ -4,7 +4,7 @@ menu: docs_basics
 weight: 170
 ---
 
-import CodeBlock from "../src/components/code_block.js";
+import CodeBlock from "@site/src/components/code_block.js";
 
 # Type-safe information extraction
 

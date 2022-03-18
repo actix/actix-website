@@ -4,7 +4,7 @@ menu: docs_advanced
 weight: 215
 ---
 
-import CodeBlock from "../src/components/code_block.js";
+import CodeBlock from "@site/src/components/code_block.js";
 
 # Testing
 
