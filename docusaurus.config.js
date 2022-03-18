@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: 'Actix',
-  tagline: 'A powerful, pragmatic, and extremely fast web framework for Rust',
+  tagline: 'Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust',
   url: 'https://actix.rs',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -39,7 +39,6 @@ module.exports = {
       ],
     },
     footer: {
-      style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} The Actix Team`,
     },
     prism: {
@@ -47,6 +46,7 @@ module.exports = {
         defaultLanguage: 'rust'
     }
   },
+  plugins: ["docusaurus-plugin-sass"],
   presets: [
     [
       '@docusaurus/preset-classic',
