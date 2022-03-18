@@ -33,13 +33,13 @@ Alternatively, for simple use cases, you can use [_wrap_fn_][wrap_fn] to create 
 
 **Warning: if you use `wrap()` or `wrap_fn()` multiple times, the last occurrence will be executed first.**
 
-# Logging
+## Logging
 
 Logging is implemented as a middleware. It is common to register a logging middleware as the first middleware for the application. Logging middleware must be registered for each application.
 
 The `Logger` middleware uses the standard log crate to log information. You should enable logger for _actix_web_ package to see access log ([env_logger][envlogger] or similar).
 
-## Usage
+### Usage
 
 Create `Logger` middleware with the specified `format`. Default `Logger` can be created with `default` method, it uses the default format:
 
@@ -56,7 +56,7 @@ INFO:actix_web::middleware::logger: 127.0.0.1:59934 [02/Dec/2017:00:21:43 -0800]
 INFO:actix_web::middleware::logger: 127.0.0.1:59947 [02/Dec/2017:00:22:40 -0800] "GET /index.html HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:57.0) Gecko/20100101 Firefox/57.0" 0.000646
 ```
 
-## Format
+### Format
 
 - `%%` The percent sign
 - `%a` Remote IP-address (IP-address of proxy if using reverse proxy)
@@ -71,7 +71,7 @@ INFO:actix_web::middleware::logger: 127.0.0.1:59947 [02/Dec/2017:00:22:40 -0800]
 - `%{FOO}o` response.headers['FOO']
 - `%{FOO}e` os.environ['FOO']
 
-## Default headers
+### Default headers
 
 To set default response headers, the `DefaultHeaders` middleware can be used. The _DefaultHeaders_ middleware does not set the header if response headers already contain a specified header.
 
@@ -95,7 +95,7 @@ In general, you create a `SessionStorage` middleware and initialize it with spec
 
 <CodeBlock example="middleware" file="user_sessions.rs" section="user-session" />
 
-# Error handlers
+## Error handlers
 
 `ErrorHandlers` middleware allows us to provide custom handlers for responses.
 

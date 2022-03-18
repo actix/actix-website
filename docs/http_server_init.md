@@ -4,7 +4,7 @@ menu: docs_architecture
 weight: 1020
 ---
 
-## Architecture overview
+# Architecture overview
 
 Below is a diagram of HttpServer initialization, which happens on the following code
 

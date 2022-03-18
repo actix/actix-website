@@ -14,7 +14,7 @@ An extractor can be accessed as an argument to a handler function. Actix Web sup
 
 <CodeBlock example="extractors" file="main.rs" section="option-one" />
 
-# Path
+## Path
 
 [_Path_][pathstruct] provides information that is extracted from the request's path. Parts of the path that are extractable are called "dynamic segments" and are marked with curly braces. You can deserialize any variable segment from the path.
 
@@ -30,13 +30,13 @@ As a non-type-safe alternative, it's also possible to query (see [`match_info` d
 
 <CodeBlock example="extractors" file="path_three.rs" section="path-three" />
 
-# Query
+## Query
 
 The [`Query<T>`][querystruct] type provides extraction functionality for the request's query parameters. Underneath it uses `serde_urlencoded` crate.
 
 <CodeBlock example="extractors" file="query.rs" section="query" />
 
-# Json
+## Json
 
 [`Json<T>`][jsonstruct] allows deserialization of a request body into a struct. To extract typed information from a request's body, the type `T` must implement `serde::Deserialize`.
 
@@ -56,7 +56,7 @@ A URL-encoded form body can be extracted to a struct, much like `Json<T>`. This 
 
 <CodeBlock example="extractors" file="form.rs" section="form" />
 
-# Other
+## Other
 
 Actix Web also provides several other extractors:
 

@@ -12,7 +12,7 @@ It is possible to serve static files with a custom path pattern and `NamedFile`.
 
 <CodeBlock example="static-files" file="main.rs" section="individual-file" />
 
-# Directory
+## Directory
 
 To serve files from specific directories and sub-directories, `Files` can be used. `Files` must be registered with an `App::service()` method, otherwise it will be unable to serve sub-paths.
 
@@ -22,7 +22,7 @@ By default files listing for sub-directories is disabled. Attempt to load direct
 
 Instead of showing files listing for directory, it is possible to redirect to a specific index file. Use the [_Files::index_file()_][indexfile] method to configure this redirect.
 
-# Configuration
+## Configuration
 
 `NamedFiles` can specify various options for serving files:
 

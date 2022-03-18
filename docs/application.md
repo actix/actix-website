@@ -72,7 +72,7 @@ One of the provided guards is [`Header`][guardheader]. It can be used as a filte
 
 <CodeBlock example="application" file="vh.rs" section="vh" />
 
-# Configure
+## Configure
 
 For simplicity and reusability both [`App`][appconfig] and [`web::Scope`][webscopeconfig] provide the `configure` method. This function is useful for moving parts of the configuration to a different module or even library. For example, some of the resource's configuration could be moved to a different module.
 

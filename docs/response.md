@@ -16,7 +16,7 @@ The methods `.body`, `.finish`, and `.json` finalize response creation and retur
 
 <CodeBlock example="responses" file="main.rs" section="builder" />
 
-# JSON Response
+## JSON Response
 
 The `Json` type allows to respond with well-formed JSON data: simply return a value of type `Json<T>` where `T` is the type of a structure to serialize into _JSON_. The type `T` must implement the `Serialize` trait from _serde_.
 
@@ -31,7 +31,7 @@ serde = { version = "1.0", features = ["derive"] }
 
 Using the `Json` type this way instead of calling the `.json` method on a `HttpResponse` makes it immediately clear that the function returns JSON and not any other type of response.
 
-# Content encoding
+## Content encoding
 
 Actix Web can automatically _compress_ payloads with the [_Compress middleware_][compressmidddleware]. The following codecs are supported:
 

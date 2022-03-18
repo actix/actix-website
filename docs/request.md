@@ -38,7 +38,7 @@ In the following example, we will deserialize a _MyObj_ struct. We need to load 
 
 > A complete example for both options is available in [examples directory][examples].
 
-# Content Encoding
+## Content Encoding
 
 Actix Web automatically _decompresses_ payloads. The following codecs are supported:
 
@@ -49,17 +49,17 @@ Actix Web automatically _decompresses_ payloads. The following codecs are suppor
 
 If request headers contain a `Content-Encoding` header, the request payload is decompressed according to the header value. Multiple codecs are not supported, i.e: `Content-Encoding: br, gzip`.
 
-# Chunked transfer encoding
+## Chunked transfer encoding
 
 Actix automatically decodes _chunked_ encoding. The [`web::Payload`][payloadextractor] extractor already contains the decoded byte stream. If the request payload is compressed with one of the supported compression codecs (br, gzip, deflate), then the byte stream is decompressed.
 
-# Multipart body
+## Multipart body
 
 Actix Web provides multipart stream support with an external crate, [`actix-multipart`][multipartcrate].
 
 > A full example is available in the [examples directory][multipartexample].
 
-# Urlencoded body
+## Urlencoded body
 
 Actix Web provides support for _application/x-www-form-urlencoded_ encoded bodies with the [`web::Form`][formencoded] extractor which resolves to the deserialized instance. The type of the instance must implement the `Deserialize` trait from _serde_.
 
@@ -72,7 +72,7 @@ The _UrlEncoded_ future can resolve into an error in several cases:
 
 <CodeBlock example="requests" file="urlencoded.rs" section="urlencoded" />
 
-# Streaming request
+## Streaming request
 
 _HttpRequest_ is a stream of `Bytes` objects. It can be used to read the request body payload.
 
