@@ -42,8 +42,10 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} The Actix Team`,
     },
     prism: {
-        additionalLanguages: ['rust', 'toml'],
-        defaultLanguage: 'rust'
+      // dracula is closest to docs.rs, where keywords are highlighted
+      theme: require('prism-react-renderer/themes/dracula'),
+      additionalLanguages: ['rust', 'toml'],
+      defaultLanguage: 'rust'
     }
   },
   plugins: ["docusaurus-plugin-sass"],
