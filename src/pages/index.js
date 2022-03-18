@@ -19,14 +19,14 @@ const Home = () => {
     <Layout description={siteConfig.tagline}>
       <Hero />
       <main className={styles.main}>
-        <Features />
+        <Highlights />
         <Examples />
       </main>
     </Layout>
   );
 };
 
-const features = [
+const highlights = [
   {
     icon: faShieldAlt,
     title: "Type Safe",
@@ -49,24 +49,24 @@ const features = [
   },
 ];
 
-const Features = () => {
+const Highlights = () => {
   return (
     <>
-      <section id="features" className={styles.features}>
+      <section id="highlights" className={styles.highlights}>
         <div className="container">
           <div className="row">
             <div className="col col--11 col--offset-1">
               <div className="row">
-                {features.map((feature, idx) => (
-                  <div className={clsx("col col--6", styles.feature)} key={idx}>
+                {highlights.map((highlight, idx) => (
+                  <div className={clsx("col col--6", styles.highlight)} key={idx}>
                     <div className="item">
                       <div className={styles.header}>
                         <div className={styles.icon}>
-                          <FontAwesomeIcon icon={feature.icon} size="lg" />
+                          <FontAwesomeIcon icon={highlight.icon} size="lg" />
                         </div>
-                        <h2 className={styles.title}>{feature.title}</h2>
+                        <h2 className={styles.title}>{highlight.title}</h2>
                       </div>
-                      <p>{feature.description}</p>
+                      <p>{highlight.description}</p>
                     </div>
                   </div>
                 ))}
@@ -159,22 +159,20 @@ const Example = ({ reversed, title, code, text }) => {
   );
 
   return (
-    <div className={styles.featureContainer}>
+    <div
+      className={clsx(styles.featureContainer, {
+        [styles.reversed]: reversed === true,
+      })}
+    >
       <div
         className={clsx(styles.featureContent, {
           [styles.reversed]: reversed === true,
         })}
       >
         {reversed ? (
-          <>
-            {right}
-            {left}
-          </>
+          <> {right} {left} </>
         ) : (
-          <>
-            {left}
-            {right}
-          </>
+          <> {left}{right}</>
         )}
       </div>
     </div>
