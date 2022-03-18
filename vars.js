@@ -1,3 +1,3 @@
 module.exports = {
-    rustVersion: 1.46
-}
+  rustVersion: '1.54',
+};

@@ -2,8 +2,6 @@ import clsx from "clsx";
 import React from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 import CodeBlock from "../components/code_block.js";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";

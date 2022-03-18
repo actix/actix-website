@@ -57,6 +57,9 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  // background-image: url('/img/jumbotron.jpg');
+  // background-size: cover;
+  // color: #fff;
 
   @media screen and (max-width: 966px) {
     padding: 2rem;
@@ -115,7 +118,7 @@
   padding: 2.5rem 0;
   margin-bottom: -1px;
   border-top: 1px solid var(--ifm-background-color);
-  border-botton: 1px solid var(--ifm-background-color);
+  border-bottom: 1px solid var(--ifm-background-color);
   transition: all 0.2s ease 0s;
 }
 
@@ -175,7 +178,7 @@ html[data-theme='dark'] {
     width: 80%;
     margin-left: 20%;
   }
-  
+
   .featureContent:not(.reversed) > .featureCode > * {
     width: 80%;
     margin-right: 20%;
