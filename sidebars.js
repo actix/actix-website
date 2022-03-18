@@ -36,12 +36,12 @@ module.exports = {
             {
                 type: 'link',
                 label: 'actix',
-                href: 'https://github.com/actix/actix'
+                href: 'https://docs.rs/actix/latest/actix/'
             },
             {
                 type: 'link',
                 label: 'actix-web',
-                href: 'https://github.com/actix/actix-web'
+                href: 'https://docs.rs/actix-web/latest/actix_web/'
             }
         ],
     },
