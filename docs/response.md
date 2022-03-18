@@ -1,7 +1,5 @@
 ---
 title: Responses
-menu: docs_advanced
-weight: 210
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

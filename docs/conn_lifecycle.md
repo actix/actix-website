@@ -1,7 +1,5 @@
 ---
 title: Connection Lifecycle
-menu: docs_architecture
-weight: 1030
 ---
 
 # Architecture overview

@@ -1,7 +1,5 @@
 ---
 title: Getting Started
-menu: docs_basics
-weight: 130
 ---
 
 import RenderCodeBlock from '@theme/CodeBlock';

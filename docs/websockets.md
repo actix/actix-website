@@ -1,7 +1,5 @@
 ---
 title: Websockets
-menu: docs_protocols
-weight: 240
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

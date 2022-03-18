@@ -1,7 +1,5 @@
 ---
 title: HTTP/2
-menu: docs_protocols
-weight: 250
 ---
 
 import RenderCodeBlock from '@theme/CodeBlock';

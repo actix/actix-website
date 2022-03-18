@@ -1,7 +1,5 @@
 ---
 title: Static Files
-menu: docs_advanced
-weight: 230
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

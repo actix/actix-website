@@ -1,7 +1,5 @@
 ---
 title: Handlers
-menu: docs_basics
-weight: 160
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

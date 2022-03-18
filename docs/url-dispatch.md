@@ -1,7 +1,5 @@
 ---
 title: URL Dispatch
-menu: docs_advanced
-weight: 190
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

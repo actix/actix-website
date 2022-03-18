@@ -1,7 +1,5 @@
 ---
 title: Extractors
-menu: docs_basics
-weight: 170
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

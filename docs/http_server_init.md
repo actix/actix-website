@@ -1,7 +1,5 @@
 ---
 title: HTTP Server Initialization
-menu: docs_architecture
-weight: 1020
 ---
 
 # Architecture overview

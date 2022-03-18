@@ -1,7 +1,5 @@
 ---
 title: Requests
-menu: docs_advanced
-weight: 200
 ---
 
 # JSON Request

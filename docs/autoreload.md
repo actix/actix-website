@@ -1,7 +1,5 @@
 ---
 title: Auto-Reloading
-menu: docs_patterns
-weight: 1000
 ---
 
 # Auto-Reloading Development Server

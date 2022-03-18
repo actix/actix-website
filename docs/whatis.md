@@ -1,7 +1,5 @@
 ---
 title: What is Actix Web
-menu: docs_intro
-weight: 100
 ---
 import { rustVersion } from "@site/vars";
 

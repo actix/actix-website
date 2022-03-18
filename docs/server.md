@@ -1,7 +1,5 @@
 ---
 title: Server
-menu: docs_basics
-weight: 150
 ---
 
 import RenderCodeBlock from '@theme/CodeBlock';

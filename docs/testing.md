@@ -1,7 +1,5 @@
 ---
 title: Testing
-menu: docs_advanced
-weight: 215
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

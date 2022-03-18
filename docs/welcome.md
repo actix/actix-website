@@ -1,10 +1,6 @@
 ---
 title: Welcome
 description: Guiding you through building web apps with Actix
-menu:
-  docs_intro:
-    name: Welcome
-weight: 10
 slug: /
 ---
 

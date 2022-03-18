@@ -1,7 +1,5 @@
 ---
 title: Application
-menu: docs_basics
-weight: 140
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";

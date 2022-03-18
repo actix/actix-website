@@ -1,7 +1,5 @@
 ---
 title: Errors
-menu: docs_advanced
-weight: 180
 ---
 
 import CodeBlock from "@site/src/components/code_block.js";
