@@ -16,9 +16,9 @@ We call Actix Web a powerful and pragmatic framework. For all intents and purpos
 
 An application developed with Actix Web will expose an HTTP server contained within a native executable. You can either put this behind another HTTP server like nginx or serve it up as-is. Even in the complete absence of another HTTP server Actix Web is powerful enough to provide HTTP/1 and HTTP/2 support as well as TLS (HTTPS). This makes it useful for building small services ready for production.
 
-<>
+<p>
 Most importantly: Actix Web runs on Rust { rustVersion } or later and it works with stable releases.
-</>
+</p>
 
 <!-- TODO -->
 <!-- which is built upon the fantastic [Tokio][tokio] asynchronous I/O system -->

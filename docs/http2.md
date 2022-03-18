@@ -4,7 +4,9 @@ menu: docs_protocols
 weight: 250
 ---
 
-import CodeBlock from '../src/components/code_block.js';
+import RenderCodeBlock from '@theme/CodeBlock';
+import CodeBlock from '@site/src/components/code_block.js';
+import { actixWebMajorVersion } from "@site/vars";
 
 `actix-web` automatically upgrades connections to *HTTP/2* if possible.
 
@@ -16,11 +18,13 @@ When either of the `rustls` or `openssl` features are enabled, `HttpServer` prov
 
 <!-- DEPENDENCY -->
 
-```toml
-[dependencies]
-actix-web = { version = "3", features = ["openssl"] }
+
+<RenderCodeBlock className="language-toml">
+{`[dependencies]
+actix-web = { version = "${actixWebMajorVersion}", features = ["openssl"] }
 openssl = { version = "0.10", features = ["v110"] }
-```
+`}
+</RenderCodeBlock>
 
 <CodeBlock example="http2" file="main.rs" section="main" />
 

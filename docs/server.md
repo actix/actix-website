@@ -4,7 +4,9 @@ menu: docs_basics
 weight: 150
 ---
 
-import CodeBlock from "@site/src/components/code_block.js";
+import RenderCodeBlock from '@theme/CodeBlock';
+import CodeBlock from '@site/src/components/code_block.js';
+import { actixWebMajorVersion } from "@site/vars";
 
 # The HTTP Server
 
@@ -60,11 +62,12 @@ The `rustls` crate feature is for `rustls` integration and `openssl` is for `ope
 
 <!-- DEPENDENCY -->
 
-```toml
-[dependencies]
-actix-web = { version = "3", features = ["openssl"] }
+<RenderCodeBlock className="language-toml">
+{`[dependencies]
+actix-web = { version = "${actixWebMajorVersion}", features = ["openssl"] }
 openssl = { version = "0.10" }
-```
+`}
+</RenderCodeBlock>
 
 <CodeBlock example="server" file="ssl.rs" section="ssl" />
 

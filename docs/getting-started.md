@@ -4,14 +4,17 @@ menu: docs_basics
 weight: 130
 ---
 
+import RenderCodeBlock from '@theme/CodeBlock';
 import CodeBlock from "@site/src/components/code_block.js";
-import { rustVersion } from "@site/vars";
+import { rustVersion, actixWebMajorVersion } from "@site/vars";
 
 ## Installing Rust
 
 If you don't have Rust yet, we recommend you use `rustup` to manage your Rust installation. The [official rust guide][rustguide] has a wonderful section on getting started.
 
-<>Actix Web currently has a minimum supported Rust version (MSRV) of { rustVersion }. Running <code>rustup update</code> will ensure you have the latest and greatest Rust version available. As such, this guide assumes you are running Rust { rustVersion } or later.</>
+<p>
+Actix Web currently has a minimum supported Rust version (MSRV) of { rustVersion }. Running <code>rustup update</code> will ensure you have the latest and greatest Rust version available. As such, this guide assumes you are running Rust { rustVersion } or later.
+</p>
 
 ## Hello, world!
 
@@ -27,10 +30,10 @@ Add `actix-web` as a dependency of your project by adding the following to your 
 
 <!-- DEPENDENCY -->
 
-```toml
-[dependencies]
-actix-web = "3"
-```
+<RenderCodeBlock className="language-toml">
+{`[dependencies]
+actix-web = "${actixWebMajorVersion}"`}
+</RenderCodeBlock>
 
 Request handlers use async functions that accept zero or more parameters. These parameters can be extracted from a request (see `FromRequest` trait) and returns a type that can be converted into an `HttpResponse` (see `Responder` trait):
 
