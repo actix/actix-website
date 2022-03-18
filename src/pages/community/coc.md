@@ -1,6 +1,6 @@
 ---
 title: Contributor Covenant Code of Conduct
-description:
+description: The code of conduct
 ---
 
 # Our Pledge
