@@ -279,7 +279,7 @@ If the path pattern can not be found in the routing table or a resource can not 
 
 <CodeBlock example="url-dispatch" file="dhandler.rs" section="default" />
 
-[handlersection]: ../handlers/
+[handlersection]: /docs/handlers/
 [approute]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.route
 [appservice]: https://docs.rs/actix-web/4/actix_web/struct.App.html?search=#method.service
 [webresource]: https://docs.rs/actix-web/4/actix_web/struct.Resource.html
@@ -299,4 +299,4 @@ If the path pattern can not be found in the routing table or a resource can not 
 [requestextensions]: https://docs.rs/actix-web/4/actix_web/struct.HttpRequest.html#method.extensions
 [implfromrequest]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html
 [implresponder]: https://docs.rs/actix-web/4/actix_web/trait.Responder.html
-[pathextractor]: ../extractors
+[pathextractor]: /docs/extractors
