@@ -15,7 +15,7 @@ Then visit http://localhost:3000.
 
 ## Updating diagrams
 
-Diagrams are located under [/static/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI].
+Diagrams are located under [/static/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI][mermaid cli].
 
 For instance to edit `connection_overview` diagram:
 
@@ -38,3 +38,4 @@ This site is licensed under either of
 <!-- LINKS -->
 
 [Docusaurus]: https://docusaurus.io/
+[mermaid cli]: https://github.com/mermaidjs/mermaid.cli
