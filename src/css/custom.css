@@ -2,9 +2,12 @@
   --ifm-font-size-base: 16px;
   --ifm-code-font-size: 90%;
   --ifm-background-color: #fff;
-  --ifm-color-primary: #163E8C;
+  --ifm-background-color-secondary: rgb(241 245 249);
+  --ifm-color-primary: #163e8c;
   --ifm-footer-background-color: var(--ifm-background-surface-color);
   --ifm-menu-color-background-active: var(--ifm-color-emphasis-200);
+  --examples-odd-background-color: var(--ifm-background-color-secondary);
+  --logo-filter: unset;
 }
 
 html[data-theme='dark'] {
@@ -14,10 +17,13 @@ html[data-theme='dark'] {
   --ifm-link-color: #8b9dff;
   --ifm-menu-color-active: #8b9dff;
   --ifm-background-color: #0a141c;
+  --ifm-background-color-secondary: #21243d;
   --ifm-footer-background-color: #0a141c;
-  --ifm-navbar-background-color: #21243d;
-  --ifm-hero-background-color: var(--ifm-navbar-background-color);
+  --ifm-navbar-background-color: var(--ifm-background-color);
+  --ifm-hero-background-color: var(--ifm-background-color-secondary);
   --ifm-menu-color-background-active: #21243d;
+  --examples-odd-background-color: var(--ifm-hero-background-color);
+  --logo-filter: brightness(0) invert(1);
 }
 
 .docusaurus-highlight-code-line {
@@ -25,4 +31,9 @@ html[data-theme='dark'] {
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+
+.navbar__logo {
+  filter: var(--logo-filter);
 }

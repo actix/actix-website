@@ -68,6 +68,7 @@
 
 .logo {
   max-width: 160px;
+  filter: var(--logo-filter);
 }
 
 .buttons {
@@ -161,7 +162,7 @@
 
   .example:nth-child(odd) {
     flex-direction: row-reverse;
-    background-color: var(--ifm-hero-background-color);
+    background-color: var(--examples-odd-background-color);
   }
   .featureText {
     width: 33%;
