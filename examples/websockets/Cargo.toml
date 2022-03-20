@@ -4,6 +4,6 @@ version = "1.0.0"
 edition = "2018"
 
 [dependencies]
-actix = "0.12"
+actix = "0.13"
 actix-web = "4"
 actix-web-actors = "4.0.0"
