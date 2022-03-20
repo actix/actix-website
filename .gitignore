@@ -1,8 +1,5 @@
-public
-tmp
-_site
-Cargo.lock
+node_modules/
 build/
-target/
-.DS_Store
-/.hugo_build.lock
+.docusaurus
+.cache-loader
+Cargo.lock

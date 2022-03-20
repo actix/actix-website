@@ -1,7 +1,0 @@
-{{- if eq (.Get 0) "actix" -}}
-  {{- .Page.Site.Params.actixVersion -}}
-{{- else if eq (.Get 0) "actix-web" -}}
-  {{- .Page.Site.Params.actixWebVersion -}}
-{{- else if eq (.Get 0) "actix-rt" -}}
-    {{- .Page.Site.Params.actixRtVersion -}}
-{{- end -}}

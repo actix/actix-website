@@ -1,44 +1,33 @@
-# Actix Website
+# Website
 
-## Getting Started
+This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
 
-Building the website depends on [Hugo]. So, first make sure that you have it installed. If on macOS and using [Homebrew], run the following:
+## Installation
 
-```sh
-brew update
-brew install hugo
+```console
+yarn install
 ```
 
-Then, get the website running locally:
+## Local Development
 
-```sh
-git clone https://github.com/actix/actix-website.git
-cd actix-website
-
-hugo server
+```console
+yarn start
 ```
 
-Then visit http://localhost:1313.
+This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
 
-## Updating diagrams
+## Build
 
-Diagrams are located under [/static/css/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI].
-
-For instance to edit `connection_overview` diagram:
-
-```sh
-cd static/css/img/diagrams
-vi connection_overview.mmd
-# Compile diagrams:
-mmdc -i connection_overview.mmd -o connection_overview.svg
+```console
+yarn build
 ```
 
-# License
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-Pretty murky. Right now a massive clone of the tokio website. Will get this figured out as we go along.
+## Deployment
 
-<!-- LINKS -->
+```console
+GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
+```
 
-[hugo]: https://gohugo.io
-[homebrew]: https://brew.sh
-[mermaid cli]: https://github.com/mermaidjs/mermaid.cli
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
