@@ -110,20 +110,45 @@
 }
 
 // features
-
-.featureContainer {
+.example {
+  display: flex;
   width: 100%;
-  min-height: 200px;
-  background-color: var(--ifm-background-color);
-  padding: 2.5rem 0;
-  margin-bottom: -1px;
-  border-top: 1px solid var(--ifm-background-color);
-  border-bottom: 1px solid var(--ifm-background-color);
-  transition: all 0.2s ease 0s;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
-.featureContainer:hover {
-  box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.1);
+.example__code {
+  width: 100%;
+}
+
+.featureText {
+  justify-self: center;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .example {
+    flex-direction: row;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+
+  .example:nth-child(odd) {
+    flex-direction: row-reverse;
+    background-color: var(--ifm-hero-background-color);
+  }
+  .featureText {
+    width: 33%;
+  }
+  .example__code {
+    width: unset;
+  }
 }
 
 .featureTitle {
@@ -131,94 +156,7 @@
   font-weight: 500;
 }
 
-.featureCode {
-  text-align: left;
-}
-
-.featureContent {
-  max-width: var(--ifm-container-width-xl);
-  margin: 0 auto;
-  padding: 50px 25px;
-  box-sizing: border-box;
-
-  display: flex;
-  align-items: center;
-
-  flex-direction: row;
-}
-
-.featureContent > * {
-  width: 50%;
-  flex-shrink: 1;
-}
-
-.featureContent > .featureCode {
-  width: 50%;
-  flex-shrink: 0;
-  text-align: left;
-}
-
-html[data-theme='dark'] {
-  .featureContainer.reversed {
-      background-color: var(--ifm-hero-background-color);
-  }
-}
-
-.featureContent.reversed > .featureText {
-  padding-left: 0;
-  padding-right: 70px;
-}
-
-
-@media only screen and (min-width: 996px) {
-  .featureContent.reversed > .featureCode > * {
-    width: 80%;
-    margin-left: 20%;
-  }
-
-  .featureContent:not(.reversed) > .featureCode > * {
-    width: 80%;
-    margin-right: 20%;
-  }
-}
-
-@media only screen and (max-width: 996px) {
-  .featureCode {
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .featureContent {
-    width: 100%;
-    flex-wrap: wrap;
-    flex-direction: column-reverse;
-  }
-
-  .featureContent.reversed {
-    flex-direction: row;
-  }
-
-  .featureContent .featureCode {
-    width: 100%;
-    padding: 0 !important;
-    text-align: left;
-  }
-  .featureContent .featureText {
-    width: 100%;
-    padding: 0 !important;
-    text-align: center;
-  }
-
-  .featureContent .featureText {
-    padding-bottom: 50px !important;
-  }
-
-  .featureContent .featureCode > img {
-    max-width: 60%;
-  }
-}
-
 // Hide the title in docs pages, we render our own in markdown
 article header h1 {
-    display: none;
+  display: none;
 }
