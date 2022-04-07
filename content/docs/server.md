@@ -10,15 +10,11 @@ The [**HttpServer**][httpserverstruct] type is responsible for serving HTTP requ
 
 `HttpServer` accepts an application factory as a parameter, and the application factory must have `Send` + `Sync` boundaries. More about that in the _multi-threading_ section.
 
-To bind to a specific socket address, [`bind()`][bindmethod] must be used, and it may be called multiple times. To bind ssl socket, [`bind_rustls()`][bindrusttls] or [`bind_openssl()`][bindopensslmethod] should be used. To run the HTTP server, use the `HttpServer::run()` method.
+To start the web server it must first be bound to a network socket. Use [`HttpServer::bind()`][bindmethod] with a socket address tuple or string such as `("127.0.0.1", 8080)` or `"0.0.0.0:8080"`. This will fail if the socket is being used by another application.
+
+After the `bind` is successful, use [`HttpServer::run()`][httpserver_run] to return a [`Server`][server] instance. The `Server` must be `await`ed or `spawn`ed to start processing requests and will run until it receives a shutdown signal (such as, by default, a `ctrl-c`; [read more here](#graceful-shutdown)).
 
 {{< include-example example="server" section="main" >}}
-
-The `run()` method returns an instance of the [`Server`][server] type. A `Server` must be `await`ed or `spawn`ed to start processing requests. It will complete when it receives a shutdown signal; Actix Web listens for system process signals by default.
-
-The following example shows how to start the HTTP server in a Tokio task with manual commands and shutdown using a server handle.
-
-{{< include-example example="server" file="signals.rs" section="signals" >}}
 
 ## Multi-Threading
 
@@ -28,9 +24,9 @@ The following example shows how to start the HTTP server in a Tokio task with ma
 
 Once the workers are created, they each receive a separate _application_ instance to handle requests. Application state is not shared between the threads, and handlers are free to manipulate their copy of the state with no concurrency concerns.
 
-> Application state does not need to be `Send` or `Sync`, but application factories must be `Send` + `Sync`.
+Application state does not need to be `Send` or `Sync`, but application factories must be `Send` + `Sync`.
 
-To share state between worker threads, use an `Arc`. Special care should be taken once sharing and synchronization are introduced. In many cases, performance costs are inadvertently introduced as a result of locking the shared state for modifications.
+To share state between worker threads, use an `Arc`/`Data`. Special care should be taken once sharing and synchronization are introduced. In many cases, performance costs are inadvertently introduced as a result of locking the shared state for modifications.
 
 In some cases these costs can be alleviated using more efficient locking strategies, for example using [read/write locks](https://doc.rust-lang.org/std/sync/struct.RwLock.html) instead of [mutexes](https://doc.rust-lang.org/std/sync/struct.Mutex.html) to achieve non-exclusive locking, but the most performant implementations often tend to be ones in which no locking occurs at all.
 
@@ -56,7 +52,9 @@ The same limitation applies to extractors as well. When a handler function recei
 
 ## TLS / HTTPS
 
-There are two features for the ssl server: `rustls` and `openssl`. The `rustls` feature is for `rustls` integration and `openssl` is for `openssl`.
+Actix Web supports two TLS implementations out-of-the-box: `rustls` and `openssl`.
+
+The `rustls` crate feature is for `rustls` integration and `openssl` is for `openssl` integration.
 
 ```toml
 [dependencies]
@@ -110,6 +108,7 @@ If the first option above is selected, then keep-alive is enabled for HTTP/1.1 r
 [server]: https://docs.rs/actix-web/4/actix_web/dev/struct.Server.html
 [httpserverstruct]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html
 [bindmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind
+[httpserver_run]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.run
 [bindopensslmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_openssl
 [bindrusttls]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_rustls
 [workers]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.workers
