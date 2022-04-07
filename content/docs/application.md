@@ -38,7 +38,7 @@ Any number of state types could be registered within the application.
 
 `HttpServer` accepts an application factory rather than an application instance. An `HttpServer` constructs an application instance for each thread. Therefore, application data must be constructed multiple times. If you want to share data between different threads, a shareable object should be used, e.g. `Send` + `Sync`.
 
-Internally, [`web::Data`][data] uses `Arc`. Thus, in order to avoid creating two `Arc`s, we should create our Data before registering it using [`App::app_data()`][appdata].
+Internally, [`web::Data`][data] uses `Arc`. So in order to avoid creating two `Arc`s, we should create our Data before registering it using [`App::app_data()`][appdata].
 
 In the following example, we will write an application with mutable, shared state. First, we define our state and create our handler:
 
@@ -47,6 +47,10 @@ In the following example, we will write an application with mutable, shared stat
 and register the data in an `App`:
 
 {{< include-example example="application" file="mutable_state.rs" section="make_app_mutable" >}}
+
+Key takeaways:
+- State initialized _inside_ the closure passed to `HttpServer::new` is local to the worker thread and may become de-synced if modified.
+- To achieve _globally shared state_, it must be created **outside** of the closure passed to `HttpServer::new` and moved/cloned in.
 
 ## Using an Application Scope to Compose Applications
 

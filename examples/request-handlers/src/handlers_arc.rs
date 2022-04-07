@@ -1,8 +1,10 @@
 // <arc>
 use actix_web::{get, web, App, HttpServer, Responder};
-use std::cell::Cell;
-use std::sync::atomic::{AtomicUsize, Ordering};
-use std::sync::Arc;
+use std::{
+    cell::Cell,
+    sync::atomic::{AtomicUsize, Ordering},
+    sync::Arc,
+};
 
 #[derive(Clone)]
 struct AppState {

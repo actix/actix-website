@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
         "actix",
+        "deserialization",
         "rustls",
-        "serde"
+        "serde",
+        "struct"
     ]
 }

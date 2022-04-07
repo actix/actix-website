@@ -24,19 +24,19 @@ It is also possible to extract path information to a type that implements the `D
 
 {{< include-example example="extractors" file="path_two.rs" section="path-two" >}}
 
-As a non-type-safe alternative, it's also possible to `query` the request for path parameters by name within a handler:
+As a non-type-safe alternative, it's also possible to query (see [`match_info` docs](docsrs_match_info)) the request for path parameters by name within a handler:
 
 {{< include-example example="extractors" file="path_three.rs" section="path-three" >}}
 
 # Query
 
-The [_Query_][querystruct] type provides extraction functionality for the request's query parameters. Underneath it uses _serde_urlencoded_ crate.
+The [`Query<T>`][querystruct] type provides extraction functionality for the request's query parameters. Underneath it uses `serde_urlencoded` crate.
 
 {{< include-example example="extractors" file="query.rs" section="query" >}}
 
 # Json
 
-[_Json_][jsonstruct] allows deserialization of a request body into a struct. To extract typed information from a request's body, the type `T` must implement the `Deserialize` trait from _serde_.
+[`Json<T>`][jsonstruct] allows deserialization of a request body into a struct. To extract typed information from a request's body, the type `T` must implement `serde::Deserialize`.
 
 {{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
 
@@ -46,9 +46,9 @@ The following example limits the size of the payload to 4kb and uses a custom er
 
 {{< include-example example="extractors" file="json_two.rs" section="json-two" >}}
 
-# Form
+# URL-Encoded Forms
 
-At the moment, only url-encoded forms are supported. The url-encoded body could be extracted to a specific type. This type must implement the `Deserialize` trait from the _serde_ crate.
+A URL-encoded form body can be extracted to a struct, much like `Json<T>`. This type must implement `serde::Deserialize`.
 
 [_FormConfig_][formconfig] allows configuring the extraction process.
 
@@ -62,25 +62,23 @@ Actix Web also provides several other extractors:
 - _HttpRequest_ - _HttpRequest_ itself is an extractor which returns self, in case you need access to the request.
 - _String_ - You can convert a request's payload to a _String_. [_Example_][stringexample] is available in doc strings.
 - _actix_web::web::Bytes_ - You can convert a request's payload into _Bytes_. [_Example_][bytesexample] is available in doc strings.
-- _Payload_ - You can access a request's payload. [_Example_][payloadexample]
+- _Payload_ - Low-level payload extractor primarily for building other extractors. [_Example_][payloadexample]
 
-# Application state extractor
+# Application State Extractor
 
 Application state is accessible from the handler with the `web::Data` extractor; however, state is accessible as a read-only reference. If you need mutable access to state, it must be implemented.
-
-> **Beware**, actix creates multiple copies of the application state and the handlers. It creates one copy for each thread.
 
 Here is an example of a handler that stores the number of processed requests:
 
 {{< include-example example="request-handlers" file="main.rs" section="data" >}}
 
-Although this handler will work, `data.count` will only count the number of requests handled _by each thread_. To count the number of total requests across all threads, one should use `Arc` and [atomics][atomics].
+Although this handler will work, `data.count` will only count the number of requests handled _by each worker thread_. To count the number of total requests across all threads, one should use shared `Arc` and [atomics][atomics].
 
 {{< include-example example="request-handlers" file="handlers_arc.rs" section="arc" >}}
 
-> **Note**, if you want the _entire_ state to be shared across all threads, use `web::Data` and `app_data` as described in [Shared Mutable State][shared_mutable_state].
+**Note**: If you want the _entire_ state to be shared across all threads, use `web::Data` and `app_data` as described in [Shared Mutable State][shared_mutable_state].
 
-> Be careful with synchronization primitives like `Mutex` or `RwLock`. The `actix-web` framework handles requests asynchronously. By blocking thread execution, all concurrent request handling processes would block. If you need to share or update some state from multiple threads, consider using the tokio synchronization primitives.
+Be careful when using blocking synchronization primitives like `Mutex` or `RwLock` within your app state. Actix Web handles requests asynchronously. It is a problem if the [_critical section_](critical_section) in your handler is too big or contains an `.await` point. If this is a concern, we would avise you also read [Tokio's advice on using blocking `Mutex` in async code](tokio_std_mutex).
 
 [pathstruct]: https://docs.rs/actix-web/4/actix_web/dev/struct.Path.html
 [querystruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Query.html
@@ -88,9 +86,12 @@ Although this handler will work, `data.count` will only count the number of requ
 [jsonconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.JsonConfig.html
 [formconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.FormConfig.html
 [datastruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Data.html
-[stringexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#example-2
-[bytesexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#example-4
+[stringexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#impl-FromRequest-for-String
+[bytesexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#impl-FromRequest-5
 [payloadexample]: https://docs.rs/actix-web/4/actix_web/web/struct.Payload.html
+[docsrs_match_info]: https://docs.rs/actix-web/latest/actix_web/struct.HttpRequest.html#method.match_info
 [actix]: https://actix.github.io/actix/actix/
 [atomics]: https://doc.rust-lang.org/std/sync/atomic/
 [shared_mutable_state]: ../application#shared-mutable-state
+[critical_section]: https://en.wikipedia.org/wiki/Critical_section
+[tokio_std_mutex]: https://tokio.rs/tokio/tutorial/shared-state#on-using-stdsyncmutex

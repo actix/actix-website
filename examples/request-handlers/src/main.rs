@@ -1,6 +1,6 @@
 pub mod handlers_arc;
 // <data>
-use actix_web::{web, Responder};
+use actix_web::{web, App, HttpServer, Responder};
 use std::cell::Cell;
 
 #[derive(Clone)]
@@ -21,8 +21,6 @@ async fn add_one(data: web::Data<AppState>) -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{App, HttpServer};
-
     let data = AppState {
         count: Cell::new(0),
     };
