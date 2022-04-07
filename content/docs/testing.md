@@ -6,7 +6,7 @@ weight: 215
 
 # Testing
 
-Every application should be well tested. Actix-web provides tools to perform unit and integration tests.
+Every application should be well tested. Actix Web provides tools to perform unit and integration tests.
 
 # Unit Tests
 
@@ -16,7 +16,7 @@ For unit testing, actix-web provides a request builder type. [_TestRequest_][tes
 
 # Integration tests
 
-There are a few methods for testing your application. Actix-web can be used to run the application with specific handlers in a real HTTP server.
+There are a few methods for testing your application. Actix Web can be used to run the application with specific handlers in a real HTTP server.
 
 `TestRequest::get()`, `TestRequest::post()` and other methods can be used to send requests to the test server.
 

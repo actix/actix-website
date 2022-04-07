@@ -31,7 +31,7 @@ Using the `Json` type this way instead of calling the `.json` method on a `HttpR
 
 # Content encoding
 
-Actix-web can automatically _compress_ payloads with the [_Compress middleware_][compressmidddleware]. The following codecs are supported:
+Actix Web can automatically _compress_ payloads with the [_Compress middleware_][compressmidddleware]. The following codecs are supported:
 
 - Brotli
 - Gzip

@@ -40,7 +40,7 @@ In the following example, we will deserialize a _MyObj_ struct. We need to load 
 
 # Content Encoding
 
-Actix-web automatically _decompresses_ payloads. The following codecs are supported:
+Actix Web automatically _decompresses_ payloads. The following codecs are supported:
 
 - Brotli
 - Gzip
@@ -55,13 +55,13 @@ Actix automatically decodes _chunked_ encoding. The [`web::Payload`][payloadextr
 
 # Multipart body
 
-Actix-web provides multipart stream support with an external crate, [`actix-multipart`][multipartcrate].
+Actix Web provides multipart stream support with an external crate, [`actix-multipart`][multipartcrate].
 
 > A full example is available in the [examples directory][multipartexample].
 
 # Urlencoded body
 
-Actix-web provides support for _application/x-www-form-urlencoded_ encoded bodies with the [`web::Form`][formencoded] extractor which resolves to the deserialized instance. The type of the instance must implement the `Deserialize` trait from _serde_.
+Actix Web provides support for _application/x-www-form-urlencoded_ encoded bodies with the [`web::Form`][formencoded] extractor which resolves to the deserialized instance. The type of the instance must implement the `Deserialize` trait from _serde_.
 
 The _UrlEncoded_ future can resolve into an error in several cases:
 

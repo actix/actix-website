@@ -60,7 +60,7 @@ In the above example, the `show_users` route will have an effective route patter
 
 ## Application guards and virtual hosting
 
-You can think of a guard as a simple function that accepts a _request_ object reference and returns _true_ or _false_. Formally, a guard is any object that implements the [`Guard`][guardtrait] trait. Actix-web provides several guards. You can check the [functions section][guardfuncs] of the API docs.
+You can think of a guard as a simple function that accepts a _request_ object reference and returns _true_ or _false_. Formally, a guard is any object that implements the [`Guard`][guardtrait] trait. Actix Web provides several guards. You can check the [functions section][guardfuncs] of the API docs.
 
 One of the provided guards is [`Header`][guardheader]. It can be used as a filter based on request header information.
 

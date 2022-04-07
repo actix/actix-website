@@ -6,9 +6,9 @@ weight: 170
 
 # Type-safe information extraction
 
-Actix-web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). By default, actix-web provides several extractor implementations.
+Actix Web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). By default, actix-web provides several extractor implementations.
 
-An extractor can be accessed as an argument to a handler function. Actix-web supports up to 12 extractors per handler function. Argument position does not matter.
+An extractor can be accessed as an argument to a handler function. Actix Web supports up to 12 extractors per handler function. Argument position does not matter.
 
 {{< include-example example="extractors" file="main.rs" section="option-one" >}}
 
@@ -56,7 +56,7 @@ At the moment, only url-encoded forms are supported. The url-encoded body could 
 
 # Other
 
-Actix-web also provides several other extractors:
+Actix Web also provides several other extractors:
 
 - [_Data_][datastruct] - If you need access to an application state.
 - _HttpRequest_ - _HttpRequest_ itself is an extractor which returns self, in case you need access to the request.

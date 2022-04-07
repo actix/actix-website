@@ -6,7 +6,7 @@ weight: 220
 
 # Middleware
 
-Actix-web's middleware system allows us to add additional behavior to request/response processing. Middleware can hook into an incoming request process, enabling us to modify requests as well as halt request processing to return a response early.
+Actix Web's middleware system allows us to add additional behavior to request/response processing. Middleware can hook into an incoming request process, enabling us to modify requests as well as halt request processing to return a response early.
 
 Middleware can also hook into response processing.
 
@@ -27,7 +27,7 @@ Alternatively, for simple use cases, you can use [_wrap_fn_][wrap_fn] to create 
 
 {{< include-example example="middleware" file="wrap_fn.rs" section="wrap-fn" >}}
 
-> Actix-web provides several useful middleware, such as _logging_, _user sessions_, _compress_, etc.
+> Actix Web provides several useful middleware, such as _logging_, _user sessions_, _compress_, etc.
 
 **Warning: if you use `wrap()` or `wrap_fn()` multiple times, the last occurrence will be executed first.**
 
@@ -77,7 +77,7 @@ To set default response headers, the `DefaultHeaders` middleware can be used. Th
 
 ## User sessions
 
-Actix-web provides a general solution for session management. The [**actix-session**][actixsession] middleware can use multiple backend types to store session data.
+Actix Web provides a general solution for session management. The [**actix-session**][actixsession] middleware can use multiple backend types to store session data.
 
 > By default, only cookie session backend is implemented. Other backend implementations can be added.
 
