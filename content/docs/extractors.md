@@ -40,7 +40,7 @@ The [_Query_][querystruct] type provides extraction functionality for the reques
 
 {{< include-example example="extractors" file="json_one.rs" section="json-one" >}}
 
-Some extractors provide a way to configure the extraction process. To configure an extractor, pass its configuration object to the resource's `.data()` method. In the case of _Json_ extractor it returns a [_JsonConfig_][jsonconfig]. You can configure the maximum size of the JSON payload as well as a custom error handler function.
+Some extractors provide a way to configure the extraction process. To configure an extractor, pass its configuration object to the resource's `.app_data()` method. In the case of _Json_ extractor it returns a [_JsonConfig_][jsonconfig]. You can configure the maximum size of the JSON payload as well as a custom error handler function.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
 
