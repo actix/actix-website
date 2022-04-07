@@ -6,7 +6,7 @@ weight: 170
 
 # Type-safe information extraction
 
-Actix Web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). By default, actix-web provides several extractor implementations.
+Actix Web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). There are lots of built-in extractor implementations (see [implementors](https://actix.rs/actix-web/actix_web/trait.FromRequest.html#implementors)).
 
 An extractor can be accessed as an argument to a handler function. Actix Web supports up to 12 extractors per handler function. Argument position does not matter.
 
@@ -14,17 +14,17 @@ An extractor can be accessed as an argument to a handler function. Actix Web sup
 
 # Path
 
-[_Path_][pathstruct] provides information that can be extracted from the Request's path. You can deserialize any variable segment from the path.
+[_Path_][pathstruct] provides information that is extracted from the request's path. Parts of the path that are extractable are called "dynamic segments" and are marked with curly braces. You can deserialize any variable segment from the path.
 
-For instance, for resource that registered for the `/users/{user_id}/{friend}` path, two segments could be deserialized, `user_id` and `friend`. These segments could be extracted into a `tuple`, i.e. `Path<(u32, String)>` or any structure that implements the `Deserialize` trait from the _serde_ crate.
+For instance, for resource that registered for the `/users/{user_id}/{friend}` path, two segments could be deserialized, `user_id` and `friend`. These segments could be extracted as a tuple in the order they are declared (e.g., `Path<(u32, String)>`).
 
 {{< include-example example="extractors" file="path_one.rs" section="path-one" >}}
 
-It is also possible to extract path information to a specific type that implements the `Deserialize` trait from _serde_. Here is an equivalent example that uses _serde_ instead of a _tuple_ type.
+It is also possible to extract path information to a type that implements the `Deserialize` trait from `serde` by matching dynamic segment names with field names. Here is an equivalent example that uses `serde` instead of a tuple type.
 
 {{< include-example example="extractors" file="path_two.rs" section="path-two" >}}
 
-It is also possible to `get` or `query` the request for path parameters by name:
+As a non-type-safe alternative, it's also possible to `query` the request for path parameters by name within a handler:
 
 {{< include-example example="extractors" file="path_three.rs" section="path-three" >}}
 

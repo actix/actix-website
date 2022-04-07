@@ -1,12 +1,12 @@
 use actix_web::{get, HttpRequest, Result};
 
 // <path-three>
-#[get("/users/{userid}/{friend}")] // <- define path parameters
+#[get("/users/{user_id}/{friend}")] // <- define path parameters
 async fn index(req: HttpRequest) -> Result<String> {
     let name: String = req.match_info().get("friend").unwrap().parse().unwrap();
-    let userid: i32 = req.match_info().query("userid").parse().unwrap();
+    let userid: i32 = req.match_info().query("user_id").parse().unwrap();
 
-    Ok(format!("Welcome {}, userid {}!", name, userid))
+    Ok(format!("Welcome {}, user_id {}!", name, userid))
 }
 
 #[actix_web::main]

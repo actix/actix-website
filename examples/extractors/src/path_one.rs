@@ -1,5 +1,5 @@
 // <path-one>
-use actix_web::{get, web, Result};
+use actix_web::{get, web, App, HttpServer, Result};
 
 /// extract path info from "/users/{user_id}/{friend}" url
 /// {user_id} - deserializes to a u32
@@ -12,8 +12,6 @@ async fn index(path: web::Path<(u32, String)>) -> Result<String> {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    use actix_web::{App, HttpServer};
-
     HttpServer::new(|| App::new().service(index))
         .bind(("127.0.0.1", 8080))?
         .run()
