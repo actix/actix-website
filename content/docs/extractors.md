@@ -78,7 +78,7 @@ Although this handler will work, `data.count` will only count the number of requ
 
 **Note**: If you want the _entire_ state to be shared across all threads, use `web::Data` and `app_data` as described in [Shared Mutable State][shared_mutable_state].
 
-Be careful when using blocking synchronization primitives like `Mutex` or `RwLock` within your app state. Actix Web handles requests asynchronously. It is a problem if the [_critical section_](critical_section) in your handler is too big or contains an `.await` point. If this is a concern, we would avise you also read [Tokio's advice on using blocking `Mutex` in async code](tokio_std_mutex).
+Be careful when using blocking synchronization primitives like `Mutex` or `RwLock` within your app state. Actix Web handles requests asynchronously. It is a problem if the [_critical section_](critical_section) in your handler is too big or contains an `.await` point. If this is a concern, we would advise you to also read [Tokio's advice on using blocking `Mutex` in async code](tokio_std_mutex).
 
 [pathstruct]: https://docs.rs/actix-web/4/actix_web/dev/struct.Path.html
 [querystruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Query.html
