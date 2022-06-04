@@ -35,11 +35,11 @@ pub fn main() {
 mod tests {
     use super::*;
 
-    use actix_web::{body::MessageBody as _, rt::pin, test, web, App};
+    use actix_web::{body, body::MessageBody as _, rt::pin, test, web, App};
     use futures::future;
 
     #[actix_web::test]
-    async fn test_stream() {
+    async fn test_stream_chunk() {
         let app = test::init_service(App::new().route("/", web::get().to(sse))).await;
         let req = test::TestRequest::get().to_request();
 
@@ -63,13 +63,28 @@ mod tests {
             web::Bytes::from_static(b"data: 4\n\n")
         );
 
-        // TODO: fix this example
-        // // remaining part
-        // let bytes = body::to_bytes(body).await;
-        // assert_eq!(
-        //     bytes.unwrap(),
-        //     web::Bytes::from_static(b"data: 3\n\ndata: 2\n\ndata: 1\n\n")
-        // );
+        // remaining part
+        for i in 0..3 {
+            let expected_data = format!("data: {}\n\n", 3 - i);
+            let bytes = future::poll_fn(|cx| body.as_mut().poll_next(cx)).await;
+            assert_eq!(bytes.unwrap().unwrap(), web::Bytes::from(expected_data));
+        }
+    }
+
+    #[actix_web::test]
+    async fn test_stream_full_payload() {
+        let app = test::init_service(App::new().route("/", web::get().to(sse))).await;
+        let req = test::TestRequest::get().to_request();
+
+        let resp = test::call_service(&app, req).await;
+        assert!(resp.status().is_success());
+
+        let body = resp.into_body();
+        let bytes = body::to_bytes(body).await;
+        assert_eq!(
+            bytes.unwrap(),
+            web::Bytes::from_static(b"data: 5\n\ndata: 4\n\ndata: 3\n\ndata: 2\n\ndata: 1\n\n")
+        );
     }
 }
 // </stream-response>
