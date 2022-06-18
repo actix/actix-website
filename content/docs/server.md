@@ -43,7 +43,7 @@ For this reason, any long, non-cpu-bound operation (e.g. I/O, database operation
 
 ```rust
 async fn my_handler() -> impl Responder {
-    tokio::time::delay_for(Duration::from_secs(5)).await; // <-- Ok. Worker thread will handle other requests here
+    tokio::time::sleep(Duration::from_secs(5)).await; // <-- Ok. Worker thread will handle other requests here
     "response"
 }
 ```
