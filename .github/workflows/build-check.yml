@@ -1,4 +1,4 @@
-name: Test deployment
+name: Build check
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   test-deploy:
-    name: Test deployment
+    name: Build check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
