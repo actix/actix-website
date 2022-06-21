@@ -100,7 +100,7 @@ The match for a segment replacement marker in a segment will be done only up to 
 foo/{name}.html
 ```
 
-The literal path _/foo/biz.html_ will match the above route pattern, and the match result will be `Params {'name': 'biz'}`. However, the literal path _/foo/biz_ will not match, because it does not contain a literal _.html_ at the end of the segment represented by _{name}.html_ (it only contains biz, not biz.html).
+The literal path `/foo/biz.html` will match the above route pattern, and the match result will be `Params {'name': 'biz'}`. However, the literal path `/foo/biz` will not match, because it does not contain a literal `.html` at the end of the segment represented by `{name}.html` (it only contains biz, not biz.html).
 
 To capture both segments, two replacement markers can be used:
 
@@ -108,14 +108,14 @@ To capture both segments, two replacement markers can be used:
 foo/{name}.{ext}
 ```
 
-The literal path _/foo/biz.html_ will match the above route pattern, and the match result will be _Params {'name': 'biz', 'ext': 'html'}_. This occurs because there is a literal part of _._ (period) between the two replacement markers _{name}_ and _{ext}_.
+The literal path `/foo/biz.html` will match the above route pattern, and the match result will be `Params {'name': 'biz', 'ext': 'html'}`. This occurs because there is a literal part of `.` (period) between the two replacement markers `{name}` and `{ext}`.
 
-Replacement markers can optionally specify a regular expression which will be used to decide whether a path segment should match the marker. To specify that a replacement marker should match only a specific set of characters as defined by a regular expression, you must use a slightly extended form of replacement marker syntax. Within braces, the replacement marker name must be followed by a colon, then directly thereafter, the regular expression. The default regular expression associated with a replacement marker _[^/]+_ matches one or more characters which are not a slash. For example, under the hood, the replacement marker _{foo}_ can more verbosely be spelled as _{foo:[^/]+}_. You can change this to be an arbitrary regular expression to match an arbitrary sequence of characters, such as _{foo:\d+}_ to match only digits.
+Replacement markers can optionally specify a regular expression which will be used to decide whether a path segment should match the marker. To specify that a replacement marker should match only a specific set of characters as defined by a regular expression, you must use a slightly extended form of replacement marker syntax. Within braces, the replacement marker name must be followed by a colon, then directly thereafter, the regular expression. The default regular expression associated with a replacement marker `[^/]+` matches one or more characters which are not a slash. For example, under the hood, the replacement marker `{foo}` can more verbosely be spelled as `{foo:[^/]+}`. You can change this to be an arbitrary regular expression to match an arbitrary sequence of characters, such as `{foo:\d+}` to match only digits.
 
-Segments must contain at least one character in order to match a segment replacement marker. For example, for the URL _/abc/_:
+Segments must contain at least one character in order to match a segment replacement marker. For example, for the URL `/abc/`:
 
-- _/abc/{foo}_ will not match.
-- _/{foo}/_ will match.
+- `/abc/{foo}` will not match.
+- `/{foo}/` will match.
 
 > **Note**: path will be URL-unquoted and decoded into valid unicode string before matching pattern and values representing matched path segments will be URL-unquoted too.
 
