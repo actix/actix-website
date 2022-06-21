@@ -2,12 +2,12 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - master
+      - feat/docusaurus
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.repository == 'actix/actix-website'
+    if: github.repository == 'Woile/actix-website'
 
     steps:
       - name: Checkout
@@ -27,7 +27,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          branch: master
+          branch: gh-pages
           folder: build
-          repository-name: actix/actix.github.io
+          repository-name: Woile/actix-website
