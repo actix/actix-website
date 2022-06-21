@@ -1,4 +1,4 @@
 module.exports = {
-  rustVersion: '1.54',
+  rustVersion: '1.56',
   actixWebMajorVersion: '4',
 };
