@@ -38,31 +38,17 @@ Actix Web can automatically _compress_ payloads with the [_Compress middleware_]
 - Deflate
 - Identity
 
-<CodeBlock example="responses" file="compress.rs" section="compress" />
+A response's `Content-Encoding` header defaults to `ContentEncoding::Auto`, which performs automatic content compression negotiation based on the request's `Accept-Encoding` header.
 
-Response payload is compressed based on the _encoding_ parameter from the `middleware::BodyEncoding` trait. By default, `ContentEncoding::Auto` is used. If `ContentEncoding::Auto` is selected, then the compression depends on the request's `Accept-Encoding` header.
+<CodeBlock example="responses" file="auto.rs" section="auto" />
 
-> `ContentEncoding::Identity` can be used to disable compression. If another content encoding is selected, the compression is enforced for that codec.
-
-For example, to enable `brotli` for a single handler use `ContentEncoding::Br`:
-
-<CodeBlock example="responses" file="brotli.rs" section="brotli" />
-
-or for the entire application:
-
-<CodeBlock example="responses" file="brotli_two.rs" section="brotli-two" />
-
-In this case we explicitly disable content compression by setting content encoding to an `Identity` value:
+Explicitly disable content compression on a handler by setting `Content-Encoding` to an `Identity` value:
 
 <CodeBlock example="responses" file="identity.rs" section="identity" />
 
-When dealing with an already compressed body (for example when serving assets), set the content encoding to `Identity` to avoid compressing the already compressed data and set the `content-encoding` header manually:
+When dealing with an already compressed body (for example, when serving pre-compressed assets), set the `Content-Encoding` header on the response manually to bypass the middleware:
 
 <CodeBlock example="responses" file="identity_two.rs" section="identity-two" />
-
-Also it is possible to set default content encoding on application level, by default `ContentEncoding::Auto` is used, which implies automatic content compression negotiation.
-
-<CodeBlock example="responses" file="auto.rs" section="auto" />
 
 [responsebuilder]: https://docs.rs/actix-web/4/actix_web/struct.HttpResponseBuilder.html
 [compressmidddleware]: https://docs.rs/actix-web/4/actix_web/middleware/struct.Compress.html
