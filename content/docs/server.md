@@ -18,7 +18,7 @@ After the `bind` is successful, use [`HttpServer::run()`][httpserver_run] to ret
 
 ## Multi-Threading
 
-`HttpServer` automatically starts a number of HTTP _workers_, by default this number is equal to the number of logical CPUs in the system. This number can be overridden with the [`HttpServer::workers()`][workers] method.
+`HttpServer` automatically starts a number of HTTP _workers_, by default this number is equal to the number of physical CPUs in the system. This number can be overridden with the [`HttpServer::workers()`][workers] method.
 
 {{< include-example example="server" file="workers.rs" section="workers" >}}
 
