@@ -8,7 +8,7 @@ struct Info {
 }
 
 /// deserialize `Info` from request's body
-#[get("/")]
+#[post("/")]
 async fn index(info: web::Json<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
