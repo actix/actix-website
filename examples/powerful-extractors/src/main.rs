@@ -1,6 +1,7 @@
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use serde::{Deserialize, Serialize};
 
+// <powerful-extractors>
 #[derive(Deserialize, Serialize)]
 struct Event {
     id: Option<i32>,
@@ -8,6 +9,12 @@ struct Event {
     kind: String,
     tags: Vec<String>,
 }
+
+async fn capture_event(evt: web::Json<Event>) -> impl Responder {
+    let new_event = store_in_db(evt.timestamp, &evt.kind, &evt.tags);
+    format!("got event {}", new_event.id.unwrap())
+}
+// </powerful-extractors>
 
 fn store_in_db(timestamp: f64, kind: &str, tags: &[String]) -> Event {
     // store item in db and get new_event
@@ -20,10 +27,6 @@ fn store_in_db(timestamp: f64, kind: &str, tags: &[String]) -> Event {
     }
 }
 
-async fn capture_event(evt: web::Json<Event>) -> impl Responder {
-    let new_event = store_in_db(evt.timestamp, &evt.kind, &evt.tags);
-    format!("got event {}", new_event.id.unwrap())
-}
 
 async fn index() -> HttpResponse {
     HttpResponse::Ok()

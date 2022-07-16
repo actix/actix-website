@@ -57,7 +57,7 @@ async fn index(pool: web::Data<DbPool>, name: web::Path<(String)>) -> impl Respo
             eprintln!("{}", e);
             HttpResponse::InternalServerError().finish()
         })?;
-    
+
     Ok(HttpResponse::Ok().json(user))
 }
 // </index>

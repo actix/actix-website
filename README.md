@@ -2,32 +2,25 @@
 
 ## Getting Started
 
-Building the website depends on [Hugo]. So, first make sure that you have it installed. If on macOS and using [Homebrew], run the following:
-
-```sh
-brew update
-brew install hugo
-```
-
-Then, get the website running locally:
+Building the website depends on [Docusaurus], you must have `npm` or `yarn` installed. You can run the site locally with:
 
 ```sh
 git clone https://github.com/actix/actix-website.git
 cd actix-website
-
-hugo server
+npm install  # or yarn install
+npm start  # or yarn start
 ```
 
-Then visit http://localhost:1313.
+Then visit http://localhost:3000.
 
 ## Updating diagrams
 
-Diagrams are located under [/static/css/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI].
+Diagrams are located under [/static/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI][mermaid cli].
 
 For instance to edit `connection_overview` diagram:
 
 ```sh
-cd static/css/img/diagrams
+cd static/img/diagrams
 vi connection_overview.mmd
 # Compile diagrams:
 mmdc -i connection_overview.mmd -o connection_overview.svg
@@ -35,10 +28,14 @@ mmdc -i connection_overview.mmd -o connection_overview.svg
 
 # License
 
-Pretty murky. Right now a massive clone of the tokio website. Will get this figured out as we go along.
+This site is licensed under either of
+
+* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+  [http://www.apache.org/licenses/LICENSE-2.0])
+* MIT license ([LICENSE-MIT](LICENSE-MIT) or
+  [http://opensource.org/licenses/MIT])
 
 <!-- LINKS -->
 
-[hugo]: https://gohugo.io
-[homebrew]: https://brew.sh
+[Docusaurus]: https://docusaurus.io/
 [mermaid cli]: https://github.com/mermaidjs/mermaid.cli

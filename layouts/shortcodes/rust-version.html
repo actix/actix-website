@@ -1,5 +1,0 @@
-{{- if eq (.Get 0) "actix" -}}
-  {{- .Page.Site.Params.actixMinRustVersion -}}
-{{- else if eq (.Get 0) "actix-web" -}}
-  {{- .Page.Site.Params.actixWebMinRustVersion -}}
-{{- end -}}
