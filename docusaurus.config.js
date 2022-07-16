@@ -4,7 +4,7 @@ module.exports = {
   title: 'Actix',
   tagline: 'Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust',
   url: 'https://actix.rs',
-  baseUrl: '/actix-website/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/logo.png',
