@@ -1,7 +1,5 @@
 pub mod auto;
-pub mod brotli;
 pub mod chunked;
-pub mod compress;
 pub mod identity;
 pub mod identity_two;
 pub mod json_resp;
