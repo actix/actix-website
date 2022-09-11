@@ -1,5 +1,7 @@
 # Actix Website
 
+> The upcoming v2 website is available here: <https://actix-website.netlify.app>.
+
 ## Getting Started
 
 Building the website depends on [Docusaurus], you must have `npm` or `yarn` installed. You can run the site locally with:
