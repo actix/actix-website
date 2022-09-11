@@ -34,7 +34,7 @@ The [`Query<T>`][querystruct] type provides extraction functionality for the req
 
 <CodeBlock example="extractors" file="query.rs" section="query" />
 
-## Json
+## JSON
 
 [`Json<T>`][jsonstruct] allows deserialization of a request body into a struct. To extract typed information from a request's body, the type `T` must implement `serde::Deserialize`.
 
@@ -56,13 +56,13 @@ A URL-encoded form body can be extracted to a struct, much like `Json<T>`. This 
 
 ## Other
 
-Actix Web also provides several other extractors:
+Actix Web also provides many other extractors, here's a few important ones:
 
-- [_Data_][datastruct] - If you need access to an application state.
-- _HttpRequest_ - _HttpRequest_ itself is an extractor which returns self, in case you need access to the request.
-- _String_ - You can convert a request's payload to a _String_. [_Example_][stringexample] is available in doc strings.
-- _actix_web::web::Bytes_ - You can convert a request's payload into _Bytes_. [_Example_][bytesexample] is available in doc strings.
-- _Payload_ - Low-level payload extractor primarily for building other extractors. [_Example_][payloadexample]
+- [`Data`][datastruct] - For accessing pieces of application state.
+- [`HttpRequest`][httprequest] - `HttpRequest` is itself an extractor, in case you need access to other parts of the request.
+- `String` - You can convert a request's payload to a `String`. [_An example_][stringexample] is available in the rustdoc.
+- [`Bytes`][bytes] - You can convert a request's payload into _Bytes_. [_An example_][bytesexample] is available in the rustdoc.
+- [`Payload`][payload] - Low-level payload extractor primarily for building other extractors. [_An example_][payloadexample] is available in the rustdoc.
 
 # Application State Extractor
 
@@ -86,8 +86,11 @@ Be careful when using blocking synchronization primitives like `Mutex` or `RwLoc
 [jsonconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.JsonConfig.html
 [formconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.FormConfig.html
 [datastruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Data.html
+[httprequest]: https://docs.rs/actix-web/4/actix_web/struct.HttpRequest.html
 [stringexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#impl-FromRequest-for-String
+[bytes]: https://docs.rs/actix-web/4/actix_web/web/struct.Bytes.html
 [bytesexample]: https://docs.rs/actix-web/4/actix_web/trait.FromRequest.html#impl-FromRequest-5
+[payload]: https://docs.rs/actix-web/4/actix_web/web/struct.Payload.html
 [payloadexample]: https://docs.rs/actix-web/4/actix_web/web/struct.Payload.html
 [docsrs_match_info]: https://docs.rs/actix-web/latest/actix_web/struct.HttpRequest.html#method.match_info
 [actix]: https://actix.github.io/actix/actix/
