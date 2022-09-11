@@ -14,7 +14,7 @@ We have several example projects showing use of async database adapters:
 
 # Diesel
 
-The current version of Diesel (v1) does not support asynchronous operations, so it is important to use the [`web::block`][web-block] function to offload your database operations to the Actix runtime thread-pool.
+The current versions of Diesel (v1/v2) does not support asynchronous operations, so it is important to use the [`web::block`][web-block] function to offload your database operations to the Actix runtime thread-pool.
 
 You can create action functions that correspond to all the operations your app will perform on the database.
 
