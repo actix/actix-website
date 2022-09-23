@@ -35,11 +35,15 @@ actix-web = "${actixWebMajorVersion}"`}
 
 Request handlers use async functions that accept zero or more parameters. These parameters can be extracted from a request (see `FromRequest` trait) and returns a type that can be converted into an `HttpResponse` (see `Responder` trait):
 
+Replace the contents of `src/main.rs` with the following:
+
 <CodeBlock example="getting-started" section="handlers" />
 
 Notice that some of these handlers have routing information attached directly using the built-in macros. These allow you to specify the method and path that the handler should respond to. You will see below how to register `manual_hello` (i.e. routes that do not use a routing macro).
 
 Next, create an `App` instance and register the request handlers. Use `App::service` for the handlers using routing macros and `App::route` for manually routed handlers, declaring the path and method. Finally, the app is started inside an `HttpServer` which will serve incoming requests using your `App` as an "application factory".
+
+Further append the following `main` function to `src/main.rs`:
 
 <CodeBlock example="getting-started" section="main" />
 
