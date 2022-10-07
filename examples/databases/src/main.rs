@@ -49,14 +49,15 @@ async fn main() -> io::Result<()> {
 async fn index(pool: web::Data<DbPool>, name: web::Path<(String)>) -> impl Responder {
     let name = name.into_inner();
 
-    let conn = pool.get().expect("couldn't get db connection from pool");
-
-    let user = web::block(move || actions::insert_new_user(&conn, &user))
+    let user = web::block(move || {
+      let conn = pool.get().expect("couldn't get db connection from pool");
+      actions::insert_new_user(&conn, &user)
         .await
         .map_err(|e| {
             eprintln!("{}", e);
             HttpResponse::InternalServerError().finish()
-        })?;
+        }
+    })?;
 
     Ok(HttpResponse::Ok().json(user))
 }
