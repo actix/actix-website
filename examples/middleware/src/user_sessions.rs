@@ -26,6 +26,7 @@ async fn main() -> std::io::Result<()> {
                 // create cookie based session middleware
                 SessionMiddleware::builder(CookieSessionStore::default(), Key::from(&[0; 64]))
                     .cookie_secure(false)
+                    .build()
             )
             .service(web::resource("/").to(index))
     })
