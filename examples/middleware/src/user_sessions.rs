@@ -1,8 +1,8 @@
 #![allow(dead_code)]
 
 // <user-session>
-use actix_session::{CookieSession, Session};
-use actix_web::{web, App, Error, HttpResponse, HttpServer};
+use actix_session::{Session, SessionMiddleware, storage::CookieSessionStore};
+use actix_web::{web, App, Error, HttpResponse, HttpServer, cookie::Key};
 
 async fn index(session: Session) -> Result<HttpResponse, Error> {
     // access session data
@@ -23,8 +23,10 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .wrap(
-                CookieSession::signed(&[0; 32]) // <- create cookie based session middleware
-                    .secure(false),
+                // create cookie based session middleware
+                SessionMiddleware::builder(CookieSessionStore::default(), Key::from(&[0; 64]))
+                    .cookie_secure(false)
+                    .build()
             )
             .service(web::resource("/").to(index))
     })

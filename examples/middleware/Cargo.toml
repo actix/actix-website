@@ -5,6 +5,6 @@ edition = "2018"
 
 [dependencies]
 actix-web = "4"
-actix-session = "0.5.0-beta.8"
+actix-session = { version = "0.7.2", features = ["cookie-session"] }
 futures-util = { version = "0.3.7", default-features = false, features = ["std"] }
 env_logger = "0.7"
