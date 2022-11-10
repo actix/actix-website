@@ -90,6 +90,7 @@ A _signed_ cookie may be viewed but not modified by the client. A _private_ cook
 The constructors take a key as an argument. This is the private key for cookie session - when this value is changed, all session data is lost.
 
 In general, you create a `SessionStorage` middleware and initialize it with specific backend implementation, such as a `CookieSession`. To access session data the [`Session`][requestsession] extractor must be used. This method returns a [_Session_][sessionobj] object, which allows us to get or set session data.
+> `actix_session::storage::CookieSessionStore` is available on the crate feature "cookie-session".
 
 <CodeBlock example="middleware" file="user_sessions.rs" section="user-session" />
 
