@@ -93,7 +93,7 @@ Be careful when using blocking synchronization primitives like `Mutex` or `RwLoc
 [payload]: https://docs.rs/actix-web/4/actix_web/web/struct.Payload.html
 [payloadexample]: https://docs.rs/actix-web/4/actix_web/web/struct.Payload.html
 [docsrs_match_info]: https://docs.rs/actix-web/latest/actix_web/struct.HttpRequest.html#method.match_info
-[actix]: https://actix.github.io/actix/actix/
+[actix]: /actix/docs/
 [atomics]: https://doc.rust-lang.org/std/sync/atomic/
 [shared_mutable_state]: /docs/application#shared-mutable-state
 [critical_section]: https://en.wikipedia.org/wiki/Critical_section
