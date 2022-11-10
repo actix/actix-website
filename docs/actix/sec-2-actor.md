@@ -29,9 +29,9 @@ Actor can spawn other actors or add futures or streams to execution context.
 The `Actor` trait provides several methods that allow controlling the actor's lifecycle.
 
 [Actor Model]: https://en.wikipedia.org/wiki/Actor_model
-[`Context<A>`]: ./sec-4-context.html
-[`Actor`]: https://actix.rs/actix/actix/trait.Actor.html
-[`Handler<M>`]: https://actix.rs/actix/actix/trait.Handler.html
+[`Context<A>`]: ./context
+[`Actor`]: https://docs.rs/actix/latest/actix/trait.Actor.html
+[`Handler<M>`]: https://docs.rs/actix/latest/actix/trait.Handler.html
 
 ## Actor lifecycle
 
@@ -88,7 +88,7 @@ impl Message for Ping {
 }
 ```
 
-[`Message`]: https://actix.rs/actix/actix/trait.Message.html
+[`Message`]: https://docs.rs/actix/latest/actix/trait.Message.html
 
 ## Spawning an actor
 

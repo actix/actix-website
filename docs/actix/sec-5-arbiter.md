@@ -24,7 +24,7 @@ While it only uses one thread, it uses the very efficient event loop pattern
 which works well for asynchronous events. To handle synchronous, CPU-bound
 tasks, it's better to avoid blocking the event loop and instead offload the
 computation to other threads. For this usecase, read the next section and
-consider using [`SyncArbiter`](./sec-6-sync-arbiter.md).
+consider using [`SyncArbiter`](./sync-arbiter).
 
 ## The event loop
 

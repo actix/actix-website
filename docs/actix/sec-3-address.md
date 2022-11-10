@@ -39,7 +39,7 @@ impl Actor for MyActor {
 }
 ```
 
-[SyncArbiter]: ./sec-6-sync-arbiter.md
+[SyncArbiter]: ./sync-arbiter
 
 ## Message
 
@@ -66,8 +66,8 @@ ways to send a message.
   of a message handling process. If the returned `Future` object is dropped, the
   message is cancelled.
 
-[`Handler<M>`]: https://actix.rs/actix/actix/trait.Handler.html
-[`SendError`]: https://actix.rs/actix/actix/prelude/enum.SendError.html
+[`Handler<M>`]: https://docs.rs/actix/latest/actix/trait.Handler.html
+[`SendError`]: https://docs.rs/actix/latest/actix/prelude/enum.SendError.html
 
 ## Recipient
 
@@ -140,8 +140,7 @@ impl Handler<Ship> for OrderEvents {
         self.notify(msg.0);
         System::current().stop();
     }
-
-} 
+}
 
 /// Email Subscriber 
 struct EmailSubscriber;

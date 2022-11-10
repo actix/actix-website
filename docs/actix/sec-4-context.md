@@ -34,7 +34,7 @@ Remember that this doesn't apply to `Addr::do_send(M)` which bypasses the Mailbo
 `AsyncContext::notify(M)` and `AsyncContext::notify_later(M, Duration)` which bypasses the mailbox
 entirely.
 
-[`Context::set_mailbox_capacity()`]: https://actix.rs/actix/actix/struct.Context.html#method.set_mailbox_capacity
+[`Context::set_mailbox_capacity()`]: https://docs.rs/actix/latest/actix/struct.Context.html#method.set_mailbox_capacity
 
 ## Getting your actors Address
 
@@ -69,7 +69,7 @@ impl Handler<WhoAmI> for MyActor {
 let who_addr = addr.do_send(WhoAmI{});
 ```
 
-[`Context::address()`]: https://actix.rs/actix/actix/struct.Context.html#method.address
+[`Context::address()`]: https://docs.rs/actix/latest/actix/struct.Context.html#method.address
 
 ## Stopping an Actor
 
@@ -111,4 +111,4 @@ async fn main() {
 }
 ```
 
-[`Context::stop()`]: https://actix.rs/actix/actix/struct.Context.html#method.stop
+[`Context::stop()`]: https://docs.rs/actix/latest/actix/struct.Context.html#method.stop
