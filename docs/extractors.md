@@ -6,7 +6,7 @@ import CodeBlock from "@site/src/components/code_block.js";
 
 # Type-safe information extraction
 
-Actix Web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). There are lots of built-in extractor implementations (see [implementors](https://actix.rs/actix-web/actix_web/trait.FromRequest.html#implementors)).
+Actix Web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). There are lots of built-in extractor implementations (see [implementors](https://docs.rs/actix-web/latest/actix_web/trait.FromRequest.html#implementors)).
 
 An extractor can be accessed as an argument to a handler function. Actix Web supports up to 12 extractors per handler function. Argument position does not matter.
 
