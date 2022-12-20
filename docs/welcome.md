@@ -13,4 +13,4 @@ The documentation on this website focusses primarily on the Actix Web framework.
 [getting-started]: https://actix.rs/docs/getting-started
 [actix-web-docs]: https://docs.rs/actix-web
 [actix-docs]: https://docs.rs/actix
-[actix-book]: https://actix.rs/docs/actix
+[actix-chapter]: https://actix.rs/docs/actix
