@@ -69,7 +69,7 @@ INFO:actix_web::middleware::logger: 127.0.0.1:59947 [02/Dec/2017:00:22:40 -0800]
 - `%{FOO}o` response.headers['FOO']
 - `%{FOO}e` os.environ['FOO']
 
-### Default headers
+## Default headers
 
 To set default response headers, the `DefaultHeaders` middleware can be used. The _DefaultHeaders_ middleware does not set the header if response headers already contain a specified header.
 
