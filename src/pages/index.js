@@ -44,7 +44,7 @@ const highlights = [
     icon: faBatteryFull,
     title: 'Feature Rich',
     description: (
-      <>Actix provides a lot of features out of box. HTTP/2, logging, etc.</>
+      <>s provides a lot of features out of box. HTTP/2, logging, etc.</>
     ),
   },
   {
@@ -137,7 +137,7 @@ const Examples = () => {
           <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Hello World!</h3>
             <p>
-              Getting started with actix is easy. An actix app comes with a URL routing system that lets you match on
+              Getting started with Actix is easy. An Actix app comes with a URL routing system that lets you match on
               URLs and invoke individual handlers.
             </p>
           </div>
@@ -151,7 +151,7 @@ const Examples = () => {
           <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Flexible Responders</h3>
             <p>
-              Handler functions in actix can return a wide range of objects that
+              Handler functions in Actix can return a wide range of objects that
               implement the <code>Responder</code> trait. This makes it a breeze
               to return consistent responses from your APIs.
             </p>
@@ -190,7 +190,7 @@ const Examples = () => {
             <h3 className={styles.featureTitle}>Easy Form Handling</h3>
             <p>
               Handling multipart/urlencoded form data is easy. Just define a
-              structure that can be deserialized and actix will handle the rest.
+              structure that can be deserialized and Actix will handle the rest.
             </p>
           </div>
           <div className={styles.example__code}>
