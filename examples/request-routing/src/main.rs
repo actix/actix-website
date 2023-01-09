@@ -1,24 +1,21 @@
 // <request-routing>
-use actix_web::{get, web, App, HttpRequest, HttpServer, Responder};
+use actix_web::{get, web, App, HttpServer, Responder};
 
 #[get("/")]
-async fn index(_req: HttpRequest) -> impl Responder {
-    "Hello from the index page."
+async fn index() -> impl Responder {
+    "Hello, World!"
 }
 
-async fn hello(path: web::Path<String>) -> impl Responder {
-    format!("Hello {}!", &path)
+#[get("/{name}")]
+async fn hello(name: web::Path<String>) -> impl Responder {
+    format!("Hello {}!", &name)
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(index)
-            .route("/{name}", web::get().to(hello))
-    })
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+    HttpServer::new(|| App::new().service(index).service(hello))
+        .bind(("127.0.0.1", 8080))?
+        .run()
+        .await
 }
 // </request-routing>
