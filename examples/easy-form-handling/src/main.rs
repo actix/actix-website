@@ -1,8 +1,8 @@
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use serde::Deserialize;
-// <easy-form-handling>
 use actix_web::web::{Either, Json, Form};
 
+// <easy-form-handling>
 #[derive(Deserialize)]
 struct Register {
     username: String,

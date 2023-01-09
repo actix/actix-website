@@ -18,6 +18,12 @@
   --ifm-background-color: #fff;
   --ifm-footer-background-color: var(--ifm-background-surface-color);
   --ifm-menu-color-background-active: var(--ifm-color-emphasis-200);
+  --ifm-navbar-background-color: var(--ifm-color-primary);
+  --ifm-navbar-link-color: #fff;
+}
+
+.lightToggleIcon {
+    display: none;
 }
 
 html[data-theme='dark'] {
@@ -49,5 +55,5 @@ html[data-theme='dark'] {
 
 
 .navbar__logo {
-  filter: var(--logo-filter);
+  filter: brightness(0) invert(1);
 }

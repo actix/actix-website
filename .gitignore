@@ -3,3 +3,4 @@ build/
 .docusaurus
 .cache-loader
 Cargo.lock
+yarn.lock

@@ -22,7 +22,6 @@ const Home = () => {
     <Layout description={siteConfig.tagline}>
       <Hero />
       <main className={styles.main}>
-        <MainExample />
         <Highlights />
         <Examples />
       </main>
@@ -97,21 +96,13 @@ const Hero = () => {
   );
 };
 
-const MainExample = () => (
-  <div className={styles.main_example}>
-    <div className={styles.main_example__code}>
-      <CodeBlock example="main-example" section="main-example" />
-    </div>
-  </div>
-);
-
 const Highlights = () => {
   return (
     <>
       <section id="highlights" className={styles.highlights}>
         <div className="container">
           <div className="row">
-            <div className="col col--11 col--offset-1">
+            <div className="col">
               <div className="row">
                 {highlights.map((highlight, idx) => (
                   <div
@@ -140,67 +131,74 @@ const Highlights = () => {
 
 const Examples = () => {
   return (
-    <div>
+    <div className={styles.examples}>
       <div className={styles.example}>
-        <div className={styles.featureText}>
-          <h3 className={styles.featureTitle}>Flexible Responders</h3>
-          <p>
-            Handler functions in actix can return a wide range of objects that
-            implement the <code>Responder</code> trait. This makes it a breeze
-            to return consistent responses from your APIs.
-          </p>
-        </div>
-        <div className={styles.example__code}>
-          <CodeBlock
-            example="flexible-responders"
-            section="flexible-responders"
-          />
+        <div className={styles.exampleContent}>
+          <div className={styles.featureText}>
+            <h3 className={styles.featureTitle}>Hello World!</h3>
+            <p>
+              Getting started with actix is easy. An actix app comes with a URL routing system that lets you match on
+              URLs and invoke individual handlers.
+            </p>
+          </div>
+          <div className={styles.example__code}>
+            <CodeBlock example="request-routing" section="request-routing" />
+          </div>
         </div>
       </div>
       <div className={styles.example}>
-        <div className={styles.featureText}>
-          <h3 className={styles.featureTitle}>Powerful Extractors</h3>
-          <p>
-            Actix comes with a powerful extractor system that extracts data from
-            the incoming HTTP request and passes it to your view functions. Not
-            only does this make for a convenient API but it also means that your
-            view functions can be synchronous code and still benefit from
-            asynchronous IO handling.
-          </p>
-        </div>
-        <div className={styles.example__code}>
-          <CodeBlock
-            example="powerful-extractors"
-            section="powerful-extractors"
-          />
-        </div>
-      </div>
-      <div className={styles.example}>
-        <div className={styles.featureText}>
-          <h3 className={styles.featureTitle}>Easy Form Handling</h3>
-          <p>
-            Handling multipart/urlencoded form data is easy. Just define a
-            structure that can be deserialized and actix will handle the rest.
-          </p>
-        </div>
-        <div className={styles.example__code}>
-          <CodeBlock
-            example="easy-form-handling"
-            section="easy-form-handling"
-          />
+        <div className={styles.exampleContent}>
+          <div className={styles.featureText}>
+            <h3 className={styles.featureTitle}>Flexible Responders</h3>
+            <p>
+              Handler functions in actix can return a wide range of objects that
+              implement the <code>Responder</code> trait. This makes it a breeze
+              to return consistent responses from your APIs.
+            </p>
+          </div>
+          <div className={styles.example__code}>
+            <CodeBlock
+              example="flexible-responders"
+              section="flexible-responders"
+            />
+          </div>
         </div>
       </div>
       <div className={styles.example}>
-        <div className={styles.featureText}>
-          <h3 className={styles.featureTitle}>Request Routing</h3>
-          <p>
-            An actix app comes with a URL routing system that lets you match on
-            URLs and invoke individual handlers. For extra flexibility, scopes
-            can be used.
-          </p>
+        <div className={styles.exampleContent}>
+          <div className={styles.featureText}>
+            <h3 className={styles.featureTitle}>Powerful Extractors</h3>
+            <p>
+              Actix comes with a powerful extractor system that extracts data from
+              the incoming HTTP request and passes it to your view functions. Not
+              only does this make for a convenient API but it also means that your
+              view functions can be synchronous code and still benefit from
+              asynchronous IO handling.
+            </p>
+          </div>
+          <div className={styles.example__code}>
+            <CodeBlock
+              example="powerful-extractors"
+              section="powerful-extractors"
+            />
+          </div>
         </div>
-        <div className={styles.example__code}>
-          <CodeBlock example="request-routing" section="request-routing" />
+      </div>
+      <div className={styles.example}>
+        <div className={styles.exampleContent}>
+          <div className={styles.featureText}>
+            <h3 className={styles.featureTitle}>Easy Form Handling</h3>
+            <p>
+              Handling multipart/urlencoded form data is easy. Just define a
+              structure that can be deserialized and actix will handle the rest.
+            </p>
+          </div>
+          <div className={styles.example__code}>
+            <CodeBlock
+              example="easy-form-handling"
+              section="easy-form-handling"
+            />
+          </div>
         </div>
       </div>
     </div>
