@@ -44,7 +44,7 @@ const highlights = [
     icon: faBatteryFull,
     title: 'Feature Rich',
     description: (
-      <>s provides a lot of features out of box. HTTP/2, logging, etc.</>
+      <>Actix provides a lot of features out of box. HTTP/2, logging, etc.</>
     ),
   },
   {
@@ -189,7 +189,7 @@ const Examples = () => {
           <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Easy Form Handling</h3>
             <p>
-              Handling multipart/urlencoded form data is easy. Just define a
+              Handling JSON or URL-encoded form data is easy. Just define a
               structure that can be deserialized and Actix will handle the rest.
             </p>
           </div>
