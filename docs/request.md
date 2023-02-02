@@ -2,6 +2,8 @@
 title: Requests
 ---
 
+import CodeBlock from "@site/src/components/code_block.js";
+
 # JSON Request
 
 There are several options for json body deserialization.
