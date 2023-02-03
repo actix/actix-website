@@ -74,7 +74,7 @@ A _variable part_ (replacement marker) is specified in the form _{identifier}_, 
 
 A replacement marker in a pattern matches the regular expression `[^{}/]+`.
 
-A match*info is the `Params` object representing the dynamic parts extracted from a \_URL* based on the routing pattern. It is available as _request.match_info_. For example, the following pattern defines one literal segment (foo) and two replacement markers (baz, and bar):
+A `match_info` is the `Params` object representing the dynamic parts extracted from a _URL_ based on the routing pattern. It is available as _request.match_info_. For example, the following pattern defines one literal segment (foo) and two replacement markers (baz, and bar):
 
 ```
 foo/{baz}/{bar}
