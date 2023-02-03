@@ -32,11 +32,11 @@ If you need more complex application configuration, testing should be very simil
 
 ## Stream response tests
 
-If you need to test stream generation, it would be enough to call `take_body()` and convert a resulting [_ResponseBody_][responsebody] into a future and execute it, for example when testing [_Server Sent Events_][serversentevents].
+If you need to test stream generation, it would be enough to call [`into_parts()`][resintoparts] and convert the resulting body into a future and execute it, for example when testing [_Server Sent Events_][serversentevents].
 
 <CodeBlock example="testing" file="stream_response.rs" section="stream-response" />
 
 [serversentevents]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
-[responsebody]: https://docs.rs/actix-web/4/actix_web/body/enum.ResponseBody.html
+[resintoparts]: https://docs.rs/actix-web/4/actix_web/struct.HttpResponse.html#method.into_parts
 [actixdocs]: https://docs.rs/actix-web/4/actix_web/test/index.html
 [testrequest]: https://docs.rs/actix-web/4/actix_web/test/struct.TestRequest.html

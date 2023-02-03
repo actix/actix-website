@@ -74,7 +74,7 @@ A _variable part_ (replacement marker) is specified in the form _{identifier}_, 
 
 A replacement marker in a pattern matches the regular expression `[^{}/]+`.
 
-A match_info is the `Params` object representing the dynamic parts extracted from a _URL_ based on the routing pattern. It is available as _request.match_info_. For example, the following pattern defines one literal segment (foo) and two replacement markers (baz, and bar):
+A match*info is the `Params` object representing the dynamic parts extracted from a \_URL* based on the routing pattern. It is available as _request.match_info_. For example, the following pattern defines one literal segment (foo) and two replacement markers (baz, and bar):
 
 ```
 foo/{baz}/{bar}
@@ -206,7 +206,7 @@ Use the [_HttpRequest.url_for()_][urlfor] method to generate URLs based on resou
 
 <CodeBlock example="url-dispatch" file="urls.rs" section="url" />
 
-This would return something like the string *http://example.com/test/1/2/3* (at least if the current protocol and hostname implied http://example.com). `url_for()` method returns [_Url object_][urlobj] so you can modify this url (add query parameters, anchor, etc). `url_for()` could be called only for _named_ resources otherwise error get returned.
+This would return something like the string `http://example.com/test/1/2/3` (at least if the current protocol and hostname implied http://example.com). `url_for()` method returns [_Url object_][urlobj] so you can modify this url (add query parameters, anchor, etc). `url_for()` could be called only for _named_ resources otherwise error get returned.
 
 ## External resources
 
