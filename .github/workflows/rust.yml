@@ -4,30 +4,17 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
   push:
-    branches:
-      - master
-
-env:
-  RUSTFLAGS: -A dead-code -A unused-variables
+    branches: [master]
 
 jobs:
   check-examples:
-    strategy:
-      fail-fast: false
-
     name: Check examples
     runs-on: ubuntu-latest
 
+    env:
+      RUSTFLAGS: -A dead-code -A unused-variables
+
     steps:
       - uses: actions/checkout@v3
-
-      - name: Use stable
-        run: |
-          rustup override set stable
-          rustup update stable
-
-      - name: cargo check and cargo test
-        run: |
-          cd examples
-          cargo check
-          cargo test
+      - uses: actions-rust-lang/setup-rust-toolchain@v1.3.5
+      - run: cargo test

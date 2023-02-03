@@ -1,9 +1,10 @@
-name: Build check
+name: Build website
 
 on:
   pull_request:
-    branches:
-      - v2
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
 
 jobs:
   test-deploy:
