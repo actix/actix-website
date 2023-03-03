@@ -23,7 +23,7 @@ To serve files from specific directories and sub-directories, [`Files`][files] c
 
 By default files listing for sub-directories is disabled. Attempt to load directory listing will return _404 Not Found_ response. To enable files listing, use [`Files::show_files_listing()`][showfileslisting] method.
 
-Instead of showing files listing for directory, it is possible to redirect to a specific index file. Use the [`Files::index_file()`][indexfile] method to configure this redirect.
+Instead of showing files listing for a directory, it is possible to redirect to a specific index file. Use the [`Files::index_file()`][indexfile] method to configure this redirect.
 
 ## Configuration
 
