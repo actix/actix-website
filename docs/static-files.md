@@ -17,13 +17,13 @@ It offers the possibility for an attacker to insert `../` into the URL and acces
 
 ## Directory
 
-To serve files from specific directories and sub-directories, `Files` can be used. `Files` must be registered with an `App::service()` method, otherwise it will be unable to serve sub-paths.
+To serve files from specific directories and sub-directories, [`Files`][files] can be used. `Files` must be registered with an `App::service()` method, otherwise it will be unable to serve sub-paths.
 
 <CodeBlock example="static-files" file="directory.rs" section="directory" />
 
-By default files listing for sub-directories is disabled. Attempt to load directory listing will return _404 Not Found_ response. To enable files listing, use [_Files::show_files_listing()_][showfileslisting] method.
+By default files listing for sub-directories is disabled. Attempt to load directory listing will return _404 Not Found_ response. To enable files listing, use [`Files::show_files_listing()`][showfileslisting] method.
 
-Instead of showing files listing for directory, it is possible to redirect to a specific index file. Use the [_Files::index_file()_][indexfile] method to configure this redirect.
+Instead of showing files listing for directory, it is possible to redirect to a specific index file. Use the [`Files::index_file()`][indexfile] method to configure this redirect.
 
 ## Configuration
 
@@ -41,5 +41,6 @@ The Configuration can also be applied to directory service:
 
 <CodeBlock example="static-files" file="configuration_two.rs" section="config-two" />
 
-[showfileslisting]: https://docs.rs/actix-files/0.2/actix_files/struct.Files.html
-[indexfile]: https://docs.rs/actix-files/0.2/actix_files/struct.Files.html#method.index_file
+[files]: https://docs.rs/actix-files/0.6/actix_files/struct.Files.html#
+[showfileslisting]: https://docs.rs/actix-files/0.6/actix_files/struct.Files.html#method.show_files_listing
+[indexfile]: https://docs.rs/actix-files/0.6/actix_files/struct.Files.html#method.index_file
