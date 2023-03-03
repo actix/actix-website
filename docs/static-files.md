@@ -10,6 +10,11 @@ It is possible to serve static files with a custom path pattern and `NamedFile`.
 
 <CodeBlock example="static-files" file="main.rs" section="individual-file" />
 
+:::warning 
+Matching a path tail with the `[.*]` regex and using it to return a `NamedFile` has serious security implications. 
+It offers the possibility for an attacker to insert `../` into the URL and access every file on the host that the user running the server has access to.
+:::
+
 ## Directory
 
 To serve files from specific directories and sub-directories, `Files` can be used. `Files` must be registered with an `App::service()` method, otherwise it will be unable to serve sub-paths.
