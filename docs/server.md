@@ -97,6 +97,7 @@ Actix Web keeps connections open to wait for subsequent requests.
 If the first option above is selected, then keep-alive is enabled for HTTP/1.1 requests if the response does not explicitly disallow it by, for example, setting the [connection type][httpconnectiontype] to `Close` or `Upgrade`. Force closing a connection can be done with [the `force_close()` method on `HttpResponseBuilder`](https://docs.rs/actix-web/4/actix_web/struct.HttpResponseBuilder.html#method.force_close)
 
 > Keep-alive is **off** for HTTP/1.0 and is **on** for HTTP/1.1 and HTTP/2.0.
+
 <CodeBlock example="server" file="keep_alive_tp.rs" section="example" />
 
 ## Graceful shutdown
