@@ -2,6 +2,7 @@
 members = [
   "application",
   "async-handlers",
+  "databases",
   "easy-form-handling",
   "either",
   "errors",
@@ -23,5 +24,3 @@ members = [
   "url-dispatch",
   "websockets",
 ]
-# TODO: update databases
-exclude = ["databases"]
