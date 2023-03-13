@@ -1,5 +1,5 @@
 // <helpers>
-use actix_web::{error, get, App, HttpServer, Result};
+use actix_web::{error, get, App, HttpServer};
 
 #[derive(Debug)]
 struct MyError {
@@ -7,10 +7,10 @@ struct MyError {
 }
 
 #[get("/")]
-async fn index() -> Result<&'static str> {
-    let result: Result<&'static str, MyError> = Err(MyError { name: "test error" });
+async fn index() -> actix_web::Result<String> {
+    let result = Err(MyError { name: "test error" });
 
-    Ok(result.map_err(|e| error::ErrorBadRequest(e.name))?)
+    result.map_err(|err| error::ErrorBadRequest(err.name))
 }
 // </helpers>
 

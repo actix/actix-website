@@ -3,7 +3,7 @@ use actix_web::{get, guard, http::header, HttpRequest, HttpResponse, Result};
 
 #[get("/test/")]
 async fn index(req: HttpRequest) -> Result<HttpResponse> {
-    let url = req.url_for("foo", &["1", "2", "3"])?; // <- generate url for "foo" resource
+    let url = req.url_for("foo", ["1", "2", "3"])?; // <- generate url for "foo" resource
 
     Ok(HttpResponse::Found()
         .insert_header((header::LOCATION, url.as_str()))
