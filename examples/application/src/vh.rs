@@ -7,12 +7,12 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .service(
                 web::scope("/")
-                    .guard(guard::Header("Host", "www.rust-lang.org"))
+                    .guard(guard::Host("www.rust-lang.org"))
                     .route("", web::to(|| async { HttpResponse::Ok().body("www") })),
             )
             .service(
                 web::scope("/")
-                    .guard(guard::Header("Host", "users.rust-lang.org"))
+                    .guard(guard::Host("users.rust-lang.org"))
                     .route("", web::to(|| async { HttpResponse::Ok().body("user") })),
             )
             .route("/", web::to(HttpResponse::Ok))
