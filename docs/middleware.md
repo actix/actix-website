@@ -102,10 +102,10 @@ You can use the `ErrorHandlers::handler()` method to register a custom error han
 
 <CodeBlock example="middleware" file="errorhandler.rs" section="error-handler" />
 
-[sessionobj]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
-[requestsession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
-[cookiesession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.CookieSession.html
-[actixsession]: https://docs.rs/actix-session/0.3.0/actix_session/
+[sessionobj]: https://docs.rs/actix-session/latest/actix_session/struct.Session.html
+[requestsession]: https://docs.rs/actix-session/latest/actix_session/struct.Session.html
+[cookiesession]: https://docs.rs/actix-session/latest/actix_session/storage/struct.CookieSessionStore.html
+[actixsession]: https://docs.rs/actix-session/latest/actix_session/
 [envlogger]: https://docs.rs/env_logger/*/env_logger/
 [servicetrait]: https://docs.rs/actix-web/4/actix_web/dev/trait.Service.html
 [transformtrait]: https://docs.rs/actix-web/4/actix_web/dev/trait.Transform.html
