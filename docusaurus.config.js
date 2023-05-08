@@ -46,6 +46,9 @@ module.exports = {
       theme: require('prism-react-renderer/themes/dracula'),
       additionalLanguages: ['rust', 'toml'],
       defaultLanguage: 'rust'
+    },
+    colorMode: {
+      respectPrefersColorScheme: true,
     }
   },
   plugins: ["docusaurus-plugin-sass"],
