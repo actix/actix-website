@@ -16,6 +16,8 @@ module.exports = {
       logo: {
         alt: 'Actix Logo',
         src: 'img/logo-icon.png',
+        width: 32,
+        height: 32,
       },
       items: [
         {
@@ -46,6 +48,9 @@ module.exports = {
       theme: require('prism-react-renderer/themes/dracula'),
       additionalLanguages: ['rust', 'toml'],
       defaultLanguage: 'rust'
+    },
+    colorMode: {
+      respectPrefersColorScheme: true,
     }
   },
   plugins: ["docusaurus-plugin-sass"],
