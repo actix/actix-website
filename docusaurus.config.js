@@ -16,6 +16,8 @@ module.exports = {
       logo: {
         alt: 'Actix Logo',
         src: 'img/logo.png',
+        width: 32,
+        height: 32,
       },
       items: [
         {
