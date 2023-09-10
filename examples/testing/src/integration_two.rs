@@ -1,4 +1,4 @@
-use actix_web::{web, HttpResponse, Responder};
+use actix_web::{get, web, HttpResponse, Responder};
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -7,6 +7,7 @@ struct AppState {
 }
 
 #[allow(dead_code)]
+#[get("/")]
 async fn index(data: web::Data<AppState>) -> impl Responder {
     HttpResponse::Ok().json(data.get_ref())
 }
@@ -22,7 +23,7 @@ mod tests {
         let app = test::init_service(
             App::new()
                 .app_data(web::Data::new(AppState { count: 4 }))
-                .route("/", web::get().to(index)),
+                .service(index),
         )
         .await;
         let req = test::TestRequest::get().uri("/").to_request();

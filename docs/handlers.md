@@ -10,7 +10,7 @@ A request handler is an async function that accepts zero or more parameters that
 
 Request handling happens in two stages. First the handler object is called, returning any object that implements the [_Responder_][respondertrait] trait. Then, `respond_to()` is called on the returned object, converting itself to a `HttpResponse` or `Error`.
 
-By default actix-web provides `Responder` implementations for some standard types, such as `&'static str`, `String`, etc.
+By default Actix Web provides `Responder` implementations for some standard types, such as `&'static str`, `String`, etc.
 
 > For a complete list of implementations, check the [_Responder documentation_][responderimpls].
 
