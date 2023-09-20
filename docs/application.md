@@ -66,7 +66,7 @@ In the above example, the `show_users` route will have an effective route patter
 
 You can think of a guard as a simple function that accepts a _request_ object reference and returns _true_ or _false_. Formally, a guard is any object that implements the [`Guard`][guardtrait] trait. Actix Web provides several guards. You can check the [functions section][guardfuncs] of the API docs.
 
-One of the provided guards is [`Host`][guardheader]. It can be used as a filter based on request header information.
+One of the provided guards is [`Host`][guardhost]. It can be used as a filter based on request header information.
 
 <CodeBlock example="application" file="vh.rs" section="vh" />
 
@@ -92,7 +92,7 @@ Each [`ServiceConfig`][serviceconfig] can have its own `data`, `routes`, and `se
 [stateexample]: https://github.com/actix/examples/blob/master/basics/state/src/main.rs
 [guardtrait]: https://docs.rs/actix-web/4/actix_web/guard/trait.Guard.html
 [guardfuncs]: https://docs.rs/actix-web/4/actix_web/guard/index.html#functions
-[guardheader]: https://docs.rs/actix-web/4/actix_web/guard/fn.Header.html
+[guardhost]: https://docs.rs/actix-web/4/actix_web/guard/fn.Host.html
 [data]: https://docs.rs/actix-web/4/actix_web/web/struct.Data.html
 [app]: https://docs.rs/actix-web/4/actix_web/struct.App.html
 [appconfig]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.configure
