@@ -52,7 +52,7 @@ Let's create a response for a custom type that serializes to an `application/jso
 
 ## Streaming response body
 
-Response body can be generated asynchronously. In this case, body must implement the stream trait `Stream<Item=Bytes, Error=Error>`, i.e.:
+Response body can be generated asynchronously. In this case, body must implement the stream trait `Stream<Item = Result<Bytes, Error>>`, i.e.:
 
 <CodeBlock example="async-handlers" file="stream.rs" section="stream" />
 
