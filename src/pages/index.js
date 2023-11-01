@@ -1,18 +1,18 @@
-import clsx from 'clsx';
-import React from 'react';
-import Link from '@docusaurus/Link';
-import Layout from '@theme/Layout';
-import CodeBlock from '../components/code_block.js';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import clsx from "clsx";
+import React from "react";
+import Link from "@docusaurus/Link";
+import Layout from "@theme/Layout";
+import CodeBlock from "../components/code_block.js";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import styles from "./styles.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShieldAlt,
   faBatteryFull,
   faPuzzlePiece,
   faTachometerAlt,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const context = useDocusaurusContext();
@@ -32,7 +32,7 @@ const Home = () => {
 const highlights = [
   {
     icon: faShieldAlt,
-    title: 'Type Safe',
+    title: "Type Safe",
     description: (
       <>
         Forget about stringly typed objects, from request to response,
@@ -42,24 +42,31 @@ const highlights = [
   },
   {
     icon: faBatteryFull,
-    title: 'Feature Rich',
+    title: "Feature Rich",
     description: (
       <>Actix provides a lot of features out of box. HTTP/2, logging, etc.</>
     ),
   },
   {
     icon: faPuzzlePiece,
-    title: 'Extensible',
+    title: "Extensible",
     description: (
       <>Easily create your own libraries that any Actix application can use.</>
     ),
   },
   {
     icon: faTachometerAlt,
-    title: 'Blazingly Fast',
+    title: "Blazingly Fast",
     description: (
       <>
-        Actix is blazingly fast. Don't take our word for it -- <a href='https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=fortune' target='_blank' rel='noopener noreferrer'>see for yourself!</a>
+        Actix is blazingly fast. Don't take our word for it --{" "}
+        <a
+          href="https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=fortune"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          see for yourself!
+        </a>
       </>
     ),
   },
@@ -70,7 +77,7 @@ const Hero = () => {
   const { siteConfig } = context;
 
   return (
-    <header id="hero" className={clsx('hero', styles.banner)}>
+    <header id="hero" className={clsx("hero", styles.banner)}>
       <div className="container">
         <img
           src={useBaseUrl(`img/logo.png`)}
@@ -79,14 +86,14 @@ const Hero = () => {
         />
 
         <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className={clsx('hero__subtitle', styles.subtitle)}>
+        <p className={clsx("hero__subtitle", styles.subtitle)}>
           {siteConfig.tagline}
         </p>
 
         <div className={styles.buttons}>
           <Link
             className="button button--primary button--lg"
-            to={useBaseUrl('docs/')}
+            to={useBaseUrl("docs/")}
           >
             Get Started
           </Link>
@@ -106,7 +113,7 @@ const Highlights = () => {
               <div className="row">
                 {highlights.map((highlight, idx) => (
                   <div
-                    className={clsx('col col--6', styles.highlight)}
+                    className={clsx("col col--6", styles.highlight)}
                     key={idx}
                   >
                     <div className="item">
@@ -137,8 +144,9 @@ const Examples = () => {
           <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Hello World!</h3>
             <p>
-              Getting started with Actix is easy. An Actix app comes with a URL routing system that lets you match on
-              URLs and invoke individual handlers.
+              Getting started with Actix is easy. An Actix app comes with a URL
+              routing system that lets you match on URLs and invoke individual
+              handlers.
             </p>
           </div>
           <div className={styles.example__code}>
@@ -169,11 +177,11 @@ const Examples = () => {
           <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Powerful Extractors</h3>
             <p>
-              Actix comes with a powerful extractor system that extracts data from
-              the incoming HTTP request and passes it to your view functions. Not
-              only does this make for a convenient API but it also means that your
-              view functions can be synchronous code and still benefit from
-              asynchronous IO handling.
+              Actix comes with a powerful extractor system that extracts data
+              from the incoming HTTP request and passes it to your view
+              functions. Not only does this make for a convenient API but it
+              also means that your view functions can be synchronous code and
+              still benefit from asynchronous IO handling.
             </p>
           </div>
           <div className={styles.example__code}>

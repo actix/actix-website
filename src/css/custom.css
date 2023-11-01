@@ -20,7 +20,7 @@
   --ifm-menu-color-background-active: var(--ifm-color-emphasis-200);
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --background-color-secondary: #0a191c;
   --examples-odd-background-color: var(--ifm-hero-background-color);
   --logo-filter: brightness(0) invert(1);
@@ -46,7 +46,6 @@ html[data-theme='dark'] {
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
-
 
 .navbar__logo {
   filter: var(--logo-filter);

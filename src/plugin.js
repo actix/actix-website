@@ -3,9 +3,7 @@ module.exports = function (context, options) {
     configureWebpack(config, isServer, utils) {
       return {
         module: {
-          rules: [
-            { test: /\.rs$/, use: 'raw-loader' },
-          ],
+          rules: [{ test: /\.rs$/, use: "raw-loader" }],
         },
       };
     },

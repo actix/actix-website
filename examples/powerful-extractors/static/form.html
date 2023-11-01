@@ -1,7 +1,7 @@
-<!doctype htmtl>
+<!DOCTYPE htmtl>
 <html>
   <head>
-    <meta charset=utf-8>
+    <meta charset="utf-8" />
     <title>Forms</title>
   </head>
 
@@ -14,17 +14,17 @@
       let payload = {
         timestamp: 12345,
         kind: "this is a kind",
-        tags: ['tag1', 'tag2', 'tag3'],
-      }
+        tags: ["tag1", "tag2", "tag3"],
+      };
 
       function submitJson() {
-        fetch('http://localhost:8080/event', {
-          method: 'POST',
+        fetch("http://localhost:8080/event", {
+          method: "POST",
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
         })
           .then(function (res) {
             return res.json();
@@ -32,7 +32,7 @@
           .then(function (data) {
             let expected = {
               ...payload,
-              id: 1
+              id: 1,
             };
             console.log("expected: ", expected);
             console.log("received: ", data);
