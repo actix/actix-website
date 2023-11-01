@@ -49,6 +49,7 @@ and register the data in an `App`:
 <CodeBlock example="application" file="mutable_state.rs" section="make_app_mutable" />
 
 Key takeaways:
+
 - State initialized _inside_ the closure passed to `HttpServer::new` is local to the worker thread and may become de-synced if modified.
 - To achieve _globally shared state_, it must be created **outside** of the closure passed to `HttpServer::new` and moved/cloned in.
 

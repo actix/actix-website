@@ -8,7 +8,7 @@ During development it can be very handy to have cargo automatically recompile th
 
 ```sh
  cargo watch -x run
- ```
+```
 
 ## Historical Note
 

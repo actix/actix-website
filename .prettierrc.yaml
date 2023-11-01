@@ -1,6 +1,6 @@
-singleQuote: true
 tabWidth: 2
 overrides:
-- files: ["*.md"]
-  options:
-    proseWrap: never
+  - files: ['*.md']
+    options:
+      proseWrap: never
+      printWidth: 9999

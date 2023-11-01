@@ -5,23 +5,20 @@ slug: /actix/getting-started
 
 # Getting Started
 
-Let’s create and run our first actix application. We’ll create a new Cargo project
-that depends on actix and then run the application.
+Let’s create and run our first actix application. We’ll create a new Cargo project that depends on actix and then run the application.
 
 In previous section we already installed required rust version. Now let's create new cargo projects.
 
 ## Ping actor
 
-Let’s write our first actix application! Start by creating a new binary-based
-Cargo project and changing into the new directory:
+Let’s write our first actix application! Start by creating a new binary-based Cargo project and changing into the new directory:
 
 ```bash
 cargo new actor-ping
 cd actor-ping
 ```
 
-Now, add actix as a dependency of your project by ensuring your Cargo.toml
-contains the following:
+Now, add actix as a dependency of your project by ensuring your Cargo.toml contains the following:
 
 ```toml
 [dependencies]
@@ -45,11 +42,9 @@ impl Actor for MyActor {
 }
 ```
 
-Each actor has an execution context, for `MyActor` we are going to use `Context<A>`. More information
-on actor contexts is available in the next section.
+Each actor has an execution context, for `MyActor` we are going to use `Context<A>`. More information on actor contexts is available in the next section.
 
-Now we need to define the `Message` that the actor needs to accept. The message can be any type
-that implements the `Message` trait.
+Now we need to define the `Message` that the actor needs to accept. The message can be any type that implements the `Message` trait.
 
 ```rust
 use actix::prelude::*;
@@ -59,12 +54,9 @@ use actix::prelude::*;
 struct Ping(usize);
 ```
 
-The main purpose of the `Message` trait is to define a result type. The `Ping` message defines
-`usize`, which indicates that any actor that can accept a `Ping` message needs to
-return `usize` value.
+The main purpose of the `Message` trait is to define a result type. The `Ping` message defines `usize`, which indicates that any actor that can accept a `Ping` message needs to return `usize` value.
 
-And finally, we need to declare that our actor `MyActor` can accept `Ping` and handle it.
-To do this, the actor needs to implement the `Handler<Ping>` trait.
+And finally, we need to declare that our actor `MyActor` can accept `Ping` and handle it. To do this, the actor needs to implement the `Handler<Ping>` trait.
 
 ```rust
 impl Handler<Ping> for MyActor {
@@ -78,24 +70,16 @@ impl Handler<Ping> for MyActor {
 }
 ```
 
-That's it. Now we just need to start our actor and send a message to it.
-The start procedure depends on the actor's context implementation. In our case we can use
-`Context<A>` which is tokio/future based. We can start it with `Actor::start()`
-or `Actor::create()`. The first is used when the actor instance can be created immediately.
-The second method is used in case we need access to the context object before we can create
-the actor instance. In case of the `MyActor` actor we can use `start()`.
+That's it. Now we just need to start our actor and send a message to it. The start procedure depends on the actor's context implementation. In our case we can use `Context<A>` which is tokio/future based. We can start it with `Actor::start()` or `Actor::create()`. The first is used when the actor instance can be created immediately. The second method is used in case we need access to the context object before we can create the actor instance. In case of the `MyActor` actor we can use `start()`.
 
-All communication with actors goes through an address. You can `do_send` a message
-without waiting for a response, or `send` to an actor with a specific message.
-Both `start()` and `create()` return an address object.
+All communication with actors goes through an address. You can `do_send` a message without waiting for a response, or `send` to an actor with a specific message. Both `start()` and `create()` return an address object.
 
 In the following example we are going to create a `MyActor` actor and send one message.
 
-Here we use the actix-rt as way to start our System and drive our main Future
-so we can easily `.await` for the messages sent to the Actor.
+Here we use the actix-rt as way to start our System and drive our main Future so we can easily `.await` for the messages sent to the Actor.
 
 ```rust
-#[actix_rt::main] 
+#[actix_rt::main]
 async fn main() {
     // start new actor
     let addr = MyActor { count: 10 }.start();

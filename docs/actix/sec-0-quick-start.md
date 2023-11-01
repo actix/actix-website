@@ -5,8 +5,7 @@ slug: /actix
 
 # Quick start
 
-Before you can start writing an actix application, you’ll need a version of Rust installed.
-We recommend you use rustup to install or configure such a version.
+Before you can start writing an actix application, you’ll need a version of Rust installed. We recommend you use rustup to install or configure such a version.
 
 ## Install Rust
 
@@ -26,9 +25,7 @@ The actix framework requires Rust version 1.40.0 and up.
 
 ## Running Examples
 
-The fastest way to start experimenting with actix is to clone the actix repository
-and run the included examples in the examples/ directory. The following set of
-commands runs the `ping` example:
+The fastest way to start experimenting with actix is to clone the actix repository and run the included examples in the examples/ directory. The following set of commands runs the `ping` example:
 
 ```bash
 git clone https://github.com/actix/actix

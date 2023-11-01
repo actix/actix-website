@@ -2,11 +2,9 @@
 title: HTTP/2
 ---
 
-import RenderCodeBlock from '@theme/CodeBlock';
-import CodeBlock from '@site/src/components/code_block.js';
-import { actixWebMajorVersion } from "@site/vars";
+import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from '@site/src/components/code_block.js'; import { actixWebMajorVersion } from "@site/vars";
 
-`actix-web` automatically upgrades connections to *HTTP/2* if possible.
+`actix-web` automatically upgrades connections to _HTTP/2_ if possible.
 
 # Negotiation
 
@@ -15,7 +13,6 @@ import { actixWebMajorVersion } from "@site/vars";
 When either of the `rustls` or `openssl` features are enabled, `HttpServer` provides the [bind_rustls][bindrustls] method and [bind_openssl][bindopenssl] methods, respectively.
 
 <!-- DEPENDENCY -->
-
 
 <RenderCodeBlock className="language-toml">
 {`[dependencies]

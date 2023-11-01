@@ -5,16 +5,11 @@ slug: /actix/context
 
 # Context
 
-Actors all maintain an internal execution context, or state. This
-allows an actor to determine its own Address, change mailbox limits,
-or stop its execution.
+Actors all maintain an internal execution context, or state. This allows an actor to determine its own Address, change mailbox limits, or stop its execution.
 
 ## Mailbox
 
-All messages go to the actor's mailbox first, then the actor's execution context
-calls specific message handlers. Mailboxes in general are bounded. The capacity is
-specific to the context implementation. For the `Context` type the capacity is set to
-16 messages by default and can be increased with [`Context::set_mailbox_capacity()`].
+All messages go to the actor's mailbox first, then the actor's execution context calls specific message handlers. Mailboxes in general are bounded. The capacity is specific to the context implementation. For the `Context` type the capacity is set to 16 messages by default and can be increased with [`Context::set_mailbox_capacity()`].
 
 ```rust
 struct MyActor;
@@ -30,18 +25,13 @@ impl Actor for MyActor {
 let addr = MyActor.start();
 ```
 
-Remember that this doesn't apply to `Addr::do_send(M)` which bypasses the Mailbox queue limit, or
-`AsyncContext::notify(M)` and `AsyncContext::notify_later(M, Duration)` which bypasses the mailbox
-entirely.
+Remember that this doesn't apply to `Addr::do_send(M)` which bypasses the Mailbox queue limit, or `AsyncContext::notify(M)` and `AsyncContext::notify_later(M, Duration)` which bypasses the mailbox entirely.
 
 [`Context::set_mailbox_capacity()`]: https://docs.rs/actix/latest/actix/struct.Context.html#method.set_mailbox_capacity
 
 ## Getting your actors Address
 
-An actor can view its own address from its context. Perhaps you want to requeue an event for
-later, or you want to transform the message type. Maybe you want to respond with your address
-to a message. If you want an actor to send a message to itself, have a look at
-`AsyncContext::notify(M)` instead.
+An actor can view its own address from its context. Perhaps you want to requeue an event for later, or you want to transform the message type. Maybe you want to respond with your address to a message. If you want an actor to send a message to itself, have a look at `AsyncContext::notify(M)` instead.
 
 To get your address from the context you call [`Context::address()`]. An example is:
 
@@ -73,9 +63,7 @@ let who_addr = addr.do_send(WhoAmI{});
 
 ## Stopping an Actor
 
-From within the actors execution context you can choose to stop the actor from processing
-any future Mailbox messages. This could be in response to an error condition, or as part
-of program shutdown. To do this you call [`Context::stop()`].
+From within the actors execution context you can choose to stop the actor from processing any future Mailbox messages. This could be in response to an error condition, or as part of program shutdown. To do this you call [`Context::stop()`].
 
 This is an adjusted Ping example that stops after 4 pings are received.
 
