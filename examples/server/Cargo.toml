@@ -2,7 +2,7 @@
 name = "server"
 version = "1.0.0"
 workspace = "../"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 actix-web = { version = "4", features = ["openssl"] }
