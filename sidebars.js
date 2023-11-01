@@ -18,7 +18,7 @@ module.exports = {
       'static-files',
     ],
     Protocols: ['websockets', 'http2'],
-    Patterns: ['autoreload', 'databases'],
+    Patterns: ['autoreload', 'databases', 'shuttle'],
     Diagrams: ['http_server_init', 'conn_lifecycle'],
     Actix: [
       'actix/sec-0-quick-start',
@@ -29,7 +29,6 @@ module.exports = {
       'actix/sec-5-arbiter',
       'actix/sec-6-sync-arbiter',
     ],
-    Hosting: ['shuttle'],
     'API Documentation': [
       {
         type: 'link',

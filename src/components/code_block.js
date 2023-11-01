@@ -1,27 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import RenderCodeBlock from '@theme/CodeBlock';
 
-const CodeBlock = ({ example, file, section }) => {
-    const [code, setCode] = useState("");
+const CodeBlock = ({ example, file, section, language }) => {
+  const [code, setCode] = useState('');
 
-    useEffect(() => {
-        let isMounted = true; 
-        import(`!!raw-loader!@site/examples/${example}/src/${file || "main.rs"}`)
-            .then(source => {
-                source = source
-                    .default
-                    .match(new RegExp(`\/\/ <${section}>\n([\\s\\S]*)\/\/ <\/${section}>`))[1];
-                if (isMounted) setCode(source)
-            })
-            .catch(err => console.log(err));
-        return () => {
-            isMounted = false;
-        }
-    }, [])
+  useEffect(() => {
+    let isMounted = true;
 
-    return (
-        <RenderCodeBlock className="language-rust">{code}</RenderCodeBlock>
-    )
-}
+    const path =
+      file === 'manifest' ? 'Cargo.toml' : `src/${file ?? 'main.rs'}`;
+
+    import(`!!raw-loader!@site/examples/${example}/${path}`)
+      .then((source) => {
+        source = source.default.match(
+          new RegExp(
+            `(?:\/\/|#) <${section}>\n([\\s\\S]*)(?:\/\/|#) <\/${section}>`
+          )
+        )[1];
+
+        if (isMounted) setCode(source);
+      })
+      .catch((err) => console.log(err));
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return (
+    <RenderCodeBlock className={`language-${language ?? 'rust'}`}>
+      {code}
+    </RenderCodeBlock>
+  );
+};
 
 export default CodeBlock;
