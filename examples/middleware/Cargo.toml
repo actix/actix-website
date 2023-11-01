@@ -5,7 +5,7 @@ publish = false
 edition.workspace = true
 
 [dependencies]
+actix-session = { version = "0.8", features = ["cookie-session"] }
 actix-web = "4"
-actix-session = { version = "0.7.2", features = ["cookie-session"] }
+env_logger = "0.10"
 futures-util = { version = "0.3.7", default-features = false, features = ["std"] }
-env_logger = "0.7"
