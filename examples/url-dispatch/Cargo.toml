@@ -1,8 +1,8 @@
 [package]
 name = "url-dispatch"
 version = "1.0.0"
-edition = "2021"
-workspace = "../"
+publish = false
+edition.workspace = true
 
 [dependencies]
 actix-web = "4"

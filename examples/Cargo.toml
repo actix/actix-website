@@ -26,3 +26,6 @@ members = [
   "url-dispatch",
   "websockets",
 ]
+
+[workspace.package]
+edition = "2021"

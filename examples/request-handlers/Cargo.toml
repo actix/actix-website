@@ -1,7 +1,8 @@
 [package]
 name = "request-handlers"
 version = "1.0.0"
-edition = "2021"
+publish = false
+edition.workspace = true
 
 [dependencies]
 actix-web = "4"

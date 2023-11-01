@@ -1,7 +1,8 @@
 [package]
 name = "http2"
 version = "1.0.0"
-edition = "2021"
+publish = false
+edition.workspace = true
 
 [dependencies]
 actix-web = { version = "4", features = ["openssl"] }
