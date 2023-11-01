@@ -1,14 +1,16 @@
-name: Build website
+name: Website
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+  merge_group:
+    types: [checks_requested]
   push:
     branches: [main]
 
 jobs:
-  test-deploy:
-    name: Build check
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
