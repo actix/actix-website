@@ -4,21 +4,21 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   check-examples:
     name: Check examples
     runs-on: ubuntu-latest
 
-    env:
-      RUSTFLAGS: -A dead-code -A unused-variables
-
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions-rust-lang/setup-rust-toolchain@v1.3.5
 
-      - name: test examples
+      - name: Test examples
+        env:
+          RUSTFLAGS: -A dead-code -A unused-variables
         run: |
           cd examples
           cargo test
