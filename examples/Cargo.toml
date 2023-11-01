@@ -19,6 +19,7 @@ members = [
   "responder-trait",
   "responses",
   "server",
+  "shuttle",
   "static-files",
   "testing",
   "url-dispatch",
