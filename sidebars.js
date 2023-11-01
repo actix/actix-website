@@ -29,6 +29,7 @@ module.exports = {
       'actix/sec-5-arbiter',
       'actix/sec-6-sync-arbiter',
     ],
+    Hosting: ['shuttle'],
     'API Documentation': [
       {
         type: 'link',
