@@ -70,7 +70,7 @@ and:
 /{foo}/bar/baz
 ```
 
-A _variable part_ (replacement marker) is specified in the form _{identifier}_, where this means "accept any characters up to the next slash character and use this as the name in the `HttpRequest.match_info()` object".
+A _variable part_ (replacement marker) is specified in the form _\{identifier}_, where this means "accept any characters up to the next slash character and use this as the name in the `HttpRequest.match_info()` object".
 
 A replacement marker in a pattern matches the regular expression `[^{}/]+`.
 
@@ -170,7 +170,7 @@ Suppose that you want to organize paths to endpoints used to view "Users". Such 
 
 - /users
 - /users/show
-- /users/show/{id}
+- /users/show/\{id}
 
 A scoped layout of these paths would appear as follows
 
@@ -202,7 +202,7 @@ It also possible to extract path pattern information to a struct. In this case, 
 
 ## Generating resource URLs
 
-Use the [_HttpRequest.url_for()_][urlfor] method to generate URLs based on resource patterns. For example, if you've configured a resource with the name "foo" and the pattern "{a}/{b}/{c}", you might do this:
+Use the [_HttpRequest.url_for()_][urlfor] method to generate URLs based on resource patterns. For example, if you've configured a resource with the name "foo" and the pattern "\{a}/\{b}/\{c}", you might do this:
 
 <CodeBlock example="url-dispatch" file="urls.rs" section="url" />
 

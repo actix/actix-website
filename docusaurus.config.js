@@ -1,5 +1,7 @@
 const path = require("path");
-
+const {
+  themes: { dracula: draculaTheme },
+} = require("prism-react-renderer");
 module.exports = {
   title: "Actix",
   tagline:
@@ -46,7 +48,7 @@ module.exports = {
     },
     prism: {
       // dracula is closest to docs.rs, where keywords are highlighted
-      theme: require("prism-react-renderer/themes/dracula"),
+      theme: draculaTheme,
       additionalLanguages: ["rust", "toml"],
       defaultLanguage: "rust",
     },
@@ -61,7 +63,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/actix/actix-website/edit/master/",
+          editUrl: "https://github.com/actix/actix-website/edit/main/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
