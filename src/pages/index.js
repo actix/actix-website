@@ -15,8 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const context = useDocusaurusContext();
-  const siteConfig = context;
+  const {siteConfig} = useDocusaurusContext();
 
   return (
     <Layout description={siteConfig.tagline}>
@@ -73,8 +72,7 @@ const highlights = [
 ];
 
 const Hero = () => {
-  const context = useDocusaurusContext();
-  const { siteConfig } = context;
+  const { siteConfig } = useDocusaurusContext();
 
   return (
     <header id="hero" className={clsx("hero", styles.banner)}>
