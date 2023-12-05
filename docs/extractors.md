@@ -22,6 +22,13 @@ For instance, for resource that registered for the `/users/{user_id}/{friend}` p
 
 It is also possible to extract path information to a type that implements the `Deserialize` trait from `serde` by matching dynamic segment names with field names. Here is an equivalent example that uses `serde` instead of a tuple type.
 
+It depends on `serde`:
+
+```toml
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+```
+
 <CodeBlock example="extractors" file="path_two.rs" section="path-two" />
 
 As a non-type-safe alternative, it's also possible to query (see [`match_info` docs][docsrs_match_info]) the request for path parameters by name within a handler:
