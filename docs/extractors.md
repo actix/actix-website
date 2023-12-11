@@ -20,7 +20,7 @@ For instance, for resource that registered for the `/users/{user_id}/{friend}` p
 
 <CodeBlock example="extractors" file="path_one.rs" section="path-one" />
 
-It is also possible to extract path information to a type that implements the `Deserialize` trait from `serde` by matching dynamic segment names with field names. Here is an equivalent example that uses `serde` instead of a tuple type.
+It is also possible to extract path information to a type that implements the `Deserialize` trait from `serde` by matching dynamic segment names with field names. Here is an equivalent example that uses a deserialization struct using `serde` (make sure to enable its `derive` feature) instead of a tuple type.
 
 <CodeBlock example="extractors" file="path_two.rs" section="path-two" />
 
