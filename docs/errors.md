@@ -12,7 +12,7 @@ If a handler returns an `Error` (referring to the [general Rust trait `std::erro
 
 ```rust
 pub trait ResponseError {
-    fn error_response(&self) -> Response<Body>;
+    fn error_response(&self) -> HttpResponse<BoxBody>;
     fn status_code(&self) -> StatusCode;
 }
 ```
