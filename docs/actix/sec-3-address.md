@@ -145,14 +145,14 @@ impl Handler<OrderShipped> for SmsSubscriber {
 
 }
 
-fn main() {
-    let system = System::new("events");
-    let email_subscriber = Subscribe(EmailSubscriber{}.start().recipient());
-    let sms_subscriber = Subscribe(SmsSubscriber{}.start().recipient());
+#[actix::main]
+async fn main() -> Result<(), actix::MailboxError> {
+    let email_subscriber = Subscribe(EmailSubscriber {}.start().recipient());
+    let sms_subscriber = Subscribe(SmsSubscriber {}.start().recipient());
     let order_event = OrderEvents::new().start();
-    order_event.do_send(email_subscriber);
-    order_event.do_send(sms_subscriber);
-    order_event.do_send(Ship(1));
-    system.run();
+    order_event.send(email_subscriber).await?;
+    order_event.send(sms_subscriber).await?;
+    order_event.send(Ship(1)).await?;
+    Ok(())
 }
 ```
