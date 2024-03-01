@@ -6,4 +6,4 @@ edition.workspace = true
 
 [dependencies]
 actix-web = "4"
-serde = { version = "1.0.197", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
