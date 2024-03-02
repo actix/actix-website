@@ -89,7 +89,7 @@ Each [`ServiceConfig`][serviceconfig] can have its own `data`, `routes`, and `se
 
 <!-- LINKS -->
 
-[usingappprefix]: /docs/url-dispatch/index.html#using-an-application-prefix-to-compose-applications
+[usingappprefix]: /docs/url-dispatch#using-an-application-prefix-to-compose-applications
 [stateexample]: https://github.com/actix/examples/blob/master/basics/state/src/main.rs
 [guardtrait]: https://docs.rs/actix-web/4/actix_web/guard/trait.Guard.html
 [guardfuncs]: https://docs.rs/actix-web/4/actix_web/guard/index.html#functions
