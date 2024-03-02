@@ -4,6 +4,9 @@ version = "1.0.0"
 publish = false
 edition.workspace = true
 
+# <deps>
 [dependencies]
-actix-web = { version = "4", features = ["openssl"] }
-openssl = { version = "0.10", features = ["v110"] }
+actix-web = { version = "4", features = ["rustls-0_22"] }
+rustls = "0.22"
+rustls-pemfile = "2"
+# </deps>
