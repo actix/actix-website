@@ -1,9 +1,6 @@
 {
-    "cSpell.words": [
-        "actix",
-        "deserialization",
-        "rustls",
-        "serde",
-        "struct"
-    ]
+  "cSpell.words": ["actix", "deserialization", "rustls", "serde", "struct"],
+  "markdownlint.config": {
+    "no-inline-html": false
+  }
 }
