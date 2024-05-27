@@ -69,13 +69,14 @@ openssl = { version = "0.10" }
 
 To create the key.pem and cert.pem use the command. **Fill in your own subject**
 
-```bash
-$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
+```shell-session
+$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem \
+    -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
 ```
 
 To remove the password, then copy nopass.pem to key.pem
 
-```bash
+```shell-session
 $ openssl rsa -in key.pem -out nopass.pem
 ```
 

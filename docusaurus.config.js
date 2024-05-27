@@ -2,6 +2,7 @@ const path = require("path");
 const {
   themes: { dracula: draculaTheme },
 } = require("prism-react-renderer");
+
 module.exports = {
   title: "Actix",
   tagline:
@@ -49,7 +50,7 @@ module.exports = {
     prism: {
       // dracula is closest to docs.rs, where keywords are highlighted
       theme: draculaTheme,
-      additionalLanguages: ["rust", "toml"],
+      additionalLanguages: ["rust", "toml", "shell-session"],
       defaultLanguage: "rust",
     },
     colorMode: {

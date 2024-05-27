@@ -62,8 +62,8 @@ See the [API documentation for actix-web's `error` module][actixerror] for a ful
 
 Actix logs all errors at the `WARN` log level. If an application's log level is set to `DEBUG` and `RUST_BACKTRACE` is enabled, the backtrace is also logged. These are configurable with environmental variables:
 
-```sh
->> RUST_BACKTRACE=1 RUST_LOG=actix_web=debug cargo run
+```shell-session
+$ RUST_BACKTRACE=1 RUST_LOG=actix_web=debug cargo run
 ```
 
 The `Error` type uses the cause's error backtrace if available. If the underlying failure does not provide a backtrace, a new backtrace is constructed pointing to the point where the conversion occurred (rather than the origin of the error).
