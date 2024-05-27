@@ -2,7 +2,7 @@
 title: Middleware
 ---
 
-import CodeBlock from "@site/src/components/code_block.js";
+import CodeBlock from "@site/src/components/code_block";
 
 # Middleware
 
@@ -49,7 +49,7 @@ Create `Logger` middleware with the specified `format`. Default `Logger` can be 
 
 The following is an example of the default logging format:
 
-```
+```log
 INFO:actix_web::middleware::logger: 127.0.0.1:59934 [02/Dec/2017:00:21:43 -0800] "GET / HTTP/1.1" 302 0 "-" "curl/7.54.0" 0.000397
 INFO:actix_web::middleware::logger: 127.0.0.1:59947 [02/Dec/2017:00:22:40 -0800] "GET /index.html HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:57.0) Gecko/20100101 Firefox/57.0" 0.000646
 ```

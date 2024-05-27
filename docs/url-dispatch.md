@@ -2,7 +2,7 @@
 title: URL Dispatch
 ---
 
-import CodeBlock from "@site/src/components/code_block.js";
+import CodeBlock from "@site/src/components/code_block";
 
 # URL Dispatch
 
@@ -12,7 +12,7 @@ URL dispatch provides a simple way for mapping URLs to handler code using a simp
 
 ## Resource configuration
 
-Resource configuration is the act of adding a new resources to an application. A resource has a name, which acts as an identifier to be used for URL generation. The name also allows developers to add routes to existing resources. A resource also has a pattern, meant to match against the _PATH_ portion of a _URL_ (the portion following the scheme and port, e.g. _/foo/bar_ in the _URL_ _http://localhost:8080/foo/bar?q=value_). It does not match against the _QUERY_ portion (the portion that follows _?_, e.g. _q=value_ in _http://localhost:8080/foo/bar?q=value_).
+Resource configuration is the act of adding a new resources to an application. A resource has a name, which acts as an identifier to be used for URL generation. The name also allows developers to add routes to existing resources. A resource also has a pattern, meant to match against the _PATH_ portion of a _URL_ (the portion following the scheme and port, e.g. _/foo/bar_ in the _URL_ _`http://localhost:8080/foo/bar?q=value`_). It does not match against the _QUERY_ portion (the portion that follows _?_, e.g. _q=value_ in _`http://localhost:8080/foo/bar?q=value`_).
 
 The [_App::route()_][approute] method provides simple way of registering routes. This method adds a single route to application routing table. This method accepts a _path pattern_, _HTTP method_ and a handler function. `route()` method could be called multiple times for the same path, in that case, multiple routes register for the same resource path.
 
@@ -206,7 +206,7 @@ Use the [_HttpRequest.url_for()_][urlfor] method to generate URLs based on resou
 
 <CodeBlock example="url-dispatch" file="urls.rs" section="url" />
 
-This would return something like the string `http://example.com/test/1/2/3` (at least if the current protocol and hostname implied http://example.com). `url_for()` method returns [_Url object_][urlobj] so you can modify this url (add query parameters, anchor, etc). `url_for()` could be called only for _named_ resources otherwise error get returned.
+This would return something like the string `http://example.com/test/1/2/3` (at least if the current protocol and hostname implied `http://example.com`). `url_for()` method returns [_Url object_][urlobj] so you can modify this url (add query parameters, anchor, etc). `url_for()` could be called only for _named_ resources otherwise error get returned.
 
 ## External resources
 

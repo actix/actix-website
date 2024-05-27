@@ -2,7 +2,7 @@
 title: Hosting on Shuttle
 ---
 
-import CodeBlock from '@site/src/components/code_block.js';
+import CodeBlock from '@site/src/components/code_block';
 
 # Hosting on Shuttle
 

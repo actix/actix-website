@@ -2,7 +2,7 @@
 title: Server
 ---
 
-import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from '@site/src/components/code_block.js'; import { actixWebMajorVersion } from "@site/vars";
+import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from '@site/src/components/code_block'; import { actixWebMajorVersion } from "@site/vars";
 
 # The HTTP Server
 
@@ -70,8 +70,7 @@ openssl = { version = "0.10" }
 To create the key.pem and cert.pem use the command. **Fill in your own subject**
 
 ```bash
-$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem \
-  -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
+$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
 ```
 
 To remove the password, then copy nopass.pem to key.pem
@@ -114,11 +113,7 @@ If the first option above is selected, then keep-alive is enabled for HTTP/1.1 r
 [httpserverstruct]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html
 [bindmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind
 [httpserver_run]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.run
-[bindopensslmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_openssl
-[bindrusttls]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_rustls
 [workers]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.workers
-[tlsalpn]: https://tools.ietf.org/html/rfc7301
-[exampleopenssl]: https://github.com/actix/examples/tree/master/security/openssl
 [shutdowntimeout]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.shutdown_timeout
 [disablesignals]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.disable_signals
 [httpconnectiontype]: https://docs.rs/actix-web/4/actix_web/http/enum.ConnectionType.html

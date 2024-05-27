@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
-import CodeBlock from "../components/code_block.js";
+import CodeBlock from "@site/src/components/code_block";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.scss";
@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
 
   return (
     <Layout description={siteConfig.tagline}>
