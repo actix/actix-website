@@ -113,7 +113,11 @@ If the first option above is selected, then keep-alive is enabled for HTTP/1.1 r
 [httpserverstruct]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html
 [bindmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind
 [httpserver_run]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.run
+[bindopensslmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_openssl
+[bindrusttls]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_rustls
 [workers]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.workers
+[tlsalpn]: https://tools.ietf.org/html/rfc7301
+[exampleopenssl]: https://github.com/actix/examples/tree/master/security/openssl
 [shutdowntimeout]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.shutdown_timeout
 [disablesignals]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.disable_signals
 [httpconnectiontype]: https://docs.rs/actix-web/4/actix_web/http/enum.ConnectionType.html
