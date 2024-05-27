@@ -11,7 +11,7 @@ npm install  # or yarn install
 npm start  # or yarn start
 ```
 
-Then visit http://localhost:3000.
+Then visit <http://localhost:3000>.
 
 ## Updating diagrams
 
@@ -37,4 +37,3 @@ This site is licensed under either of
 
 [docusaurus]: https://docusaurus.io/
 [mermaid_cli]: https://github.com/mermaidjs/mermaid.cli
-
