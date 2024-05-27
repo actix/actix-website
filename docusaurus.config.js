@@ -56,7 +56,10 @@ module.exports = {
       respectPrefersColorScheme: true,
     },
   },
-  plugins: ["docusaurus-plugin-sass"],
+  plugins: [
+    "docusaurus-plugin-sass",
+    require.resolve("docusaurus-lunr-search"),
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
