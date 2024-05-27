@@ -99,7 +99,7 @@ log = "0.4"
 <CodeBlock example="errors" file="logging.rs" section="logging" />
 
 [actixerror]: https://docs.rs/actix-web/4/actix_web/error/struct.Error.html
-[errorhelpers]: https://docs.rs/actix-web/4/actix_web/trait.ResponseError.html
+[errorhelpers]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html
 [derive_more]: https://crates.io/crates/derive_more
 [responseerror]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html
 [responseerrorimpls]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html#foreign-impls
