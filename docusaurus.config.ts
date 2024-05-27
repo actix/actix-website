@@ -1,9 +1,11 @@
-const path = require("path");
-const {
-  themes: { dracula: draculaTheme },
-} = require("prism-react-renderer");
+import { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
-module.exports = {
+import { themes as prismThemes } from "prism-react-renderer";
+
+const draculaTheme = prismThemes.dracula;
+
+const config: Config = {
   title: "Actix",
   tagline:
     "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
@@ -56,14 +58,14 @@ module.exports = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
-  },
+  } satisfies Preset.ThemeConfig,
   plugins: [
     "docusaurus-plugin-sass",
     require.resolve("docusaurus-lunr-search"),
   ],
   presets: [
     [
-      "@docusaurus/preset-classic",
+      "classic",
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
@@ -72,7 +74,9 @@ module.exports = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-      },
+      } satisfies Preset.Options,
     ],
   ],
-};
+} as Config;
+
+export default config;

@@ -1,6 +1,6 @@
 {
   "name": "actix-website",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -30,8 +30,10 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.3.2",
+    "@docusaurus/tsconfig": "^3.3.2",
     "@docusaurus/types": "^3.3.2",
-    "raw-loader": "^4.0.2"
+    "raw-loader": "^4.0.2",
+    "typescript": "^5.4.5"
   },
   "browserslist": {
     "production": [

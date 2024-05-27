@@ -2,7 +2,9 @@
 title: Server
 ---
 
-import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from '@site/src/components/code_block'; import { actixWebMajorVersion } from "@site/vars";
+import RenderCodeBlock from '@theme/CodeBlock';
+import CodeBlock from '@site/src/components/code_block';
+import vars from "@site/vars";
 
 # The HTTP Server
 
@@ -60,7 +62,7 @@ The `rustls` crate feature is for `rustls` integration and `openssl` is for `ope
 
 <RenderCodeBlock className="language-toml">
 {`[dependencies]
-actix-web = { version = "${actixWebMajorVersion}", features = ["openssl"] }
+actix-web = { version = "${vars.actixWebMajorVersion}", features = ["openssl"] }
 openssl = { version = "0.10" }
 `}
 </RenderCodeBlock>
