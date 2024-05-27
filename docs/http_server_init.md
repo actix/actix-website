@@ -19,4 +19,4 @@ async fn main() -> std::io::Result<()> {
 }
 ```
 
-![](/img/diagrams/http_server.svg)
+![HTTP Server Diagram](/img/diagrams/http_server.svg)

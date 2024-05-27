@@ -2,11 +2,11 @@
 title: Hosting on Shuttle
 ---
 
-import CodeBlock from '@site/src/components/code_block.js';
+import CodeBlock from '@site/src/components/code_block';
 
 # Hosting on Shuttle
 
-<img width="300" src="https://raw.githubusercontent.com/shuttle-hq/shuttle/master/assets/logo-rectangle-transparent.png"/>
+<img width="300" src="https://raw.githubusercontent.com/shuttle-hq/shuttle/master/assets/logo-rectangle-transparent.png" alt="Shuttle Logo"/>
 
 > [**Shuttle**](https://www.shuttle.rs) is a Rust-native cloud development platform that lets you deploy your Rust apps for free.
 

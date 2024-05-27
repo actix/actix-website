@@ -2,7 +2,7 @@
 title: Requests
 ---
 
-import CodeBlock from "@site/src/components/code_block.js";
+import CodeBlock from "@site/src/components/code_block";
 
 # JSON Request
 

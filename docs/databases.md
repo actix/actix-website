@@ -2,15 +2,15 @@
 title: Databases
 ---
 
-import CodeBlock from "@site/src/components/code_block.js";
+import CodeBlock from "@site/src/components/code_block";
 
 # Async Options
 
 We have several example projects showing use of async database adapters:
 
-- Postgres: https://github.com/actix/examples/tree/master/databases/postgres
-- SQLite: https://github.com/actix/examples/tree/master/databases/sqlite
-- MongoDB: https://github.com/actix/examples/tree/master/databases/mongodb
+- [Postgres](https://github.com/actix/examples/tree/master/databases/postgres)
+- [SQLite](https://github.com/actix/examples/tree/master/databases/sqlite)
+- [MongoDB](https://github.com/actix/examples/tree/master/databases/mongodb)
 
 # Diesel
 
@@ -30,7 +30,7 @@ This example also maps the error to an `HttpResponse` before using the `?` opera
 
 <CodeBlock example="databases" file="main.rs" section="index" />
 
-That's it! See the full example here: https://github.com/actix/examples/tree/master/databases/diesel
+That's it! See the full example [here](https://github.com/actix/examples/tree/master/databases/diesel).
 
 [web-block]: https://docs.rs/actix-web/4/actix_web/web/fn.block.html
-[response-error]: https://docs.rs/actix-web/4/actix_web/trait.ResponseError.html
+[response-error]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html

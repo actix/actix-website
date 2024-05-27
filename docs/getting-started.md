@@ -2,7 +2,7 @@
 title: Getting Started
 ---
 
-import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from "@site/src/components/code_block.js"; import { rustVersion, actixWebMajorVersion } from "@site/vars";
+import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from "@site/src/components/code_block"; import { rustVersion, actixWebMajorVersion } from "@site/vars";
 
 ## Installing Rust
 

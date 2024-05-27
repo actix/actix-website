@@ -2,7 +2,7 @@
 title: Server
 ---
 
-import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from '@site/src/components/code_block.js'; import { actixWebMajorVersion } from "@site/vars";
+import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from '@site/src/components/code_block'; import { actixWebMajorVersion } from "@site/vars";
 
 # The HTTP Server
 
@@ -70,8 +70,7 @@ openssl = { version = "0.10" }
 To create the key.pem and cert.pem use the command. **Fill in your own subject**
 
 ```bash
-$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem \
-  -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
+$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
 ```
 
 To remove the password, then copy nopass.pem to key.pem

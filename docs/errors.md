@@ -2,7 +2,7 @@
 title: Errors
 ---
 
-import CodeBlock from "@site/src/components/code_block.js";
+import CodeBlock from "@site/src/components/code_block";
 
 # Errors
 
@@ -62,7 +62,7 @@ See the [API documentation for actix-web's `error` module][actixerror] for a ful
 
 Actix logs all errors at the `WARN` log level. If an application's log level is set to `DEBUG` and `RUST_BACKTRACE` is enabled, the backtrace is also logged. These are configurable with environmental variables:
 
-```
+```sh
 >> RUST_BACKTRACE=1 RUST_LOG=actix_web=debug cargo run
 ```
 
@@ -99,7 +99,7 @@ log = "0.4"
 <CodeBlock example="errors" file="logging.rs" section="logging" />
 
 [actixerror]: https://docs.rs/actix-web/4/actix_web/error/struct.Error.html
-[errorhelpers]: https://docs.rs/actix-web/4/actix_web/trait.ResponseError.html
+[errorhelpers]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html
 [derive_more]: https://crates.io/crates/derive_more
 [responseerror]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html
 [responseerrorimpls]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html#foreign-impls
