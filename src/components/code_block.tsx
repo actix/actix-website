@@ -12,8 +12,6 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    let isMounted = true;
-
     const path =
       file === "manifest" ? "Cargo.toml" : `src/${file ?? "main.rs"}`;
 
@@ -25,13 +23,9 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
           )
         )[1];
 
-        if (isMounted) setCode(source);
+        setCode(source);
       })
       .catch((err) => console.log(err));
-
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
   return (
