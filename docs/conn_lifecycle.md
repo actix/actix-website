@@ -2,6 +2,12 @@
 title: Connection Lifecycle
 ---
 
+import MermaidDiagram from "@site/src/components/mermaid_diagram";
+import connection_overview from '!!raw-loader!@site/static/img/diagrams/connection_overview.mmd';
+import connection_accept from '!!raw-loader!@site/static/img/diagrams/connection_accept.mmd';
+import connection_worker from '!!raw-loader!@site/static/img/diagrams/connection_worker.mmd';
+import connection_request from '!!raw-loader!@site/static/img/diagrams/connection_request.mmd';
+
 # Architecture overview
 
 After Server has started listening to all sockets, [`Accept`][accept] and [`Worker`][worker] are two main loops responsible for processing incoming client connections.
@@ -10,23 +16,23 @@ Once connection accepted Application level protocol processing happens in a prot
 
     Please note, below diagrams are outlining happy-path scenarios only.
 
-![Connection Overview](/img/diagrams/connection_overview.svg)
+<MermaidDiagram value={connection_overview}  />
 
 ## Accept loop in more detail
 
-![Connection Accept](/img/diagrams/connection_accept.svg "Connection Accept")
+<MermaidDiagram value={connection_accept}  />
 
 Most of code implementation resides in [`actix-server`][server] crate for struct [`Accept`][accept].
 
 ## Worker loop in more detail
 
-![Connection Worker](/img/diagrams/connection_worker.svg "Connection Worker")
+<MermaidDiagram value={connection_worker}  />
 
 Most of code implementation resides in [`actix-server`][server] crate for struct [`Worker`][worker].
 
 ## Request loop roughly
 
-![Connection Request](/img/diagrams/connection_request.svg "Connection Request")
+<MermaidDiagram value={connection_request}  />
 
 Most of code implementation for request loop resides in [`actix-web`][web] and [`actix-http`][http] crates.
 

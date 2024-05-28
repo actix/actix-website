@@ -2,6 +2,10 @@
 title: HTTP Server Initialization
 ---
 
+import CodeBlock from "@site/src/components/code_block";
+import MermaidDiagram from "@site/src/components/mermaid_diagram";
+import http_server from '!!raw-loader!@site/static/img/diagrams/http_server.mmd';
+
 # Architecture overview
 
 Below is a diagram of HttpServer initialization, which happens on the following code
@@ -19,4 +23,4 @@ async fn main() -> std::io::Result<()> {
 }
 ```
 
-![HTTP Server Diagram](/img/diagrams/http_server.svg)
+<MermaidDiagram value={http_server}  />

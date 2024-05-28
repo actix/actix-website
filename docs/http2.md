@@ -2,7 +2,8 @@
 title: HTTP/2
 ---
 
-import RenderCodeBlock from '@theme/CodeBlock'; import CodeBlock from '@site/src/components/code_block'; import { actixWebMajorVersion } from "@site/vars";
+import RenderCodeBlock from '@theme/CodeBlock';
+import CodeBlock from '@site/src/components/code_block';
 
 `actix-web` automatically upgrades connections to _HTTP/2_ if possible.
 
