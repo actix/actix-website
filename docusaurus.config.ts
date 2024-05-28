@@ -83,6 +83,6 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-} as Config;
+};
 
 export default config;
