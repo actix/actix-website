@@ -50,6 +50,12 @@ const config: Config = {
           label: "Code",
           position: "left",
         },
+        {
+          href: "https://github.com/actix/actix-web",
+          position: "right",
+          className: "header-github-link",
+          "aria-label": "GitHub repository",
+        },
       ],
     },
     footer: {
