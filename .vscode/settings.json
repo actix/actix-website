@@ -4,6 +4,9 @@
     "no-inline-html": false,
     "link-image-reference-definitions": false,
     "commands-show-output": false,
-    "fenced-code-language": false
+    "fenced-code-language": false,
+    "no-trailing-punctuation": {
+      "punctuation": ".,;:。，；："
+    }
   }
 }
