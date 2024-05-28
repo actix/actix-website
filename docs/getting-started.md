@@ -14,7 +14,7 @@ If you don't have Rust yet, we recommend you use `rustup` to manage your Rust in
 Actix Web currently has a minimum supported Rust version (MSRV) of { vars.rustVersion }. Running <code>rustup update</code> will ensure you have the latest and greatest Rust version available. As such, this guide assumes you are running Rust { vars.rustVersion } or later.
 </p>
 
-## Hello, world
+## Hello, world!
 
 Start by creating a new binary-based Cargo project and changing into the new directory:
 
