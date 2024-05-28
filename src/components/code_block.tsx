@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RenderCodeBlock from "@theme/CodeBlock";
+import { useIsMounted } from "usehooks-ts";
 
 type Props = {
   example: string;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 const CodeBlock = ({ example, file, section, language }: Props) => {
+  const isMounted = useIsMounted();
   const [code, setCode] = useState("");
 
   useEffect(() => {
@@ -23,10 +25,12 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
           )
         )[1];
 
-        setCode(source);
+        if (isMounted()) {
+          setCode(source);
+        }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [isMounted]);
 
   return (
     <RenderCodeBlock className={`language-${language ?? "rust"}`}>
