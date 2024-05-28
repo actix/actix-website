@@ -19,15 +19,17 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
 
     import(`!!raw-loader!@site/examples/${example}/${path}`)
       .then((source) => {
+        if (!isMounted()) {
+          return;
+        }
+
         source = source.default.match(
           new RegExp(
             `(?:\/\/|#) <${section}>\n([\\s\\S]*)(?:\/\/|#) <\/${section}>`
           )
         )[1];
 
-        if (isMounted()) {
-          setCode(source);
-        }
+        setCode(source);
       })
       .catch((err) => console.log(err));
   }, [isMounted]);
