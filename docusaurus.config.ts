@@ -16,6 +16,12 @@ const config: Config = {
   favicon: "img/logo.png",
   organizationName: "actix", // Usually your GitHub org/user name.
   projectName: "actix-web", // Usually your repo name.
+  // https://docusaurus.io/docs/api/themes/@docusaurus/theme-mermaid
+  // https://docusaurus.io/docs/markdown-features/diagrams
+  markdown: {
+    mermaid: true,
+  },
+  themes: ["@docusaurus/theme-mermaid"],
   themeConfig: {
     navbar: {
       title: "Actix",
