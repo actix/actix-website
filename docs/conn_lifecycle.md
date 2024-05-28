@@ -2,7 +2,7 @@
 title: Connection Lifecycle
 ---
 
-import MermaidDiagram from "@site/src/components/diagram";
+import MermaidDiagram from "@site/src/components/mermaid_diagram";
 import connection_overview from '!!raw-loader!@site/static/img/diagrams/connection_overview.mmd';
 import connection_accept from '!!raw-loader!@site/static/img/diagrams/connection_accept.mmd';
 import connection_worker from '!!raw-loader!@site/static/img/diagrams/connection_worker.mmd';

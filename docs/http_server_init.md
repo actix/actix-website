@@ -3,7 +3,7 @@ title: HTTP Server Initialization
 ---
 
 import CodeBlock from "@site/src/components/code_block";
-import MermaidDiagram from "@site/src/components/diagram";
+import MermaidDiagram from "@site/src/components/mermaid_diagram";
 import http_server from '!!raw-loader!@site/static/img/diagrams/http_server.mmd';
 
 # Architecture overview
