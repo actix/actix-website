@@ -3,6 +3,9 @@ title: Getting Started
 slug: /actix/getting-started
 ---
 
+import RenderCodeBlock from '@theme/CodeBlock';
+import vars from "@site/vars";
+
 # Getting Started
 
 Let’s create and run our first actix application. We’ll create a new Cargo project that depends on actix and then run the application.
@@ -20,11 +23,11 @@ cd actor-ping
 
 Now, add actix as a dependency of your project by ensuring your Cargo.toml contains the following:
 
-```toml
-[dependencies]
-actix = "0.11.0"
-actix-rt = "2.2" # <-- Runtime for actix
-```
+<RenderCodeBlock className="language-toml">
+{`[dependencies]
+actix = "${vars.actorsMajorVersion}"
+`}
+</RenderCodeBlock>
 
 Let's create an actor that will accept a `Ping` message and respond with the number of pings processed.
 
@@ -76,10 +79,10 @@ All communication with actors goes through an address. You can `do_send` a messa
 
 In the following example we are going to create a `MyActor` actor and send one message.
 
-Here we use the actix-rt as way to start our System and drive our main Future so we can easily `.await` for the messages sent to the Actor.
+Here we use the `#[actix::main]` as way to start our System and drive our main Future so we can easily `.await` for the messages sent to the Actor.
 
 ```rust
-#[actix_rt::main]
+#[actix::main]
 async fn main() {
     // start new actor
     let addr = MyActor { count: 10 }.start();
@@ -95,6 +98,6 @@ async fn main() {
 }
 ```
 
-`#[actix_rt::main]` starts the system and block until future resolves.
+`#[actix::main]` starts the system and block until future resolves.
 
 The Ping example is available in the [examples directory](https://github.com/actix/actix/tree/master/actix/examples/).

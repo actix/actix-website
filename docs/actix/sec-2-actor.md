@@ -107,7 +107,7 @@ impl Handler<Ping> for MyActor {
     }
 }
 
-#[actix_rt::main]
+#[actix::main]
 async fn main() {
     // Start MyActor in current thread
     let addr = MyActor.start();
@@ -191,7 +191,7 @@ impl Handler<Messages> for MyActor {
     }
 }
 
-#[actix_rt::main]
+#[actix::main]
 async fn main() {
     // Start MyActor in current thread
     let addr = MyActor.start();
