@@ -145,7 +145,7 @@ impl Handler<OrderShipped> for SmsSubscriber {
 
 }
 
-#[actix::main]
+#[actix_rt::main]
 async fn main() -> Result<(), actix::MailboxError> {
     let email_subscriber = Subscribe(EmailSubscriber {}.start().recipient());
     let sms_subscriber = Subscribe(SmsSubscriber {}.start().recipient());
