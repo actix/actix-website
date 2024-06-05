@@ -9,6 +9,10 @@ async fn index(_req: HttpRequest) -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    rustls::crypto::aws_lc_rs::default_provider()
+        .install_default()
+        .unwrap();
+
     let mut certs_file = BufReader::new(File::open("cert.pem").unwrap());
     let mut key_file = BufReader::new(File::open("key.pem").unwrap());
 
@@ -30,7 +34,7 @@ async fn main() -> std::io::Result<()> {
         .unwrap();
 
     HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind_rustls_0_22(("127.0.0.1", 8443), tls_config)?
+        .bind_rustls_0_23(("127.0.0.1", 8443), tls_config)?
         .run()
         .await
 }

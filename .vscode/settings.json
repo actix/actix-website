@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["actix", "deserialization", "rustls", "serde", "struct"],
+  "cSpell.words": [
+    "actix",
+    "deserialization",
+    "pemfile",
+    "rustls",
+    "serde",
+    "struct"
+  ],
   "markdownlint.config": {
     "no-inline-html": false,
     "link-image-reference-definitions": false,
