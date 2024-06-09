@@ -51,6 +51,12 @@ const config: Config = {
           position: "left",
         },
         {
+          href: "https://discord.gg/NWpN5mmg3x",
+          position: "right",
+          className: "header-discord-link",
+          "aria-label": "Chat on Discord",
+        },
+        {
           href: "https://github.com/actix/actix-web",
           position: "right",
           className: "header-github-link",
