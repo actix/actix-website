@@ -6,7 +6,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 const draculaTheme = prismThemes.dracula;
 
 const config: Config = {
-  title: "Actix",
+  title: "Actix Web",
   tagline:
     "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
   url: "https://actix.rs",
