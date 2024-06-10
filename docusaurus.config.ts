@@ -24,12 +24,12 @@ const config: Config = {
   themes: ["@docusaurus/theme-mermaid"],
   themeConfig: {
     navbar: {
-      title: "Actix",
+      title: "Actix Web",
       logo: {
-        alt: "Actix Logo",
         src: "img/logo-icon.png",
         width: 32,
         height: 32,
+        alt: "Actix Web Logo",
       },
       items: [
         {
