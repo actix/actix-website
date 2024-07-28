@@ -85,7 +85,7 @@ fn main() {
             Ok(res) => {
                 // `res` is now the `usize` returned from `SumActor` as a response to `Value(6, 7)`
                 // Once the future is complete, send the successful response (`usize`)
-                // to the `DisplayActor` wrapped in a `Display
+                // to the `DisplayActor` wrapped in a `Display`
                 dis_addr.send(Display(res)).await;
             }
             Err(e) => {
