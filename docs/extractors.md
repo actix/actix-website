@@ -64,6 +64,8 @@ Actix Web also provides many other extractors, here's a few important ones:
 - [`Bytes`][bytes] - You can convert a request's payload into _Bytes_. [_An example_][bytesexample] is available in the rustdoc.
 - [`Payload`][payload] - Low-level payload extractor primarily for building other extractors. [_An example_][payloadexample] is available in the rustdoc.
 
+Note: You can't use the String in combination with the Json extractor
+
 ## Application State Extractor
 
 Application state is accessible from the handler with the `web::Data` extractor; however, state is accessible as a read-only reference. If you need mutable access to state, it must be implemented.
