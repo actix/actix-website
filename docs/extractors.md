@@ -4,11 +4,20 @@ title: Extractors
 
 import CodeBlock from "@site/src/components/code_block";
 
-# Type-safe information extraction
+# Type-safe Request Information Extraction
 
 Actix Web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). There are lots of built-in extractor implementations (see [implementors](https://docs.rs/actix-web/latest/actix_web/trait.FromRequest.html#implementors)).
 
-An extractor can be accessed as an argument to a handler function. Actix Web supports up to 12 extractors per handler function. Argument position does not matter.
+An extractor can be accessed as an argument to a handler function. Actix Web supports up to 12 extractors per handler function.
+
+In most cases, argument position does not matter. However, if an extractor **takes** the body (i.e., it reads _any_ bytes from the request body stream), then only the first extractor will succeed. If you need fallback behavior such as "read body as JSON or just give me the raw bytes if that fails", then use the [`Either`][either] extractor (e.g., `Either<Json<T>, Bytes>`).
+
+Some other specific use cases where request bodies need reading twice can be supported:
+
+- For body (any extractor) + it's hash/digest, see [the `actix-hash` crate][actix_hash].
+- For body (any extractor) + custom request signature scheme: see [the `RequestSignature` extractor][request_signature] from `actix-web-lab`.
+
+Simple example showing extraction of two positional dynamic path segments and a JSON body:
 
 <CodeBlock example="extractors" file="main.rs" section="option-one" />
 
@@ -80,6 +89,9 @@ Although this handler will work, `data.count` will only count the number of requ
 
 Be careful when using blocking synchronization primitives like `Mutex` or `RwLock` within your app state. Actix Web handles requests asynchronously. It is a problem if the [_critical section_][critical_section] in your handler is too big or contains an `.await` point. If this is a concern, we would advise you to also read [Tokio's advice on using blocking `Mutex` in async code][tokio_std_mutex].
 
+[either]: https://docs.rs/actix-web/4/actix_web/enum.Either.html
+[actix_hash]: https://docs.rs/actix-hash
+[request_signature]: https://docs.rs/actix-web-lab/0.21/actix_web_lab/extract/struct.RequestSignature.html
 [pathstruct]: https://docs.rs/actix-web/4/actix_web/dev/struct.Path.html
 [querystruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Query.html
 [jsonstruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Json.html

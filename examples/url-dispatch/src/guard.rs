@@ -1,3 +1,5 @@
+#![allow(dead_code)] // false positive on ContentTypeHeader
+
 // <guard>
 use actix_web::{
     guard::{Guard, GuardContext},

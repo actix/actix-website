@@ -3,6 +3,7 @@
     "actix",
     "deserialization",
     "pemfile",
+    "rustdoc",
     "rustls",
     "serde",
     "struct"
