@@ -13,6 +13,7 @@ Here is an example of `Actor::start()` method usage. In this example `MyActor` a
 
 ```rust
 struct MyActor;
+
 impl Actor for MyActor {
     type Context = Context<Self>;
 }
@@ -113,7 +114,8 @@ impl Handler<Subscribe> for OrderEvents {
 /// Subscribe to ship message
 impl Handler<Ship> for OrderEvents {
     type Result = ();
-    fn handle(&mut self, msg: Ship, ctx: &mut Self::Context) -> Self::Result {
+
+    fn handle(&mut self, msg: Ship, ctx: &mut Self::Context) {
         self.notify(msg.0);
         System::current().stop();
     }
@@ -121,25 +123,31 @@ impl Handler<Ship> for OrderEvents {
 
 /// Email Subscriber
 struct EmailSubscriber;
+
 impl Actor for EmailSubscriber {
     type Context = Context<Self>;
 }
 
 impl Handler<OrderShipped> for EmailSubscriber {
     type Result = ();
-    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) -> Self::Result {
+
+    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) {
         println!("Email sent for order {}", msg.0)
     }
 
 }
+
+/// SMS Subscriber
 struct SmsSubscriber;
+
 impl Actor for SmsSubscriber {
     type Context = Context<Self>;
 }
 
 impl Handler<OrderShipped> for SmsSubscriber {
     type Result = ();
-    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) -> Self::Result {
+
+    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) {
         println!("SMS sent for order {}", msg.0)
     }
 
@@ -150,9 +158,11 @@ async fn main() -> Result<(), actix::MailboxError> {
     let email_subscriber = Subscribe(EmailSubscriber {}.start().recipient());
     let sms_subscriber = Subscribe(SmsSubscriber {}.start().recipient());
     let order_event = OrderEvents::new().start();
+
     order_event.send(email_subscriber).await?;
     order_event.send(sms_subscriber).await?;
     order_event.send(Ship(1)).await?;
+
     Ok(())
 }
 ```
