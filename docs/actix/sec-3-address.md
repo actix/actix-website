@@ -115,7 +115,7 @@ impl Handler<Subscribe> for OrderEvents {
 impl Handler<Ship> for OrderEvents {
     type Result = ();
 
-    fn handle(&mut self, msg: Ship, ctx: &mut Self::Context) -> Self::Result {
+    fn handle(&mut self, msg: Ship, ctx: &mut Self::Context) {
         self.notify(msg.0);
         System::current().stop();
     }
@@ -131,7 +131,7 @@ impl Actor for EmailSubscriber {
 impl Handler<OrderShipped> for EmailSubscriber {
     type Result = ();
 
-    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) -> Self::Result {
+    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) {
         println!("Email sent for order {}", msg.0)
     }
 
@@ -147,7 +147,7 @@ impl Actor for SmsSubscriber {
 impl Handler<OrderShipped> for SmsSubscriber {
     type Result = ();
 
-    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) -> Self::Result {
+    fn handle(&mut self, msg: OrderShipped, _ctx: &mut Self::Context) {
         println!("SMS sent for order {}", msg.0)
     }
 
