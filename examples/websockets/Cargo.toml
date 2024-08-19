@@ -5,6 +5,6 @@ publish = false
 edition.workspace = true
 
 [dependencies]
-actix = "0.13"
 actix-web = "4"
-actix-web-actors = "4.0.0"
+actix-ws = "0.3"
+futures-util = { version = "0.3.17", default-features = false, features = ["std"] }
