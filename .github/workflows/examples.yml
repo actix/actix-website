@@ -27,4 +27,4 @@ jobs:
       - name: Test examples
         env:
           RUSTFLAGS: -A dead-code -A unused-variables
-        run: just check-examples
+        run: just test
