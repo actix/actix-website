@@ -4,11 +4,11 @@ use actix_web::{
     http::{header::ContentType, StatusCode},
     App, HttpResponse, HttpServer,
 };
-use derive_more::{Display, Error};
+use derive_more::derive::{Display, Error};
 
 #[derive(Debug, Display, Error)]
 enum UserError {
-    #[display(fmt = "Validation error on field: {}", field)]
+    #[display("Validation error on field: {field}")]
     ValidationError { field: String },
 }
 

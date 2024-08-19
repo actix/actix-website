@@ -6,10 +6,10 @@ pub mod recommend_two;
 
 // <response-error>
 use actix_web::{error, Result};
-use derive_more::{Display, Error};
+use derive_more::derive::{Display, Error};
 
 #[derive(Debug, Display, Error)]
-#[display(fmt = "my error: {}", name)]
+#[display("my error: {name}")]
 struct MyError {
     name: &'static str,
 }

@@ -1,10 +1,10 @@
 // <logging>
 use actix_web::{error, get, middleware::Logger, App, HttpServer, Result};
-use derive_more::{Display, Error};
+use derive_more::derive::{Display, Error};
 use log::info;
 
 #[derive(Debug, Display, Error)]
-#[display(fmt = "my error: {}", name)]
+#[display("my error: {name}")]
 pub struct MyError {
     name: &'static str,
 }

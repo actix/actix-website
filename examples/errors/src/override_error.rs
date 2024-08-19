@@ -4,17 +4,17 @@ use actix_web::{
     http::{header::ContentType, StatusCode},
     App, HttpResponse,
 };
-use derive_more::{Display, Error};
+use derive_more::derive::{Display, Error};
 
 #[derive(Debug, Display, Error)]
 enum MyError {
-    #[display(fmt = "internal error")]
+    #[display("internal error")]
     InternalError,
 
-    #[display(fmt = "bad request")]
+    #[display("bad request")]
     BadClientData,
 
-    #[display(fmt = "timeout")]
+    #[display("timeout")]
     Timeout,
 }
 
