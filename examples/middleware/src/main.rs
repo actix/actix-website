@@ -1,5 +1,6 @@
 pub mod default_headers;
 pub mod errorhandler;
+pub mod from_fn;
 pub mod logger;
 pub mod user_sessions;
 pub mod wrap_fn;
