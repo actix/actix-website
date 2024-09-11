@@ -115,5 +115,5 @@ You can use the `ErrorHandlers::handler()` method to register a custom error han
 [servicetrait]: https://docs.rs/actix-web/4/actix_web/dev/trait.Service.html
 [transformtrait]: https://docs.rs/actix-web/4/actix_web/dev/trait.Transform.html
 [wrap_fn]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.wrap_fn
-[from_fn]: https://docs.rs/actix-web/latest/actix_web/middleware/fn.from_fn.html
-[wrap]: https://docs.rs/actix-web/4.9.0/actix_web/struct.App.html#method.wrap
+[from_fn]: https://docs.rs/actix-web/4/actix_web/middleware/fn.from_fn.html
+[wrap]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.wrap
