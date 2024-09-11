@@ -27,6 +27,10 @@ Alternatively, for simple use cases, you can use [_wrap_fn_][wrap_fn] to create 
 
 <CodeBlock example="middleware" file="wrap_fn.rs" section="wrap-fn" />
 
+You can also use [_from_fn_][from_fn] to in combination with [_wrap_][wrap] to create a function as middlware.
+
+<CodeBlock example="middleware" file="from_fn.rs" section="from-fn" />
+
 > Actix Web provides several useful middleware, such as _logging_, _user sessions_, _compress_, etc.
 
 **Warning: if you use `wrap()` or `wrap_fn()` multiple times, the last occurrence will be executed first.**
@@ -111,3 +115,5 @@ You can use the `ErrorHandlers::handler()` method to register a custom error han
 [servicetrait]: https://docs.rs/actix-web/4/actix_web/dev/trait.Service.html
 [transformtrait]: https://docs.rs/actix-web/4/actix_web/dev/trait.Transform.html
 [wrap_fn]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.wrap_fn
+[from_fn]: https://docs.rs/actix-web/4/actix_web/middleware/fn.from_fn.html
+[wrap]: https://docs.rs/actix-web/4/actix_web/struct.App.html#method.wrap
