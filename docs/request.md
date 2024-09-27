@@ -10,7 +10,7 @@ There are several options for json body deserialization.
 
 The first option is to use _Json_ extractor. First, you define a handler function that accepts `Json<T>` as a parameter, then, you use the `.to()` method for registering this handler. It is also possible to accept arbitrary valid json object by using `serde_json::Value` as a type `T`.
 
-First example of json of `JSON Request` depends on `serde`:
+First example of `JSON Request` depends on `serde`:
 
 ```toml
 [dependencies]
