@@ -8,4 +8,4 @@ edition.workspace = true
 actix-session = { version = "0.10", features = ["cookie-session"] }
 actix-web = "4"
 env_logger = "0.11"
-futures-util = { version = "0.3.7", default-features = false, features = ["std"] }
+futures-util = { version = "0.3.31", default-features = false, features = ["std"] }
