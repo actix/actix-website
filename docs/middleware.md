@@ -27,7 +27,7 @@ Alternatively, for simple use cases, you can use [_wrap_fn_][wrap_fn] to create 
 
 <CodeBlock example="middleware" file="wrap_fn.rs" section="wrap-fn" />
 
-You can also use [_from_fn_][from_fn] to in combination with [_wrap_][wrap] to create a function as middlware.
+You can also use [_from_fn_][from_fn] to in combination with [_wrap_][wrap] to create a function as middleware.
 
 <CodeBlock example="middleware" file="from_fn.rs" section="from-fn" />
 
