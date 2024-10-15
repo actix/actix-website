@@ -8,7 +8,7 @@ use actix_web::{
     App, Error,
 };
 
-async fn my_midleware(
+async fn my_middleware(
     req: ServiceRequest,
     next: Next<impl MessageBody>,
 ) -> Result<ServiceResponse<impl MessageBody>, Error> {
@@ -19,6 +19,6 @@ async fn my_midleware(
 
 #[actix_web::main]
 async fn main() {
-    let app = App::new().wrap(from_fn(my_midleware));
+    let app = App::new().wrap(from_fn(my_middleware));
 }
 // </from-fn>
