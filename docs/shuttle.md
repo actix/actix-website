@@ -8,7 +8,7 @@ import CodeBlock from '@site/src/components/code_block';
 
 <img width="300" src="https://raw.githubusercontent.com/shuttle-hq/shuttle/master/assets/logo-rectangle-transparent.png" alt="Shuttle Logo"/>
 
-> [**Shuttle**](https://www.shuttle.rs) is a Rust-native cloud development platform that lets you deploy your Rust apps for free.
+> [**Shuttle**](https://www.shuttle.dev) is a Rust-native cloud development platform that lets you deploy your Rust apps for free.
 
 Shuttle has out-of-the-box support for Actix Web. Follow these steps to host your web service on Shuttle:
 
@@ -29,15 +29,15 @@ cargo install cargo-shuttle
 4. Create your project on the Shuttle platform:
 
 ```sh
-cargo shuttle project start
+shuttle project start
 ```
 
 5. Deploy! 🚀
 
 ```sh
-cargo shuttle deploy
+shuttle deploy
 ```
 
-You can run `cargo shuttle run` to test your application locally.
+You can run `shuttle run` to test your application locally.
 
 Check out some complete Actix Web examples [here](https://github.com/shuttle-hq/shuttle-examples/tree/main/actix-web).
