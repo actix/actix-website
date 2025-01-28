@@ -6,7 +6,7 @@ import vars from "@site/vars";
 
 # Actix Web is part of an Ecosystem of Crates
 
-Long ago, Actix Web was built on top of the `actix` actor framework. Now, Actix Web is largely unrelated to the actor framework and is built using a different system. Though `actix` is still maintained, its usefulness as a general tool is diminishing as the features and async/await ecosystem matures. At this time, the use of `actix` is only required for WebSocket endpoints.
+Long ago, Actix Web was built on top of the `actix` actor framework. Now, Actix Web is largely unrelated to the actor framework and is built using a different system. Though `actix` is still maintained, its usefulness as a general tool is diminishing as the [futures](https://docs.rs/futures/latest/futures) and async/await ecosystem matures. At this time, the use of `actix` is only required for WebSocket endpoints.
 
 We call Actix Web a powerful and pragmatic framework. For all intents and purposes, it's a micro-framework with a few twists. If you are already a Rust programmer, you will probably find yourself at home quickly. But even if you are coming from another programming language, you should find Actix Web easy to pick up.
 
