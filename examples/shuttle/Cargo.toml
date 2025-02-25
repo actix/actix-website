@@ -7,7 +7,7 @@ edition.workspace = true
 # <shuttle-deps>
 [dependencies]
 actix-web = "4"
-shuttle-actix-web = "0.50"
-shuttle-runtime = "0.50"
+shuttle-actix-web = "0.52"
+shuttle-runtime = "0.52"
 tokio = "1"
 # </shuttle-deps>
