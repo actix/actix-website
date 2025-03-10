@@ -195,9 +195,9 @@ dependencies = [
 
 [[package]]
 name = "actix-web"
-version = "4.9.0"
+version = "4.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9180d76e5cc7ccbc4d60a506f2c727730b154010262df5b910eb17dbe4b8cb38"
+checksum = "2cce64e942deba4ad3dca8f1ede704fc2bfdb3d461c213e044b8f321b599a7e0"
 dependencies = [
  "actix-codec",
  "actix-http",
@@ -209,13 +209,13 @@ dependencies = [
  "actix-tls",
  "actix-utils",
  "actix-web-codegen",
- "ahash",
  "bytes",
  "bytestring",
  "cfg-if",
  "cookie",
- "derive_more 0.99.18",
+ "derive_more 2.0.1",
  "encoding_rs",
+ "foldhash",
  "futures-core",
  "futures-util",
  "impl-more",
@@ -233,6 +233,7 @@ dependencies = [
  "smallvec",
  "socket2",
  "time",
+ "tracing",
  "url",
 ]
 
@@ -1039,6 +1040,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
 
 [[package]]
+name = "foldhash"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a0d2fde1f7b3d48b8395d5f2de76c18a528bd6a9cdde438df747bfcba3e05d6f"
+
+[[package]]
 name = "foreign-types"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1739,7 +1746,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c2a198fb6b0eada2a8df47933734e6d35d350665a33a3593d7164fa52c75c19"
 dependencies = [
  "cfg-if",
- "windows-targets 0.48.5",
+ "windows-targets 0.52.6",
 ]
 
 [[package]]
