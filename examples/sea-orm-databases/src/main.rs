@@ -5,6 +5,7 @@ use sea_orm::{ActiveModelTrait, Database, DatabaseConnection, Set};
 use serde::Serialize;
 use uuid::Uuid;
 
+// <handler>
 // Importing the existing entity modules
 pub mod prelude;
 pub mod users;
@@ -16,7 +17,6 @@ struct User {
     name: String,
 }
 
-// <handler>
 async fn insert_new_user(
     conn: &DatabaseConnection,
     user_name: String,

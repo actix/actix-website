@@ -36,7 +36,7 @@ That's it! See the full example [here](https://github.com/actix/examples/tree/ma
 
 [SeaORM](https://www.sea-ql.org/SeaORM/) is a Rust ORM with full async support. When used with Actix Web, unlike Diesel, it allows you to perform database operations directly in an asynchronous manner without needing to use `web::block`.
 
-First, define your data models and functions for database operations:
+First, define your data models and functions for database operations. Using `sea-orm-cli`, you can use a data model that is automatically generated from an existing DB definition:
 
 <CodeBlock example="sea-orm-databases" file="main.rs" section="handler" />
 
@@ -48,7 +48,7 @@ In your request handler, use the `web::Data<DatabaseConnection>` extractor to ge
 
 <CodeBlock example="sea-orm-databases" file="main.rs" section="index" />
 
-See the full example [here](https://github.com/actix/examples/tree/master/databases/sea-orm).
+For a full example, please refer to [here](https://github.com/actix/examples/tree/master/databases/sea-orm).
 
 [web-block]: https://docs.rs/actix-web/4/actix_web/web/fn.block.html
 [response-error]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html
