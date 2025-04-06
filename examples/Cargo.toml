@@ -19,6 +19,7 @@ members = [
   "requests",
   "responder-trait",
   "responses",
+  "sea-orm-databases",
   "server",
   "shuttle",
   "static-files",

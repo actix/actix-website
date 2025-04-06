@@ -32,5 +32,23 @@ This example also maps the error to an `HttpResponse` before using the `?` opera
 
 That's it! See the full example [here](https://github.com/actix/examples/tree/master/databases/diesel).
 
+# SeaORM
+
+[SeaORM](https://www.sea-ql.org/SeaORM/) is a Rust ORM with full async support. When used with Actix Web, unlike Diesel, it allows you to perform database operations directly in an asynchronous manner without needing to use `web::block`.
+
+First, define your data models and functions for database operations:
+
+<CodeBlock example="sea-orm-databases" file="main.rs" section="handler" />
+
+Next, set up the database connection as part of your application state. SeaORM manages connection pools by default, so you don't need additional pool configuration:
+
+<CodeBlock example="sea-orm-databases" file="main.rs" section="main" />
+
+In your request handler, use the `web::Data<DatabaseConnection>` extractor to get the database connection and perform async operations directly:
+
+<CodeBlock example="sea-orm-databases" file="main.rs" section="index" />
+
+See the full example [here](https://github.com/actix/examples/tree/master/databases/sea-orm).
+
 [web-block]: https://docs.rs/actix-web/4/actix_web/web/fn.block.html
 [response-error]: https://docs.rs/actix-web/4/actix_web/error/trait.ResponseError.html
