@@ -6,7 +6,7 @@ edition.workspace = true
 
 [dependencies]
 actix-web = "4"
-sea-orm = { version = "1.1.0", features = [
+sea-orm = { version = "1.1.9", features = [
     "sqlx-sqlite",
     "runtime-tokio-native-tls",
     "macros",
