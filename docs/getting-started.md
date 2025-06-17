@@ -32,7 +32,7 @@ Add `actix-web` as a dependency of your project by adding the following to your 
 actix-web = "${vars.actixWebMajorVersion}"`}
 </RenderCodeBlock>
 
-Request handlers use async functions that accept zero or more parameters. These parameters can be extracted from a request (see `FromRequest` trait) and returns a type that can be converted into an `HttpResponse` (see `Responder` trait):
+Request handlers use async functions that accept zero or more parameters. These parameters can be extracted from a request (see `FromRequest` trait), and the function returns a type that can be converted into an `HttpResponse` (see `Responder` trait):
 
 Replace the contents of `src/main.rs` with the following:
 
