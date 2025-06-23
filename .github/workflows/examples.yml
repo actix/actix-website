@@ -23,7 +23,7 @@ jobs:
         uses: actions-rust-lang/setup-rust-toolchain@v1.12.0
 
       - name: Install just
-        uses: taiki-e/install-action@v2.52.8
+        uses: taiki-e/install-action@v2.54.0
         with:
           tool: just
 
