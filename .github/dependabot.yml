@@ -3,11 +3,11 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
   - package-ecosystem: cargo
     directory: /examples
     schedule:
-      interval: weekly
+      interval: monthly
     groups:
        shuttle:
           patterns:
