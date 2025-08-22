@@ -9,6 +9,6 @@ updates:
     schedule:
       interval: monthly
     groups:
-       shuttle:
+        shuttle:
           patterns:
             - shuttle-*
