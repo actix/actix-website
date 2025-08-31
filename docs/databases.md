@@ -44,7 +44,7 @@ Next, set up the database connection as part of your application state. SeaORM m
 
 <CodeBlock example="sea-orm-databases" file="main.rs" section="main" />
 
-In your request handler, use the `web::Data<DatabaseConnection>` extractor to get the database connection and perform async operations directly:
+In your request handler, use the `web::ThinData<DatabaseConnection>` extractor to get the database connection and perform async operations directly:
 
 <CodeBlock example="sea-orm-databases" file="main.rs" section="index" />
 

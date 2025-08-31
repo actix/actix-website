@@ -49,7 +49,7 @@ async fn main() -> io::Result<()> {
 
     HttpServer::new(move || {
         App::new()
-            .app_data(web::Data::new(conn.clone()))
+            .app_data(web::ThinData(conn.clone()))
             .route("/{name}", web::get().to(index))
     })
     .bind(("127.0.0.1", 8080))?
@@ -60,7 +60,7 @@ async fn main() -> io::Result<()> {
 
 // <index>
 async fn index(
-    conn: web::Data<DatabaseConnection>,
+    conn: web::ThinData<DatabaseConnection>,
     name: web::Path<(String,)>,
 ) -> actix_web::Result<impl Responder> {
     let (name,) = name.into_inner();
