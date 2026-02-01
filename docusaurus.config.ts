@@ -7,8 +7,7 @@ const draculaTheme = prismThemes.dracula;
 
 const config: Config = {
   title: "Actix Web",
-  tagline:
-    "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
+  tagline: "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
   url: "https://actix.rs",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -77,10 +76,7 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
   } satisfies Preset.ThemeConfig,
-  plugins: [
-    "docusaurus-plugin-sass",
-    require.resolve("docusaurus-lunr-search"),
-  ],
+  plugins: ["docusaurus-plugin-sass", require.resolve("docusaurus-lunr-search")],
   presets: [
     [
       "classic",
