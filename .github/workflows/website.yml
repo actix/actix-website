@@ -28,5 +28,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Check format
+        run: pnpm run fmt:check
+
+      - name: Lint codebase
+        run: pnpm run lint
+
       - name: Test build website
         run: pnpm run build
