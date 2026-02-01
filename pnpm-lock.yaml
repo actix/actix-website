@@ -9,13 +9,13 @@ importers:
   .:
     dependencies:
       '@docusaurus/core':
-        specifier: ^3.9.1
+        specifier: ^3.9.2
         version: 3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.10)(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       '@docusaurus/preset-classic':
-        specifier: ^3.9.1
+        specifier: ^3.9.2
         version: 3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.10)(react@19.2.4))(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       '@docusaurus/theme-mermaid':
-        specifier: ^3.9.1
+        specifier: ^3.9.2
         version: 3.9.2(@docusaurus/plugin-content-docs@3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.10)(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(@mdx-js/react@3.1.1(@types/react@19.2.10)(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       '@fortawesome/fontawesome-svg-core':
         specifier: ^7.1.0
@@ -27,16 +27,16 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.4)
       '@mdx-js/react':
-        specifier: ^3.0.0
+        specifier: ^3.1.1
         version: 3.1.1(@types/react@19.2.10)(react@19.2.4)
       clsx:
-        specifier: ^2.1.0
+        specifier: ^2.1.1
         version: 2.1.1
       docusaurus-lunr-search:
-        specifier: ^3.4.0
+        specifier: ^3.6.0
         version: 3.6.0(@docusaurus/core@3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.10)(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       docusaurus-plugin-sass:
-        specifier: ~0.2.5
+        specifier: ~0.2.6
         version: 0.2.6(@docusaurus/core@3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.10)(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(sass@1.97.3)(webpack@5.104.1)
       lunr:
         specifier: ^2.3.9
@@ -45,7 +45,7 @@ importers:
         specifier: ^1.14.0
         version: 1.14.0
       prism-react-renderer:
-        specifier: ^2.3.0
+        specifier: ^2.4.1
         version: 2.4.1(react@19.2.4)
       react:
         specifier: ^19.2.4
@@ -54,20 +54,20 @@ importers:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
       sass:
-        specifier: ^1.71.0
+        specifier: ^1.97.3
         version: 1.97.3
       usehooks-ts:
-        specifier: ^3.1.0
+        specifier: ^3.1.1
         version: 3.1.1(react@19.2.4)
     devDependencies:
       '@docusaurus/module-type-aliases':
-        specifier: ^3.3.2
+        specifier: ^3.9.2
         version: 3.9.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@docusaurus/tsconfig':
-        specifier: ^3.3.2
+        specifier: ^3.9.2
         version: 3.9.2
       '@docusaurus/types':
-        specifier: ^3.3.2
+        specifier: ^3.9.2
         version: 3.9.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       oxfmt:
         specifier: ^0.27.0
@@ -79,7 +79,7 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2(webpack@5.104.1)
       typescript:
-        specifier: ^5.4.5
+        specifier: ^5.9.3
         version: 5.9.3
 
 packages:
