@@ -11,7 +11,6 @@ const config: Config = {
   url: "https://actix.rs",
   baseUrl: "/",
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
   favicon: "img/logo.png",
   organizationName: "actix", // Usually your GitHub org/user name.
   projectName: "actix-web", // Usually your repo name.
@@ -19,6 +18,9 @@ const config: Config = {
   // https://docusaurus.io/docs/markdown-features/diagrams
   markdown: {
     mermaid: true,
+      hooks: {
+        onBrokenMarkdownLinks: "warn",
+    },
   },
   themes: ["@docusaurus/theme-mermaid"],
   themeConfig: {
