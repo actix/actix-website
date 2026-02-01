@@ -18,8 +18,8 @@ const config: Config = {
   // https://docusaurus.io/docs/markdown-features/diagrams
   markdown: {
     mermaid: true,
-      hooks: {
-        onBrokenMarkdownLinks: "warn",
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
     },
   },
   themes: ["@docusaurus/theme-mermaid"],
