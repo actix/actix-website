@@ -14,8 +14,7 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    const path =
-      file === "manifest" ? "Cargo.toml" : `src/${file ?? "main.rs"}`;
+    const path = file === "manifest" ? "Cargo.toml" : `src/${file ?? "main.rs"}`;
 
     import(`!!raw-loader!@site/examples/${example}/${path}`)
       .then((source) => {
@@ -24,9 +23,7 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
         }
 
         source = source.default.match(
-          new RegExp(
-            `(?:\/\/|#) <${section}>\n([\\s\\S]*)(?:\/\/|#) <\/${section}>`
-          )
+          new RegExp(`(?://|#) <${section}>\n([\\s\\S]*)(?://|#) </${section}>`),
         )[1];
 
         setCode(source);
@@ -34,11 +31,7 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
       .catch((err) => console.log(err));
   }, [isMounted]);
 
-  return (
-    <RenderCodeBlock className={`language-${language ?? "rust"}`}>
-      {code}
-    </RenderCodeBlock>
-  );
+  return <RenderCodeBlock className={`language-${language ?? "rust"}`}>{code}</RenderCodeBlock>;
 };
 
 export default CodeBlock;

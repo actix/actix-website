@@ -7,12 +7,10 @@ const draculaTheme = prismThemes.dracula;
 
 const config: Config = {
   title: "Actix Web",
-  tagline:
-    "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
+  tagline: "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
   url: "https://actix.rs",
   baseUrl: "/",
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
   favicon: "img/logo.png",
   organizationName: "actix", // Usually your GitHub org/user name.
   projectName: "actix-web", // Usually your repo name.
@@ -20,6 +18,9 @@ const config: Config = {
   // https://docusaurus.io/docs/markdown-features/diagrams
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
   },
   themes: ["@docusaurus/theme-mermaid"],
   themeConfig: {
@@ -77,10 +78,7 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
   } satisfies Preset.ThemeConfig,
-  plugins: [
-    "docusaurus-plugin-sass",
-    require.resolve("docusaurus-lunr-search"),
-  ],
+  plugins: ["docusaurus-plugin-sass", require.resolve("docusaurus-lunr-search")],
   presets: [
     [
       "classic",

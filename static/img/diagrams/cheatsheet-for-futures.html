@@ -1,11 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cheatsheet for Futures</title>
   </head>
-  <body><pre style="margin: 0"><code style="background: transparent"><span style="color: #8e908c">// Constructing leaf futures</span>
+  <body>
+    <pre
+      style="margin: 0"
+    ><code style="background: transparent"><span style="color: #8e908c">// Constructing leaf futures</span>
 <span style="color: #8959a8">fn</span> <a href="https://docs.rs/futures/0.1.13/futures/future/fn.empty.html">empty</a> ()             -&gt; <span style="color: #c82829">Future</span>&lt;<var>T</var>, <var>E</var>&gt;
 <span style="color: #8959a8">fn</span> <a href="https://docs.rs/futures/0.1.13/futures/future/fn.ok.html">ok</a>    (<var>T</var>)            -&gt; <span style="color: #c82829">Future</span>&lt;<var>T</var>, <var>E</var>&gt;
 <span style="color: #8959a8">fn</span> <a href="https://docs.rs/futures/0.1.13/futures/future/fn.err.html">err</a>   (<var>E</var>)            -&gt; <span style="color: #c82829">Future</span>&lt;<var>T</var>, <var>E</var>&gt;
@@ -49,5 +52,6 @@
 <span style="color: #8959a8">fn</span> <a href="https://docs.rs/futures/0.1.13/futures/future/trait.Future.html#method.catch_unwind">Future::catch_unwind</a>  (<span style="color: #c82829">Future</span>&lt;<var>T</var>, <var>E</var>&gt;+<span style="color: #4271ae">UnwindSafe</span>) -&gt; <span style="color: #c82829">Future</span>&lt;<span style="color: #4271ae">Result</span>&lt;<var>T</var>, <var>E</var>&gt;, <span style="color: #4271ae">Any</span>+<span style="color: #4271ae">Send</span>&gt;
 <span style="color: #8959a8">fn</span> <a href="https://docs.rs/futures/0.1.13/futures/future/trait.Future.html#method.shared">Future::shared</a>        (<span style="color: #c82829">Future</span>&lt;<var>T</var>, <var>E</var>&gt;)            -&gt; <span style="color: #c82829">Future</span>&lt;<span style="color: #4271ae">SharedItem</span>&lt;<var>T</var>&gt;, <span style="color: #4271ae">SharedError</span>&lt;<var>E</var>&gt;&gt;+<span style="color: #4271ae">Clone</span>
 <span style="color: #8959a8">fn</span> <a href="https://docs.rs/futures/0.1.13/futures/future/trait.Future.html#method.wait">Future::wait</a>          (<span style="color: #c82829">Future</span>&lt;<var>T</var>, <var>E</var>&gt;)            -&gt; <span style="color: #4271ae">Result</span>&lt;<var>T</var>, <var>E</var>&gt;
-</code></pre></body>
+</code></pre>
+  </body>
 </html>
