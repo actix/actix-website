@@ -63,6 +63,10 @@ A URL-encoded form body can be extracted to a struct, much like `Json<T>`. This 
 
 <CodeBlock example="extractors" file="form.rs" section="form" />
 
+If the form body is optional, or you want to handle invalid input yourself, wrap the extractor in `Option` and check for `None` in your handler.
+
+<CodeBlock example="extractors" file="form_optional.rs" section="form-optional" />
+
 ## Other
 
 Actix Web also provides many other extractors, here's a few important ones:
