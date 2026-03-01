@@ -6,5 +6,5 @@ edition.workspace = true
 
 [dependencies]
 actix-web = "4"
-actix-ws = "0.3"
+actix-ws = "0.4"
 futures-util = { version = "0.3.31", default-features = false, features = ["std"] }
