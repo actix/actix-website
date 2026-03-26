@@ -1,4 +1,4 @@
----
+--
 title: Arbiter
 slug: /actix/arbiter
 ---
