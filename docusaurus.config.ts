@@ -78,7 +78,20 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
   } satisfies Preset.ThemeConfig,
-  plugins: ["docusaurus-plugin-sass", require.resolve("docusaurus-lunr-search")],
+  plugins: [
+    "docusaurus-plugin-sass",
+    require.resolve("docusaurus-lunr-search"),
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "community",
+        path: "community",
+        routeBasePath: "community",
+        sidebarPath: require.resolve("./communitySidebars.ts"),
+        editUrl: "https://github.com/actix/actix-website/edit/main/",
+      },
+    ],
+  ],
   presets: [
     [
       "classic",
