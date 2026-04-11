@@ -10,6 +10,8 @@ Actix Web's middleware system allows us to add additional behavior to request/re
 
 Middleware can also hook into response processing.
 
+For browser-facing APIs, [CORS](/docs/cors) is another common middleware concern.
+
 Typically, middleware is involved in the following actions:
 
 - Pre-process the Request
