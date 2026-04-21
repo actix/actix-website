@@ -15,7 +15,7 @@ const sidebars: SidebarsConfig = {
       "static-files",
     ],
     Protocols: ["websockets", "http2"],
-    Patterns: ["autoreload", "databases", "shuttle"],
+    Patterns: ["autoreload", "databases"],
     Diagrams: ["http_server_init", "conn_lifecycle"],
     Actix: [
       "actix/sec-0-quick-start",

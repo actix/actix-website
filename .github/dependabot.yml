@@ -8,7 +8,3 @@ updates:
     directory: /examples
     schedule:
       interval: monthly
-    groups:
-      shuttle:
-        patterns:
-          - shuttle-*
