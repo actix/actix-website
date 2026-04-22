@@ -1,7 +1,6 @@
 ---
 title: Welcome
-description: Guiding you through building web apps with Actix
-slug: /
+description: this acount can,t use Actix
 ---
 
 # Welcome to Actix
