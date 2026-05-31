@@ -34,5 +34,6 @@ These are third-party crates. The Actix project is not involved in their develop
 | [actix-web-metrics](https://crates.io/crates/actix-web-metrics)               | Metrics.rs integration for Actix Web.                                                            |
 | [actix-htmx](https://crates.io/crates/actix-htmx)                             | Htmx integration for Actix Web.                                                                  |
 | [actix-web-helmet](https://crates.io/crates/actix-web-helmet)                 | A security middleware library for popular Rust web frameworks, with first-class `actix` support. |
+| [actix-mark](https://crates.io/crates/actix-mark)                             | An actix-web service for serving Markdown files as HTML.                                         |
 
 To add a crate to this list, submit a pull request to the [website repository](https://github.com/actix/actix-website).
