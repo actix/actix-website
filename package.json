@@ -41,7 +41,7 @@
     "@docusaurus/tsconfig": "^3.10.0",
     "@docusaurus/types": "^3.10.0",
     "oxfmt": "^0.47.0",
-    "oxlint": "^1.62.0",
+    "oxlint": "^1.67.0",
     "raw-loader": "^4.0.2",
     "typescript": "^6.0.3"
   },
