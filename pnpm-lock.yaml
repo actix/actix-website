@@ -45,8 +45,8 @@ importers:
         specifier: ^2.3.9
         version: 2.3.9
       lunr-languages:
-        specifier: ^1.14.0
-        version: 1.14.0
+        specifier: ^1.20.0
+        version: 1.20.0
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.2.5)
@@ -4093,8 +4093,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lunr-languages@1.14.0:
-    resolution: {integrity: sha512-hWUAb2KqM3L7J5bcrngszzISY4BxrXn/Xhbb9TTCJYEGqlR1nG67/M14sp09+PTIRklobrn57IAxcdcO/ZFyNA==}
+  lunr-languages@1.20.0:
+    resolution: {integrity: sha512-3LVgE7ekWXt04NBci/hjm+NXJxXZeRXuyClL0kA0HONyBOjxhP3ZQkuWIM4Ok3pbeptUW/rj3XcJcJuJVPwPYA==}
 
   lunr@2.3.9:
     resolution: {integrity: sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==}
@@ -10257,7 +10257,7 @@ snapshots:
       hast-util-to-text: 2.0.1
       hogan.js: 3.0.2
       lunr: 2.3.9
-      lunr-languages: 1.14.0
+      lunr-languages: 1.20.0
       mark.js: 8.11.1
       minimatch: 3.1.5
       react: 19.2.5
@@ -11293,7 +11293,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lunr-languages@1.14.0: {}
+  lunr-languages@1.20.0: {}
 
   lunr@2.3.9: {}
 
