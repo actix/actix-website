@@ -18,7 +18,7 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.10.0",
+    "@docusaurus/core": "^3.10.1",
     "@docusaurus/preset-classic": "^3.10.0",
     "@docusaurus/theme-mermaid": "^3.10.0",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
