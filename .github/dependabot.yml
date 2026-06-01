@@ -12,6 +12,10 @@ updates:
       interval: monthly
     cooldown:
       default-days: 3
+    groups:
+      docusaurus:
+        patterns:
+          - "@docusaurus/*"
   - package-ecosystem: cargo
     directory: /examples
     schedule:
