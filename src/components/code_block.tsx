@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
 import RenderCodeBlock from "@theme/CodeBlock";
-import { useIsMounted } from "usehooks-ts";
 
 type Props = {
   example: string;
@@ -9,27 +7,35 @@ type Props = {
   language?: string;
 };
 
+type RawCodeModule = {
+  default: string;
+};
+
+type WebpackRequire = typeof require & {
+  context: (
+    directory: string,
+    useSubdirectories: boolean,
+    regExp: RegExp,
+  ) => (request: string) => RawCodeModule;
+};
+
+const exampleSources = (require as WebpackRequire).context(
+  "!!raw-loader!@site/examples",
+  true,
+  /^\.\/[^/]+\/(?:Cargo\.toml|src\/[^/]+\.rs)$/,
+);
+
 const CodeBlock = ({ example, file, section, language }: Props) => {
-  const isMounted = useIsMounted();
-  const [code, setCode] = useState("");
+  const path = file === "manifest" ? "Cargo.toml" : `src/${file ?? "main.rs"}`;
+  const source = exampleSources(`./${example}/${path}`).default;
 
-  useEffect(() => {
-    const path = file === "manifest" ? "Cargo.toml" : `src/${file ?? "main.rs"}`;
+  const code = source.match(
+    new RegExp(`(?://|#) <${section}>\n([\\s\\S]*)(?://|#) </${section}>`),
+  )?.[1];
 
-    import(`!!raw-loader!@site/examples/${example}/${path}`)
-      .then((source) => {
-        if (!isMounted()) {
-          return;
-        }
-
-        source = source.default.match(
-          new RegExp(`(?://|#) <${section}>\n([\\s\\S]*)(?://|#) </${section}>`),
-        )[1];
-
-        setCode(source);
-      })
-      .catch((err) => console.log(err));
-  }, [isMounted]);
+  if (code === undefined) {
+    throw new Error(`Missing code section "${section}" in ${example}/${path}`);
+  }
 
   return <RenderCodeBlock className={`language-${language ?? "rust"}`}>{code}</RenderCodeBlock>;
 };
