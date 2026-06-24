@@ -24,7 +24,7 @@ These are third-party crates. The Actix project is not involved in their develop
 | [actix-web-flash-messages](https://crates.io/crates/actix-web-flash-messages) | Support for flash messages or one-time notifications in `actix-web`.                             |
 | [awmp](https://crates.io/crates/awmp)                                         | An easy to use wrapper around multipart fields for Actix Web.                                    |
 | [actix-hash](https://crates.io/crates/actix-hash)                             | Hashing utilities for Actix Web.                                                                 |
-| [actix-bincode](https://crates.io/crates/actix-bincode)                       | Bincode payload extractor for Actix Web.                                                         |
+| [actix-bincode](https://crates.io/crates/actix-bincode)                       | Bincode payload extractor for Actix Web.                                                        |
 | [sentinel-actix](https://crates.io/crates/sentinel-actix)                     | General and flexible protection for Actix Web.                                                   |
 | [actix-telepathy](https://crates.io/crates/actix-telepathy)                   | Build distributed applications with `RemoteActors` and `RemoteMessages`.                         |
 | [apistos](https://crates.io/crates/apistos)                                   | Automatic OpenAPI v3 documentation for Actix Web.                                                |
@@ -35,6 +35,6 @@ These are third-party crates. The Actix project is not involved in their develop
 | [actix-htmx](https://crates.io/crates/actix-htmx)                             | Htmx integration for Actix Web.                                                                  |
 | [actix-web-helmet](https://crates.io/crates/actix-web-helmet)                 | A security middleware library for popular Rust web frameworks, with first-class `actix` support. |
 | [actix-mark](https://crates.io/crates/actix-mark)                             | An actix-web service for serving Markdown files as HTML.                                         |
-| [actixutils](https://crates.io/crates/actixutils)                             | Reusable middleware and request utilities for Actix Web |
+| [actixutils](https://crates.io/crates/actixutils)                             | A collection of middlewares and extractors for authentication, session management, rate limiting, idempotency, request context and pagination. |
 
 To add a crate to this list, submit a pull request to the [website repository](https://github.com/actix/actix-website).
