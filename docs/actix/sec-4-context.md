@@ -56,7 +56,8 @@ impl Handler<WhoAmI> for MyActor {
     }
 }
 
-let who_addr = addr.do_send(WhoAmI{});
+let addr = MyActor.start();
+let who_addr = addr.send(WhoAmI {}).await;
 ```
 
 [`Context::address()`]: https://docs.rs/actix/latest/actix/struct.Context.html#method.address
