@@ -14,6 +14,24 @@ const config: Config = {
   favicon: "img/logo.png",
   organizationName: "actix", // Usually your GitHub org/user name.
   projectName: "actix-web", // Usually your repo name.
+  future: {
+    v4: {
+      // Required by future.faster.ssgWorkerThreads
+      removeLegacyPostBuildHeadAttribute: true,
+    },
+    faster: {
+      // Rspack bundler replaces webpack for faster builds (Docusaurus Faster).
+      // Requires swcJsLoader, swcJsMinimizer and lightningCssMinimizer.
+      swcJsLoader: true,
+      swcJsMinimizer: true,
+      swcHtmlMinimizer: true,
+      lightningCssMinimizer: true,
+      mdxCrossCompilerCache: true,
+      rspackBundler: true,
+      rspackPersistentCache: true,
+      ssgWorkerThreads: true,
+    },
+  },
   // https://docusaurus.io/docs/api/themes/@docusaurus/theme-mermaid
   // https://docusaurus.io/docs/markdown-features/diagrams
   markdown: {

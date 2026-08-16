@@ -10,9 +10,7 @@ import vars from "@site/vars";
 
 If you don't have Rust yet, we recommend you use `rustup` to manage your Rust installation. The [official rust guide][rustguide] has a wonderful section on getting started.
 
-<p>
 Actix Web currently has a minimum supported Rust version (MSRV) of { vars.rustVersion }. Running <code>rustup update</code> will ensure you have the latest and greatest Rust version available. As such, this guide assumes you are running Rust { vars.rustVersion } or later.
-</p>
 
 ## Hello, world!
 

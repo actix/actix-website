@@ -1,0 +1,7 @@
+overrides:
+  webpackbar: ^7.0.0
+
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  core-js: true

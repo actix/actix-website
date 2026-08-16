@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",
+    "@docusaurus/faster": "^3.10.2",
     "@docusaurus/preset-classic": "^3.10.1",
     "@docusaurus/theme-mermaid": "^3.10.1",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
@@ -58,10 +59,5 @@
   },
   "engines": {
     "node": ">=24.13.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "webpackbar": "^7.0.0"
-    }
   }
 }
