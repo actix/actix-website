@@ -76,14 +76,14 @@ This example reads `cert.pem` and `key.pem` from the working directory and serve
 
 ### Certificates for local development
 
-To create a self-signed certificate and an unencrypted private key for local testing, run:
+Install [mkcert](https://github.com/FiloSottile/mkcert#installation), then create and install a local certificate authority and generate a certificate for `localhost`:
 
 ```shell-session
-$ openssl req -x509 -newkey rsa:4096 -nodes -keyout key.pem -out cert.pem \
-    -days 365 -sha256 -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost"
+$ mkcert -install
+$ mkcert -cert-file cert.pem -key-file key.pem localhost 127.0.0.1 ::1
 ```
 
-The `openssl` command is only used here to generate the files. The rustls server does not need the `openssl` crate. Browsers do not trust this self-signed certificate by default. For production, use a certificate from a trusted certificate authority.
+mkcert installs its local certificate authority in the system trust store, so supported browsers trust these development certificates. Use mkcert only for local development, and do not share its `rootCA-key.pem` file.
 
 ### OpenSSL alternative
 
