@@ -1,7 +1,7 @@
+// <main>
 use std::{fs::File, io::BufReader};
 
-// <main>
-use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+use actix_web::{App, HttpRequest, HttpServer, Responder, web};
 
 async fn index(_req: HttpRequest) -> impl Responder {
     "Hello TLS World!"

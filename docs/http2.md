@@ -9,9 +9,7 @@ import CodeBlock from '@site/src/components/code_block';
 
 # Negotiation
 
-<!-- TODO: use rustls example -->
-
-When either of the `rustls` or `openssl` features are enabled, `HttpServer` provides the [`bind_rustls()`][bindrustls] method and [`bind_openssl()`][bindopenssl] methods, respectively.
+When either of the `rustls-0_23` or `openssl` features are enabled, `HttpServer` provides the [`bind_rustls_0_23()`][bindrustls] and [`bind_openssl()`][bindopenssl] methods, respectively. See [TLS / HTTPS](server.md#tls--https) for certificate setup. The example below uses rustls, the recommended option.
 
 <!-- DEPENDENCY -->
 
@@ -25,7 +23,7 @@ Upgrades to HTTP/2 described in [RFC 7540 §3.2][rfcsection32] are not supported
 
 [rfcsection32]: https://httpwg.org/specs/rfc7540.html#rfc.section.3.2
 [rfcsection34]: https://httpwg.org/specs/rfc7540.html#rfc.section.3.4
-[bindrustls]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_rustls_0_22
+[bindrustls]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_rustls_0_23
 [bindopenssl]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_openssl
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [examples]: https://github.com/actix/examples/tree/master/https-tls
