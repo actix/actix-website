@@ -54,9 +54,40 @@ The same limitation applies to extractors as well. When a handler function recei
 
 ## TLS / HTTPS
 
-Actix Web supports two TLS implementations out-of-the-box: `rustls` and `openssl`.
+Actix Web supports TLS / HTTPS through `rustls` and `openssl`. Use `rustls` for new applications. OpenSSL is available as an alternative for applications that need it.
 
-The `rustls` crate feature is for `rustls` integration and `openssl` is for `openssl` integration.
+### rustls (recommended)
+
+Enable the `rustls-0_23` feature and add `rustls` and `rustls-pemfile` to load certificates and private keys from PEM files:
+
+<RenderCodeBlock className="language-toml">
+{`[dependencies]
+actix-web = { version = "${vars.actixWebMajorVersion}", features = ["rustls-0_23"] }
+rustls = "0.23"
+rustls-pemfile = "2"
+`}
+</RenderCodeBlock>
+
+Load the certificate chain and private key, then pass the TLS configuration to [`HttpServer::bind_rustls_0_23()`][bindrustlsmethod]:
+
+<CodeBlock example="http2" file="main.rs" section="main" />
+
+This example reads `cert.pem` and `key.pem` from the working directory and serves HTTPS at `https://localhost:8443`. The private key must be in unencrypted PKCS#8 PEM format.
+
+### Certificates for local development
+
+Install [mkcert](https://github.com/FiloSottile/mkcert#installation), then create and install a local certificate authority and generate a certificate for `localhost`:
+
+```shell-session
+$ mkcert -install
+$ mkcert -cert-file cert.pem -key-file key.pem localhost 127.0.0.1 ::1
+```
+
+mkcert installs its local certificate authority in the system trust store, so supported browsers trust these development certificates. Use mkcert only for local development, and do not share its `rootCA-key.pem` file.
+
+### OpenSSL alternative
+
+To use OpenSSL, enable the `openssl` feature and add the `openssl` crate:
 
 <!-- DEPENDENCY -->
 
@@ -67,20 +98,9 @@ openssl = { version = "0.10" }
 `}
 </RenderCodeBlock>
 
+Load the certificate and private key with OpenSSL, then use [`HttpServer::bind_openssl()`][bindopensslmethod]:
+
 <CodeBlock example="server" file="ssl.rs" section="ssl" />
-
-To create the key.pem and cert.pem use the command. **Fill in your own subject**
-
-```shell-session
-$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem \
-    -days 365 -sha256 -subj "/C=CN/ST=Fujian/L=Xiamen/O=TVlinux/OU=Org/CN=muro.lxd"
-```
-
-To remove the password, then copy nopass.pem to key.pem
-
-```shell-session
-$ openssl rsa -in key.pem -out nopass.pem
-```
 
 ## Keep-Alive
 
@@ -117,7 +137,7 @@ If the first option above is selected, then keep-alive is enabled for HTTP/1.1 r
 [bindmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind
 [httpserver_run]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.run
 [bindopensslmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_openssl
-[bindrusttls]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_rustls
+[bindrustlsmethod]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.bind_rustls_0_23
 [workers]: https://docs.rs/actix-web/4/actix_web/struct.HttpServer.html#method.workers
 [tlsalpn]: https://tools.ietf.org/html/rfc7301
 [exampleopenssl]: https://github.com/actix/examples/tree/master/security/openssl
