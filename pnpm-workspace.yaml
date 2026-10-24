@@ -1,4 +1,8 @@
+overrides:
+  serialize-javascript@>=5.0.0 <7.0.5: ">=7.0.5"
+  uuid@<11.1.1: ">=11.1.1"
+
 allowBuilds:
-  '@parcel/watcher': false
+  "@parcel/watcher": false
   core-js: false
   core-js-pure: false
