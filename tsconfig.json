@@ -1,9 +1,13 @@
 // https://docusaurus.io/docs/typescript-support
-// This file is not used in compilation. It is here just for a nice editor experience.
+// Used for type checking and editor support. Docusaurus handles compilation separately.
 {
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
+    // Disable the baseUrl inherited from Docusaurus; TypeScript 7 removed it.
+    "baseUrl": null,
+    "paths": {
+      "@site/*": ["./*"]
+    },
     // https://miyoon.medium.com/array-parameters-in-tsconfig-json-are-always-overwritten-11c80bb514e1
     // https://github.com/microsoft/TypeScript/issues/20110
     "types": [
