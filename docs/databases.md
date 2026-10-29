@@ -7,7 +7,9 @@ description: >-
 
 import CodeBlock from "@site/src/components/code_block";
 
-# Async Options
+# Databases
+
+## Async Options
 
 We have several example projects showing use of async database adapters:
 
@@ -15,7 +17,7 @@ We have several example projects showing use of async database adapters:
 - [SQLite](https://github.com/actix/examples/tree/master/databases/sqlite)
 - [MongoDB](https://github.com/actix/examples/tree/master/databases/mongodb)
 
-# Diesel
+## Diesel
 
 The current versions of Diesel (v1/v2) does not support asynchronous operations, so it is important to use the [`web::block`][web-block] function to offload your database operations to the Actix runtime thread-pool.
 
@@ -35,7 +37,7 @@ This example also maps the error to an `HttpResponse` before using the `?` opera
 
 That's it! See the full example [here](https://github.com/actix/examples/tree/master/databases/diesel).
 
-# SeaORM
+## SeaORM
 
 [SeaORM](https://www.sea-ql.org/SeaORM/) is a Rust ORM with full async support. When used with Actix Web, unlike Diesel, it allows you to perform database operations directly in an asynchronous manner without needing to use `web::block`.
 
