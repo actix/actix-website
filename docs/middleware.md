@@ -1,5 +1,8 @@
 ---
 title: Middleware
+description: >-
+  Add middleware to Actix Web applications. Process requests and responses, configure execution
+  order, and write custom middleware.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

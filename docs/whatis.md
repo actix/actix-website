@@ -1,5 +1,7 @@
 ---
 title: What is Actix Web
+description: >-
+  Explore Actix Web, a Rust framework for building HTTP services.
 ---
 
 import vars from "@site/vars";
