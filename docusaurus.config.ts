@@ -97,6 +97,7 @@ const config: Config = {
     [
       "classic",
       {
+        blog: false,
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/actix/actix-website/edit/main/",
