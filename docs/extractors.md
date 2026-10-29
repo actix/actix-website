@@ -1,5 +1,8 @@
 ---
 title: Extractors
+description: >-
+  Read path parameters, query strings, JSON, and form data with Actix Web extractors. Access request
+  data through typed handler arguments.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

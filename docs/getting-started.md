@@ -1,5 +1,8 @@
 ---
 title: Getting Started
+description: >-
+  Build your first Rust web server with Actix Web. Set up a Cargo project, add request handlers, and
+  run your application.
 ---
 
 import RenderCodeBlock from '@theme/CodeBlock';

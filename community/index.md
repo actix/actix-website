@@ -1,6 +1,8 @@
 ---
 title: Community
-description: The best things in life are to be shared
+description: >-
+  Connect with the Actix community, ask questions, report bugs, and discover community-maintained
+  crates.
 ---
 
 # Join us

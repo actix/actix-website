@@ -1,5 +1,8 @@
 ---
 title: Getting Started | Actors
+description: >-
+  Build your first Actix actor in Rust. Create a Cargo project, define an actor, and send and handle
+  Ping messages.
 slug: /actix/getting-started
 ---
 
