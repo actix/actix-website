@@ -37,5 +37,6 @@ These are third-party crates. The Actix project is not involved in their develop
 | [actix-mark](https://crates.io/crates/actix-mark)                             | An actix-web service for serving Markdown files as HTML.                                         |
 | [actix-web-oidc-bff](https://crates.io/crates/actix-web-oidc-bff)             | Backend-for-Frontend OIDC relying party for actix-web.                                           |
 | [actixutils](https://crates.io/crates/actixutils)                             | A collection of middlewares, extractors and generic CRUD layers for developing apps in actix-web |
+| [actix-guard-rs](https://crates.io/crates/actix-guard-rs)                     | IP filtering, rate limiting with automatic bans and attack pattern detection for Actix Web.      |
 
 To add a crate to this list, submit a pull request to the [website repository](https://github.com/actix/actix-website).
