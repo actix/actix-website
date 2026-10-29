@@ -10,6 +10,7 @@ const config: Config = {
   tagline: "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
   url: "https://actix.rs",
   baseUrl: "/",
+  trailingSlash: false,
   onBrokenLinks: "throw",
   favicon: "img/logo.png",
   organizationName: "actix", // Usually your GitHub org/user name.
