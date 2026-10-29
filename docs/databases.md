@@ -1,5 +1,8 @@
 ---
 title: Databases
+description: >-
+  Connect Actix Web to databases with Diesel or SeaORM. Share connections through application state
+  and run database queries in handlers.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

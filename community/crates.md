@@ -35,6 +35,7 @@ These are third-party crates. The Actix project is not involved in their develop
 | [actix-htmx](https://crates.io/crates/actix-htmx)                             | Htmx integration for Actix Web.                                                                  |
 | [actix-web-helmet](https://crates.io/crates/actix-web-helmet)                 | A security middleware library for popular Rust web frameworks, with first-class `actix` support. |
 | [actix-mark](https://crates.io/crates/actix-mark)                             | An actix-web service for serving Markdown files as HTML.                                         |
+| [actix-web-oidc-bff](https://crates.io/crates/actix-web-oidc-bff)             | Backend-for-Frontend OIDC relying party for actix-web.                                           |
 | [actixutils](https://crates.io/crates/actixutils)                             | A collection of middlewares, extractors and generic CRUD layers for developing apps in actix-web |
 
 To add a crate to this list, submit a pull request to the [website repository](https://github.com/actix/actix-website).

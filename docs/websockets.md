@@ -1,5 +1,8 @@
 ---
 title: WebSockets
+description: >-
+  Build WebSocket services with Actix Web. Handle messages asynchronously and explore echo and chat
+  server examples.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

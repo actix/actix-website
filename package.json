@@ -14,35 +14,39 @@
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "typecheck": "tsc --noEmit",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.10.1",
-    "@docusaurus/preset-classic": "^3.10.1",
-    "@docusaurus/theme-mermaid": "^3.10.1",
-    "@fortawesome/fontawesome-svg-core": "^7.2.0",
-    "@fortawesome/free-solid-svg-icons": "^7.2.0",
-    "@fortawesome/react-fontawesome": "^3.3.1",
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
+    "@docusaurus/theme-mermaid": "^3.10.2",
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@fortawesome/react-fontawesome": "^3.5.0",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
     "docusaurus-lunr-search": "^3.6.0",
-    "docusaurus-plugin-sass": "~0.2.6",
+    "docusaurus-plugin-sass": "~0.2.7",
     "lunr": "^2.3.9",
-    "lunr-languages": "^1.20.0",
+    "lunr-languages": "^1.23.0",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "sass": "^1.100.0"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "sass": "^1.106.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.10.1",
-    "@docusaurus/tsconfig": "^3.10.1",
-    "@docusaurus/types": "^3.10.1",
-    "oxfmt": "^0.52.0",
-    "oxlint": "^1.67.0",
+    "@docusaurus/module-type-aliases": "^3.10.2",
+    "@docusaurus/theme-classic": "^3.10.2",
+    "@docusaurus/tsconfig": "^3.10.2",
+    "@docusaurus/types": "^3.10.2",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "oxfmt": "^0.74.0",
+    "oxlint": "^1.89.0",
     "raw-loader": "^4.0.2",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "browserslist": {
     "production": [
@@ -57,11 +61,7 @@
     ]
   },
   "engines": {
-    "node": ">=24.13.0"
+    "node": ">=24.22.1"
   },
-  "pnpm": {
-    "overrides": {
-      "webpackbar": "^7.0.0"
-    }
-  }
+  "packageManager": "pnpm@12.15.0"
 }
