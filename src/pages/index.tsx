@@ -138,8 +138,10 @@ const Examples = () => {
             <h3 className={styles.featureTitle}>Flexible Responders</h3>
             <p>
               Handler functions in Actix can return a wide range of objects that implement the{" "}
-              <code>Responder</code> trait. This makes it a breeze to return consistent responses
-              from your APIs.
+              <Link to="/docs/handlers">
+                <code>Responder</code>
+              </Link>{" "}
+              trait. This makes it a breeze to return consistent responses from your APIs.
             </p>
           </div>
           <div className={styles.example__code}>
@@ -152,10 +154,10 @@ const Examples = () => {
           <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Powerful Extractors</h3>
             <p>
-              Actix comes with a powerful extractor system that extracts data from the incoming HTTP
-              request and passes it to your view functions. Not only does this make for a convenient
-              API but it also means that your view functions can be synchronous code and still
-              benefit from asynchronous IO handling.
+              Actix comes with a powerful <Link to="/docs/extractors">extractor system</Link> that
+              extracts data from the incoming HTTP request and passes it to your view functions. Not
+              only does this make for a convenient API but it also means that your view functions
+              can be synchronous code and still benefit from asynchronous IO handling.
             </p>
           </div>
           <div className={styles.example__code}>
@@ -168,8 +170,9 @@ const Examples = () => {
           <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Easy Form Handling</h3>
             <p>
-              Handling JSON or URL-encoded form data is easy. Just define a structure that can be
-              deserialized and Actix will handle the rest.
+              Handling <Link to="/docs/extractors#json">JSON</Link> or{" "}
+              <Link to="/docs/extractors#url-encoded-forms">URL-encoded form data</Link> is easy.
+              Just define a structure that can be deserialized and Actix will handle the rest.
             </p>
           </div>
           <div className={styles.example__code}>
