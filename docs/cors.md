@@ -1,5 +1,8 @@
 ---
 title: CORS
+description: >-
+  Configure cross-origin requests in Actix Web with actix-cors, including allowed origins, methods,
+  headers, and credentials.
 ---
 
 # CORS

@@ -1,6 +1,8 @@
 ---
 title: Welcome
-description: Guiding you through building web apps with Actix
+description: >-
+  Learn to build web services in Rust with Actix Web. Find setup guides, framework documentation,
+  examples, and API references.
 slug: /
 ---
 
