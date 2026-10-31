@@ -56,7 +56,7 @@ The same limitation applies to extractors as well. When a handler function recei
 
 Actix Web supports TLS / HTTPS through `rustls` and `openssl`. Use `rustls` for new applications. OpenSSL is available as an alternative for applications that need it.
 
-### rustls (recommended)
+### rustls (Recommended)
 
 Enable the `rustls-0_23` feature and add `rustls` and `rustls-pemfile` to load certificates and private keys from PEM files:
 
@@ -74,7 +74,7 @@ Load the certificate chain and private key, then pass the TLS configuration to [
 
 This example reads `cert.pem` and `key.pem` from the working directory and serves HTTPS at `https://localhost:8443`. The private key must be in unencrypted PKCS#8 PEM format.
 
-### Certificates for local development
+### Certificates for Local Development
 
 Install [mkcert](https://github.com/FiloSottile/mkcert#installation), then create and install a local certificate authority and generate a certificate for `localhost`:
 
@@ -85,7 +85,7 @@ $ mkcert -cert-file cert.pem -key-file key.pem localhost 127.0.0.1 ::1
 
 mkcert installs its local certificate authority in the system trust store, so supported browsers trust these development certificates. Use mkcert only for local development, and do not share its `rootCA-key.pem` file.
 
-### OpenSSL alternative
+### OpenSSL Alternative
 
 To use OpenSSL, enable the `openssl` feature and add the `openssl` crate:
 
@@ -120,7 +120,7 @@ If the first option above is selected, then keep-alive is enabled for HTTP/1.1 r
 
 <CodeBlock example="server" file="keep_alive_tp.rs" section="example" />
 
-## Graceful shutdown
+## Graceful Shutdown
 
 `HttpServer` supports graceful shutdown. After receiving a stop signal, workers have a specific amount of time to finish serving requests. Any workers still alive after the timeout are force-dropped. By default the shutdown timeout is set to 30 seconds. You can change this parameter with the [`HttpServer::shutdown_timeout()`][shutdowntimeout] method.
 

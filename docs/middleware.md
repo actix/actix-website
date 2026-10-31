@@ -78,13 +78,13 @@ INFO:actix_web::middleware::logger: 127.0.0.1:59947 [02/Dec/2017:00:22:40 -0800]
 - `%{FOO}o` response.headers['FOO']
 - `%{FOO}e` os.environ['FOO']
 
-## Default headers
+## Default Headers
 
 To set default response headers, the `DefaultHeaders` middleware can be used. The _DefaultHeaders_ middleware does not set the header if response headers already contain a specified header.
 
 <CodeBlock example="middleware" file="default_headers.rs" section="default-headers" />
 
-## User sessions
+## User Sessions
 
 Actix Web provides a general solution for session management. The [**actix-session**][actixsession] middleware can use multiple backend types to store session data.
 
@@ -104,7 +104,7 @@ In general, you create a `SessionStorage` middleware and initialize it with spec
 
 <CodeBlock example="middleware" file="user_sessions.rs" section="user-session" />
 
-## Error handlers
+## Error Handlers
 
 `ErrorHandlers` middleware allows us to provide custom handlers for responses.
 

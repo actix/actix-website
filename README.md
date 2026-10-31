@@ -13,7 +13,7 @@ npm start  # or yarn start
 
 Then visit <http://localhost:3000>.
 
-## Updating diagrams
+## Updating Diagrams
 
 Diagrams are located under [/static/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI][mermaid_cli].
 

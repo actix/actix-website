@@ -10,7 +10,7 @@ URL dispatch provides a simple way for mapping URLs to handler code using a simp
 
 > A request handler is a function that accepts zero or more parameters that can be extracted from a request (i.e., [_impl FromRequest_][implfromrequest]) and returns a type that can be converted into an HttpResponse (i.e., [_impl Responder_][implresponder]). More information is available in the [handler section][handlersection].
 
-## Resource configuration
+## Resource Configuration
 
 Resource configuration is the act of adding a new resources to an application. A resource has a name, which acts as an identifier to be used for URL generation. The name also allows developers to add routes to existing resources. A resource also has a pattern, meant to match against the _PATH_ portion of a _URL_ (the portion following the scheme and port, e.g. _/foo/bar_ in the _URL_ _`http://localhost:8080/foo/bar?q=value`_). It does not match against the _QUERY_ portion (the portion that follows _?_, e.g. _q=value_ in _`http://localhost:8080/foo/bar?q=value`_).
 
@@ -44,7 +44,7 @@ If a resource can not match any route, a "NOT FOUND" response is returned.
 - [_Route::method()_][routemethod] registers a method guard. Any number of guards can be registered for each route.
 - [_Route::to()_][routeto] registers an async handler function for this route. Only one handler can be registered. Usually handler registration is the last config operation.
 
-## Route matching
+## Route Matching
 
 The main purpose of route configuration is to match (or not match) the request's `path` against a URL path pattern. `path` represents the path portion of the URL that was requested.
 
@@ -54,7 +54,7 @@ When a route configuration is declared, it may contain route guard arguments. Al
 
 If any route matches, the route matching process stops and the handler associated with the route is invoked. If no route matches after all route patterns are exhausted, a _NOT FOUND_ response get returned.
 
-## Resource pattern syntax
+## Resource Pattern Syntax
 
 The syntax of the pattern matching language used by actix in the pattern argument is straightforward.
 
@@ -180,7 +180,7 @@ A _scoped_ path can contain variable path segments as resources. Consistent with
 
 You can get variable path segments from `HttpRequest::match_info()`. [`Path` extractor][pathextractor] also is able to extract scope level variable segments.
 
-## Match information
+## Match Information
 
 All values representing matched path segments are available in [`HttpRequest::match_info`][matchinfo]. Specific values can be retrieved with [`Path::get()`][pathget].
 
@@ -188,7 +188,7 @@ All values representing matched path segments are available in [`HttpRequest::ma
 
 For this example for path '/a/1/2/', values v1 and v2 will resolve to "1" and "2".
 
-### Path information extractor
+### Path Information Extractor
 
 Actix provides functionality for type safe path information extraction. [_Path_][pathstruct] extracts information, destination type could be defined in several different forms. Simplest approach is to use `tuple` type. Each element in tuple must correspond to one element from path pattern. i.e. you can match path pattern `/{id}/{username}/` against `Path<(u32, String)>` type, but `Path<(String, String, String)>` type will always fail.
 
@@ -200,7 +200,7 @@ It also possible to extract path pattern information to a struct. In this case, 
 
 [_Query_][query] provides similar functionality for request query parameters.
 
-## Generating resource URLs
+## Generating Resource URLs
 
 Use the [_HttpRequest.url_for()_][urlfor] method to generate URLs based on resource patterns. For example, if you've configured a resource with the name "foo" and the pattern "\{a}/\{b}/\{c}", you might do this:
 
@@ -208,13 +208,13 @@ Use the [_HttpRequest.url_for()_][urlfor] method to generate URLs based on resou
 
 This would return something like the string `http://example.com/test/1/2/3` (at least if the current protocol and hostname implied `http://example.com`). `url_for()` method returns [_Url object_][urlobj] so you can modify this url (add query parameters, anchor, etc). `url_for()` could be called only for _named_ resources otherwise error get returned.
 
-## External resources
+## External Resources
 
 Resources that are valid URLs, can be registered as external resources. They are useful for URL generation purposes only and are never considered for matching at request time.
 
 <CodeBlock example="url-dispatch" file="url_ext.rs" section="ext" />
 
-## Path normalization and redirecting to slash-appended routes
+## Path Normalization and Redirecting to Slash-Appended Routes
 
 By normalizing it means:
 
@@ -243,7 +243,7 @@ For example:
 
 In the above example, the _show_users_ route will have an effective route pattern of _/users/show_ instead of _/show_ because the application's scope will be prepended to the pattern. The route will then only match if the URL path is _/users/show_, and when the `HttpRequest.url_for()` function is called with the route name show_users, it will generate a URL with that same path.
 
-## Custom route guard
+## Custom Route Guard
 
 You can think of a guard as a simple function that accepts a _request_ object reference and returns _true_ or _false_. Formally, a guard is any object that implements the [`Guard`][guardtrait] trait. Actix provides several predicates, you can check [functions section][guardfuncs] of API docs.
 
@@ -255,7 +255,7 @@ In this example, _index_ handler will be called only if request contains _CONTEN
 
 Guards can not access or modify the request object, but it is possible to store extra information in [request extensions][requestextensions].
 
-### Modifying guard values
+### Modifying Guard Values
 
 You can invert the meaning of any predicate value by wrapping it in a `Not` predicate. For example, if you want to return "METHOD NOT ALLOWED" response for all methods except "GET":
 
@@ -273,7 +273,7 @@ The `All` guard accepts a list of guard and matches if all of the supplied guard
 guard::All(guard::Get()).and(guard::Header("content-type", "plain/text"))
 ```
 
-## Changing the default Not Found response
+## Changing the Default Not Found Response
 
 If the path pattern can not be found in the routing table or a resource can not find matching route, the default resource is used. The default response is _NOT FOUND_. It is possible to override the _NOT FOUND_ response with `App::default_service()`. This method accepts a _configuration function_ same as normal resource configuration with `App::service()` method.
 

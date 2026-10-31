@@ -8,7 +8,7 @@ import connection_accept from '!!raw-loader!@site/static/img/diagrams/connection
 import connection_worker from '!!raw-loader!@site/static/img/diagrams/connection_worker.mmd';
 import connection_request from '!!raw-loader!@site/static/img/diagrams/connection_request.mmd';
 
-# Architecture overview
+# Architecture Overview
 
 After Server has started listening to all sockets, [`Accept`][accept] and [`Worker`][worker] are two main loops responsible for processing incoming client connections.
 
@@ -18,19 +18,19 @@ Once connection accepted Application level protocol processing happens in a prot
 
 <MermaidDiagram value={connection_overview}  />
 
-## Accept loop in more detail
+## Accept Loop in More Detail
 
 <MermaidDiagram value={connection_accept}  />
 
 Most of code implementation resides in [`actix-server`][server] crate for struct [`Accept`][accept].
 
-## Worker loop in more detail
+## Worker Loop in More Detail
 
 <MermaidDiagram value={connection_worker}  />
 
 Most of code implementation resides in [`actix-server`][server] crate for struct [`Worker`][worker].
 
-## Request loop roughly
+## Request Loop Roughly
 
 <MermaidDiagram value={connection_request}  />
 

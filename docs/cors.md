@@ -57,7 +57,7 @@ let cors = Cors::default()
 let app = App::new().wrap(cors);
 ```
 
-### Allow Any Origin For a Public API
+### Allow Any Origin for a Public API
 
 If the API is public and does not need cookies or other credentials, allow any origin:
 
@@ -92,7 +92,7 @@ let cors = Cors::default()
 let app = App::new().wrap(cors);
 ```
 
-### Apply CORS To Only One Scope
+### Apply CORS to Only One Scope
 
 You can wrap a scope instead of the whole application:
 
@@ -281,7 +281,7 @@ headers, prefer an explicit origin allowlist instead of `*`.
 understand the caching implications. It tells CDNs and proxies that the CORS response can change
 based on request headers.
 
-## When To Use `allowed_origin_fn`
+## When to Use `allowed_origin_fn`
 
 Most applications should keep CORS static and startup-configured. Use
 [`allowed_origin_fn`][allowed-origin-fn] only when your allowlist really must depend on request
@@ -298,7 +298,7 @@ let cors = Cors::default().allowed_origin_fn(|origin, _req_head| {
 That is different from loading a normal allowlist from config. If your configuration is just
 "one value, many values, or `*`", prefer the static builder methods shown above.
 
-## Applying CORS To Your App
+## Applying CORS to Your App
 
 Once the builder has been created from config, wrap it like any other middleware:
 

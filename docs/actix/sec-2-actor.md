@@ -22,7 +22,7 @@ To be able to handle a specific message the actor has to provide a [`Handler<M>`
 [`Actor`]: https://docs.rs/actix/latest/actix/trait.Actor.html
 [`Handler<M>`]: https://docs.rs/actix/latest/actix/trait.Handler.html
 
-## Actor lifecycle
+## Actor Lifecycle
 
 ### Started
 
@@ -66,11 +66,11 @@ impl Message for Ping {
 
 [`Message`]: https://docs.rs/actix/latest/actix/trait.Message.html
 
-## Spawning an actor
+## Spawning an Actor
 
 How to start an actor depends on its context. Spawning a new async actor is achieved via the `start` and `create` methods of the [`Actor`] trait. It provides several different ways of creating actors; for details check the docs.
 
-## Complete example
+## Complete Example
 
 ```rust
 use actix::prelude::*;
@@ -123,7 +123,7 @@ async fn main() {
 }
 ```
 
-## Responding with a MessageResponse
+## Responding With a `MessageResponse`
 
 Let's take a look at the `Result` type defined for the `impl Handler` in the above example. See how we're returning a `Result<bool, std::io::Error>`? We're able to respond to our actor's incoming message with this type because it has the `MessageResponse` trait implemented for that type. Here's the definition for that trait:
 
