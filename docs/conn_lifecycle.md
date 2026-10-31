@@ -1,5 +1,8 @@
 ---
 title: Connection Lifecycle
+description: >-
+  Follow an Actix Web connection through the accept, worker, and request processing loops with
+  architecture diagrams.
 ---
 
 import MermaidDiagram from "@site/src/components/mermaid_diagram";

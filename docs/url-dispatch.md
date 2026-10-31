@@ -1,5 +1,8 @@
 ---
 title: URL Routing and Dispatch
+description: >-
+  Route requests to Actix Web handlers with path patterns, scopes, and guards. Extract path
+  parameters and generate URLs.
 sidebar_label: URL Dispatch
 ---
 
