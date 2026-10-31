@@ -66,9 +66,30 @@
   }
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 575px) {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
 .logo {
-  max-width: 112px;
+  width: 72px;
+  flex-shrink: 0;
   filter: var(--logo-filter);
+
+  @media screen and (max-width: 575px) {
+    width: 48px;
+  }
 }
 
 .buttons {
