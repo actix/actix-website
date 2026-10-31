@@ -1,5 +1,6 @@
 ---
-title: Extractors
+title: Request Data Extraction
+sidebar_label: Extractors
 description: >-
   Read path parameters, query strings, JSON, and form data with Actix Web extractors. Access request
   data through typed handler arguments.

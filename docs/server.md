@@ -1,5 +1,6 @@
 ---
-title: Server
+title: HTTP Server Configuration
+sidebar_label: Server
 description: >-
   Configure an Actix Web HTTP server with worker threads, shared state, TLS, keep-alive connections,
   and graceful shutdown.

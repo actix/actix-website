@@ -1,5 +1,6 @@
 ---
-title: Welcome
+title: Documentation
+sidebar_label: Welcome
 description: >-
   Learn to build web services in Rust with Actix Web. Find setup guides, framework documentation,
   examples, and API references.

@@ -1,5 +1,6 @@
 ---
-title: Application
+title: Application Setup and Shared State
+sidebar_label: Application
 description: >-
   Build an Actix Web application with routes, shared state, scopes, and reusable configuration.
 ---

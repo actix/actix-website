@@ -1,5 +1,6 @@
 ---
-title: Testing
+title: Testing Applications and Handlers
+sidebar_label: Testing
 description: >-
   Test Actix Web applications, request handlers, extractors, and streaming responses.
 ---

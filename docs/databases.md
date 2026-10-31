@@ -1,5 +1,6 @@
 ---
-title: Databases
+title: Database Integration
+sidebar_label: Databases
 description: >-
   Connect Actix Web to databases with Diesel or SeaORM. Share connections through application state
   and run database queries in handlers.

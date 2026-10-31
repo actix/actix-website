@@ -1,5 +1,6 @@
 ---
-title: Responses
+title: Response Bodies and Content Encoding
+sidebar_label: Responses
 description: >-
   Build HTTP responses in Actix Web with response builders, JSON bodies, and automatic content
   compression.
