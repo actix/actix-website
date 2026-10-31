@@ -1,5 +1,6 @@
 ---
-title: Handlers
+title: Request Handlers and Responders
+sidebar_label: Handlers
 description: >-
   Write Actix Web request handlers that return custom types, stream response bodies, or combine
   different response types.

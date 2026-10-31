@@ -1,5 +1,6 @@
 ---
-title: Errors
+title: Error Handling
+sidebar_label: Errors
 description: >-
   Handle errors in Actix Web with custom responses, error helpers, and logging.
 ---

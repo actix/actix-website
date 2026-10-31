@@ -1,5 +1,6 @@
 ---
-title: URL Dispatch
+title: URL Routing and Dispatch
+sidebar_label: URL Dispatch
 ---
 
 import CodeBlock from "@site/src/components/code_block";

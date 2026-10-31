@@ -1,5 +1,6 @@
 ---
-title: Requests
+title: Request Bodies and Payloads
+sidebar_label: Requests
 description: >-
   Read request bodies in Actix Web, including JSON, multipart data, URL-encoded forms, and streaming
   payloads.

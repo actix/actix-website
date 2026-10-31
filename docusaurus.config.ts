@@ -100,6 +100,7 @@ const config: Config = {
         blog: false,
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
+          sidebarCollapsed: false,
           editUrl: "https://github.com/actix/actix-website/edit/main/",
         },
         theme: {
