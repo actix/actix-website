@@ -1,5 +1,7 @@
 ---
 title: Testing
+description: >-
+  Test Actix Web applications, request handlers, extractors, and streaming responses.
 ---
 
 import CodeBlock from "@site/src/components/code_block";
@@ -10,7 +12,7 @@ Every application should be well tested. Actix Web provides tools to perform int
 
 Actix Web provides a request builder type. [_TestRequest_][testrequest] implements a builder-like pattern. You can generate a `HttpRequest` instance with `to_http_request()` and call your handlers or extractors with it. Also see
 
-## Integration Testing For Applications
+## Integration Testing for Applications
 
 There are a few methods for testing your application. Actix Web can be used to run the application with specific handlers in a real HTTP server.
 

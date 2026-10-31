@@ -7,7 +7,7 @@ description: >-
 
 import CodeBlock from "@site/src/components/code_block";
 
-# Type-safe Request Information Extraction
+# Type-Safe Request Information Extraction
 
 Actix Web provides a facility for type-safe request information access called _extractors_ (i.e., `impl FromRequest`). There are lots of built-in extractor implementations (see [implementors](https://docs.rs/actix-web/latest/actix_web/trait.FromRequest.html#implementors)).
 

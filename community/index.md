@@ -5,7 +5,7 @@ description: >-
   crates.
 ---
 
-# Join us
+# Join Us
 
 Want to talk to others about questions? The Actix Web [Discord server](https://discord.gg/NWpN5mmg3x) is the best starting point. We also have a [Gitter room](https://gitter.im/actix/actix-web).
 

@@ -8,6 +8,11 @@
 .docusaurus
 .cache-loader
 
+# Nix and direnv
+/.direnv/
+/result
+/result-*
+
 # Misc
 .DS_Store
 .env.local

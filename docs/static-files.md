@@ -1,10 +1,13 @@
 ---
 title: Static Files
+description: >-
+  Serve individual files and directories with Actix Web. Configure directory listings, index files,
+  and response headers.
 ---
 
 import CodeBlock from "@site/src/components/code_block";
 
-# Individual file
+# Individual File
 
 It is possible to serve static files with a custom path pattern and `NamedFile`. To match a path tail, we can use a `[.*]` regex.
 

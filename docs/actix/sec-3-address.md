@@ -47,7 +47,7 @@ To send a message to an actor, the `Addr` object needs to be used. `Addr` provid
 
 - `Addr::try_send(M)` - this method tries to send the message immediately. If the mailbox is full or closed (actor is dead), this method returns a [`SendError`].
 
-- `Addr::send(M)` - This message returns a future object that resolves to a result of a message handling process. If the returned `Future` object is dropped, the message is cancelled.
+- `Addr::send(M)` - This message returns a future object that resolves to a result of a message handling process. If the returned `Future` object is dropped, the message is canceled.
 
 [`Handler<M>`]: https://docs.rs/actix/latest/actix/trait.Handler.html
 [`SendError`]: https://docs.rs/actix/latest/actix/prelude/enum.SendError.html

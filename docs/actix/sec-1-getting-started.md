@@ -15,7 +15,7 @@ Let’s create and run our first actix application. We’ll create a new Cargo p
 
 In previous section we already installed required rust version. Now let's create new cargo projects.
 
-## Ping actor
+## Ping Actor
 
 Let’s write our first actix application! Start by creating a new binary-based Cargo project and changing into the new directory:
 

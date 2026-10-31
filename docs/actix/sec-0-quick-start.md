@@ -1,9 +1,9 @@
 ---
-title: Quick start
+title: Quick Start
 slug: /actix
 ---
 
-# Quick start
+# Quick Start
 
 Before you can start writing an actix application, you’ll need a version of Rust installed. We recommend you use rustup to install or configure such a version.
 

@@ -1,5 +1,7 @@
 ---
 title: Errors
+description: >-
+  Handle errors in Actix Web with custom responses, error helpers, and logging.
 ---
 
 import CodeBlock from "@site/src/components/code_block";
@@ -38,7 +40,7 @@ fn index(_req: HttpRequest) -> io::Result<NamedFile> {
 
 See [the Actix Web API documentation][responseerrorimpls] for a full list of foreign implementations for `ResponseError`.
 
-## An example of a custom error response
+## An Example of a Custom Error Response
 
 Here's an example implementation for `ResponseError`, using the [derive_more] crate for declarative error enums.
 
@@ -50,7 +52,7 @@ Override `error_response()` to produce more useful results:
 
 <CodeBlock example="errors" file="override_error.rs" section="override" />
 
-## Error helpers
+## Error Helpers
 
 Actix Web provides a set of error helper functions that are useful for generating specific HTTP error codes from other errors. Here we convert `MyError`, which doesn't implement the `ResponseError` trait, to a _400_ (bad request) using `map_err`:
 
@@ -58,7 +60,7 @@ Actix Web provides a set of error helper functions that are useful for generatin
 
 See the [API documentation for actix-web's `error` module][actixerror] for a full list of available error helpers.
 
-## Error logging
+## Error Logging
 
 Actix logs all errors at the `WARN` log level. If an application's log level is set to `DEBUG` and `RUST_BACKTRACE` is enabled, the backtrace is also logged. These are configurable with environmental variables:
 
@@ -68,7 +70,7 @@ $ RUST_BACKTRACE=1 RUST_LOG=actix_web=debug cargo run
 
 The `Error` type uses the cause's error backtrace if available. If the underlying failure does not provide a backtrace, a new backtrace is constructed pointing to the point where the conversion occurred (rather than the origin of the error).
 
-## Recommended practices in error handling
+## Recommended Practices in Error Handling
 
 It might be useful to think about dividing the errors an application produces into two broad groups: those which are intended to be user-facing, and those which are not.
 
