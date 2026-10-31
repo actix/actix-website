@@ -70,9 +70,11 @@ const Hero = () => {
   return (
     <header id="hero" className={clsx("hero", styles.banner)}>
       <div className="container">
-        <img src={useBaseUrl(`img/logo.png`)} alt="Actix Logo" className={styles.logo} />
+        <div className={styles.brand}>
+          <img src={useBaseUrl(`img/logo.png`)} alt="Actix Logo" className={styles.logo} />
 
-        <h1 className="hero__title">{siteConfig.title}</h1>
+          <h1 className="hero__title">{siteConfig.title}</h1>
+        </div>
         <p className={clsx("hero__subtitle", styles.subtitle)}>{siteConfig.tagline}</p>
 
         <div className={styles.buttons}>
