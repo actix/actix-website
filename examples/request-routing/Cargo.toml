@@ -4,5 +4,9 @@ version = "1.0.0"
 publish = false
 edition.workspace = true
 
+[[bin]]
+name = "manual-routing"
+path = "src/manual.rs"
+
 [dependencies]
 actix-web = "4"

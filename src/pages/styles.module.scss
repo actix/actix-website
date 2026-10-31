@@ -199,6 +199,68 @@
   font-weight: 500;
 }
 
+.macroPreference {
+  border: 0;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  min-width: 0;
+
+  legend {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+.macroSegments {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 4px;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 2rem;
+  background: var(--ifm-background-color);
+}
+
+.macroOption {
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    height: 100%;
+    padding: 0.5rem 0.875rem;
+    border-radius: 2rem;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  &:hover span {
+    background: var(--ifm-color-emphasis-200);
+  }
+
+  input:checked + span {
+    color: var(--ifm-background-color);
+    background: var(--ifm-color-primary);
+  }
+
+  input:focus-visible + span {
+    outline: 2px solid var(--ifm-color-primary);
+    outline-offset: 3px;
+  }
+}
+
 // Hide the title in docs pages, we render our own in markdown
 article header h1 {
   display: none;
