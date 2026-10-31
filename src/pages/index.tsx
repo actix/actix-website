@@ -18,7 +18,7 @@ const Home = () => {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <Layout description={siteConfig.tagline}>
+    <Layout title="The Most Pragmatic Web Framework For Rust" description={siteConfig.tagline}>
       <Hero />
       <main className={styles.main}>
         <Highlights />
