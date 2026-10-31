@@ -13,8 +13,8 @@ async fn hello(name: web::Path<String>) -> impl Responder {
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .route("/", web::get().to(index))
-            .route("/{name}", web::get().to(hello))
+            .service(web::resource("/").get(index))
+            .service(web::resource("/{name}").get(hello))
     })
     .bind(("127.0.0.1", 8080))?
     .run()

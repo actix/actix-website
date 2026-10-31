@@ -130,13 +130,14 @@ const Examples = () => {
               Getting started with Actix is easy. An Actix app comes with a URL routing system that
               lets you match on URLs and invoke individual handlers.
             </p>
+            <hr className={styles.macroDivider} />
             <fieldset className={styles.macroPreference}>
               <legend>How do you feel about macros?</legend>
               <div className={styles.macroSegments}>
                 {[
-                  { value: true, label: "I love macros" },
-                  { value: false, label: "Macros are evil" },
-                ].map(({ value, label }) => (
+                  { value: true, label: "I love macros", emoji: "❤️" },
+                  { value: false, label: "Macros are evil", emoji: "😈" },
+                ].map(({ value, label, emoji }) => (
                   <label key={label} className={styles.macroOption}>
                     <input
                       type="radio"
@@ -145,7 +146,9 @@ const Examples = () => {
                       onChange={() => setUseMacros(value)}
                       aria-controls="hello-world-code"
                     />
-                    <span>{label}</span>
+                    <span>
+                      <i aria-hidden="true">{emoji}</i> {label}
+                    </span>
                   </label>
                 ))}
               </div>
