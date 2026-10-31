@@ -29,7 +29,7 @@ Remember that this doesn't apply to `Addr::do_send(M)` which bypasses the Mailbo
 
 [`Context::set_mailbox_capacity()`]: https://docs.rs/actix/latest/actix/struct.Context.html#method.set_mailbox_capacity
 
-## Getting your actors Address
+## Getting Your Actors Address
 
 An actor can view its own address from its context. Perhaps you want to requeue an event for later, or you want to transform the message type. Maybe you want to respond with your address to a message. If you want an actor to send a message to itself, have a look at `AsyncContext::notify(M)` instead.
 

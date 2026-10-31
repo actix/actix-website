@@ -42,7 +42,7 @@ async fn index(req: HttpRequest) -> Box<Future<Item=HttpResponse, Error=Error>> 
 }
 ```
 
-## Response with custom type
+## Response With Custom Type
 
 To return a custom type directly from a handler function, the type needs to implement the `Responder` trait.
 
@@ -50,13 +50,13 @@ Let's create a response for a custom type that serializes to an `application/jso
 
 <CodeBlock example="responder-trait" file="main.rs" section="responder-trait" />
 
-## Streaming response body
+## Streaming Response Body
 
 Response body can be generated asynchronously. In this case, body must implement the stream trait `Stream<Item = Result<Bytes, Error>>`, i.e.:
 
 <CodeBlock example="async-handlers" file="stream.rs" section="stream" />
 
-## Different return types (Either)
+## Different Return Types (Either)
 
 Sometimes, you need to return different types of responses. For example, you can error check and return errors, return async responses, or any result that requires two different types.
 

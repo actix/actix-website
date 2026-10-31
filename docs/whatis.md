@@ -1,12 +1,12 @@
 ---
-title: What is Actix Web
+title: What Is Actix Web
 description: >-
   Explore Actix Web, a Rust framework for building HTTP services.
 ---
 
 import vars from "@site/vars";
 
-# Actix Web is part of an Ecosystem of Crates
+# Actix Web Is Part of an Ecosystem of Crates
 
 We call Actix Web a powerful and pragmatic framework. Fundamentally, it's a micro-framework with a few twists. If you are already a Rust programmer, you will probably find yourself at home quickly. But even if you are coming from another programming language, you should find Actix Web easy to pick up, too.
 

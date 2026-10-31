@@ -4,7 +4,7 @@ title: Static Files
 
 import CodeBlock from "@site/src/components/code_block";
 
-# Individual file
+# Individual File
 
 It is possible to serve static files with a custom path pattern and `NamedFile`. To match a path tail, we can use a `[.*]` regex.
 
