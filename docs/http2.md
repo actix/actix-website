@@ -7,7 +7,9 @@ import CodeBlock from '@site/src/components/code_block';
 
 `actix-web` automatically upgrades connections to _HTTP/2_ if possible.
 
-# Negotiation
+# HTTP/2
+
+## TLS Negotiation Using ALPN
 
 When either of the `rustls-0_23` or `openssl` features are enabled, `HttpServer` provides the [`bind_rustls_0_23()`][bindrustls] and [`bind_openssl()`][bindopenssl] methods, respectively. See [TLS / HTTPS](server.md#tls--https) for certificate setup. The example below uses rustls, the recommended option.
 
