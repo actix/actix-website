@@ -1,9 +1,16 @@
 ---
+unlisted: true
 title: Context
 slug: /actix/context
 ---
 
 # Context
+
+:::warning Archived Documentation
+
+The `actix` actor crate is soft deprecated. We recommend [`ractor`](https://docs.rs/ractor/latest/ractor/) for new projects. This book is kept for existing users. Actix Web does not depend on the actor crate and is not deprecated.
+
+:::
 
 Actors all maintain an internal execution context, or state. This allows an actor to determine its own Address, change mailbox limits, or stop its execution.
 

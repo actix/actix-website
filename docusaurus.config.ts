@@ -81,7 +81,12 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
   plugins: [
     "docusaurus-plugin-sass",
-    require.resolve("docusaurus-lunr-search"),
+    [
+      require.resolve("docusaurus-lunr-search"),
+      {
+        excludeRoutes: ["/docs/actix", "/docs/actix/**"],
+      },
+    ],
     [
       "@docusaurus/plugin-content-docs",
       {

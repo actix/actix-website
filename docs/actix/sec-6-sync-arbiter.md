@@ -1,9 +1,16 @@
 ---
+unlisted: true
 title: SyncArbiter
 slug: /actix/sync-arbiter
 ---
 
 # SyncArbiter
+
+:::warning Archived Documentation
+
+The `actix` actor crate is soft deprecated. We recommend [`ractor`](https://docs.rs/ractor/latest/ractor/) for new projects. This book is kept for existing users. Actix Web does not depend on the actor crate and is not deprecated.
+
+:::
 
 When you normally run Actors, there are multiple Actors running on the System's Arbiter thread, using its event loop. However for CPU bound workloads, or highly concurrent workloads, you may wish to have an Actor running multiple instances in parallel.
 

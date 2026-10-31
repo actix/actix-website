@@ -1,9 +1,16 @@
 ---
+unlisted: true
 title: Address
 slug: /actix/address
 ---
 
 # Address
+
+:::warning Archived Documentation
+
+The `actix` actor crate is soft deprecated. We recommend [`ractor`](https://docs.rs/ractor/latest/ractor/) for new projects. This book is kept for existing users. Actix Web does not depend on the actor crate and is not deprecated.
+
+:::
 
 Actors communicate exclusively by exchanging messages. The sending actor can optionally wait for the response. Actors cannot be referenced directly, only by their addresses.
 

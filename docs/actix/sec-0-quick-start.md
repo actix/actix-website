@@ -1,9 +1,16 @@
 ---
+unlisted: true
 title: Quick Start
 slug: /actix
 ---
 
 # Quick Start
+
+:::warning Archived Documentation
+
+The `actix` actor crate is soft deprecated. We recommend [`ractor`](https://docs.rs/ractor/latest/ractor/) for new projects. This book is kept for existing users. Actix Web does not depend on the actor crate and is not deprecated.
+
+:::
 
 Before you can start writing an actix application, you’ll need a version of Rust installed. We recommend you use rustup to install or configure such a version.
 

@@ -1,4 +1,5 @@
 ---
+unlisted: true
 title: Getting Started | Actors
 description: >-
   Build your first Actix actor in Rust. Create a Cargo project, define an actor, and send and handle
@@ -10,6 +11,12 @@ import RenderCodeBlock from '@theme/CodeBlock';
 import vars from "@site/vars";
 
 # Getting Started
+
+:::warning Archived Documentation
+
+The `actix` actor crate is soft deprecated. We recommend [`ractor`](https://docs.rs/ractor/latest/ractor/) for new projects. This book is kept for existing users. Actix Web does not depend on the actor crate and is not deprecated.
+
+:::
 
 Let’s create and run our first actix application. We’ll create a new Cargo project that depends on actix and then run the application.
 
