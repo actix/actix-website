@@ -1,5 +1,8 @@
 ---
 title: Handlers
+description: >-
+  Write Actix Web request handlers that return custom types, stream response bodies, or combine
+  different response types.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

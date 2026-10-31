@@ -1,5 +1,7 @@
 ---
 title: Application
+description: >-
+  Build an Actix Web application with routes, shared state, scopes, and reusable configuration.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

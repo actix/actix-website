@@ -1,5 +1,8 @@
 ---
 title: Responses
+description: >-
+  Build HTTP responses in Actix Web with response builders, JSON bodies, and automatic content
+  compression.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

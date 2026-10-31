@@ -1,5 +1,8 @@
 ---
 title: Requests
+description: >-
+  Read request bodies in Actix Web, including JSON, multipart data, URL-encoded forms, and streaming
+  payloads.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

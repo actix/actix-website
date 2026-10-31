@@ -1,5 +1,7 @@
 ---
 title: Testing
+description: >-
+  Test Actix Web applications, request handlers, extractors, and streaming responses.
 ---
 
 import CodeBlock from "@site/src/components/code_block";
