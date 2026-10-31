@@ -53,7 +53,7 @@ const highlights = [
       <>
         Actix is blazingly fast. Don't take our word for it --{" "}
         <a
-          href="https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=fortune"
+          href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc"
           target="_blank"
           rel="noopener noreferrer"
         >
