@@ -1,9 +1,16 @@
 ---
+unlisted: true
 title: Actor
 slug: /actix/actor
 ---
 
 # Actor
+
+:::warning Archived Documentation
+
+The `actix` actor crate is soft deprecated. We recommend [`ractor`](https://docs.rs/ractor/latest/ractor/) for new projects. This book is kept for existing users. Actix Web does not depend on the actor crate and is not deprecated.
+
+:::
 
 Actix is a rust library providing a framework for developing concurrent applications.
 

@@ -17,14 +17,14 @@ const sidebars: SidebarsConfig = {
     Protocols: ["websockets", "http2"],
     Patterns: ["autoreload", "databases"],
     Diagrams: ["http_server_init", "conn_lifecycle"],
-    Actix: [
-      "actix/sec-0-quick-start",
-      "actix/sec-1-getting-started",
-      "actix/sec-2-actor",
-      "actix/sec-3-address",
-      "actix/sec-4-context",
-      "actix/sec-5-arbiter",
-      "actix/sec-6-sync-arbiter",
+    "Actor Book (Archived)": [
+      { type: "link", label: "Quick Start", href: "/docs/actix" },
+      { type: "link", label: "Getting Started", href: "/docs/actix/getting-started" },
+      { type: "link", label: "Actor", href: "/docs/actix/actor" },
+      { type: "link", label: "Address", href: "/docs/actix/address" },
+      { type: "link", label: "Context", href: "/docs/actix/context" },
+      { type: "link", label: "Arbiter", href: "/docs/actix/arbiter" },
+      { type: "link", label: "SyncArbiter", href: "/docs/actix/sync-arbiter" },
     ],
     "API Documentation": [
       {

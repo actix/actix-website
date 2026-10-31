@@ -1,9 +1,16 @@
 ---
+unlisted: true
 title: Arbiter
 slug: /actix/arbiter
 ---
 
 # Arbiter
+
+:::warning Archived Documentation
+
+The `actix` actor crate is soft deprecated. We recommend [`ractor`](https://docs.rs/ractor/latest/ractor/) for new projects. This book is kept for existing users. Actix Web does not depend on the actor crate and is not deprecated.
+
+:::
 
 `Arbiter`s provide an asynchronous execution context for `Actor`s, `functions` and `futures`. Where an actor contains a `Context` that defines its Actor specific execution state, Arbiters host the environment where an actor runs.
 
