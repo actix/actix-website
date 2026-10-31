@@ -1,5 +1,7 @@
 ---
 title: Errors
+description: >-
+  Handle errors in Actix Web with custom responses, error helpers, and logging.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

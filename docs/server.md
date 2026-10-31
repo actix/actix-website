@@ -1,5 +1,8 @@
 ---
 title: Server
+description: >-
+  Configure an Actix Web HTTP server with worker threads, shared state, TLS, keep-alive connections,
+  and graceful shutdown.
 ---
 
 import RenderCodeBlock from '@theme/CodeBlock';

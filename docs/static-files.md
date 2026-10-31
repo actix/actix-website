@@ -1,5 +1,8 @@
 ---
 title: Static Files
+description: >-
+  Serve individual files and directories with Actix Web. Configure directory listings, index files,
+  and response headers.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

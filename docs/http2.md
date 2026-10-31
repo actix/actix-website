@@ -1,5 +1,7 @@
 ---
 title: HTTP/2
+description: >-
+  Serve HTTP/2 with Actix Web using TLS negotiation or automatic cleartext HTTP/2 detection.
 ---
 
 import RenderCodeBlock from '@theme/CodeBlock';
