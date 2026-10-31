@@ -1,5 +1,8 @@
 ---
 title: HTTP Server Initialization
+description: >-
+  Follow Actix Web HTTP server initialization with a code example and a sequence diagram of service
+  and worker startup.
 ---
 
 import CodeBlock from "@site/src/components/code_block";

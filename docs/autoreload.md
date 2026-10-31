@@ -1,5 +1,8 @@
 ---
 title: Auto-Reloading
+description: >-
+  Automatically rebuild and restart an Actix Web development server when files change using
+  watchexec.
 ---
 
 # Auto-Reloading Development Server
