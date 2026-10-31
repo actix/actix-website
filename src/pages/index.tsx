@@ -118,6 +118,8 @@ const Highlights = () => {
 };
 
 const Examples = () => {
+  const [useMacros, setUseMacros] = React.useState(true);
+
   return (
     <div className={styles.examples}>
       <div className={styles.example}>
@@ -128,9 +130,36 @@ const Examples = () => {
               Getting started with Actix is easy. An Actix app comes with a URL routing system that
               lets you match on URLs and invoke individual handlers.
             </p>
+            <hr className={styles.macroDivider} />
+            <fieldset className={styles.macroPreference}>
+              <legend>How do you feel about macros?</legend>
+              <div className={styles.macroSegments}>
+                {[
+                  { value: true, label: "I love macros", emoji: "❤️" },
+                  { value: false, label: "Macros are evil", emoji: "😈" },
+                ].map(({ value, label, emoji }) => (
+                  <label key={label} className={styles.macroOption}>
+                    <input
+                      type="radio"
+                      name="macro-preference"
+                      checked={useMacros === value}
+                      onChange={() => setUseMacros(value)}
+                      aria-controls="hello-world-code"
+                    />
+                    <span>
+                      <i aria-hidden="true">{emoji}</i> {label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
           </div>
-          <div className={styles.example__code}>
-            <CodeBlock example="request-routing" section="request-routing" />
+          <div id="hello-world-code" className={styles.example__code}>
+            <CodeBlock
+              example="request-routing"
+              file={useMacros ? "main.rs" : "manual.rs"}
+              section="request-routing"
+            />
           </div>
         </div>
       </div>
