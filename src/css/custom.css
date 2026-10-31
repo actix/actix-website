@@ -51,6 +51,10 @@ html[data-theme="dark"] {
   filter: var(--logo-filter);
 }
 
+.docs-wrapper .footer {
+  display: none;
+}
+
 .header-discord-link::before {
   content: "";
   width: 24px;
