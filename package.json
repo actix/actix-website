@@ -44,7 +44,7 @@
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "oxfmt": "^0.75.0",
-    "oxlint": "^1.89.0",
+    "oxlint": "^1.90.0",
     "raw-loader": "^4.0.2",
     "typescript": "^7.0.2"
   },
