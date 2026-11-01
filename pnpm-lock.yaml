@@ -201,7 +201,7 @@ importers:
         version: 3.6.0(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.1))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(debug@4.4.3(supports-color@8.1.1))(html-minifier-terser@7.2.0)(postcss@8.5.31)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@8.1.1)(svgo@3.3.5)(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       docusaurus-plugin-sass:
         specifier: ~0.2.7
-        version: 0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.1))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(debug@4.4.3(supports-color@8.1.1))(html-minifier-terser@7.2.0)(postcss@8.5.31)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@8.1.1)(svgo@3.3.5)(typescript@7.0.2))(sass@1.106.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5))
+        version: 0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.1))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(debug@4.4.3(supports-color@8.1.1))(html-minifier-terser@7.2.0)(postcss@8.5.31)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@8.1.1)(svgo@3.3.5)(typescript@7.0.2))(sass@1.107.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5))
       lunr:
         specifier: ^2.3.9
         version: 2.3.9
@@ -218,8 +218,8 @@ importers:
         specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
       sass:
-        specifier: ^1.106.0
-        version: 1.106.0
+        specifier: ^1.107.0
+        version: 1.107.0
     devDependencies:
       '@docusaurus/module-type-aliases':
         specifier: ^3.10.2
@@ -5731,8 +5731,8 @@ packages:
       webpack:
         optional: true
 
-  sass@1.106.0:
-    resolution: {integrity: sha512-JHAqUksyijU5tsmDLCDq8/IX3Mq8mVkOtxvcXnUdwy8vsX5MVnvQauMomauxyuEux8uBJdT/OuBwWBYavoWUqQ==}
+  sass@1.107.0:
+    resolution: {integrity: sha512-+whPilvVNoAD57xvdIPLQT0gXo4RD1lHYw+Uw8zYHlojaeaMDxK14tc0JmEsz/XMns48h3lpypisMP+3E8eHQA==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -10791,11 +10791,11 @@ snapshots:
       unified: 9.2.2
       unist-util-is: 4.1.0
 
-  docusaurus-plugin-sass@0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.1))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(debug@4.4.3(supports-color@8.1.1))(html-minifier-terser@7.2.0)(postcss@8.5.31)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@8.1.1)(svgo@3.3.5)(typescript@7.0.2))(sass@1.106.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5)):
+  docusaurus-plugin-sass@0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.1))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(debug@4.4.3(supports-color@8.1.1))(html-minifier-terser@7.2.0)(postcss@8.5.31)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@8.1.1)(svgo@3.3.5)(typescript@7.0.2))(sass@1.107.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5)):
     dependencies:
       '@docusaurus/core': 3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.1))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(debug@4.4.3(supports-color@8.1.1))(html-minifier-terser@7.2.0)(postcss@8.5.31)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@8.1.1)(svgo@3.3.5)(typescript@7.0.2)
-      sass: 1.106.0
-      sass-loader: 16.0.8(sass@1.106.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5))
+      sass: 1.107.0
+      sass-loader: 16.0.8(sass@1.107.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5))
     transitivePeerDependencies:
       - '@rspack/core'
       - node-sass
@@ -13510,14 +13510,14 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@16.0.8(sass@1.106.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5)):
+  sass-loader@16.0.8(sass@1.107.0)(webpack@5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.106.0
+      sass: 1.107.0
       webpack: 5.112.0(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.31))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.31)(svgo@3.3.5)
 
-  sass@1.106.0:
+  sass@1.107.0:
     dependencies:
       chokidar: 5.0.0
       immutable: 5.1.9
