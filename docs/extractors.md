@@ -100,7 +100,7 @@ Be careful when using blocking synchronization primitives like `Mutex` or `RwLoc
 [either]: https://docs.rs/actix-web/4/actix_web/enum.Either.html
 [actix_hash]: https://docs.rs/actix-hash
 [request_signature]: https://docs.rs/actix-web-lab/0.21/actix_web_lab/extract/struct.RequestSignature.html
-[pathstruct]: https://docs.rs/actix-web/4/actix_web/dev/struct.Path.html
+[pathstruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Path.html
 [querystruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Query.html
 [jsonstruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Json.html
 [jsonconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.JsonConfig.html
