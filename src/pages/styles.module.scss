@@ -351,6 +351,8 @@ article header h1 {
 }
 
 .requestHero {
+  position: relative;
+  isolation: isolate;
   --paper: var(--ifm-background-color);
   --ink: var(--ifm-font-color-base);
   --accent: var(--ifm-color-primary);
@@ -411,6 +413,12 @@ article header h1 {
 .requestHero .art {
   min-width: 0;
   position: relative;
+  padding-bottom: 60px;
+}
+
+.requestHero .copy {
+  position: relative;
+  z-index: 1;
 }
 .requestHero .art > svg {
   display: block;
@@ -440,17 +448,16 @@ article header h1 {
 .requestHero .disc {
   fill: var(--paper);
 }
-.requestHero .code {
-  fill: var(--ink);
-  font-family: var(--ifm-font-family-monospace);
-  font-size: 13px;
-}
 
 .requestHero .motion {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin: 1rem 0 0 auto;
+  margin: 0;
   color: var(--ink);
   font: inherit;
   font-size: 0.75rem;
@@ -504,7 +511,8 @@ article header h1 {
     align-items: stretch;
     gap: 2.5rem;
   }
-  .requestHero .art {
+  .requestHero .art,
+  .requestHero .motion {
     display: none;
   }
   .requestHero {
@@ -535,7 +543,7 @@ article header h1 {
 
 @keyframes bluePulse {
   to {
-    stroke-dashoffset: -130;
+    stroke-dashoffset: var(--pulse-distance, -130);
   }
 }
 
