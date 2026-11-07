@@ -25,6 +25,7 @@ const config: Config = {
   },
   themes: ["@docusaurus/theme-mermaid"],
   themeConfig: {
+    image: "img/actix-web-social.png",
     navbar: {
       title: "Actix Web",
       logo: {
