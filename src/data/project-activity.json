@@ -1,0 +1,11 @@
+{
+  "stars": 24926,
+  "release": {
+    "tag": "actix-web-v4.18.2",
+    "date": "2026-11-06"
+  },
+  "commit": {
+    "sha": "9fb59640aebc6a7c87bb79ead55b5730a5425ba4",
+    "date": "2026-11-06"
+  }
+}

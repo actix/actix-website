@@ -6,6 +6,7 @@ import CodeBlock from "@site/src/components/code_block";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.scss";
+import activity from "@site/src/data/project-activity.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPause,
@@ -14,6 +15,7 @@ import {
   faBatteryFull,
   faPuzzlePiece,
   faTachometerAlt,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
@@ -198,10 +200,40 @@ const Hero = () => {
             <FontAwesomeIcon icon={motionPaused ? faPlay : faPause} aria-hidden="true" />
           </button>
         </div>
+        <ProjectActivity />
       </div>
     </header>
   );
 };
+
+const activityDate = (value: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${value}T00:00:00Z`));
+
+const ProjectActivity = () => (
+  <ul className={styles.activity} aria-label="Actix Web project activity">
+    <li>
+      <a href="https://github.com/actix/actix-web/stargazers">
+        <FontAwesomeIcon icon={faStar} aria-hidden="true" />{" "}
+        {activity.stars.toLocaleString("en-US")} GitHub stars
+      </a>
+    </li>
+    <li>
+      <a href={`https://github.com/actix/actix-web/releases/tag/${activity.release.tag}`}>
+        Released <time dateTime={activity.release.date}>{activityDate(activity.release.date)}</time>
+      </a>
+    </li>
+    <li>
+      <a href={`https://github.com/actix/actix-web/commit/${activity.commit.sha}`}>
+        Committed <time dateTime={activity.commit.date}>{activityDate(activity.commit.date)}</time>
+      </a>
+    </li>
+  </ul>
+);
 
 const Highlights = () => {
   return (

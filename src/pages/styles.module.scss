@@ -100,6 +100,32 @@
   justify-content: center;
 }
 
+.activity {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+
+  a {
+    color: var(--ifm-color-emphasis-700);
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--ifm-color-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ifm-color-primary);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  }
+}
+
 .subtitle {
   margin: 0 auto 1.5rem;
   max-width: 500px;

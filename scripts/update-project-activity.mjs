@@ -1,0 +1,76 @@
+import { writeFile, rename } from "node:fs/promises";
+
+const repository = "actix/actix-web";
+const destination = new URL("../src/data/project-activity.json", import.meta.url);
+
+async function github(path) {
+  const response = await fetch(`https://api.github.com/repos/${repository}${path}`, {
+    headers: {
+      Accept: "application/vnd.github+json",
+      ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
+    },
+    signal: AbortSignal.timeout(30_000),
+  });
+
+  if (!response.ok) {
+    throw new Error(`GitHub ${path}: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function date(value) {
+  if (typeof value !== "string" || !Number.isFinite(Date.parse(value))) {
+    throw new Error("GitHub returned an invalid date");
+  }
+
+  return new Date(value).toISOString().slice(0, 10);
+}
+
+// This repository also publishes releases for other crates.
+async function latestWebRelease() {
+  for (let page = 1; page <= 10; page++) {
+    const releases = await github(`/releases?per_page=100&page=${page}`);
+    const release = releases.find(
+      (item) => !item.draft && !item.prerelease && /^actix-web-v\d+\.\d+\.\d+$/.test(item.tag_name),
+    );
+
+    if (release) return release;
+    if (releases.length < 100) break;
+  }
+
+  throw new Error("No stable Actix Web release found");
+}
+
+const [repo, commits, release] = await Promise.all([
+  github(""),
+  github("/commits?per_page=1"),
+  latestWebRelease(),
+]);
+
+if (!Number.isSafeInteger(repo.stargazers_count) || repo.stargazers_count < 0) {
+  throw new Error("GitHub returned an invalid star count");
+}
+
+const commit = commits[0];
+
+if (!/^[a-f0-9]{40}$/.test(commit?.sha)) {
+  throw new Error("GitHub returned an invalid commit");
+}
+
+const snapshot = {
+  stars: repo.stargazers_count,
+  release: {
+    tag: release.tag_name,
+    date: date(release.published_at),
+  },
+  commit: {
+    sha: commit.sha,
+    date: date(commit.commit.committer.date),
+  },
+};
+
+// Replace the snapshot only after all requests and validation succeed.
+const temporary = new URL(`${destination.href}.tmp`);
+await writeFile(temporary, `${JSON.stringify(snapshot, null, 2)}\n`);
+await rename(temporary, destination);

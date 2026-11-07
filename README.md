@@ -13,6 +13,22 @@ npm start  # or yarn start
 
 Then visit <http://localhost:3000>.
 
+## Updating Project Activity
+
+The homepage imports `src/data/project-activity.json` at build time. It does not request GitHub data in the browser. Dates use UTC and remain fixed until the next deployment.
+
+The **Update Project Activity** workflow runs daily and can also run manually. It opens or updates `chore/project-activity` with the latest star count, stable Actix Web release, and default-branch commit. Merge the pull request to deploy through Netlify.
+
+Enable **Allow GitHub Actions to create and approve pull requests** in the repository's Actions settings. Pull requests created with `GITHUB_TOKEN` do not automatically trigger other GitHub Actions workflows. Close and reopen the pull request as a maintainer to trigger the normal checks before merge. See [GitHub's workflow trigger documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow).
+
+To update the snapshot locally:
+
+```sh
+node scripts/update-project-activity.mjs
+```
+
+Set `GITHUB_TOKEN` to use authenticated API requests. Failed requests or invalid responses leave the previous snapshot intact. Normal site builds use the saved snapshot and do not need GitHub access.
+
 ## Updating Diagrams
 
 Diagrams are located under [/static/img/diagrams/](https://github.com/actix/actix-website/tree/master/static/img/diagrams) and built with [Mermaid CLI][mermaid_cli].
