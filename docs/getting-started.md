@@ -7,6 +7,7 @@ description: >-
 
 import RenderCodeBlock from '@theme/CodeBlock';
 import CodeBlock from "@site/src/components/code_block";
+import InstallCommand from "@site/src/components/install_command";
 import vars from "@site/vars";
 
 ## Installing Rust
@@ -26,7 +27,11 @@ cargo new hello-world
 cd hello-world
 ```
 
-Add `actix-web` as a dependency of your project by adding the following to your `Cargo.toml` file.
+Add `actix-web` as a dependency from your project directory:
+
+<InstallCommand command={`cargo add actix-web@${vars.actixWebMajorVersion}`} />
+
+Or add the following to your `Cargo.toml` file:
 
 <!-- DEPENDENCY -->
 

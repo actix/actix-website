@@ -145,7 +145,7 @@ const Hero = () => {
             <span className={styles.taglineContext}> web framework for Rust</span>
           </h1>
           <div className={styles.blueActions}>
-            <Link className={styles.start} to={useBaseUrl("docs/")}>
+            <Link className={styles.start} to={useBaseUrl("docs/getting-started")}>
               Get Started
             </Link>
             <a href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc">
