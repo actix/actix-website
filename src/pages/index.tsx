@@ -152,6 +152,7 @@ const Hero = () => {
               Explore the Benchmarks
             </a>
           </div>
+          <ProjectActivity />
         </div>
         <div className={clsx(styles.art, motionPaused && styles.paused)}>
           <svg
@@ -200,7 +201,6 @@ const Hero = () => {
             <FontAwesomeIcon icon={motionPaused ? faPlay : faPause} aria-hidden="true" />
           </button>
         </div>
-        <ProjectActivity />
       </div>
     </header>
   );
@@ -218,17 +218,24 @@ const ProjectActivity = () => (
   <ul className={styles.activity} aria-label="Actix Web project activity">
     <li>
       <a href="https://github.com/actix/actix-web/stargazers">
-        <FontAwesomeIcon icon={faStar} aria-hidden="true" />{" "}
-        {activity.stars >= 1000
-          ? `${(activity.stars / 1000).toLocaleString("en-US", { maximumFractionDigits: 1 })}k`
-          : activity.stars.toLocaleString("en-US")}{" "}
-        GitHub stars
+        <FontAwesomeIcon icon={faStar} aria-hidden="true" />
+        <span>
+          <strong>
+            {activity.stars >= 1000
+              ? `${(activity.stars / 1000).toLocaleString("en-US", { maximumFractionDigits: 1 })}k`
+              : activity.stars.toLocaleString("en-US")}
+          </strong>{" "}
+          GitHub stars
+        </span>
       </a>
     </li>
     <li>
       <a href={`https://github.com/actix/actix-web/releases/tag/${activity.release.tag}`}>
-        {activity.release.tag.replace("actix-web-", "")} · Released{" "}
-        <time dateTime={activity.release.date}>{activityDate(activity.release.date)}</time>
+        <strong>{activity.release.tag.replace("actix-web-", "")}</strong>
+        <span className={styles.releaseDate}>
+          Released{" "}
+          <time dateTime={activity.release.date}>{activityDate(activity.release.date)}</time>
+        </span>
       </a>
     </li>
   </ul>
