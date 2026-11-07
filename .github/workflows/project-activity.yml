@@ -27,8 +27,13 @@ jobs:
         with:
           node-version-file: ".tool-versions"
 
+      - name: Install just
+        uses: taiki-e/install-action@86f7a0ffb25f40114606501a311ebcfaf882ea32 # v2.88.0
+        with:
+          tool: just
+
       - name: Fetch project activity
-        run: node scripts/update-project-activity.mjs
+        run: just update-project-activity
         env:
           GITHUB_TOKEN: ${{ github.token }}
 

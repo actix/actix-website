@@ -24,7 +24,7 @@ Enable **Allow GitHub Actions to create and approve pull requests** in the repos
 To update the snapshot locally:
 
 ```sh
-node scripts/update-project-activity.mjs
+just update-project-activity
 ```
 
 Set `GITHUB_TOKEN` to use authenticated API requests. Failed requests or invalid responses leave the previous snapshot intact. Normal site builds use the saved snapshot and do not need GitHub access.
