@@ -206,6 +206,29 @@
   padding-bottom: 1rem;
 }
 
+.routingExamples {
+  display: grid;
+  min-width: 0;
+}
+
+.routingExample {
+  grid-area: 1 / 1;
+  min-width: 0;
+  display: flex;
+
+  > div {
+    width: 100%;
+  }
+
+  &:first-child pre code {
+    padding-top: calc(var(--ifm-pre-padding) + 1lh);
+  }
+
+  &[aria-hidden="true"] {
+    visibility: hidden;
+  }
+}
+
 @media (min-width: 1024px) {
   .exampleContent {
     flex-direction: row;

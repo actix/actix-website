@@ -311,12 +311,13 @@ const Examples = () => {
               </div>
             </fieldset>
           </div>
-          <div id="hello-world-code" className={styles.example__code}>
-            <CodeBlock
-              example="request-routing"
-              file={useMacros ? "main.rs" : "manual.rs"}
-              section="request-routing"
-            />
+          <div id="hello-world-code" className={clsx(styles.example__code, styles.routingExamples)}>
+            <div className={styles.routingExample} aria-hidden={!useMacros}>
+              <CodeBlock example="request-routing" file="main.rs" section="request-routing" />
+            </div>
+            <div className={styles.routingExample} aria-hidden={useMacros}>
+              <CodeBlock example="request-routing" file="manual.rs" section="request-routing" />
+            </div>
           </div>
         </div>
       </div>
