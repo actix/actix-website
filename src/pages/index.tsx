@@ -8,6 +8,8 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faPause,
+  faPlay,
   faShieldAlt,
   faBatteryFull,
   faPuzzlePiece,
@@ -64,23 +66,137 @@ const highlights = [
   },
 ];
 
+const requestPaths = [
+  {
+    path: "M0 18 C100 18 150 75 260 165 C345 70 420 12 520 12",
+    duration: 0.38,
+    delay: -0.17,
+    dash: "8 122",
+  },
+  {
+    path: "M0 61 C100 43 150 97 260 165 C345 92 420 64 520 50",
+    duration: 0.51,
+    delay: -0.39,
+    dash: "16 114",
+  },
+  {
+    path: "M0 105 C100 123 150 112 260 165 C345 118 420 81 520 99",
+    duration: 0.43,
+    delay: -0.08,
+    dash: "6 54 12 58",
+  },
+  {
+    path: "M0 145 C100 126 150 139 260 165 C345 142 420 151 520 140",
+    duration: 0.34,
+    delay: -0.26,
+    dash: "10 120",
+  },
+  {
+    path: "M0 181 C100 205 150 160 260 165 C345 164 420 170 520 185",
+    duration: 0.47,
+    delay: -0.31,
+    dash: "14 66 7 43",
+  },
+  {
+    path: "M0 223 C100 217 150 186 260 165 C345 190 420 237 520 220",
+    duration: 0.41,
+    delay: -0.12,
+    dash: "9 121",
+  },
+  {
+    path: "M0 253 C100 274 150 208 260 165 C345 211 420 250 520 263",
+    duration: 0.56,
+    delay: -0.44,
+    dash: "18 112",
+  },
+  {
+    path: "M0 285 C100 278 150 235 260 165 C345 238 420 283 520 287",
+    duration: 0.36,
+    delay: -0.21,
+    dash: "7 53 11 59",
+  },
+  {
+    path: "M0 309 C100 318 150 260 260 165 C345 263 420 306 520 309",
+    duration: 0.49,
+    delay: -0.36,
+    dash: "12 118",
+  },
+];
+
 const Hero = () => {
-  const { siteConfig } = useDocusaurusContext();
+  const [motionPaused, setMotionPaused] = React.useState(false);
 
   return (
-    <header id="hero" className={clsx("hero", styles.banner)}>
-      <div className="container">
-        <div className={styles.brand}>
-          <img src={useBaseUrl(`img/logo.png`)} alt="Actix Logo" className={styles.logo} />
-
-          <h1 className="hero__title">{siteConfig.title}</h1>
+    <header id="hero" className={styles.requestHero}>
+      <div className={styles.blueLayout}>
+        <div className={styles.copy}>
+          <img
+            src={useBaseUrl("img/logo.png")}
+            alt="Actix Web Logo"
+            width="80"
+            height="80"
+            className={styles.compactLogo}
+          />
+          <h1>
+            <span className={styles.taglineContext}>Actix Web is a </span>
+            <span className={styles.taglineEmphasis}>powerful, pragmatic, and extremely fast</span>
+            <span className={styles.taglineContext}> web framework for Rust</span>
+          </h1>
+          <div className={styles.blueActions}>
+            <Link className={styles.start} to={useBaseUrl("docs/")}>
+              Get Started
+            </Link>
+            <a href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc">
+              Explore the Benchmarks
+            </a>
+          </div>
         </div>
-        <p className={clsx("hero__subtitle", styles.subtitle)}>{siteConfig.tagline}</p>
-
-        <div className={styles.buttons}>
-          <Link className="button button--primary button--lg" to={useBaseUrl("docs/")}>
-            Get Started
-          </Link>
+        <div className={clsx(styles.art, motionPaused && styles.paused)}>
+          <svg
+            viewBox="0 0 520 350"
+            role="img"
+            aria-label="Request Constellation with the Actix Web logo"
+          >
+            {requestPaths.map(({ path, duration, delay, dash }) => (
+              <g key={path}>
+                <path d={path} className={styles.track} />
+                <path
+                  d={path}
+                  className={styles.pulse}
+                  style={{
+                    animationDuration: `${duration}s`,
+                    animationDelay: `${delay}s`,
+                    strokeDasharray: dash,
+                  }}
+                />
+              </g>
+            ))}
+            <circle cx="260" cy="165" r="65" className={styles.disc} />
+            <image
+              href={useBaseUrl("img/logo.png")}
+              x="210"
+              y="115"
+              width="100"
+              height="100"
+              className={styles.emblem}
+            />
+            <text x="0" y="333" textAnchor="start" className={styles.code}>
+              Request
+            </text>
+            <text x="520" y="333" textAnchor="end" className={styles.code}>
+              Response
+            </text>
+          </svg>
+          <button
+            className={styles.motion}
+            onClick={() => setMotionPaused(!motionPaused)}
+            type="button"
+            aria-label={motionPaused ? "Resume Animation" : "Pause Animation"}
+            title={motionPaused ? "Resume Animation" : "Pause Animation"}
+            aria-pressed={motionPaused}
+          >
+            <FontAwesomeIcon icon={motionPaused ? faPlay : faPause} aria-hidden="true" />
+          </button>
         </div>
       </div>
     </header>
