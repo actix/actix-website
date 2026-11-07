@@ -222,7 +222,7 @@ const ProjectActivity = () => (
         <span>
           <strong>
             {activity.stars >= 1000
-              ? `${(activity.stars / 1000).toLocaleString("en-US", { maximumFractionDigits: 1 })}k`
+              ? `${Math.floor(activity.stars / 1000).toLocaleString("en-US")}k`
               : activity.stars.toLocaleString("en-US")}
           </strong>{" "}
           GitHub stars
