@@ -72,58 +72,64 @@ const highlights = [
 
 const requestPaths = [
   {
-    path: "M0 18 C100 18 150 75 260 165 C345 70 420 12 520 12",
-    duration: 0.38,
-    delay: -0.17,
-    dash: "8 122",
+    path: "M-1800 -77.5 L-350 -77.5 C-80 -77.5 110 31.6 260 165 C410 26.2 600 -87.4 850 -87.4 L1800 -87.4",
+    duration: 1.379,
+    delay: -0.19,
+    dash: "5 25 18 103 8 51 26 148 4 41 12 83",
   },
   {
-    path: "M0 61 C100 43 150 97 260 165 C345 92 420 64 520 50",
-    duration: 0.51,
-    delay: -0.39,
-    dash: "16 114",
+    path: "M-1800 -6.6 L-350 -6.6 C-80 -6.6 110 70.6 260 165 C410 60.7 600 -24.7 850 -24.7 L1800 -24.7",
+    duration: 2.109,
+    delay: -0.507,
+    dash: "22 129 4 20 7 67 15 167 5 43 9 92",
   },
   {
-    path: "M0 105 C100 123 150 112 260 165 C345 118 420 81 520 99",
-    duration: 0.43,
-    delay: -0.08,
-    dash: "6 54 12 58",
+    path: "M-1800 66 L-350 66 C-80 66 110 110.6 260 165 C410 105.1 600 56.1 850 56.1 L1800 56.1",
+    duration: 1.267,
+    delay: -0.824,
+    dash: "4 37 9 22 21 123 6 174 13 57 3 82",
   },
   {
-    path: "M0 145 C100 126 150 139 260 165 C345 142 420 151 520 140",
-    duration: 0.34,
-    delay: -0.26,
-    dash: "10 120",
+    path: "M-1800 132 L-350 132 C-80 132 110 146.9 260 165 C410 142.3 600 123.8 850 123.8 L1800 123.8",
+    duration: 1.655,
+    delay: -1.141,
+    dash: "12 75 3 150 24 47 8 27 5 113 17 65",
   },
   {
-    path: "M0 181 C100 205 150 160 260 165 C345 164 420 170 520 185",
-    duration: 0.47,
-    delay: -0.31,
-    dash: "14 66 7 43",
+    path: "M-1800 191.4 L-350 191.4 C-80 191.4 110 179.5 260 165 C410 183.2 600 198 850 198 L1800 198",
+    duration: 1.972,
+    delay: -1.458,
+    dash: "7 169 19 38 4 62 11 121 25 22 6 88",
   },
   {
-    path: "M0 223 C100 217 150 186 260 165 C345 190 420 237 520 220",
-    duration: 0.41,
-    delay: -0.12,
-    dash: "9 121",
+    path: "M-1800 260.7 L-350 260.7 C-80 260.7 110 217.6 260 165 C410 214.9 600 255.8 850 255.8 L1800 255.8",
+    duration: 1.439,
+    delay: -1.775,
+    dash: "28 58 5 134 9 33 3 96 16 158 7 43",
   },
   {
-    path: "M0 253 C100 274 150 208 260 165 C345 211 420 250 520 263",
-    duration: 0.56,
-    delay: -0.44,
-    dash: "18 112",
+    path: "M-1800 310.2 L-350 310.2 C-80 310.2 110 244.9 260 165 C410 253.9 600 326.7 850 326.7 L1800 326.7",
+    duration: 2.275,
+    delay: -2.092,
+    dash: "6 87 14 27 4 184 23 64 8 124 3 36",
   },
   {
-    path: "M0 285 C100 278 150 235 260 165 C345 238 420 283 520 287",
-    duration: 0.36,
-    delay: -0.21,
-    dash: "7 53 11 59",
+    path: "M-1800 363 L-350 363 C-80 363 110 273.9 260 165 C410 275.7 600 366.3 850 366.3 L1800 366.3",
+    duration: 1.282,
+    delay: -2.409,
+    dash: "9 47 4 139 18 85 6 24 27 172 5 60",
   },
   {
-    path: "M0 309 C100 318 150 260 260 165 C345 263 420 306 520 309",
-    duration: 0.49,
-    delay: -0.36,
-    dash: "12 118",
+    path: "M-1800 402.6 L-350 402.6 C-80 402.6 110 295.7 260 165 C410 295.7 600 402.6 850 402.6 L1800 402.6",
+    duration: 1.994,
+    delay: -2.726,
+    dash: "3 110 24 29 7 153 12 52 5 76 19 128",
+  },
+  {
+    path: "M-1800 450 L-350 450 C-80 450 110 321.8 260 165 C410 327.3 600 460 850 460 L1800 460",
+    duration: 1.628,
+    delay: -3.043,
+    dash: "17 160 5 50 11 25 4 118 22 66 8 100",
   },
 ];
 
@@ -162,20 +168,49 @@ const Hero = () => {
             role="img"
             aria-label="Request Constellation with the Actix Web logo"
           >
-            {requestPaths.map(({ path, duration, delay, dash }) => (
-              <g key={path}>
-                <path d={path} className={styles.track} />
-                <path
-                  d={path}
-                  className={styles.pulse}
-                  style={{
-                    animationDuration: `${duration}s`,
-                    animationDelay: `${delay}s`,
-                    strokeDasharray: dash,
-                  }}
-                />
-              </g>
-            ))}
+            <defs>
+              <linearGradient id="traffic-fade" gradientUnits="userSpaceOnUse" x1="-1200" x2="1100">
+                <stop offset="0%" stopColor="white" stopOpacity="0" />
+                <stop offset="24%" stopColor="white" stopOpacity="0.08" />
+                <stop offset="41%" stopColor="white" stopOpacity="0.08" />
+                <stop offset="52%" stopColor="white" stopOpacity="0.3" />
+                <stop offset="60%" stopColor="white" />
+                <stop offset="70%" stopColor="white" />
+                <stop offset="79%" stopColor="white" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="white" stopOpacity="0" />
+              </linearGradient>
+              <mask
+                id="traffic-mask"
+                maskUnits="userSpaceOnUse"
+                x="-1800"
+                y="-400"
+                width="3600"
+                height="1200"
+              >
+                <rect x="-1800" y="-400" width="3600" height="1200" fill="url(#traffic-fade)" />
+              </mask>
+            </defs>
+            <g mask="url(#traffic-mask)">
+              {requestPaths.map(({ path, duration, delay, dash }) => (
+                <g key={path}>
+                  <path d={path} className={styles.track} />
+                  <path
+                    d={path}
+                    className={styles.pulse}
+                    style={
+                      {
+                        "--pulse-distance": -dash
+                          .split(" ")
+                          .reduce((sum, value) => sum + Number(value), 0),
+                        animationDuration: `${duration}s`,
+                        animationDelay: `${delay}s`,
+                        strokeDasharray: dash,
+                      } as React.CSSProperties
+                    }
+                  />
+                </g>
+              ))}
+            </g>
             <circle cx="260" cy="165" r="65" className={styles.disc} />
             <image
               href={useBaseUrl("img/logo.png")}
@@ -185,25 +220,19 @@ const Hero = () => {
               height="100"
               className={styles.emblem}
             />
-            <text x="0" y="333" textAnchor="start" className={styles.code}>
-              Request
-            </text>
-            <text x="520" y="333" textAnchor="end" className={styles.code}>
-              Response
-            </text>
           </svg>
-          <button
-            className={styles.motion}
-            onClick={() => setMotionPaused(!motionPaused)}
-            type="button"
-            aria-label={motionPaused ? "Resume Animation" : "Pause Animation"}
-            title={motionPaused ? "Resume Animation" : "Pause Animation"}
-            aria-pressed={motionPaused}
-          >
-            <FontAwesomeIcon icon={motionPaused ? faPlay : faPause} aria-hidden="true" />
-          </button>
         </div>
       </div>
+      <button
+        className={styles.motion}
+        onClick={() => setMotionPaused(!motionPaused)}
+        type="button"
+        aria-label={motionPaused ? "Resume Animation" : "Pause Animation"}
+        title={motionPaused ? "Resume Animation" : "Pause Animation"}
+        aria-pressed={motionPaused}
+      >
+        <FontAwesomeIcon icon={motionPaused ? faPlay : faPause} aria-hidden="true" />
+      </button>
     </header>
   );
 };
