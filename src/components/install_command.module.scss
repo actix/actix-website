@@ -1,0 +1,86 @@
+.wrapper {
+  margin-bottom: var(--ifm-leading);
+}
+
+.command {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  background: var(--ifm-code-background);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--ifm-color-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ifm-color-primary);
+    outline-offset: 3px;
+  }
+
+  code {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 0.9375rem;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.prompt {
+  opacity: 0.5;
+  user-select: none;
+}
+
+.status {
+  display: block;
+  font-size: 0.875rem;
+
+  &:not(:empty) {
+    margin-top: 0.5rem;
+  }
+}
+
+.icons {
+  display: grid;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+
+  svg {
+    grid-area: 1 / 1;
+    transition: opacity 180ms ease-out;
+  }
+
+  .successIcon {
+    opacity: 0;
+  }
+
+  &[data-copied="true"] {
+    .copyIcon {
+      opacity: 0;
+    }
+
+    .successIcon {
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icons svg {
+    transition: none;
+  }
+}

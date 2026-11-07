@@ -3,6 +3,8 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import CodeBlock from "@site/src/components/code_block";
+import InstallCommand from "@site/src/components/install_command";
+import vars from "@site/vars";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.scss";
@@ -145,7 +147,7 @@ const Hero = () => {
             <span className={styles.taglineContext}> web framework for Rust</span>
           </h1>
           <div className={styles.blueActions}>
-            <Link className={styles.start} to={useBaseUrl("docs/")}>
+            <Link className={styles.start} to={useBaseUrl("docs/getting-started")}>
               Get Started
             </Link>
             <a href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc">
@@ -284,6 +286,7 @@ const Examples = () => {
               Getting started with Actix is easy. An Actix app comes with a URL routing system that
               lets you match on URLs and invoke individual handlers.
             </p>
+            <InstallCommand command={`cargo add actix-web@${vars.actixWebMajorVersion}`} />
             <hr className={styles.macroDivider} />
             <fieldset className={styles.macroPreference}>
               <legend>How do you feel about macros?</legend>
