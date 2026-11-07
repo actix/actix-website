@@ -55,7 +55,7 @@ jobs:
 
           if [ -z "$(gh pr list --head "$branch" --base main --state open --json number --jq '.[].number')" ]; then
             cat > "$RUNNER_TEMP/activity-pr.md" <<'EOF'
-          Update the homepage's static GitHub star count, latest stable Actix Web release, and latest default-branch commit.
+          Update the homepage's static GitHub star count and latest stable Actix Web release.
 
           The update script validates all responses before replacing the snapshot. Netlify deploys the updated data after merge. No browser requests to GitHub are required.
 

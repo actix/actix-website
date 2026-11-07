@@ -17,7 +17,7 @@ Then visit <http://localhost:3000>.
 
 The homepage imports `src/data/project-activity.json` at build time. It does not request GitHub data in the browser. Dates use UTC and remain fixed until the next deployment.
 
-The **Update Project Activity** workflow runs daily and can also run manually. It opens or updates `chore/project-activity` with the latest star count, stable Actix Web release, and default-branch commit. Merge the pull request to deploy through Netlify.
+The **Update Project Activity** workflow runs daily and can also run manually. It opens or updates `chore/project-activity` with the latest star count and stable Actix Web release. Merge the pull request to deploy through Netlify.
 
 Enable **Allow GitHub Actions to create and approve pull requests** in the repository's Actions settings. Pull requests created with `GITHUB_TOKEN` do not automatically trigger other GitHub Actions workflows. Close and reopen the pull request as a maintainer to trigger the normal checks before merge. See [GitHub's workflow trigger documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow).
 

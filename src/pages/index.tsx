@@ -219,17 +219,16 @@ const ProjectActivity = () => (
     <li>
       <a href="https://github.com/actix/actix-web/stargazers">
         <FontAwesomeIcon icon={faStar} aria-hidden="true" />{" "}
-        {activity.stars.toLocaleString("en-US")} GitHub stars
+        {activity.stars >= 1000
+          ? `${(activity.stars / 1000).toLocaleString("en-US", { maximumFractionDigits: 1 })}k`
+          : activity.stars.toLocaleString("en-US")}{" "}
+        GitHub stars
       </a>
     </li>
     <li>
       <a href={`https://github.com/actix/actix-web/releases/tag/${activity.release.tag}`}>
-        Released <time dateTime={activity.release.date}>{activityDate(activity.release.date)}</time>
-      </a>
-    </li>
-    <li>
-      <a href={`https://github.com/actix/actix-web/commit/${activity.commit.sha}`}>
-        Committed <time dateTime={activity.commit.date}>{activityDate(activity.commit.date)}</time>
+        {activity.release.tag.replace("actix-web-", "")} · Released{" "}
+        <time dateTime={activity.release.date}>{activityDate(activity.release.date)}</time>
       </a>
     </li>
   </ul>

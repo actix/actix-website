@@ -42,20 +42,10 @@ async function latestWebRelease() {
   throw new Error("No stable Actix Web release found");
 }
 
-const [repo, commits, release] = await Promise.all([
-  github(""),
-  github("/commits?per_page=1"),
-  latestWebRelease(),
-]);
+const [repo, release] = await Promise.all([github(""), latestWebRelease()]);
 
 if (!Number.isSafeInteger(repo.stargazers_count) || repo.stargazers_count < 0) {
   throw new Error("GitHub returned an invalid star count");
-}
-
-const commit = commits[0];
-
-if (!/^[a-f0-9]{40}$/.test(commit?.sha)) {
-  throw new Error("GitHub returned an invalid commit");
 }
 
 const snapshot = {
@@ -63,10 +53,6 @@ const snapshot = {
   release: {
     tag: release.tag_name,
     date: date(release.published_at),
-  },
-  commit: {
-    sha: commit.sha,
-    date: date(commit.commit.committer.date),
   },
 };
 
