@@ -5,6 +5,8 @@ description: >-
   Stream server-sent events with Actix Web and receive updates in a browser with EventSource.
 ---
 
+import CodeBlock from "@site/src/components/code_block";
+
 # Server-Sent Events (SSE)
 
 Server-sent events (SSE) let a server send updates to a client over a long-lived HTTP response. Use SSE for notifications, progress updates, or live feeds. Communication is one-way: the server sends events to the client. For two-way communication, see [WebSockets](websockets.md).
@@ -17,7 +19,15 @@ Create an `Sse` responder from a stream with `Sse::from_stream()`, or from a Tok
 
 For a long-lived connection, use `with_keep_alive()` to send periodic comments while no events are available. Use `with_retry_duration()` to set the client's reconnection delay.
 
-See the [SSE API examples][sse] for handlers that use a stream or a channel. A complete [broadcast example][example] is available in the examples repository.
+Add these dependencies to your `Cargo.toml`:
+
+<CodeBlock example="server-sent-events" file="manifest" section="dependencies" language="toml" />
+
+This server sends an unnamed message immediately and then every five seconds. The task stops when the client disconnects and the channel closes.
+
+<CodeBlock example="server-sent-events" section="server-sent-events" />
+
+See the [SSE API examples][sse] for more handlers. A complete [broadcast example][example] is available in the examples repository.
 
 ## Receive Events in a Browser
 

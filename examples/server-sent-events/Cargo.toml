@@ -1,0 +1,12 @@
+[package]
+name = "server-sent-events"
+version = "1.0.0"
+publish = false
+edition.workspace = true
+
+# <dependencies>
+[dependencies]
+actix-web = "4"
+actix-web-lab = "0.29"
+tokio = { version = "1", features = ["sync"] }
+# </dependencies>
