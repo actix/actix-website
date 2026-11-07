@@ -6,6 +6,7 @@ import CodeBlock from "@site/src/components/code_block";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.scss";
+import activity from "@site/src/data/project-activity.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPause,
@@ -14,6 +15,7 @@ import {
   faBatteryFull,
   faPuzzlePiece,
   faTachometerAlt,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
@@ -150,6 +152,7 @@ const Hero = () => {
               Explore the Benchmarks
             </a>
           </div>
+          <ProjectActivity />
         </div>
         <div className={clsx(styles.art, motionPaused && styles.paused)}>
           <svg
@@ -202,6 +205,41 @@ const Hero = () => {
     </header>
   );
 };
+
+const activityDate = (value: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${value}T00:00:00Z`));
+
+const ProjectActivity = () => (
+  <ul className={styles.activity} aria-label="Actix Web project activity">
+    <li>
+      <a href="https://github.com/actix/actix-web/stargazers">
+        <FontAwesomeIcon icon={faStar} aria-hidden="true" />
+        <span>
+          <strong>
+            {activity.stars >= 1000
+              ? `${Math.floor(activity.stars / 1000).toLocaleString("en-US")}k`
+              : activity.stars.toLocaleString("en-US")}
+          </strong>{" "}
+          GitHub stars
+        </span>
+      </a>
+    </li>
+    <li>
+      <a href={`https://github.com/actix/actix-web/releases/tag/${activity.release.tag}`}>
+        <strong>{activity.release.tag.replace("actix-web-", "")}</strong>
+        <span className={styles.releaseDate}>
+          Released{" "}
+          <time dateTime={activity.release.date}>{activityDate(activity.release.date)}</time>
+        </span>
+      </a>
+    </li>
+  </ul>
+);
 
 const Highlights = () => {
   return (

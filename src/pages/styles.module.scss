@@ -100,6 +100,54 @@
   justify-content: center;
 }
 
+.activity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.5rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+
+  a {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    min-height: 32px;
+    color: var(--ifm-color-emphasis-700);
+    text-underline-offset: 4px;
+
+    strong {
+      color: var(--ifm-font-color-base);
+      font-weight: 650;
+    }
+
+    &:hover {
+      color: var(--ifm-color-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ifm-color-primary);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  }
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex: none;
+    color: var(--ifm-color-primary);
+  }
+}
+
+.releaseDate {
+  font-size: 0.75rem;
+}
+
 .subtitle {
   margin: 0 auto 1.5rem;
   max-width: 500px;
@@ -341,7 +389,7 @@ article header h1 {
   min-width: 0;
   position: relative;
 }
-.requestHero svg {
+.requestHero .art > svg {
   display: block;
   width: 100%;
   overflow: visible;
@@ -418,6 +466,15 @@ article header h1 {
     justify-content: center;
   }
 
+  .activity {
+    justify-content: center;
+    column-gap: 1.25rem;
+
+    a {
+      justify-content: center;
+    }
+  }
+
   .requestHero .blueLayout {
     display: flex;
     flex-direction: column;
@@ -430,7 +487,7 @@ article header h1 {
   .requestHero {
     padding: 2.5rem 24px;
   }
-  .requestHero svg {
+  .requestHero .art > svg {
     max-height: 330px;
   }
 }

@@ -1,0 +1,70 @@
+name: Update Project Activity
+
+on:
+  schedule:
+    - cron: "23 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: project-activity
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.repository == 'actix/actix-website'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          node-version-file: ".tool-versions"
+
+      - name: Install just
+        uses: taiki-e/install-action@86f7a0ffb25f40114606501a311ebcfaf882ea32 # v2.88.0
+        with:
+          tool: just
+
+      - name: Fetch project activity
+        run: just update-project-activity
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Check snapshot format
+        run: pnpm exec oxfmt --check src/data/project-activity.json
+
+      - name: Open or update pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- src/data/project-activity.json; then
+            exit 0
+          fi
+
+          branch=chore/project-activity
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          gh auth setup-git
+          git fetch origin "$branch" || true
+          git switch -C "$branch"
+          git add src/data/project-activity.json
+          git commit -m 'chore: update project activity'
+          git push --force-with-lease origin "$branch"
+
+          if [ -z "$(gh pr list --head "$branch" --base main --state open --json number --jq '.[].number')" ]; then
+            cat > "$RUNNER_TEMP/activity-pr.md" <<'EOF'
+          Update the homepage's static GitHub star count and latest stable Actix Web release.
+
+          The update script validates all responses before replacing the snapshot. Netlify deploys the updated data after merge. No browser requests to GitHub are required.
+
+          Validation: fetched and validated the GitHub data; checked the snapshot format.
+          EOF
+            gh pr create --base main --head "$branch" --title 'chore: update project activity' --body-file "$RUNNER_TEMP/activity-pr.md"
+          fi
