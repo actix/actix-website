@@ -22,7 +22,7 @@ const sidebars: SidebarsConfig = {
         "static-files",
       ],
     },
-    { type: "category", label: "Protocols", items: ["websockets", "http2"] },
+    { type: "category", label: "Protocols", items: ["websockets", "server-sent-events", "http2"] },
     { type: "category", label: "Patterns", items: ["autoreload", "databases"] },
     { type: "category", label: "Diagrams", items: ["http_server_init", "conn_lifecycle"] },
     {
