@@ -21,6 +21,7 @@ members = [
   "responses",
   "sea-orm-databases",
   "server",
+  "server-sent-events",
   "static-files",
   "testing",
   "url-dispatch",
