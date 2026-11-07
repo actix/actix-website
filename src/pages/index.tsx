@@ -3,6 +3,8 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import CodeBlock from "@site/src/components/code_block";
+import InstallCommand from "@site/src/components/install_command";
+import vars from "@site/vars";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.scss";
@@ -284,6 +286,7 @@ const Examples = () => {
               Getting started with Actix is easy. An Actix app comes with a URL routing system that
               lets you match on URLs and invoke individual handlers.
             </p>
+            <InstallCommand command={`cargo add actix-web@${vars.actixWebMajorVersion}`} />
             <hr className={styles.macroDivider} />
             <fieldset className={styles.macroPreference}>
               <legend>How do you feel about macros?</legend>
