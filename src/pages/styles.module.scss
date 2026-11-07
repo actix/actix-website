@@ -24,6 +24,8 @@
     }
 
     @media screen and (min-width: 576px) {
+      flex: 0 0 50%;
+      max-width: 50%;
       margin-bottom: 1.5rem;
       text-align: center;
     }
@@ -275,4 +277,200 @@
 // Hide the title in docs pages, we render our own in markdown
 article header h1 {
   display: none;
+}
+
+.requestHero {
+  --paper: var(--ifm-background-color);
+  --ink: var(--ifm-font-color-base);
+  --accent: var(--ifm-color-primary);
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(3rem, 6vw, 6rem) 24px;
+  overflow: hidden;
+}
+.requestHero .blueLayout {
+  max-width: 1050px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+.requestHero h1 {
+  font-size: 3.25rem;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  text-wrap: balance;
+  margin: 0;
+}
+.requestHero .taglineContext {
+  display: block;
+  font-size: 0.65em;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.requestHero .taglineEmphasis {
+  display: block;
+  margin: 0.3em 0;
+  line-height: 1.14;
+}
+
+.requestHero .blueActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.requestHero .blueActions a {
+  color: var(--accent);
+  font-weight: 650;
+  text-underline-offset: 5px;
+}
+.requestHero .blueActions .start {
+  padding: 14px 24px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--paper);
+  text-decoration: none;
+}
+.requestHero .art {
+  min-width: 0;
+  position: relative;
+}
+.requestHero svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+.requestHero .track {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.24;
+}
+.requestHero .pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 12 118;
+  animation: bluePulse 0.42s linear infinite;
+}
+.requestHero .emblem {
+  filter: var(--logo-filter);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: emblemRotation 24s linear infinite;
+}
+.requestHero .disc {
+  fill: var(--paper);
+}
+.requestHero .code {
+  fill: var(--ink);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 13px;
+}
+
+.requestHero .motion {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 1rem 0 0 auto;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.75rem;
+  background: none;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  padding: 0;
+}
+.requestHero .paused * {
+  animation-play-state: paused !important;
+}
+.requestHero a:focus-visible,
+.requestHero button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.compactLogo {
+  display: none;
+  filter: var(--logo-filter);
+}
+
+@media (max-width: 850px) {
+  .compactLogo {
+    display: block;
+    margin: 0 auto 1.5rem;
+  }
+
+  .requestHero .copy {
+    text-align: center;
+  }
+
+  .requestHero .blueActions {
+    justify-content: center;
+  }
+
+  .requestHero .blueLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.5rem;
+  }
+  .requestHero .art {
+    display: none;
+  }
+  .requestHero {
+    padding: 2.5rem 24px;
+  }
+  .requestHero svg {
+    max-height: 330px;
+  }
+}
+@media (max-width: 575px) {
+  .requestHero h1 {
+    font-size: 2.25rem;
+  }
+
+  .requestHero .blueActions {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .requestHero .art * {
+    animation: none !important;
+  }
+  .requestHero .motion {
+    display: none;
+  }
+}
+
+@keyframes bluePulse {
+  to {
+    stroke-dashoffset: -130;
+  }
+}
+
+.requestHero .motion svg {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.requestHero .motion:hover {
+  color: var(--accent);
+}
+
+@keyframes emblemRotation {
+  to {
+    transform: rotate(360deg);
+  }
 }
