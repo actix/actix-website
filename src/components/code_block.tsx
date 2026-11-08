@@ -39,7 +39,9 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
 
   const displayCode = code.replace(/^[\t ]*#!?\[rustfmt::skip\][\t ]*(?:\r?\n|$)/gm, "");
 
-  return <RenderCodeBlock className={`language-${language ?? "rust"}`}>{displayCode}</RenderCodeBlock>;
+  return (
+    <RenderCodeBlock className={`language-${language ?? "rust"}`}>{displayCode}</RenderCodeBlock>
+  );
 };
 
 export default CodeBlock;
