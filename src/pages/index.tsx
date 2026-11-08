@@ -149,13 +149,7 @@ const Hero = () => {
     <header id="hero" className={styles.requestHero}>
       <div className={styles.blueLayout}>
         <div className={styles.copy}>
-          <img
-            src={useBaseUrl("img/logo.png")}
-            alt="Actix Web Logo"
-            width="80"
-            height="80"
-            className={styles.compactLogo}
-          />
+          <div className={styles.compactLogo} aria-hidden="true" />
           <h1>
             <span className={styles.taglineContext}>Actix Web is a </span>
             <span className={styles.taglineEmphasis}>powerful, pragmatic, and extremely fast</span>
