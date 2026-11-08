@@ -53,7 +53,24 @@ The [`Query<T>`][querystruct] type provides extraction functionality for the req
 
 <CodeBlock example="extractors" file="json_one.rs" section="json-one" />
 
-Some extractors provide a way to configure the extraction process. To configure an extractor, pass its configuration object to the resource's `.app_data()` method. In the case of _Json_ extractor it returns a [_JsonConfig_][jsonconfig]. You can configure the maximum size of the JSON payload as well as a custom error handler function.
+### JSON Extraction Errors
+
+If `Json<T>` extraction fails, Actix Web returns an error response without calling the handler. By default, [`JsonPayloadError`][jsonpayloaderror] determines the status code:
+
+| Failure                                                   | HTTP Status                               |
+| --------------------------------------------------------- | ----------------------------------------- |
+| Invalid JSON or data that cannot be deserialized into `T` | `400 Bad Request`                         |
+| Missing or unacceptable `Content-Type`                    | `400 Bad Request`                         |
+| Body exceeds the configured size limit                    | `413 Payload Too Large`                   |
+| Error while reading the request body                      | Status from the underlying `PayloadError` |
+
+The response has `Content-Type: text/plain; charset=utf-8`. The body contains the error's `Display` message. For deserialization errors, the message starts with `Json deserialize error: `, followed by the `serde_json::Error` message. This can identify a missing field, an incorrect type, or a syntax error with its line and column.
+
+Include these responses in your API specification. To use your API's error format, set the status and body with [`JsonConfig::error_handler`][jsonconfig_error_handler].
+
+### JSON Configuration
+
+To configure JSON extraction, pass a [`JsonConfig`][jsonconfig] object to `.app_data()` on the application, scope, or resource. Use this configuration to set the payload size limit and a custom error handler.
 
 The following example limits the size of the payload to 4kb and uses a custom error handler.
 
@@ -104,6 +121,8 @@ Be careful when using blocking synchronization primitives like `Mutex` or `RwLoc
 [querystruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Query.html
 [jsonstruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Json.html
 [jsonconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.JsonConfig.html
+[jsonconfig_error_handler]: https://docs.rs/actix-web/4/actix_web/web/struct.JsonConfig.html#method.error_handler
+[jsonpayloaderror]: https://docs.rs/actix-web/4/actix_web/error/enum.JsonPayloadError.html
 [formconfig]: https://docs.rs/actix-web/4/actix_web/web/struct.FormConfig.html
 [datastruct]: https://docs.rs/actix-web/4/actix_web/web/struct.Data.html
 [httprequest]: https://docs.rs/actix-web/4/actix_web/struct.HttpRequest.html
