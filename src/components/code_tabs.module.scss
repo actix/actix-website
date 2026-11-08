@@ -20,7 +20,7 @@
 
 .tab {
   flex: 0 0 auto;
-  min-height: 48px;
+  min-height: var(--code-tab-height, 48px);
   padding: 0.75rem;
   border: 0;
   border-bottom: 2px solid transparent;

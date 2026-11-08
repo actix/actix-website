@@ -315,10 +315,10 @@ const Examples = () => {
       <div className={styles.example}>
         <div className={styles.exampleContent}>
           <div className={styles.featureText}>
-            <h3 className={styles.featureTitle}>Hello World!</h3>
+            <h3 className={styles.featureTitle}>Hello, World!</h3>
             <p>
-              Getting started with Actix is easy. An Actix app comes with a URL routing system that
-              lets you match on URLs and invoke individual handlers.
+              Start with a route and a handler. Actix Web matches incoming requests to your routes
+              by path and method, then calls the right handler to build a response.
             </p>
             <InstallCommand command={`cargo add actix-web@${vars.actixWebMajorVersion}`} />
           </div>
