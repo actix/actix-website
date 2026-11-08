@@ -37,7 +37,15 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
     throw new Error(`Missing code section "${section}" in ${example}/${path}`);
   }
 
-  const displayCode = code.replace(/^[\t ]*#!?\[rustfmt::skip\][\t ]*(?:\r?\n|$)/gm, "");
+  const cleanCode = code
+    .replace(/^[\t ]*#!?\[rustfmt::skip\][\t ]*(?:\r?\n|$)/gm, "")
+    .replace(/^[\t ]*\/\/ <\/?[\w-]+>[\t ]*(?:\r?\n|$)/gm, "");
+
+  const lines = cleanCode.split("\n");
+  const indentation = Math.min(
+    ...lines.filter((line) => line.trim()).map((line) => line.match(/^\s*/)![0].length),
+  );
+  const displayCode = lines.map((line) => line.slice(indentation)).join("\n");
 
   return (
     <RenderCodeBlock className={`language-${language ?? "rust"}`}>{displayCode}</RenderCodeBlock>

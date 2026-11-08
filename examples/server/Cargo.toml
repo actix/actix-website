@@ -5,6 +5,8 @@ publish = false
 edition.workspace = true
 
 [dependencies]
-actix-web = { version = "4", features = ["openssl"] }
+actix-web = { version = "4", features = ["openssl", "rustls-0_23"] }
 openssl = "0.10"
+rustls = "0.23"
+rustls-pemfile = "2"
 tokio = { version = "1", features = ["full"] }

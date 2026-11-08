@@ -1,0 +1,13 @@
+[package]
+name = "batteries-included"
+version = "1.0.0"
+publish = false
+edition.workspace = true
+
+[dependencies]
+actix-cors = "0.7"
+actix-web = "4"
+actix-web-lab = "0.29"
+tracing = "0.1"
+tracing-actix-web = "0.7"
+tracing-subscriber = "0.3"

@@ -1,3 +1,5 @@
+pub mod battery;
+
 // <websockets>
 use actix_web::{rt, web, App, Error, HttpRequest, HttpResponse, HttpServer};
 use actix_ws::AggregatedMessage;

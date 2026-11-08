@@ -104,7 +104,7 @@ openssl = { version = "0.10" }
 
 Load the certificate and private key with OpenSSL, then use [`HttpServer::bind_openssl()`][bindopensslmethod]:
 
-<CodeBlock example="server" file="ssl.rs" section="ssl" />
+<CodeBlock example="server" file="openssl.rs" section="ssl" />
 
 ## Keep-Alive
 

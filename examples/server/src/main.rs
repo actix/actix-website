@@ -1,7 +1,8 @@
 pub mod keep_alive;
 pub mod keep_alive_tp;
 pub mod signals;
-pub mod ssl;
+pub mod openssl;
+pub mod rustls;
 pub mod workers;
 
 // <main>

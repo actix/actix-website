@@ -384,17 +384,45 @@ const Examples = () => {
       <div className={styles.example}>
         <div className={styles.exampleContent}>
           <div className={styles.featureText}>
-            <h3 className={styles.featureTitle}>Flexible Responders</h3>
+            <h3 className={styles.featureTitle}>Batteries Included</h3>
             <p>
-              Handler functions in Actix can return a wide range of objects that implement the{" "}
-              <Link to="/docs/handlers">
-                <code>Responder</code>
-              </Link>{" "}
-              trait. This makes it a breeze to return consistent responses from your APIs.
+              The Actix Web team maintains a whole ecosystem of flexible and high quality crates for
+              building real apps. Get off the ground without reinventing the things you expect to be
+              there.
+            </p>
+            <p>
+              Add the crates your application needs, with documentation and examples to get you
+              started.
             </p>
           </div>
           <div className={styles.example__code}>
-            <CodeBlock example="flexible-responders" section="flexible-responders" />
+            <CodeTabs label="Batteries included examples">
+              <CodeTabs.Tab id="tls" label="TLS">
+                <CodeBlock example="server" file="rustls.rs" section="battery" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="websockets" label="WebSockets">
+                <CodeBlock example="websockets" file="battery.rs" section="battery" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="sse" label="SSE">
+                <CodeBlock example="server-sent-events" file="battery.rs" section="battery" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="cors" label="CORS">
+                <CodeBlock example="batteries-included" file="cors.rs" section="cors" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="sessions" label="Sessions">
+                <CodeBlock example="middleware" file="user_sessions.rs" section="battery" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="files" label="Static Files">
+                <CodeBlock example="static-files" file="precompressed.rs" section="battery" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="observability" label="Observability">
+                <CodeBlock
+                  example="batteries-included"
+                  file="observability.rs"
+                  section="observability"
+                />
+              </CodeTabs.Tab>
+            </CodeTabs>
           </div>
         </div>
       </div>

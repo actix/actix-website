@@ -1,6 +1,7 @@
 pub mod configuration;
 pub mod configuration_two;
 pub mod directory;
+pub mod precompressed;
 
 // <individual-file>
 use actix_files::NamedFile;

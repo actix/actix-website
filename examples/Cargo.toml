@@ -3,6 +3,7 @@ resolver = "2"
 members = [
   "application",
   "async-handlers",
+  "batteries-included",
   "databases",
   "easy-form-handling",
   "either",
