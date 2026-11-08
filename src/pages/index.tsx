@@ -316,36 +316,68 @@ const Examples = () => {
               lets you match on URLs and invoke individual handlers.
             </p>
             <InstallCommand command={`cargo add actix-web@${vars.actixWebMajorVersion}`} />
-            <hr className={styles.macroDivider} />
-            <fieldset className={styles.macroPreference}>
-              <legend>How do you feel about macros?</legend>
-              <div className={styles.macroSegments}>
+          </div>
+          <div className={styles.example__code}>
+            <div className={styles.routingFrame}>
+              <div
+                className={styles.macroTabs}
+                role="tablist"
+                aria-label="How do you feel about macros?"
+              >
                 {[
                   { value: true, label: "I love macros", emoji: "❤️" },
                   { value: false, label: "Macros are evil", emoji: "😈" },
                 ].map(({ value, label, emoji }) => (
-                  <label key={label} className={styles.macroOption}>
-                    <input
-                      type="radio"
-                      name="macro-preference"
-                      checked={useMacros === value}
-                      onChange={() => setUseMacros(value)}
-                      aria-controls="hello-world-code"
-                    />
-                    <span>
-                      <i aria-hidden="true">{emoji}</i> {label}
-                    </span>
-                  </label>
+                  <button
+                    key={label}
+                    type="button"
+                    role="tab"
+                    id={value ? "macros-tab" : "manual-tab"}
+                    aria-controls={value ? "macros-code" : "manual-code"}
+                    aria-selected={useMacros === value}
+                    tabIndex={useMacros === value ? 0 : -1}
+                    className={styles.macroTab}
+                    onClick={() => setUseMacros(value)}
+                    onKeyDown={(event) => {
+                      const keys = ["ArrowLeft", "ArrowRight", "Home", "End"];
+
+                      if (!keys.includes(event.key)) return;
+
+                      event.preventDefault();
+
+                      const next =
+                        event.key === "Home" ? true : event.key === "End" ? false : !value;
+
+                      setUseMacros(next);
+                      document.getElementById(next ? "macros-tab" : "manual-tab")?.focus();
+                    }}
+                  >
+                    <span aria-hidden="true">{emoji}</span> {label}
+                  </button>
                 ))}
               </div>
-            </fieldset>
-          </div>
-          <div id="hello-world-code" className={clsx(styles.example__code, styles.routingExamples)}>
-            <div className={styles.routingExample} aria-hidden={!useMacros}>
-              <CodeBlock example="request-routing" file="main.rs" section="request-routing" />
-            </div>
-            <div className={styles.routingExample} aria-hidden={useMacros}>
-              <CodeBlock example="request-routing" file="manual.rs" section="request-routing" />
+              <div className={styles.routingExamples}>
+                <div
+                  id="macros-code"
+                  role="tabpanel"
+                  aria-labelledby="macros-tab"
+                  tabIndex={0}
+                  className={styles.routingExample}
+                  aria-hidden={!useMacros}
+                >
+                  <CodeBlock example="request-routing" file="main.rs" section="request-routing" />
+                </div>
+                <div
+                  id="manual-code"
+                  role="tabpanel"
+                  aria-labelledby="manual-tab"
+                  tabIndex={0}
+                  className={styles.routingExample}
+                  aria-hidden={useMacros}
+                >
+                  <CodeBlock example="request-routing" file="manual.rs" section="request-routing" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
