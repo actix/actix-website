@@ -3,6 +3,7 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import CodeBlock from "@site/src/components/code_block";
+import CodeTabs from "@site/src/components/code_tabs";
 import InstallCommand from "@site/src/components/install_command";
 import vars from "@site/vars";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -303,8 +304,6 @@ const Highlights = () => {
 };
 
 const Examples = () => {
-  const [useMacros, setUseMacros] = React.useState(true);
-
   return (
     <div className={styles.examples}>
       <div className={styles.example}>
@@ -318,67 +317,28 @@ const Examples = () => {
             <InstallCommand command={`cargo add actix-web@${vars.actixWebMajorVersion}`} />
           </div>
           <div className={styles.example__code}>
-            <div className={styles.routingFrame}>
-              <div
-                className={styles.macroTabs}
-                role="tablist"
-                aria-label="How do you feel about macros?"
+            <CodeTabs label="How do you feel about macros?">
+              <CodeTabs.Tab
+                id="macros"
+                label={
+                  <>
+                    <span aria-hidden="true">❤️</span> I love macros
+                  </>
+                }
               >
-                {[
-                  { value: true, label: "I love macros", emoji: "❤️" },
-                  { value: false, label: "Macros are evil", emoji: "😈" },
-                ].map(({ value, label, emoji }) => (
-                  <button
-                    key={label}
-                    type="button"
-                    role="tab"
-                    id={value ? "macros-tab" : "manual-tab"}
-                    aria-controls={value ? "macros-code" : "manual-code"}
-                    aria-selected={useMacros === value}
-                    tabIndex={useMacros === value ? 0 : -1}
-                    className={styles.macroTab}
-                    onClick={() => setUseMacros(value)}
-                    onKeyDown={(event) => {
-                      const keys = ["ArrowLeft", "ArrowRight", "Home", "End"];
-
-                      if (!keys.includes(event.key)) return;
-
-                      event.preventDefault();
-
-                      const next =
-                        event.key === "Home" ? true : event.key === "End" ? false : !value;
-
-                      setUseMacros(next);
-                      document.getElementById(next ? "macros-tab" : "manual-tab")?.focus();
-                    }}
-                  >
-                    <span aria-hidden="true">{emoji}</span> {label}
-                  </button>
-                ))}
-              </div>
-              <div className={styles.routingExamples}>
-                <div
-                  id="macros-code"
-                  role="tabpanel"
-                  aria-labelledby="macros-tab"
-                  tabIndex={0}
-                  className={styles.routingExample}
-                  aria-hidden={!useMacros}
-                >
-                  <CodeBlock example="request-routing" file="main.rs" section="request-routing" />
-                </div>
-                <div
-                  id="manual-code"
-                  role="tabpanel"
-                  aria-labelledby="manual-tab"
-                  tabIndex={0}
-                  className={styles.routingExample}
-                  aria-hidden={useMacros}
-                >
-                  <CodeBlock example="request-routing" file="manual.rs" section="request-routing" />
-                </div>
-              </div>
-            </div>
+                <CodeBlock example="request-routing" file="main.rs" section="request-routing" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab
+                id="manual"
+                label={
+                  <>
+                    <span aria-hidden="true">😈</span> Macros are evil
+                  </>
+                }
+              >
+                <CodeBlock example="request-routing" file="manual.rs" section="request-routing" />
+              </CodeTabs.Tab>
+            </CodeTabs>
           </div>
         </div>
       </div>

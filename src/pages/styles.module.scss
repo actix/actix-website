@@ -206,29 +206,6 @@
   padding-bottom: 1rem;
 }
 
-.routingExamples {
-  display: grid;
-  min-width: 0;
-}
-
-.routingExample {
-  grid-area: 1 / 1;
-  min-width: 0;
-  display: flex;
-
-  > div {
-    width: 100%;
-  }
-
-  &:first-child pre code {
-    padding-top: calc(var(--ifm-pre-padding) + 1lh);
-  }
-
-  &[aria-hidden="true"] {
-    visibility: hidden;
-  }
-}
-
 @media (min-width: 1024px) {
   .exampleContent {
     flex-direction: row;
@@ -270,52 +247,6 @@
 .featureTitle {
   font-size: 36px;
   font-weight: 500;
-}
-
-.routingFrame {
-  overflow: hidden;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: var(--ifm-code-border-radius);
-  background: var(--prism-background-color);
-
-  .routingExample > div {
-    margin-bottom: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-}
-
-.macroTabs {
-  display: flex;
-  overflow-x: auto;
-  padding: 0 0.75rem;
-  border-bottom: 1px solid var(--ifm-color-emphasis-300);
-}
-
-.macroTab {
-  flex: 0 0 auto;
-  min-height: 48px;
-  padding: 0.75rem;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  background: transparent;
-  color: var(--ifm-font-color-base);
-  font: inherit;
-  font-size: 0.875rem;
-  cursor: pointer;
-
-  &:hover {
-    background: var(--ifm-color-emphasis-200);
-  }
-
-  &[aria-selected="true"] {
-    border-bottom-color: var(--ifm-color-primary);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--ifm-color-primary);
-    outline-offset: -4px;
-  }
 }
 
 // Hide the title in docs pages, we render our own in markdown
