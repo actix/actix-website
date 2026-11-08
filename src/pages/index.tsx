@@ -17,11 +17,14 @@ import {
   faPause,
   faPlay,
   faShieldAlt,
-  faBatteryFull,
-  faPuzzlePiece,
   faTachometerAlt,
   faStar,
+  faToolbox,
+  faServer,
 } from "@fortawesome/free-solid-svg-icons";
+
+const HTTP_ARENA_URL =
+  "https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B";
 
 const Home = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -40,33 +43,36 @@ const Home = () => {
 const highlights = [
   {
     icon: faShieldAlt,
-    title: "Type Safe",
+    title: "Strong Type Safety",
+    description: <>Typed requests and responses make handler contracts explicit.</>,
+  },
+  {
+    icon: faToolbox,
+    title: "Batteries Included",
+    description: <>Get started fast with an extensive first-party ecosystem.</>,
+  },
+  {
+    icon: faServer,
+    title: "Trusted in Production",
     description: (
-      <>Forget about stringly typed objects, from request to response, everything has types.</>
+      <>
+        Over{" "}
+        <a href="https://crates.io/crates/actix-web" target="_blank" rel="noopener noreferrer">
+          80 million downloads
+        </a>{" "}
+        and counting.
+      </>
     ),
   },
   {
-    icon: faBatteryFull,
-    title: "Feature Rich",
-    description: <>Actix provides a lot of features out of box. HTTP/2, logging, etc.</>,
-  },
-  {
-    icon: faPuzzlePiece,
-    title: "Extensible",
-    description: <>Easily create your own libraries that any Actix application can use.</>,
-  },
-  {
     icon: faTachometerAlt,
-    title: "Blazingly Fast",
+    title: "Built for Performance",
     description: (
       <>
-        Actix is blazingly fast. Don't take our word for it --{" "}
-        <a
-          href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          see for yourself!
+        High throughput. Low latency. Tiny memory requirements.
+        <br />
+        <a href={HTTP_ARENA_URL} target="_blank" rel="noopener noreferrer">
+          Verified by independent benchmarks.
         </a>
       </>
     ),
@@ -159,9 +165,7 @@ const Hero = () => {
             <Link className={styles.start} to={useBaseUrl("docs/getting-started")}>
               Get Started
             </Link>
-            <a href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B">
-              Explore the Benchmarks
-            </a>
+            <a href={HTTP_ARENA_URL}>See Benchmarks</a>
           </div>
           <ProjectActivity />
         </div>
@@ -444,7 +448,7 @@ const Examples = () => {
           <figure className={styles.performanceDetails}>
             <a
               className={styles.benchmarkLink}
-              href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc"
+              href={HTTP_ARENA_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Explore HTTP Arena benchmarks (opens in a new tab)"
