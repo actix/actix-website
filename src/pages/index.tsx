@@ -3,6 +3,7 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import CodeBlock from "@site/src/components/code_block";
+import CodeTabs from "@site/src/components/code_tabs";
 import InstallCommand from "@site/src/components/install_command";
 import vars from "@site/vars";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -303,8 +304,6 @@ const Highlights = () => {
 };
 
 const Examples = () => {
-  const [useMacros, setUseMacros] = React.useState(true);
-
   return (
     <div className={styles.examples}>
       <div className={styles.example}>
@@ -318,67 +317,62 @@ const Examples = () => {
             <InstallCommand command={`cargo add actix-web@${vars.actixWebMajorVersion}`} />
           </div>
           <div className={styles.example__code}>
-            <div className={styles.routingFrame}>
-              <div
-                className={styles.macroTabs}
-                role="tablist"
-                aria-label="How do you feel about macros?"
+            <CodeTabs label="How do you feel about macros?">
+              <CodeTabs.Tab
+                id="macros"
+                label={
+                  <>
+                    <span aria-hidden="true">❤️</span> I love macros
+                  </>
+                }
               >
-                {[
-                  { value: true, label: "I love macros", emoji: "❤️" },
-                  { value: false, label: "Macros are evil", emoji: "😈" },
-                ].map(({ value, label, emoji }) => (
-                  <button
-                    key={label}
-                    type="button"
-                    role="tab"
-                    id={value ? "macros-tab" : "manual-tab"}
-                    aria-controls={value ? "macros-code" : "manual-code"}
-                    aria-selected={useMacros === value}
-                    tabIndex={useMacros === value ? 0 : -1}
-                    className={styles.macroTab}
-                    onClick={() => setUseMacros(value)}
-                    onKeyDown={(event) => {
-                      const keys = ["ArrowLeft", "ArrowRight", "Home", "End"];
-
-                      if (!keys.includes(event.key)) return;
-
-                      event.preventDefault();
-
-                      const next =
-                        event.key === "Home" ? true : event.key === "End" ? false : !value;
-
-                      setUseMacros(next);
-                      document.getElementById(next ? "macros-tab" : "manual-tab")?.focus();
-                    }}
-                  >
-                    <span aria-hidden="true">{emoji}</span> {label}
-                  </button>
-                ))}
-              </div>
-              <div className={styles.routingExamples}>
-                <div
-                  id="macros-code"
-                  role="tabpanel"
-                  aria-labelledby="macros-tab"
-                  tabIndex={0}
-                  className={styles.routingExample}
-                  aria-hidden={!useMacros}
-                >
-                  <CodeBlock example="request-routing" file="main.rs" section="request-routing" />
-                </div>
-                <div
-                  id="manual-code"
-                  role="tabpanel"
-                  aria-labelledby="manual-tab"
-                  tabIndex={0}
-                  className={styles.routingExample}
-                  aria-hidden={useMacros}
-                >
-                  <CodeBlock example="request-routing" file="manual.rs" section="request-routing" />
-                </div>
-              </div>
-            </div>
+                <CodeBlock example="request-routing" file="main.rs" section="request-routing" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab
+                id="manual"
+                label={
+                  <>
+                    <span aria-hidden="true">😈</span> Macros are evil
+                  </>
+                }
+              >
+                <CodeBlock example="request-routing" file="manual.rs" section="request-routing" />
+              </CodeTabs.Tab>
+            </CodeTabs>
+          </div>
+        </div>
+      </div>
+      <div className={styles.example}>
+        <div className={styles.exampleContent}>
+          <div className={styles.featureText}>
+            <h3 className={styles.featureTitle}>Powerful Extractors</h3>
+            <p>
+              Just ask for what you need. <Link to="/docs/extractors">Extractors</Link> turn request
+              data into ready-to-use types, just by adding a function parameter.
+            </p>
+            <p>
+              From JSON and query parameters to typed headers and file uploads, the parsing is
+              handled for you. Less boilerplate. Cleaner handlers.
+            </p>
+          </div>
+          <div className={styles.example__code}>
+            <CodeTabs label="Extractor examples">
+              <CodeTabs.Tab id="json" label="JSON">
+                <CodeBlock example="powerful-extractors" section="powerful-extractors" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="query" label="Query">
+                <CodeBlock example="powerful-extractors" file="query.rs" section="query" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="headers" label="Headers">
+                <CodeBlock example="powerful-extractors" file="headers.rs" section="headers" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="auth" label="Auth">
+                <CodeBlock example="powerful-extractors" file="auth.rs" section="auth" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="multipart" label="Multipart">
+                <CodeBlock example="powerful-extractors" file="multipart.rs" section="multipart" />
+              </CodeTabs.Tab>
+            </CodeTabs>
           </div>
         </div>
       </div>
@@ -396,22 +390,6 @@ const Examples = () => {
           </div>
           <div className={styles.example__code}>
             <CodeBlock example="flexible-responders" section="flexible-responders" />
-          </div>
-        </div>
-      </div>
-      <div className={styles.example}>
-        <div className={styles.exampleContent}>
-          <div className={styles.featureText}>
-            <h3 className={styles.featureTitle}>Powerful Extractors</h3>
-            <p>
-              Actix comes with a powerful <Link to="/docs/extractors">extractor system</Link> that
-              extracts data from the incoming HTTP request and passes it to your view functions. Not
-              only does this make for a convenient API but it also means that your view functions
-              can be synchronous code and still benefit from asynchronous IO handling.
-            </p>
-          </div>
-          <div className={styles.example__code}>
-            <CodeBlock example="powerful-extractors" section="powerful-extractors" />
           </div>
         </div>
       </div>
