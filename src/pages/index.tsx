@@ -255,7 +255,7 @@ const activityDate = (value: string) =>
 const ProjectActivity = () => (
   <ul className={styles.activity} aria-label="Actix Web project activity">
     <li>
-      <a href="https://github.com/actix/actix-web/stargazers">
+      <a href="https://github.com/actix/actix-web">
         <FontAwesomeIcon icon={faStar} aria-hidden="true" />
         <span>
           <strong>
