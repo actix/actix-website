@@ -6,4 +6,7 @@ edition.workspace = true
 
 [dependencies]
 actix-web = "4"
-serde = "1"
+actix-web-httpauth = "0.8"
+actix-multipart = "0.8"
+mime = "0.3"
+serde = { version = "1", features = ["derive"] }

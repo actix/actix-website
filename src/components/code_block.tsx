@@ -37,7 +37,9 @@ const CodeBlock = ({ example, file, section, language }: Props) => {
     throw new Error(`Missing code section "${section}" in ${example}/${path}`);
   }
 
-  return <RenderCodeBlock className={`language-${language ?? "rust"}`}>{code}</RenderCodeBlock>;
+  const displayCode = code.replace(/^[\t ]*#!?\[rustfmt::skip\][\t ]*(?:\r?\n|$)/gm, "");
+
+  return <RenderCodeBlock className={`language-${language ?? "rust"}`}>{displayCode}</RenderCodeBlock>;
 };
 
 export default CodeBlock;

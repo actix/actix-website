@@ -197,11 +197,17 @@
 
 .example__code {
   flex: 1;
+  min-width: 0;
   width: 100%;
+
+  > div {
+    box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+  }
 }
 
 .featureText {
   flex: 1;
+  min-width: 0;
   justify-self: center;
   padding-bottom: 1rem;
 }
@@ -209,6 +215,7 @@
 @media (min-width: 1024px) {
   .exampleContent {
     flex-direction: row;
+    flex-wrap: nowrap;
     padding-top: 3rem;
     padding-bottom: 3rem;
     max-width: 1280px;
@@ -234,12 +241,14 @@
   }
 
   .featureText {
-    width: 33%;
+    flex: 0 0 44%;
+    width: 44%;
     padding-right: 30px;
   }
 
   .example__code {
-    width: unset;
+    flex: 0 0 55%;
+    width: 55%;
     padding-left: 30px;
   }
 }

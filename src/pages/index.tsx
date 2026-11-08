@@ -345,6 +345,40 @@ const Examples = () => {
       <div className={styles.example}>
         <div className={styles.exampleContent}>
           <div className={styles.featureText}>
+            <h3 className={styles.featureTitle}>Powerful Extractors</h3>
+            <p>
+              Just ask for what you need. <Link to="/docs/extractors">Extractors</Link> turn request
+              data into ready-to-use types, just by adding a function parameter.
+            </p>
+            <p>
+              From JSON and query parameters to typed headers and file uploads, the parsing is
+              handled for you. Less boilerplate. Cleaner handlers.
+            </p>
+          </div>
+          <div className={styles.example__code}>
+            <CodeTabs label="Extractor examples">
+              <CodeTabs.Tab id="json" label="JSON">
+                <CodeBlock example="powerful-extractors" section="powerful-extractors" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="query" label="Query">
+                <CodeBlock example="powerful-extractors" file="query.rs" section="query" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="headers" label="Headers">
+                <CodeBlock example="powerful-extractors" file="headers.rs" section="headers" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="auth" label="Auth">
+                <CodeBlock example="powerful-extractors" file="auth.rs" section="auth" />
+              </CodeTabs.Tab>
+              <CodeTabs.Tab id="multipart" label="Multipart">
+                <CodeBlock example="powerful-extractors" file="multipart.rs" section="multipart" />
+              </CodeTabs.Tab>
+            </CodeTabs>
+          </div>
+        </div>
+      </div>
+      <div className={styles.example}>
+        <div className={styles.exampleContent}>
+          <div className={styles.featureText}>
             <h3 className={styles.featureTitle}>Flexible Responders</h3>
             <p>
               Handler functions in Actix can return a wide range of objects that implement the{" "}
@@ -356,22 +390,6 @@ const Examples = () => {
           </div>
           <div className={styles.example__code}>
             <CodeBlock example="flexible-responders" section="flexible-responders" />
-          </div>
-        </div>
-      </div>
-      <div className={styles.example}>
-        <div className={styles.exampleContent}>
-          <div className={styles.featureText}>
-            <h3 className={styles.featureTitle}>Powerful Extractors</h3>
-            <p>
-              Actix comes with a powerful <Link to="/docs/extractors">extractor system</Link> that
-              extracts data from the incoming HTTP request and passes it to your view functions. Not
-              only does this make for a convenient API but it also means that your view functions
-              can be synchronous code and still benefit from asynchronous IO handling.
-            </p>
-          </div>
-          <div className={styles.example__code}>
-            <CodeBlock example="powerful-extractors" section="powerful-extractors" />
           </div>
         </div>
       </div>
