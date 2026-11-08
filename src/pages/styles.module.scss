@@ -458,12 +458,13 @@ article header h1 {
 
 .compactLogo {
   display: none;
-  filter: var(--logo-filter);
 }
 
 @media (max-width: 850px) {
   .compactLogo {
     display: block;
+    width: 80px;
+    height: 80px;
     margin: 0 auto 1.5rem;
   }
 
@@ -485,20 +486,31 @@ article header h1 {
   }
 
   .requestHero .blueLayout {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 2.5rem;
   }
-  .requestHero .art,
-  .requestHero .motion {
-    display: none;
+  .requestHero .art {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    padding: 0;
+    pointer-events: none;
   }
   .requestHero {
     padding: 2.5rem 24px;
   }
   .requestHero .art > svg {
-    max-height: 330px;
+    position: absolute;
+    width: 416px;
+    max-width: none;
+    top: -92px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 @media (max-width: 575px) {
