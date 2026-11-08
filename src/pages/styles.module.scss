@@ -272,76 +272,49 @@
   font-weight: 500;
 }
 
-.macroDivider {
-  opacity: 0.3;
-}
+.routingFrame {
+  overflow: hidden;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-code-border-radius);
+  background: var(--prism-background-color);
 
-.macroPreference {
-  border: 0;
-  padding: 0;
-  margin: 1rem 0 0;
-  min-width: 0;
-
-  legend {
-    margin-bottom: 0.375rem;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    font-weight: 500;
+  .routingExample > div {
+    margin-bottom: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 
-.macroSegments {
-  display: inline-flex;
-  max-width: 100%;
-  padding: 2px;
-  border: 1px solid var(--ifm-color-emphasis-400);
-  border-radius: 2rem;
-  background: var(--ifm-background-color);
+.macroTabs {
+  display: flex;
+  overflow-x: auto;
+  padding: 0 0.75rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
 }
 
-.macroOption {
-  position: relative;
+.macroTab {
   flex: 0 0 auto;
+  min-height: 48px;
+  padding: 0.75rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  font-size: 0.875rem;
   cursor: pointer;
 
-  input {
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 30px;
-    gap: 0.25rem;
-    padding: 0.25rem 0.625rem;
-    border-radius: 2rem;
-    text-align: center;
-    font-size: 0.75rem;
-    line-height: 1.4;
-    white-space: nowrap;
-    font-weight: 600;
-
-    i {
-      font-style: normal;
-    }
-  }
-
-  &:hover span {
+  &:hover {
     background: var(--ifm-color-emphasis-200);
   }
 
-  input:checked + span {
-    color: var(--ifm-background-color);
-    background: var(--ifm-color-primary);
+  &[aria-selected="true"] {
+    border-bottom-color: var(--ifm-color-primary);
   }
 
-  input:focus-visible + span {
+  &:focus-visible {
     outline: 2px solid var(--ifm-color-primary);
-    outline-offset: 3px;
+    outline-offset: -4px;
   }
 }
 
