@@ -258,6 +258,64 @@
   font-weight: 500;
 }
 
+.performanceDetails {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background: var(--examples-odd-background-color);
+  border-radius: 12px;
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    flex: 0 0 55%;
+    width: 55%;
+    padding: 2rem;
+  }
+}
+
+.performanceAside {
+  display: inline-block;
+  font-size: 0.55em;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--ifm-font-color-base) 45%, transparent);
+  visibility: hidden;
+}
+
+.performanceTitle:hover .performanceAside {
+  visibility: visible;
+}
+
+.memoryResult {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  text-align: center;
+}
+
+.memoryMetric {
+  flex: 0 0 auto;
+  margin: 0;
+
+  strong {
+    display: block;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  span {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+  }
+}
+
 // Hide the title in docs pages, we render our own in markdown
 article header h1 {
   display: none;
@@ -473,5 +531,27 @@ article header h1 {
 @keyframes emblemRotation {
   to {
     transform: rotate(360deg);
+  }
+}
+
+.benchmarkLink {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  color: color-mix(in srgb, var(--ifm-font-color-base) 45%, transparent);
+
+  &:hover {
+    color: var(--ifm-color-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ifm-color-primary);
+    outline-offset: 2px;
   }
 }

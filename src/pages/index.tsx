@@ -4,6 +4,7 @@ import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import CodeBlock from "@site/src/components/code_block";
 import CodeTabs from "@site/src/components/code_tabs";
+import Speedometer from "@site/src/components/speedometer";
 import InstallCommand from "@site/src/components/install_command";
 import vars from "@site/vars";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -12,6 +13,7 @@ import styles from "./styles.module.scss";
 import activity from "@site/src/data/project-activity.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowUpRightFromSquare,
   faPause,
   faPlay,
   faShieldAlt,
@@ -157,7 +159,7 @@ const Hero = () => {
             <Link className={styles.start} to={useBaseUrl("docs/getting-started")}>
               Get Started
             </Link>
-            <a href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc">
+            <a href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B">
               Explore the Benchmarks
             </a>
           </div>
@@ -360,6 +362,9 @@ const Examples = () => {
               <CodeTabs.Tab id="json" label="JSON">
                 <CodeBlock example="powerful-extractors" section="powerful-extractors" />
               </CodeTabs.Tab>
+              <CodeTabs.Tab id="json-or-form" label="JSON or Form">
+                <CodeBlock example="easy-form-handling" section="easy-form-handling" />
+              </CodeTabs.Tab>
               <CodeTabs.Tab id="query" label="Query">
                 <CodeBlock example="powerful-extractors" file="query.rs" section="query" />
               </CodeTabs.Tab>
@@ -393,21 +398,42 @@ const Examples = () => {
           </div>
         </div>
       </div>
-      <div className={styles.example}>
+      <section className={styles.example} aria-labelledby="performance-title">
         <div className={styles.exampleContent}>
           <div className={styles.featureText}>
-            <h3 className={styles.featureTitle}>Easy Form Handling</h3>
+            <h3
+              id="performance-title"
+              className={clsx(styles.featureTitle, styles.performanceTitle)}
+            >
+              It's Fast <span className={styles.performanceAside}>(Blazing Fast)</span>
+            </h3>
+            <p>Actix Web tops benchmarks on high- and low-resource machines.</p>
             <p>
-              Handling <Link to="/docs/extractors#json">JSON</Link> or{" "}
-              <Link to="/docs/extractors#url-encoded-forms">URL-encoded form data</Link> is easy.
-              Just define a structure that can be deserialized and Actix will handle the rest.
+              The unique architecture keeps tail latencies low while providing massive throughput on
+              your workloads.
             </p>
           </div>
-          <div className={styles.example__code}>
-            <CodeBlock example="easy-form-handling" section="easy-form-handling" />
-          </div>
+          <figure className={styles.performanceDetails}>
+            <a
+              className={styles.benchmarkLink}
+              href="https://http-arena.com/#sort=rps:-1&type=flagship&tuned=0&q=rust%2Cgo%2Cpython%2Cruby%2Cnode%2Celixir%2Cc%2B%2B%2Cc"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Explore HTTP Arena benchmarks (opens in a new tab)"
+              title="Explore HTTP Arena benchmarks"
+            >
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} aria-hidden="true" />
+            </a>
+            <Speedometer />
+            <div className={styles.memoryResult}>
+              <p className={styles.memoryMetric}>
+                <strong>10 MiB</strong>
+                <span>tiny memory overhead</span>
+              </p>
+            </div>
+          </figure>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

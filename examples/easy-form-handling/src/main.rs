@@ -1,6 +1,5 @@
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{App, Either, HttpResponse, HttpServer, Responder, web};
 use serde::Deserialize;
-use actix_web::web::{Either, Json, Form};
 
 // <easy-form-handling>
 #[derive(Deserialize)]
@@ -9,17 +8,20 @@ struct Register {
     country: String,
 }
 
-// register form is JSON
-async fn json_register(form: web::Json<Register>) -> impl Responder {
-    format!("Hello {} from {}!", form.username, form.country)
-}
-
-// register form can be either JSON or URL-encoded
-async fn register(form: Either<Json<Register>, Form<Register>>) -> impl Responder {
+// Accept JSON or URL-encoded form data.
+#[rustfmt::skip]
+async fn register(
+    form: Either<web::Json<Register>, web::Form<Register>>,
+) -> impl Responder {
     let Register { username, country } = form.into_inner();
+
     format!("Hello {username} from {country}!")
 }
 // </easy-form-handling>
+
+async fn json_register(form: web::Json<Register>) -> impl Responder {
+    format!("Hello {} from {}!", form.username, form.country)
+}
 
 async fn index() -> HttpResponse {
     HttpResponse::Ok()

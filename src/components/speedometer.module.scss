@@ -1,0 +1,151 @@
+.speedometerDial {
+  --speedometer-red: #d13438;
+  --speedometer-marker: color-mix(
+    in srgb,
+    var(--ifm-font-color-base) 65%,
+    var(--examples-odd-background-color)
+  );
+  position: relative;
+  width: min(100%, 320px);
+  margin: 0 auto;
+  container-type: inline-size;
+}
+
+[data-theme="dark"] .speedometerDial {
+  --speedometer-red: #ff7377;
+}
+
+.speedometer {
+  display: block;
+  width: 100%;
+  color: var(--ifm-color-primary);
+}
+
+.benchmarkPip {
+  position: absolute;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--speedometer-marker);
+  transform: translate(-50%, -50%);
+  cursor: help;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &:hover,
+  &:focus {
+    z-index: 2;
+    color: var(--ifm-color-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  &:hover .pipTooltip,
+  &:focus .pipTooltip {
+    visibility: visible;
+  }
+}
+
+.pipTooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: max-content;
+  white-space: nowrap;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: left;
+  visibility: hidden;
+
+  strong,
+  span {
+    display: block;
+  }
+}
+
+.pipTooltipRight {
+  right: 0;
+  left: auto;
+}
+
+.pipComparison + .pipComparison {
+  margin-top: 0.625rem;
+}
+
+.speedometerTrack,
+.speedometerArc {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.speedometerTrack {
+  stroke: var(--speedometer-marker);
+}
+
+.speedometerArc {
+  stroke: currentColor;
+}
+
+.speedometerRedZone {
+  fill: none;
+  stroke: var(--speedometer-red);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.speedometerTick {
+  stroke: var(--speedometer-marker);
+  stroke-width: 1.5;
+}
+
+.speedometerNeedle {
+  fill: currentColor;
+}
+
+.throughput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(1.5rem, 14cqi, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+
+  strong,
+  span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+  }
+
+  strong {
+    top: 29%;
+    font-weight: inherit;
+  }
+
+  span {
+    top: 78%;
+    font-size: clamp(0.875rem, 5cqi, 1rem);
+    font-weight: 500;
+  }
+}
