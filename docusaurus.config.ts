@@ -60,6 +60,20 @@ const config: Config = {
           "aria-label": "Chat on Discord",
         },
         {
+          href: "https://crates.io/crates/actix-web",
+          position: "right",
+          className: "header-crates-link",
+          "aria-label": "Actix Web on crates.io",
+          title: "Actix Web on crates.io",
+        },
+        {
+          href: "https://docs.rs/actix-web",
+          position: "right",
+          className: "header-docs-link",
+          "aria-label": "Actix Web API documentation on docs.rs",
+          title: "Actix Web API documentation on docs.rs",
+        },
+        {
           href: "https://github.com/actix/actix-web",
           position: "right",
           className: "header-github-link",

@@ -69,6 +69,34 @@ html[data-theme="dark"] {
   background-color: var(--ifm-navbar-link-hover-color);
 }
 
+.header-crates-link::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background-color: var(--ifm-navbar-link-color);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='m12 2 9 5v10l-9 5-9-5V7Zm0 10 9-5M12 12 3 7m9 5v10M7.5 4.5l9 5v4'/%3E%3C/svg%3E");
+  transition: background-color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+
+.header-crates-link:hover::before {
+  background-color: var(--ifm-navbar-link-hover-color);
+}
+
+.header-docs-link::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background-color: var(--ifm-navbar-link-color);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 6C9 3 5 2 2 3v15c4-1 7 0 10 3 3-2.5 7-3 10-2V4c-3-1-7-.5-10 2Zm0 0v15M5 8c1.5 0 2.7.5 4 1.5M5 12c1.5 0 2.7.5 4 1.5M15 9c1.3-.7 2.5-1 4-1'/%3E%3C/svg%3E");
+  transition: background-color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+
+.header-docs-link:hover::before {
+  background-color: var(--ifm-navbar-link-hover-color);
+}
+
 .header-github-link::before {
   content: "";
   width: 24px;
