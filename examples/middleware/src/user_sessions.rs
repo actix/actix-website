@@ -4,6 +4,7 @@
 use actix_session::{Session, SessionMiddleware, storage::CookieSessionStore};
 use actix_web::{web, App, Error, HttpResponse, HttpServer, cookie::Key};
 
+// <battery>
 async fn index(session: Session) -> Result<HttpResponse, Error> {
     // access session data
     if let Some(count) = session.get::<i32>("counter")? {
@@ -17,6 +18,7 @@ async fn index(session: Session) -> Result<HttpResponse, Error> {
         session.get::<i32>("counter")?.unwrap()
     )))
 }
+// </battery>
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

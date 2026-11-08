@@ -1,3 +1,5 @@
+pub mod battery;
+
 // <server-sent-events>
 use std::time::Duration;
 
