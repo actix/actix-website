@@ -41,6 +41,12 @@ fn index(_req: HttpRequest) -> io::Result<NamedFile> {
 
 See [the Actix Web API documentation][responseerrorimpls] for a full list of foreign implementations for `ResponseError`.
 
+## Extractor Errors
+
+Extractors run before the request handler. If extraction fails, Actix Web returns an error response and does not call the handler. The extractor's error type determines the status and body through its `ResponseError` implementation.
+
+Some extractors let you configure error responses. See [JSON Extraction Errors](./extractors.md#json-extraction-errors) for the JSON defaults and configuration. To handle an extraction error in the handler, change the extractor type from `T` to `actix::Result<T>`. If the error is not important, such as for optional typed-header extraction, `Option<T>` is also supported.
+
 ## An Example of a Custom Error Response
 
 Here's an example implementation for `ResponseError`, using the [derive_more] crate for declarative error enums.
