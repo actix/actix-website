@@ -183,6 +183,8 @@
 
 // features
 .exampleContent {
+  --code-tab-height: max(48px, calc(0.875rem * var(--ifm-line-height-base) + 1.5rem + 2px));
+
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -216,6 +218,7 @@
   .exampleContent {
     flex-direction: row;
     flex-wrap: nowrap;
+    align-items: flex-start;
     padding-top: 3rem;
     padding-bottom: 3rem;
     max-width: 1280px;
@@ -244,6 +247,11 @@
     flex: 0 0 44%;
     width: 44%;
     padding-right: 30px;
+  }
+
+  .exampleContent:has(> .example__code) > .featureText {
+    // Include the frame's top border and the tab bar's bottom border.
+    padding-top: calc(var(--code-tab-height) + 2px);
   }
 
   .example__code {
