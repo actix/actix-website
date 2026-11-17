@@ -64,8 +64,7 @@
   bottom: 100%;
   left: 0;
   width: max-content;
-  max-width: min(20rem, calc(50vw - 2rem));
-  white-space: normal;
+  white-space: nowrap;
   padding: 0.625rem 0.75rem;
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 8px;
