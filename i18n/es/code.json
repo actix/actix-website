@@ -300,41 +300,6 @@
     "message": "Expandir barra lateral",
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
-  "theme.SearchBar.noResultsText": {
-    "message": "Sin resultados"
-  },
-  "theme.SearchBar.seeAllOutsideContext": {
-    "message": "Ver todos los resultados fuera de «{context}»"
-  },
-  "theme.SearchBar.searchInContext": {
-    "message": "Ver todos los resultados en «{context}»"
-  },
-  "theme.SearchBar.seeAll": {
-    "message": "Ver todos los resultados"
-  },
-  "theme.SearchBar.label": {
-    "message": "Buscar",
-    "description": "The ARIA label and placeholder for search button"
-  },
-  "theme.SearchPage.existingResultsTitle": {
-    "message": "Resultados de búsqueda de «{query}»",
-    "description": "The search page title for non-empty query"
-  },
-  "theme.SearchPage.emptyResultsTitle": {
-    "message": "Buscar en la documentación",
-    "description": "The search page title for empty query"
-  },
-  "theme.SearchPage.searchContext.everywhere": {
-    "message": "En todo el sitio"
-  },
-  "theme.SearchPage.documentsFound.plurals": {
-    "message": "1 documento encontrado|{count} documentos encontrados",
-    "description": "Pluralized label for \"{count} documents found\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
-  },
-  "theme.SearchPage.noResultsText": {
-    "message": "No se encontraron documentos",
-    "description": "The paragraph for empty search result"
-  },
   "theme.ErrorPageContent.tryAgain": {
     "message": "Intente de nuevo",
     "description": "The label of the button to try again rendering when the React error boundary captures an error"

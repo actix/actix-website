@@ -11,6 +11,8 @@ require("lunr-languages/lunr.stemmer.support")(lunr);
 require("lunr-languages/lunr.es")(lunr);
 require("lunr-languages/lunr.multi")(lunr);
 
+lunr.tokenizer.separator = /[\s\-/]+/;
+
 const buildDirectory = path.resolve("build");
 const pages = new Map();
 
@@ -93,32 +95,29 @@ for (const [prefix, term, expectedPage] of [
   ["", "requests", "/docs/extractors/"],
   ["/es", "bienvenido", "/es/docs/"],
 ]) {
-  const indexes = JSON.parse(
-    fs.readFileSync(path.join(buildDirectory, prefix, "search-index.json"), "utf8"),
+  const { searchDocs: documents } = JSON.parse(
+    fs.readFileSync(path.join(buildDirectory, prefix, "search-doc.json"), "utf8"),
   );
-  const documents = indexes.flatMap((index) => index.documents);
 
   assert.ok(documents.length > 0, `Empty search index: ${prefix}`);
   assert.ok(
-    documents.every((doc) => (prefix ? doc.u.startsWith(`${prefix}/`) : !doc.u.startsWith("/es/"))),
+    documents.every((doc) =>
+      prefix ? doc.url.startsWith(`${prefix}/`) : !doc.url.startsWith("/es/"),
+    ),
     `Mixed search locales: ${prefix}`,
   );
   assert.ok(
-    documents.every((doc) => !doc.u.includes("/docs/actix")),
+    documents.every((doc) => !doc.url.includes("/docs/actix")),
     `Archived content is indexed: ${prefix}`,
   );
 
-  const matches = indexes.flatMap((data) => {
-    const index = lunr.Index.load(data.index);
-    const results = index.search(term);
-
-    return results.flatMap((result) =>
-      data.documents.filter((doc) => String(doc.i) === result.ref),
-    );
-  });
+  const index = lunr.Index.load(
+    JSON.parse(fs.readFileSync(path.join(buildDirectory, prefix, "lunr-index.json"), "utf8")),
+  );
+  const matches = index.search(term).map((result) => documents[Number(result.ref)]);
 
   assert.ok(
-    matches.some((doc) => doc.u === expectedPage),
+    matches.some((doc) => new URL(doc.url, "https://actix.rs").pathname === expectedPage),
     `Search cannot find ${expectedPage} for ${term}`,
   );
 }

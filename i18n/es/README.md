@@ -38,8 +38,8 @@ Run these commands from the repository root at the corresponding steps in the sh
 
 ## Search and Routing
 
-Spanish uses local search with Spanish and English tokenization so API names remain searchable.
-The search fields use the dependency's English accessibility label.
+Local search uses `docusaurus-lunr-search` and keeps its English interface.
+The Spanish index uses Spanish and English tokenization so API names remain searchable.
 URLs use trailing slashes so homepage language links resolve correctly.
 The language-link tests cover homepages and nested documentation pages with and without trailing slashes.
 The build check verifies route coverage, language metadata, internal links, heading anchors,

@@ -35,21 +35,7 @@ const config: Config = {
       onBrokenMarkdownLinks: "warn",
     },
   },
-  themes: [
-    "@docusaurus/theme-mermaid",
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        hashed: true,
-        language: locale === "es" ? ["es", "en"] : "en",
-        docsRouteBasePath: ["docs", "community"],
-        docsDir: ["docs", "community"],
-        indexBlog: false,
-        indexPages: true,
-        ignoreFiles: /^docs\/actix(?:\/|$)/,
-      },
-    ],
-  ],
+  themes: ["@docusaurus/theme-mermaid"],
   themeConfig: {
     image: "img/actix-web-social.png",
     navbar: {
@@ -126,6 +112,13 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
   plugins: [
     "docusaurus-plugin-sass",
+    [
+      require.resolve("docusaurus-lunr-search"),
+      {
+        languages: locale === "es" ? ["es", "en"] : ["en"],
+        excludeRoutes: ["docs/actix", "docs/actix/**"],
+      },
+    ],
     [
       "@docusaurus/plugin-content-docs",
       {
