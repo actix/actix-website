@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { hasSitemapUrl } from "./sitemap.mjs";
 
 const require = createRequire(import.meta.url);
 const lunr = require("lunr");
@@ -130,7 +131,7 @@ const spanishHome = pages.get("es/index.html");
 const spanishWelcome = pages.get("es/docs.html");
 const spanishSitemap = fs.readFileSync(path.join(buildDirectory, "es/sitemap.xml"), "utf8");
 
-assert.ok(spanishSitemap.includes("https://actix.rs/es/docs"));
+assert.ok(hasSitemapUrl(spanishSitemap, "https://actix.rs/es/docs"));
 assert.ok(spanishHome.includes("Actix Web es un framework web"));
 assert.ok(spanishHome.includes("Primeros Pasos"));
 assert.ok(spanishHome.includes("Pausar Animación"));
