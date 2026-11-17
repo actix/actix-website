@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://actix.rs/sitemap.xml
+Sitemap: https://actix.rs/es/sitemap.xml

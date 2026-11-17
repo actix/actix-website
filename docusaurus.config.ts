@@ -2,15 +2,27 @@ import { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
 import { themes as prismThemes } from "prism-react-renderer";
+import englishMessages from "./src/data/site-messages.json";
+import spanishMessages from "./i18n/es/site.json";
 
 const draculaTheme = prismThemes.dracula;
+const locale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? "en";
+const messages = locale === "es" ? spanishMessages : englishMessages;
 
 const config: Config = {
   title: "Actix Web",
-  tagline: "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust",
+  tagline: messages.tagline,
   url: "https://actix.rs",
   baseUrl: "/",
   trailingSlash: false,
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    localeConfigs: {
+      en: { label: "English" },
+      es: { label: "Español" },
+    },
+  },
   onBrokenLinks: "throw",
   favicon: "img/logo.png",
   organizationName: "actix", // Usually your GitHub org/user name.
@@ -23,7 +35,21 @@ const config: Config = {
       onBrokenMarkdownLinks: "warn",
     },
   },
-  themes: ["@docusaurus/theme-mermaid"],
+  themes: [
+    "@docusaurus/theme-mermaid",
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: locale === "es" ? ["es", "en"] : "en",
+        docsRouteBasePath: ["docs", "community"],
+        docsDir: ["docs", "community"],
+        indexBlog: false,
+        indexPages: true,
+        ignoreFiles: /^docs\/actix(?:\/|$)/,
+      },
+    ],
+  ],
   themeConfig: {
     image: "img/actix-web-social.png",
     navbar: {
@@ -54,30 +80,34 @@ const config: Config = {
           position: "left",
         },
         {
+          type: "localeDropdown",
+          position: "right",
+        },
+        {
           href: "https://discord.gg/NWpN5mmg3x",
           position: "right",
           className: "header-discord-link",
-          "aria-label": "Chat on Discord",
+          "aria-label": messages.discord,
         },
         {
           href: "https://crates.io/crates/actix-web",
           position: "right",
           className: "header-crates-link",
-          "aria-label": "Actix Web on crates.io",
-          title: "Actix Web on crates.io",
+          "aria-label": messages.crates,
+          title: messages.crates,
         },
         {
           href: "https://docs.rs/actix-web",
           position: "right",
           className: "header-docs-link",
-          "aria-label": "Actix Web API documentation on docs.rs",
-          title: "Actix Web API documentation on docs.rs",
+          "aria-label": messages.api,
+          title: messages.api,
         },
         {
           href: "https://github.com/actix/actix-web",
           position: "right",
           className: "header-github-link",
-          "aria-label": "GitHub repository",
+          "aria-label": messages.github,
         },
       ],
     },
@@ -97,12 +127,6 @@ const config: Config = {
   plugins: [
     "docusaurus-plugin-sass",
     [
-      require.resolve("docusaurus-lunr-search"),
-      {
-        excludeRoutes: ["/docs/actix", "/docs/actix/**"],
-      },
-    ],
-    [
       "@docusaurus/plugin-content-docs",
       {
         id: "community",
@@ -110,6 +134,7 @@ const config: Config = {
         routeBasePath: "community",
         sidebarPath: require.resolve("./communitySidebars.ts"),
         editUrl: "https://github.com/actix/actix-website/edit/main/",
+        editLocalizedFiles: true,
       },
     ],
   ],
@@ -122,6 +147,7 @@ const config: Config = {
           sidebarPath: require.resolve("./sidebars.js"),
           sidebarCollapsed: false,
           editUrl: "https://github.com/actix/actix-website/edit/main/",
+          editLocalizedFiles: true,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

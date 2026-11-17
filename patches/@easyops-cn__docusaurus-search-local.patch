@@ -1,0 +1,26 @@
+diff --git a/dist/client/client/theme/SearchBar/SearchBar.jsx b/dist/client/client/theme/SearchBar/SearchBar.jsx
+index 10ef222e098d751b8f0d402585c6643909af9ed3..61082a43eb43657ed87033400f5b874eb738b53a 100644
+--- a/dist/client/client/theme/SearchBar/SearchBar.jsx
++++ b/dist/client/client/theme/SearchBar/SearchBar.jsx
+@@ -398,7 +398,7 @@ export default function SearchBar({ handleSearchBarToggle, }) {
+             id: "theme.SearchBar.label",
+             message: "Search",
+             description: "The ARIA label and placeholder for search button",
+-        })} aria-label="Search" className={`navbar__search-input ${styles.searchInput}`} onMouseEnter={onInputMouseEnter} onFocus={onInputFocus} onBlur={onInputBlur} onChange={onInputChange} ref={searchBarRef} value={inputValue}/>
++        })} aria-label={translate({ id: "theme.SearchBar.label", message: "Search" })} className={`navbar__search-input ${styles.searchInput}`} onMouseEnter={onInputMouseEnter} onFocus={onInputFocus} onBlur={onInputBlur} onChange={onInputChange} ref={searchBarRef} value={inputValue}/>
+       {askAi && AskAIWidgetComponent && (<AskAIWidgetComponent ref={askAIWidgetRef} {...askAi}>
+           <span hidden></span>
+         </AskAIWidgetComponent>)}
+diff --git a/dist/client/client/theme/SearchPage/SearchPage.jsx b/dist/client/client/theme/SearchPage/SearchPage.jsx
+index 2efb8b4817b76bfc13f70ad68d289ee4f2a6bfbf..7a49a029038669cec851fca84e6645d35d25c17e 100644
+--- a/dist/client/client/theme/SearchPage/SearchPage.jsx
++++ b/dist/client/client/theme/SearchPage/SearchPage.jsx
+@@ -95,7 +95,7 @@ function SearchPageContent() {
+             "col--9": Array.isArray(searchContextByPaths),
+             "col--12": !Array.isArray(searchContextByPaths),
+         })}>
+-            <input type="search" name="q" className={styles.searchQueryInput} aria-label="Search" onChange={handleSearchInputChange} value={searchQuery} autoComplete="off" autoFocus/>
++            <input type="search" name="q" className={styles.searchQueryInput} aria-label={translate({ id: "theme.SearchBar.label", message: "Search" })} onChange={handleSearchInputChange} value={searchQuery} autoComplete="off" autoFocus/>
+           </div>
+           {Array.isArray(searchContextByPaths) ? (<div className={clsx("col", "col--3", "padding-left--none", styles.searchContextColumn)}>
+               <select name="search-context" className={styles.searchContextInput} id="context-selector" value={searchContext} onChange={(e) => updateSearchContext(e.target.value)}>

@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "Actix Web",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Logotipo de Actix Web",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Documentation": {
+    "message": "Documentación",
+    "description": "Navbar item with label Documentation"
+  },
+  "item.label.Community": {
+    "message": "Comunidad",
+    "description": "Navbar item with label Community"
+  },
+  "item.label.Code": {
+    "message": "Código",
+    "description": "Navbar item with label Code"
+  }
+}

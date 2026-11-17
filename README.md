@@ -13,6 +13,11 @@ npm start  # or yarn start
 
 Then visit <http://localhost:3000>.
 
+## Translations
+
+The site supports English and Spanish. Run `just preview es` to preview Spanish.
+See [the translation guide](i18n/README.md) for content locations, terminology, and validation commands.
+
 ## Updating Project Activity
 
 The homepage imports `src/data/project-activity.json` at build time. It does not request GitHub data in the browser. Dates use UTC and remain fixed until the next deployment.

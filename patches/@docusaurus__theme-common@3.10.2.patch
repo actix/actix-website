@@ -1,0 +1,30 @@
+diff --git a/lib/utils/useAlternatePageUtils.js b/lib/utils/useAlternatePageUtils.js
+index e62ed48140932fa017bd69b3fd3d3037fee87d21..1e00e9b080cc40a34c5e7f59ec3ca46ede39c300 100644
+--- a/lib/utils/useAlternatePageUtils.js
++++ b/lib/utils/useAlternatePageUtils.js
+@@ -23,7 +23,9 @@ export function useAlternatePageUtils() {
+         baseUrl,
+     });
+     // Canonical pathname, without the baseUrl of the current locale
+-    const pathnameSuffix = canonicalPathname.replace(baseUrl, '');
++    const pathnameSuffix = canonicalPathname === baseUrl.replace(/\/$/, '')
++    ? ''
++    : canonicalPathname.replace(baseUrl, '');
+     function getLocaleConfig(locale) {
+         const localeConfig = localeConfigs[locale];
+         if (!localeConfig) {
+diff --git a/src/utils/useAlternatePageUtils.ts b/src/utils/useAlternatePageUtils.ts
+index fd537163f1d9f00b1c75ac4ed88bece1da5a82da..aeeccfee79b50154aea843b0ccf553f7b0766095 100644
+--- a/src/utils/useAlternatePageUtils.ts
++++ b/src/utils/useAlternatePageUtils.ts
+@@ -51,7 +51,9 @@ export function useAlternatePageUtils(): {
+   });
+ 
+   // Canonical pathname, without the baseUrl of the current locale
+-  const pathnameSuffix = canonicalPathname.replace(baseUrl, '');
++  const pathnameSuffix = canonicalPathname === baseUrl.replace(/\/$/, '')
++    ? ''
++    : canonicalPathname.replace(baseUrl, '');
+ 
+   function getLocaleConfig(locale: string): I18nLocaleConfig {
+     const localeConfig = localeConfigs[locale];
