@@ -14,7 +14,7 @@ const config: Config = {
   tagline: messages.tagline,
   url: "https://actix.rs",
   baseUrl: "/",
-  trailingSlash: false,
+  trailingSlash: true,
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],

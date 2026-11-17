@@ -14,6 +14,3 @@ allowBuilds:
   "@parcel/watcher": false
   core-js: false
   core-js-pure: false
-patchedDependencies:
-  "@docusaurus/theme-common@3.10.2": patches/@docusaurus__theme-common@3.10.2.patch
-  "@easyops-cn/docusaurus-search-local": patches/@easyops-cn__docusaurus-search-local.patch

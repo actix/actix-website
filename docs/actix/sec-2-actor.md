@@ -25,7 +25,7 @@ Any rust type can be an actor, it only needs to implement the [`Actor`] trait.
 To be able to handle a specific message the actor has to provide a [`Handler<M>`] implementation for this message. All messages are statically typed. The message can be handled in an asynchronous fashion. Actor can spawn other actors or add futures or streams to execution context. The `Actor` trait provides several methods that allow controlling the actor's lifecycle.
 
 [Actor Model]: https://en.wikipedia.org/wiki/Actor_model
-[`Context<A>`]: ./context
+[`Context<A>`]: ./sec-4-context.md
 [`Actor`]: https://docs.rs/actix/latest/actix/trait.Actor.html
 [`Handler<M>`]: https://docs.rs/actix/latest/actix/trait.Handler.html
 

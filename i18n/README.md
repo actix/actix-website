@@ -34,7 +34,7 @@ Add only files for maintained translations. Docusaurus loads the English source 
 Keep document IDs, filenames, slugs, explicit heading IDs, code identifiers, and official names unchanged.
 Keep stable message IDs in `<Translate>` and `translate()` calls, and preserve placeholders such as `{command}`.
 Import Rust examples and version values from the shared sources.
-Use locale-prefixed links for pages in other sections, such as `/<locale>/community/crates`.
+Use trailing slashes in page URLs and locale-prefixed links for pages in other sections, such as `/<locale>/community/crates/`.
 Use relative Markdown links within the same section.
 
 ## Update a Translation

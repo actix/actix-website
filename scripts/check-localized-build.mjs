@@ -39,22 +39,18 @@ for (const [file, html] of pages) {
   assert.ok(translated, `Missing Spanish route for ${file}`);
   assert.match(html, /<html[^>]+lang="en"/, file);
   assert.match(translated, /<html[^>]+lang="es"/, translatedFile);
-  assert.ok(
-    !/<input\b[^>]+aria-label="Search"/.test(translated),
-    `Untranslated search label: ${translatedFile}`,
-  );
 
   if (file !== "404.html") {
     assert.match(translated, /rel="alternate"[^>]+hreflang="en"/, translatedFile);
     assert.match(translated, /rel="alternate"[^>]+hreflang="es"/, translatedFile);
     assert.match(
       translated,
-      /rel="canonical"[^>]+href="https:\/\/actix\.rs\/es(?:\/|")/,
+      /rel="canonical"[^>]+href="https:\/\/actix\.rs\/es\/(?:[^"]*\/)?"/,
       translatedFile,
     );
   }
 
-  const route = file === "index.html" ? "/es/" : `/es/${file.replace(/(?:\/index)?\.html$/, "")}`;
+  const route = `/es/${file.replace(/index\.html$/, "")}`;
 
   for (const [tag, href] of [...translated.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>/g)].map(
     (match) => [match[0], match[1]],
@@ -73,7 +69,7 @@ for (const [file, html] of pages) {
       continue;
     }
 
-    if (file === "index.html" || file === "docs.html") {
+    if (file === "index.html" || file === "docs/index.html") {
       assert.ok(
         url.pathname === "/es" || url.pathname.startsWith("/es/") || tag.includes('lang="en"'),
         `Link leaves Spanish in ${translatedFile}: ${href}`,
@@ -94,8 +90,8 @@ for (const [file, html] of pages) {
 }
 
 for (const [prefix, term, expectedPage] of [
-  ["", "requests", "/docs/extractors"],
-  ["/es", "bienvenido", "/es/docs"],
+  ["", "requests", "/docs/extractors/"],
+  ["/es", "bienvenido", "/es/docs/"],
 ]) {
   const indexes = JSON.parse(
     fs.readFileSync(path.join(buildDirectory, prefix, "search-index.json"), "utf8"),
@@ -128,10 +124,10 @@ for (const [prefix, term, expectedPage] of [
 }
 
 const spanishHome = pages.get("es/index.html");
-const spanishWelcome = pages.get("es/docs.html");
+const spanishWelcome = pages.get("es/docs/index.html");
 const spanishSitemap = fs.readFileSync(path.join(buildDirectory, "es/sitemap.xml"), "utf8");
 
-assert.ok(hasSitemapUrl(spanishSitemap, "https://actix.rs/es/docs"));
+assert.ok(hasSitemapUrl(spanishSitemap, "https://actix.rs/es/docs/"));
 assert.ok(spanishHome.includes("Actix Web es un framework web"));
 assert.ok(spanishHome.includes("Primeros Pasos"));
 assert.ok(spanishHome.includes("Pausar Animación"));
@@ -140,15 +136,17 @@ assert.ok(spanishHome.includes("Powerful Extractors"));
 assert.ok(spanishHome.includes("Copy command:"));
 assert.ok(!spanishHome.includes("Extractores Potentes"));
 assert.ok(spanishWelcome.includes("Bienvenido a Actix Web"));
-assert.ok(pages.get("es/docs/whatis.html").includes("What Is Actix Web"));
-assert.ok(pages.get("es/docs/getting-started.html").includes("Installing Rust"));
+assert.ok(pages.get("es/docs/whatis/index.html").includes("What Is Actix Web"));
+assert.ok(pages.get("es/docs/getting-started/index.html").includes("Installing Rust"));
 assert.ok(
-  pages.get("es/docs/extractors.html").includes("Type-Safe Request Information Extraction"),
+  pages.get("es/docs/extractors/index.html").includes("Type-Safe Request Information Extraction"),
 );
 assert.ok(
   spanishWelcome.includes("/edit/main/i18n/es/docusaurus-plugin-content-docs/current/welcome.md"),
 );
-assert.ok(pages.get("es/docs/getting-started.html").includes("/edit/main/docs/getting-started.md"));
+assert.ok(
+  pages.get("es/docs/getting-started/index.html").includes("/edit/main/docs/getting-started.md"),
+);
 assert.ok(
   pages
     .get(pageFor(new URL("https://actix.rs/es/community")))

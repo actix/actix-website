@@ -26,12 +26,13 @@ const loadHook = compileFunction(`${source}\nreturn useAlternatePageUtils();`, [
 for (const [pathname, english, spanish] of [
   ["/es/", "/", "/es/"],
   ["/es", "/", "/es/"],
-  ["/es/docs/extractors", "/docs/extractors", "/es/docs/extractors"],
+  ["/es/docs/extractors", "/docs/extractors/", "/es/docs/extractors/"],
+  ["/es/docs/extractors/", "/docs/extractors/", "/es/docs/extractors/"],
 ]) {
   test(`language links preserve the page at ${pathname}`, () => {
     const hook = loadHook(
       () => ({
-        siteConfig: { baseUrl: "/es/", trailingSlash: false },
+        siteConfig: { baseUrl: "/es/", trailingSlash: true },
         i18n: {
           localeConfigs: {
             en: { url: "https://actix.rs", baseUrl: "/" },

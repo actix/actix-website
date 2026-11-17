@@ -39,8 +39,8 @@ Run these commands from the repository root at the corresponding steps in the sh
 ## Search and Routing
 
 Spanish uses local search with Spanish and English tokenization so API names remain searchable.
-The search dependency patch makes both search fields use the translated accessibility label.
-The Docusaurus theme patch keeps homepage language links valid when `/es/` becomes `/es`.
-The language-link tests cover both homepage forms and a nested documentation page.
+The search fields use the dependency's English accessibility label.
+URLs use trailing slashes so homepage language links resolve correctly.
+The language-link tests cover homepages and nested documentation pages with and without trailing slashes.
 The build check verifies route coverage, language metadata, internal links, heading anchors,
 localized edit links, and search isolation. Netlify uses `static/_redirects` for Spanish 404 responses.
