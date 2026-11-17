@@ -15,8 +15,8 @@ Then visit <http://localhost:3000>.
 
 ## Translations
 
-The site supports English and Spanish. Run `just preview es` to preview Spanish.
-See [the translation guide](i18n/README.md) for content locations, terminology, and validation commands.
+English is the source language. Run `just preview <locale>` to preview a configured locale.
+See [the translation guide](i18n/README.md) for the shared workflow and `i18n/<locale>/README.md` for language-specific guidance.
 
 ## Updating Project Activity
 
