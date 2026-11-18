@@ -12,7 +12,6 @@ i18n/
     README.md
     code.json
     site.json
-    translation-sources.json
     docusaurus-plugin-content-docs/
       current.json
       current/
@@ -21,7 +20,7 @@ i18n/
       navbar.json
 ```
 
-Keep all guidance, catalogs, translated content, and source revisions for a language in its locale directory.
+Keep all guidance, catalogs, and translated content for a language in its locale directory.
 When adding a language, add its guide there. This shared guide does not list individual languages.
 
 `code.json` contains React messages. Plugin and theme JSON files contain sidebar and navigation labels.
@@ -44,14 +43,13 @@ Replace `<locale>` in commands with the locale directory name.
 1. Read the locale's guide and update the translation when its English source changes. Check technical meaning against the source.
 2. Run `pnpm run write-translations --locale <locale>` after adding React messages or navigation labels. Translate new messages. Remove generated catalog files for sections that remain in English.
 3. Preview with `just preview <locale>`. The development server runs one locale at a time. Test search against a production build.
-4. Use the source revision command in the locale's guide after reviewing the affected translations.
-5. Run `pnpm run test:i18n`, the locale's source check, `pnpm run build`, and the locale's build check.
+4. Run `pnpm run test:i18n`, the locale's translation check, `pnpm run build`, and the locale's build check.
 
-The coverage check tracks existing translations and their entries in `<locale>/translation-sources.json`.
-It reports missing maintained translations, missing or untranslated messages, changed placeholders,
-changed routes, and English source changes that need review. Untranslated pages and catalogs
-do not need copies. To stop maintaining a translation, remove its file and its source entries from
-the locale's `translation-sources.json`. To add a translation, copy and translate its source, then record its revision.
+The translation check validates existing translated files and message catalogs.
+It reports empty translations, missing or obsolete message keys, changed placeholders,
+changed route fields, and translated files whose source no longer exists.
+Pages and catalogs without translations use English content and do not need copies.
+To add a translation, copy and translate its source. To stop maintaining one, remove its file.
 
 The check recreates `i18n/en/` for extraction;
-that generated directory is ignored by Git. A source hash records a review baseline, not proof of translation quality.
+that generated directory is ignored by Git.

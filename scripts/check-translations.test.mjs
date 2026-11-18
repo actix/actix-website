@@ -27,12 +27,10 @@ function fixture(t) {
   write("src/data/site-messages.json", JSON.stringify({ tagline: "A web framework" }));
   write("i18n/es/site.json", JSON.stringify({ tagline: "Un framework web" }));
 
-  assert.deepEqual(checkTranslations(root, { update: true }), []);
-
   return { root, write };
 }
 
-test("complete translations pass without changes to their revision record", (t) => {
+test("complete translations pass structural checks", (t) => {
   const { root } = fixture(t);
 
   assert.deepEqual(checkTranslations(root), []);
@@ -57,35 +55,29 @@ test("catalogs outside the translated scope use English fallback", (t) => {
   assert.deepEqual(checkTranslations(root), []);
 });
 
-test("an existing translation cannot be removed without updating its scope", (t) => {
+test("removing a translated page restores English fallback", (t) => {
   const { root } = fixture(t);
 
   fs.unlinkSync(path.join(root, "i18n/es/docusaurus-plugin-content-docs/current/welcome.md"));
 
-  assert.ok(
-    checkTranslations(root, { update: true }).includes(
-      "Missing translation: i18n/es/docusaurus-plugin-content-docs/current/welcome.md",
-    ),
-  );
+  assert.deepEqual(checkTranslations(root), []);
 });
 
-test("new translations require a source review before entering coverage", (t) => {
+test("new translations pass without a review record", (t) => {
   const { root, write } = fixture(t);
 
   write("docs/new.md", "# New Page\n");
   write("i18n/es/docusaurus-plugin-content-docs/current/new.md", "# Página Nueva\n");
 
-  assert.ok(checkTranslations(root).includes("Review changed source: docs/new.md"));
-  assert.deepEqual(checkTranslations(root, { update: true }), []);
   assert.deepEqual(checkTranslations(root), []);
 });
 
-test("changed source text requires a translation review", (t) => {
+test("source wording changes do not require recorded approval", (t) => {
   const { root, write } = fixture(t);
 
   write("docs/welcome.md", "---\nslug: /\n---\n\n# Welcome\n\nNew setup instructions.\n");
 
-  assert.ok(checkTranslations(root).includes("Review changed source: docs/welcome.md"));
+  assert.deepEqual(checkTranslations(root), []);
 });
 
 test("a deleted source page requires removal of its translation", (t) => {
@@ -94,15 +86,12 @@ test("a deleted source page requires removal of its translation", (t) => {
   fs.unlinkSync(path.join(root, "docs/welcome.md"));
 
   assert.ok(
-    checkTranslations(root, { update: true }).some((error) =>
-      error.startsWith("Remove obsolete translation:"),
-    ),
+    checkTranslations(root).some((error) => error.startsWith("Remove obsolete translation:")),
   );
 });
 
-test("missing messages and lost placeholders cannot be marked as reviewed", (t) => {
+test("missing messages and lost placeholders fail structural checks", (t) => {
   const { root, write } = fixture(t);
-  const manifest = fs.readFileSync(path.join(root, "i18n/es/translation-sources.json"), "utf8");
 
   write(
     "i18n/en/code.json",
@@ -110,17 +99,13 @@ test("missing messages and lost placeholders cannot be marked as reviewed", (t) 
   );
   write("i18n/es/code.json", JSON.stringify({ greeting: { message: "Hola" } }));
 
-  const errors = checkTranslations(root, { update: true });
+  const errors = checkTranslations(root);
 
   assert.ok(errors.includes("Placeholder mismatch: i18n/es/code.json#greeting"));
   assert.ok(errors.includes("Missing message: i18n/es/code.json#next"));
-  assert.equal(
-    fs.readFileSync(path.join(root, "i18n/es/translation-sources.json"), "utf8"),
-    manifest,
-  );
 });
 
-test("changed routes and untranslated messages fail coverage checks", (t) => {
+test("route checks preserve slugs without judging message wording", (t) => {
   const { root, write } = fixture(t);
 
   write(
@@ -131,6 +116,7 @@ test("changed routes and untranslated messages fail coverage checks", (t) => {
 
   const errors = checkTranslations(root);
 
-  assert.ok(errors.some((error) => error.startsWith("Keep the source slug:")));
-  assert.ok(errors.includes("Untranslated message: i18n/es/code.json#greeting"));
+  assert.deepEqual(errors, [
+    "Keep the source slug: i18n/es/docusaurus-plugin-content-docs/current/welcome.md",
+  ]);
 });

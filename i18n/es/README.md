@@ -32,8 +32,7 @@ The rest of the homepage and all other pages use English content.
 
 Run these commands from the repository root at the corresponding steps in the shared update workflow:
 
-- **Record source revisions:** `pnpm run i18n:record`. This updates `translation-sources.json` with the current English source hashes after translation review. It does not translate or review text.
-- **Check source translations:** `pnpm run i18n:check`.
+- **Check translation structure:** `pnpm run i18n:check`.
 - **Check the production build:** `pnpm run i18n:check-build`.
 
 ## Search and Routing
