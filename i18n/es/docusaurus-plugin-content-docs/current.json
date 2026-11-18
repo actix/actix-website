@@ -1,0 +1,78 @@
+{
+  "version.label": {
+    "message": "Actual",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Introduction": {
+    "message": "Introducción",
+    "description": "The label for category 'Introduction' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Basics": {
+    "message": "Conceptos Básicos",
+    "description": "The label for category 'Basics' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Advanced": {
+    "message": "Temas Avanzados",
+    "description": "The label for category 'Advanced' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Protocols": {
+    "message": "Protocolos",
+    "description": "The label for category 'Protocols' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Patterns": {
+    "message": "Patrones",
+    "description": "The label for category 'Patterns' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Diagrams": {
+    "message": "Diagramas",
+    "description": "The label for category 'Diagrams' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Actor Book (Archived)": {
+    "message": "Libro de Actores (Archivado)",
+    "description": "The label for category 'Actor Book (Archived)' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.API Documentation": {
+    "message": "Documentación de la API",
+    "description": "The label for category 'API Documentation' in sidebar 'docs'"
+  },
+  "sidebar.docs.link.actix": {
+    "message": "actix",
+    "description": "The label for link 'actix' in sidebar 'docs', linking to 'https://docs.rs/actix/latest/actix/'"
+  },
+  "sidebar.docs.link.actix-web": {
+    "message": "actix-web",
+    "description": "The label for link 'actix-web' in sidebar 'docs', linking to 'https://docs.rs/actix-web/latest/actix_web/'"
+  },
+  "sidebar.docs.link.actix-cors": {
+    "message": "actix-cors",
+    "description": "The label for link 'actix-cors' in sidebar 'docs', linking to 'https://docs.rs/actix-cors/latest/actix_cors/'"
+  },
+  "sidebar.docs.doc.Quick Start": {
+    "message": "Inicio Rápido",
+    "description": "The label for the doc item 'Quick Start' in sidebar 'docs', linking to the doc actix/sec-0-quick-start"
+  },
+  "sidebar.docs.doc.Getting Started": {
+    "message": "Primeros Pasos",
+    "description": "The label for the doc item 'Getting Started' in sidebar 'docs', linking to the doc actix/sec-1-getting-started"
+  },
+  "sidebar.docs.doc.Actor": {
+    "message": "Actor",
+    "description": "The label for the doc item 'Actor' in sidebar 'docs', linking to the doc actix/sec-2-actor"
+  },
+  "sidebar.docs.doc.Address": {
+    "message": "Dirección",
+    "description": "The label for the doc item 'Address' in sidebar 'docs', linking to the doc actix/sec-3-address"
+  },
+  "sidebar.docs.doc.Context": {
+    "message": "Contexto",
+    "description": "The label for the doc item 'Context' in sidebar 'docs', linking to the doc actix/sec-4-context"
+  },
+  "sidebar.docs.doc.Arbiter": {
+    "message": "Arbiter",
+    "description": "The label for the doc item 'Arbiter' in sidebar 'docs', linking to the doc actix/sec-5-arbiter"
+  },
+  "sidebar.docs.doc.SyncArbiter": {
+    "message": "SyncArbiter",
+    "description": "The label for the doc item 'SyncArbiter' in sidebar 'docs', linking to the doc actix/sec-6-sync-arbiter"
+  }
+}
