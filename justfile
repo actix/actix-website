@@ -2,8 +2,8 @@ _list:
     @just --list
 
 # Preview the site locally.
-preview:
-    pnpm start
+preview locale="en":
+    pnpm start --locale {{locale}}
 
 # Tests examples.
 test:

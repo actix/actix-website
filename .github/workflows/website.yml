@@ -33,5 +33,13 @@ jobs:
       - name: Check types
         run: pnpm run typecheck
 
+      - name: Check translations
+        run: |
+          pnpm run test:i18n
+          pnpm run i18n:check
+
       - name: Test build website
         run: pnpm run build
+
+      - name: Check localized output
+        run: pnpm run i18n:check-build

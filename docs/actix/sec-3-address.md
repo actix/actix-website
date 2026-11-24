@@ -42,7 +42,7 @@ impl Actor for MyActor {
 }
 ```
 
-[SyncArbiter]: ./sync-arbiter
+[SyncArbiter]: ./sec-6-sync-arbiter.md
 
 ## Message
 

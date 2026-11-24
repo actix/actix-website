@@ -16,6 +16,9 @@
     "lint:fix": "oxlint --fix",
     "typecheck": "tsc --noEmit",
     "write-translations": "docusaurus write-translations",
+    "i18n:check": "node scripts/check-translations.mjs",
+    "i18n:check-build": "node scripts/check-localized-build.mjs",
+    "test:i18n": "node --test scripts/*.test.mjs",
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {

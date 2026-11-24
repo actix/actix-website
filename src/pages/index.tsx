@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import Link from "@docusaurus/Link";
+import Translate, { translate } from "@docusaurus/Translate";
 import Layout from "@theme/Layout";
 import CodeBlock from "@site/src/components/code_block";
 import CodeTabs from "@site/src/components/code_tabs";
@@ -151,15 +152,30 @@ const Hero = () => {
         <div className={styles.copy}>
           <div className={styles.compactLogo} aria-hidden="true" />
           <h1>
-            <span className={styles.taglineContext}>Actix Web is a </span>
-            <span className={styles.taglineEmphasis}>powerful, pragmatic, and extremely fast</span>
-            <span className={styles.taglineContext}> web framework for Rust</span>
+            <span className={styles.taglineContext}>
+              <Translate
+                id="home.hero.tagline"
+                values={{
+                  qualities: (
+                    <span className={styles.taglineEmphasis}>
+                      <Translate id="home.hero.qualities">
+                        powerful, pragmatic, and extremely fast
+                      </Translate>
+                    </span>
+                  ),
+                }}
+              >
+                {"Actix Web is a {qualities} web framework for Rust"}
+              </Translate>
+            </span>
           </h1>
           <div className={styles.blueActions}>
             <Link className={styles.start} to={useBaseUrl("docs/getting-started")}>
-              Get Started
+              <Translate id="home.getStarted">Get Started</Translate>
             </Link>
-            <a href={HTTP_ARENA_URL}>See Benchmarks</a>
+            <a href={HTTP_ARENA_URL}>
+              <Translate id="home.seeBenchmarks">See Benchmarks</Translate>
+            </a>
           </div>
           <ProjectActivity />
         </div>
@@ -167,7 +183,10 @@ const Hero = () => {
           <svg
             viewBox="0 0 520 350"
             role="img"
-            aria-label="Request Constellation with the Actix Web logo"
+            aria-label={translate({
+              id: "home.hero.illustration",
+              message: "Request Constellation with the Actix Web logo",
+            })}
           >
             <defs>
               <linearGradient id="traffic-fade" gradientUnits="userSpaceOnUse" x1="-1200" x2="1100">
@@ -228,8 +247,8 @@ const Hero = () => {
         className={styles.motion}
         onClick={() => setMotionPaused(!motionPaused)}
         type="button"
-        aria-label={motionPaused ? "Resume Animation" : "Pause Animation"}
-        title={motionPaused ? "Resume Animation" : "Pause Animation"}
+        aria-label={motionPaused ? resumeAnimationLabel : pauseAnimationLabel}
+        title={motionPaused ? resumeAnimationLabel : pauseAnimationLabel}
         aria-pressed={motionPaused}
       >
         <FontAwesomeIcon icon={motionPaused ? faPlay : faPause} aria-hidden="true" />
@@ -238,40 +257,73 @@ const Hero = () => {
   );
 };
 
-const activityDate = (value: string) =>
-  new Intl.DateTimeFormat("en-US", {
+const resumeAnimationLabel = translate({
+  id: "home.animation.resume",
+  message: "Resume Animation",
+});
+const pauseAnimationLabel = translate({ id: "home.animation.pause", message: "Pause Animation" });
+
+const activityDate = (value: string, locale: string) =>
+  new Intl.DateTimeFormat(locale === "en" ? "en-US" : locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 
-const ProjectActivity = () => (
-  <ul className={styles.activity} aria-label="Actix Web project activity">
-    <li>
-      <a href="https://github.com/actix/actix-web">
-        <FontAwesomeIcon icon={faStar} aria-hidden="true" />
-        <span>
-          <strong>
-            {activity.stars >= 1000
-              ? `${Math.floor(activity.stars / 1000).toLocaleString("en-US")}k`
-              : activity.stars.toLocaleString("en-US")}
-          </strong>{" "}
-          GitHub stars
-        </span>
-      </a>
-    </li>
-    <li>
-      <a href={`https://github.com/actix/actix-web/releases/tag/${activity.release.tag}`}>
-        <strong>{activity.release.tag.replace("actix-web-", "")}</strong>
-        <span className={styles.releaseDate}>
-          Released{" "}
-          <time dateTime={activity.release.date}>{activityDate(activity.release.date)}</time>
-        </span>
-      </a>
-    </li>
-  </ul>
-);
+const ProjectActivity = () => {
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+
+  return (
+    <ul
+      className={styles.activity}
+      aria-label={translate({ id: "home.activity.label", message: "Actix Web project activity" })}
+    >
+      <li>
+        <a href="https://github.com/actix/actix-web">
+          <FontAwesomeIcon icon={faStar} aria-hidden="true" />
+          <span>
+            <Translate
+              id="home.activity.stars"
+              values={{
+                count: (
+                  <strong>
+                    {activity.stars >= 1000
+                      ? `${Math.floor(activity.stars / 1000).toLocaleString(currentLocale)}k`
+                      : activity.stars.toLocaleString(currentLocale)}
+                  </strong>
+                ),
+              }}
+            >
+              {"{count} GitHub stars"}
+            </Translate>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href={`https://github.com/actix/actix-web/releases/tag/${activity.release.tag}`}>
+          <strong>{activity.release.tag.replace("actix-web-", "")}</strong>
+          <span className={styles.releaseDate}>
+            <Translate
+              id="home.activity.released"
+              values={{
+                date: (
+                  <time dateTime={activity.release.date}>
+                    {activityDate(activity.release.date, currentLocale)}
+                  </time>
+                ),
+              }}
+            >
+              {"Released {date}"}
+            </Translate>
+          </span>
+        </a>
+      </li>
+    </ul>
+  );
+};
 
 const Highlights = () => {
   return (

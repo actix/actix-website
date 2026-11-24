@@ -13,6 +13,11 @@ npm start  # or yarn start
 
 Then visit <http://localhost:3000>.
 
+## Translations
+
+English is the source language. Run `just preview <locale>` to preview a configured locale.
+See [the translation guide](i18n/README.md) for the shared workflow and `i18n/<locale>/README.md` for language-specific guidance.
+
 ## Updating Project Activity
 
 The homepage imports `src/data/project-activity.json` at build time. It does not request GitHub data in the browser. Dates use UTC and remain fixed until the next deployment.

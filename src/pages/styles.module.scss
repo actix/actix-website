@@ -358,6 +358,8 @@ article header h1 {
 }
 .requestHero .taglineContext {
   display: block;
+  overflow-wrap: break-word;
+  hyphens: auto;
   font-size: 0.65em;
   font-weight: 500;
   line-height: 1.35;
@@ -367,6 +369,9 @@ article header h1 {
 .requestHero .taglineEmphasis {
   display: block;
   margin: 0.3em 0;
+  font-size: calc(1em / 0.65);
+  font-weight: 750;
+  letter-spacing: -0.035em;
   line-height: 1.14;
 }
 
